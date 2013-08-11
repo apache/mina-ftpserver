@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.ftpserver.ConnectionConfig;
@@ -85,8 +86,8 @@ public class DefaultFtpServerContext implements FtpServerContext {
     /**
      * The thread pool executor to be used by the server using this context
      */
-    private ThreadPoolExecutor threadPoolExecutor = null;
     
+    private ExecutorService threadPoolExecutor = null;
     static {
         ADMIN_AUTHORITIES.add(new WritePermission());
         
@@ -262,7 +263,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
         this.connectionConfig = connectionConfig;
     }
     
-    public synchronized ThreadPoolExecutor getThreadPoolExecutor() {
+    public synchronized Executor getThreadPoolExecutor() {
         if(threadPoolExecutor == null) {
             int maxThreads = connectionConfig.getMaxThreads();
             if(maxThreads < 1) {
