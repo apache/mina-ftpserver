@@ -30,5 +30,4 @@ public class MinaExplicitTLSTest extends ExplicitSecurityTestTemplate {
     protected String getAuthValue() {
         return "TLS";
     }
-
 }

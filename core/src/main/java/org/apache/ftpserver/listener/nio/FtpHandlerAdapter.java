@@ -6,16 +6,16 @@
  *  to you under the Apache License, Version 2.0 (the
  *  "License"); you may not use this file except in compliance
  *  with the License.  You may obtain a copy of the License at
- *  
+ * 
  *    http://www.apache.org/licenses/LICENSE-2.0
- *  
+ * 
  *  Unless required by applicable law or agreed to in writing,
  *  software distributed under the License is distributed on an
  *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  *  KIND, either express or implied.  See the License for the
  *  specific language governing permissions and limitations
- *  under the License. 
- *  
+ *  under the License.
+ * 
  */
 package org.apache.ftpserver.listener.nio;
 
@@ -25,7 +25,7 @@ import org.apache.ftpserver.impl.DefaultFtpRequest;
 import org.apache.ftpserver.impl.FtpHandler;
 import org.apache.ftpserver.impl.FtpIoSession;
 import org.apache.ftpserver.impl.FtpServerContext;
-import org.apache.mina.core.service.IoHandler;
+import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.logging.MdcInjectionFilter;
@@ -38,7 +38,7 @@ import org.apache.mina.filter.logging.MdcInjectionFilter;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  *
  */
-public class FtpHandlerAdapter implements IoHandler {
+public class FtpHandlerAdapter extends IoHandlerAdapter {
     private final FtpServerContext context;
 
     private FtpHandler ftpHandler;
@@ -77,7 +77,7 @@ public class FtpHandlerAdapter implements IoHandler {
         MdcInjectionFilter.setProperty(session, "session", ftpSession.getSessionId().toString());
 
         ftpHandler.sessionCreated(ftpSession);
-        
+
     }
 
     public void sessionIdle(IoSession session, IdleStatus status)

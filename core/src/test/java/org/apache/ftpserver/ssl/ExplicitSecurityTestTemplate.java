@@ -22,6 +22,7 @@ package org.apache.ftpserver.ssl;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.security.Security;
 
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPSClient;
@@ -39,6 +40,12 @@ public abstract class ExplicitSecurityTestTemplate extends SSLTestTemplate {
     protected static final File TEST_FILE2 = new File(ROOT_DIR, "test2.txt");
 
     protected static final byte[] TEST_DATA = "TESTDATA".getBytes();
+    
+    // Enabling SSLv3 because Java 8 disable it by default...
+    static
+    {
+        Security.setProperty( "jdk.tls.disabledAlgorithms", "RC4, MD5withRSA, DH keySize < 768" );
+    }
 
     @Override
     protected void setUp() throws Exception {

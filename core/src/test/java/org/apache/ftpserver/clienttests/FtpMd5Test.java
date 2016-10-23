@@ -20,6 +20,7 @@
 package org.apache.ftpserver.clienttests;
 
 import java.io.File;
+import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,12 @@ public class FtpMd5Test extends ClientTestTemplate {
     private static String testDataHash;
 
     private static String testData2Hash;
+
+    // Enabling SSLv3 because Java 8 disable it by default...
+    static
+    {
+        Security.setProperty( "jdk.tls.disabledAlgorithms", "RC4, MD5withRSA, DH keySize < 768" );
+    }
 
     /*
      * (non-Javadoc)

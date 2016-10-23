@@ -74,4 +74,40 @@ public class DefaultFtpServerTest extends TestCase {
         }
     }
     
+    public void testStartFtpServer() throws Exception {
+        // FTPSERVER-197
+        
+        FtpServerFactory serverFactory = new FtpServerFactory();
+        
+        ListenerFactory listenerFactory = new ListenerFactory();
+        listenerFactory.setPort(0);
+        
+        // let's create two listeners on the same port, second should not start
+     
+        Listener defaultListener = listenerFactory.createListener();
+        Listener secondListener = listenerFactory.createListener();
+        
+        
+        serverFactory.addListener("default", defaultListener);
+        
+        FtpServer server = serverFactory.createServer();
+        
+        try {
+            server.start();
+            
+            // Windows seems to allow for both listeners to bind on the same port...
+            //fail("Must throw FtpServerConfigurationException");
+        } catch(FtpServerConfigurationException e) {
+            if(e.getCause() instanceof BindException) {
+                // OK!
+                
+                // we failed to start, make sure things are shut down correctly
+                assertTrue(defaultListener.isStopped());
+                assertTrue(secondListener.isStopped());
+                assertTrue(server.isStopped());
+            } else {
+                throw e;
+            }
+        }
+    }
 }
