@@ -24,7 +24,7 @@
   <parent>
     <artifactId>apache</artifactId>
     <groupId>org.apache</groupId>
-    <version>9</version>
+    <version>17</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ftpserver</groupId>
@@ -135,6 +135,25 @@
     <url>http://svn.apache.org/viewvc/mina/ftpserver/trunk</url>
   </scm>
 
+  <properties>
+    <!-- Set versions for depending jars -->
+    <commons.codec.version>1.10</commons.codec.version>
+    <commons.net.version>3.5</commons.net.version>
+    <hsqldb.version>1.8.0.10</hsqldb.version>
+    <jcl.over.slf4j.version>1.7.21</jcl.over.slf4j.version>
+    <junit.version>4.12</junit.version>
+    <log4j.version>1.2.17</log4j.version>
+    <mina.core.version>2.0.16</mina.core.version>
+    <slf4j.api.version>1.7.21</slf4j.api.version>
+    <slf4j.log4j12.version>1.7.21</slf4j.log4j12.version>
+    <spring.context.version>2.5.5</spring.context.version>
+
+    <maven.compile.source>1.7</maven.compile.source>
+    <maven.compile.target>1.7</maven.compile.target>
+    <ftpserver.version>${project.version}</ftpserver.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <!-- Submodules -->
@@ -153,70 +172,69 @@
       <dependency>
         <groupId>org.apache.mina</groupId>
         <artifactId>mina-core</artifactId>
-        <version>2.0.4</version>
+        <version>${mina.core.version}</version>
       </dependency>
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>2.5.5</version>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.context.version}</version>
         <exclusions>
-            <exclusion>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-            </exclusion>
-	</exclusions>
-    </dependency>
-
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
 
       <!-- Logging -->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.6.4</version>
+        <version>${slf4j.api.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
-        <version>1.6.4</version>
+        <version>${jcl.over.slf4j.version}</version>
       </dependency>
 
       <!-- Test dependencies -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.8.2</version>
+        <version>${junit.version}</version>
       </dependency>
 
       <dependency>
         <groupId>commons-net</groupId>
         <artifactId>commons-net</artifactId>
-        <version>2.0</version>
+        <version>${commons.net.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
-        <version>1.6.4</version>
+        <version>${slf4j.log4j12.version}</version>
       </dependency>
 
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
-        <version>1.2.14</version>
+        <version>${log4j.version}</version>
       </dependency>
 
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.3</version>
+        <version>${commons.codec.version}</version>
       </dependency>
 
       <dependency>
         <groupId>hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
-        <version>1.8.0.7</version>
+        <version>${hsqldb.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -226,7 +244,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>1.0-alpha-3</version>
+        <version>1.3.1</version>
         <executions>
           <execution>
             <phase>validate</phase>
@@ -247,12 +265,12 @@
 
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.8.1</version>
+        <version>2.18.1</version>
       </plugin>
 
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>2.9</version>
         <configuration>
           <downloadSources>true</downloadSources>
         </configuration>
@@ -260,7 +278,7 @@
 
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.0-beta-7</version>
+        <version>2.5.1</version>
         <configuration>
           <tagBase>https://svn.apache.org/repos/asf/mina/ftpserver/tags/</tagBase>
         </configuration>
@@ -268,7 +286,7 @@
 
       <plugin>
         <artifactId>maven-remote-resources-plugin</artifactId>
-        <version>1.0</version>
+        <version>1.5</version>
         <executions>
           <execution>
             <goals>
@@ -288,22 +306,22 @@
 
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
+        <version>3.2</version>
         <configuration>
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
         </configuration>
       </plugin>
 
-	  <plugin>
-	    <groupId>org.codehaus.mojo</groupId>
-	    <artifactId>rat-maven-plugin</artifactId>
-	    <version>1.0-alpha-3</version>
-	  </plugin>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>rat-maven-plugin</artifactId>
+      <version>1.0-alpha-3</version>
+    </plugin>
 
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.0.4</version>
+        <version>2.4</version>
         <executions>
           <execution>
             <id>create-source-jar</id>
@@ -316,7 +334,7 @@
 
       <plugin>
         <artifactId>maven-idea-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.2.1</version>
         <configuration>
           <jdkLevel>${maven.compile.source}</jdkLevel>
         </configuration>
@@ -324,7 +342,7 @@
 
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.2</version>
+        <version>2.5</version>
         <configuration>
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>
@@ -335,7 +353,7 @@
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.0.2</version>
+          <version>2.5</version>
       </plugin>
     </plugins>
   </build>
@@ -347,7 +365,7 @@
         <plugins>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.5</version>
+            <version>2.10.1</version>
             <executions>
               <execution>
                 <id>create-javadoc-jar</id>
@@ -356,11 +374,12 @@
                 </goals>
                 <configuration>
                   <source>${maven.compile.source}</source>
-		  <excludePackageNames>
-		    *.impl:org.apache.ftpserver.example.*:org.apache.ftpserver.config.spring:org.apache.ftpserver.command.impl.listing:org.apache.ftpserver.listener.nio:org.apache.ftpserver.util
-		  </excludePackageNames>
+                  <excludePackageNames>
+                    *.impl:org.apache.ftpserver.example.*:org.apache.ftpserver.config.spring:org.apache.ftpserver.command.impl.listing:org.apache.ftpserver.listener.nio:org.apache.ftpserver.util
+                  </excludePackageNames>
                 </configuration>
               </execution>
+
               <execution>
                 <id>create-site-javadoc</id>
                 <phase>process-resources</phase>
@@ -368,20 +387,21 @@
                   <goal>aggregate</goal>
                 </goals>
                 <configuration>
-		  <doctitle>Apache FtpServer ${project.version} Public API</doctitle>
-		  <windowtitle>Apache FtpServer ${project.version} Public API</windowtitle>
+                  <doctitle>Apache FtpServer ${project.version} Public API</doctitle>
+                  <windowtitle>Apache FtpServer ${project.version} Public API</windowtitle>
                   <source>${maven.compile.source}</source>
-		  <excludePackageNames>
-		    *.impl:org.apache.ftpserver.example.*:org.apache.ftpserver.config.spring:org.apache.ftpserver.command.impl.listing:org.apache.ftpserver.listener.nio:org.apache.ftpserver.util
-		  </excludePackageNames>
+                  <excludePackageNames>
+                    *.impl:org.apache.ftpserver.example.*:org.apache.ftpserver.config.spring:org.apache.ftpserver.command.impl.listing:org.apache.ftpserver.listener.nio:org.apache.ftpserver.util
+                  </excludePackageNames>
                 </configuration>
               </execution>
             </executions>
           </plugin>
-	  <plugin>
-	    <groupId>org.codehaus.mojo</groupId>
-	    <artifactId>rat-maven-plugin</artifactId>
-	    <version>1.0-alpha-3</version>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>rat-maven-plugin</artifactId>
+            <version>1.0-alpha-3</version>
             <executions>
               <execution>
                 <id>verify-licenses</id>
@@ -391,7 +411,7 @@
                 </goals>
               </execution>
             </executions>
-	  </plugin>
+          </plugin>
         </plugins>
       </build>
       <modules>
@@ -409,10 +429,4 @@
     <module>examples</module>
   </modules>
 
-  <properties>
-    <maven.compile.source>1.5</maven.compile.source>
-    <maven.compile.target>1.5</maven.compile.target>
-    <ftpserver.version>${project.version}</ftpserver.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 </project>

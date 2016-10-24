@@ -33,11 +33,13 @@
   <packaging>pom</packaging>
   <name>Apache FtpServer</name>
   <version>1.1.0-SNAPSHOT</version>
+  
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/mina/ftpserver/trunk/distribution</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/mina/ftpserver/trunk/distribution</developerConnection>
     <url>http://svn.apache.org/viewvc/mina/ftpserver/trunk/distribution</url>
   </scm>
+  
   <build>
     <finalName>apache-${project.artifactId}-${project.version}</finalName>
     <plugins>
@@ -73,41 +75,47 @@
           </execution>
         </executions>
       </plugin>
-	  <plugin>
-	    <groupId>org.codehaus.mojo</groupId>
-	    <artifactId>rat-maven-plugin</artifactId>
-	    <version>1.0-alpha-3</version>
-	    <configuration>
-	      <excludes>
-			<exclude>LICENSE.slf4j.txt</exclude>
-			<exclude>LICENSE.springframework.txt</exclude>
-		</excludes>
-	    </configuration>
-	  </plugin>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>rat-maven-plugin</artifactId>
+      <version>1.0-alpha-3</version>
+      <configuration>
+        <excludes>
+          <exclude>LICENSE.slf4j.txt</exclude>
+          <exclude>LICENSE.springframework.txt</exclude>
+        </excludes>
+      </configuration>
+    </plugin>
 
     </plugins>
   </build>
+  
   <dependencies>
     <dependency>
       <groupId>org.apache.ftpserver</groupId>
       <artifactId>ftplet-api</artifactId>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.ftpserver</groupId>
       <artifactId>ftpserver-core</artifactId>
     </dependency>
+    
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
     </dependency>
+    
     <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
     </dependency>
-        <dependency>
+    
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
     </dependency>
+    
     <!-- Use as Spring uses JCL -->
     <dependency>
         <groupId>org.slf4j</groupId>
@@ -139,6 +147,7 @@
               </tasks>
             </configuration>
           </execution>
+          
           <execution>
             <id>copy-javadocs-docs</id>
             <phase>process-resources</phase>
@@ -149,9 +158,9 @@
               <tasks>
                 <echo>Copying Javadocs</echo>
                 <mkdir dir="${project.build.directory}/api"></mkdir>
-		<copy todir="${project.build.directory}/api">
-		    <fileset dir="../target/site/apidocs" />
-		</copy>
+                <copy todir="${project.build.directory}/api">
+                  <fileset dir="../target/site/apidocs" />
+                </copy>
               </tasks>
             </configuration>
           </execution>
