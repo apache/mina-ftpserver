@@ -136,6 +136,9 @@
   </scm>
 
   <properties>
+    <!-- Disbale the JAV8 Javadoc Lint -->
+    <additionalparam>-Xdoclint:none</additionalparam>
+
     <!-- Set versions for depending jars -->
     <commons.codec.version>1.10</commons.codec.version>
     <commons.net.version>3.5</commons.net.version>
