@@ -13,20 +13,17 @@
     the specific language governing permissions and limitations under the
     License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>ftpserver-parent</artifactId>
     <groupId>org.apache.ftpserver</groupId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ftpserver</groupId>
   <artifactId>ftplet-api</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
   <packaging>bundle</packaging>
   <name>Apache Ftplet API</name>
   
@@ -46,6 +43,7 @@
     </developerConnection>
     <url>http://svn.apache.org/viewvc/mina/ftpserver/trunk/ftplet-api
     </url>
+    <tag>ftpserver-parent-1.1.0</tag>
   </scm>
   
   <build>

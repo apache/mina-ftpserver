@@ -18,26 +18,24 @@
  under the License. -->  
 
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>ftpserver-parent</artifactId>
     <groupId>org.apache.ftpserver</groupId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.ftpserver</groupId>
   <artifactId>ftpserver</artifactId>
   <packaging>pom</packaging>
   <name>Apache FtpServer</name>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.1.0</version>
   
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/mina/ftpserver/trunk/distribution</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/mina/ftpserver/trunk/distribution</developerConnection>
     <url>http://svn.apache.org/viewvc/mina/ftpserver/trunk/distribution</url>
+    <tag>ftpserver-parent-1.1.0</tag>
   </scm>
   
   <build>
@@ -141,9 +139,9 @@
             <configuration>
               <tasks>
                 <echo>Downloading Manual</echo>
-                <mkdir dir="${project.build.directory}/site"></mkdir>
-                <get src="http://people.apache.org/~ngn/ftpserver/docs/ftpserver.zip" dest="${project.build.directory}/${project.artifactId}-docs.zip"></get>
-                <unzip src="${project.build.directory}/${project.artifactId}-docs.zip" dest="${project.build.directory}/docs"></unzip>
+                <mkdir dir="${project.build.directory}/site" />
+                <get src="http://people.apache.org/~ngn/ftpserver/docs/ftpserver.zip" dest="${project.build.directory}/${project.artifactId}-docs.zip" />
+                <unzip src="${project.build.directory}/${project.artifactId}-docs.zip" dest="${project.build.directory}/docs" />
               </tasks>
             </configuration>
           </execution>
@@ -157,7 +155,7 @@
             <configuration>
               <tasks>
                 <echo>Copying Javadocs</echo>
-                <mkdir dir="${project.build.directory}/api"></mkdir>
+                <mkdir dir="${project.build.directory}/api" />
                 <copy todir="${project.build.directory}/api">
                   <fileset dir="../target/site/apidocs" />
                 </copy>
