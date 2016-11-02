@@ -77,8 +77,8 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
             final FtpIoSession session) {
         this.session = session;
         this.serverContext = serverContext;
-        if ((session != null) && session.getListener().getDataConnectionConfiguration()
-                .isImplicitSsl()) {
+        if ((session != null) && (session.getListener() != null) && 
+            session.getListener().getDataConnectionConfiguration().isImplicitSsl()) {
             secure = true;
         }
     }
