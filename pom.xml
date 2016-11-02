@@ -1,102 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License. -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>apache</artifactId>
-    <groupId>org.apache</groupId>
-    <version>17</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.ftpserver</groupId>
-  <artifactId>ftpserver-parent</artifactId>
-  <packaging>pom</packaging>
-  <name>Apache FtpServer Parent</name>
-  <version>1.1.1-SNAPSHOT</version>
-  <url>http://mina.apache.org/ftpserver</url>
-  <issueManagement>
-    <system>Jira</system>
-    <url>http://issues.apache.org/jira/browse/FTPSERVER</url>
-  </issueManagement>
-  <inceptionYear>2003</inceptionYear>
-
-  <licenses>
-    <license>
-      <name>Apache 2.0 License</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-
-  <mailingLists>
-    <mailingList>
-      <name>FtpServer Users mailing list</name>
-      <subscribe>ftpserver-users-subscribe@mina.apache.org</subscribe>
-      <unsubscribe>ftpserver-users-unsubscribe@mina.apache.org</unsubscribe>
-      <post>ftpserver-users@mina.apache.org</post>
-      <archive>http://mail-archives.apache.org/mod_mbox/mina-ftpserver-users/</archive>
-    </mailingList>
-    <mailingList>
-      <name>MINA Development mailing list</name>
-      <subscribe>dev-subscribe@mina.apache.org</subscribe>
-      <unsubscribe>dev-unsubscribe@mina.apache.org</unsubscribe>
-      <post>dev@mina.apache.org</post>
-      <archive>http://mail-archives.apache.org/mod_mbox/mina-dev/</archive>
-      <otherArchives>
-        <otherArchive>http://www.nabble.com/Apache-MINA-f16868.html</otherArchive>
-      </otherArchives>
-    </mailingList>
-    <mailingList>
-      <name>MINA Commit mailing list</name>
-      <subscribe>commits-subscribe@mina.apache.org</subscribe>
-      <unsubscribe>commits-unsubscribe@mina.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/mina-commits/</archive>
-    </mailingList>
-  </mailingLists>
-
-  <developers>
-    <developer>
-      <id>ngn</id>
-      <name>Niklas Gustavsson</name>
-      <email>niklas@protocol7.com</email>
-    </developer>
-    <developer>
-      <id>rana_b</id>
-      <name>Rana Battacharyya</name>
-      <email>rana_b.{aT}.yahoo.{d0T}.com</email>
-    </developer>
-    <developer>
-      <id>hammant</id>
-      <name>Paul Hammant</name>
-      <email>paul.{aT}.hammant.{d0T}.org</email>
-    </developer>
-    <developer>
-      <id>sergey</id>
-      <name>Sergey M Vladimirov</name>
-      <email>vlsergey.{aT}.gmail.{d0T}.com</email>
-      <organization>Netcracker corp.</organization>
-    </developer>
-  </developers>
-
-  <contributors>
-    <contributor>
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+ 
+    http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License. -->
+ 
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+     <artifactId>apache</artifactId>
+     <groupId>org.apache</groupId>
+     <version>18</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.apache.ftpserver</groupId>
+   <artifactId>ftpserver-parent</artifactId>
+   <packaging>pom</packaging>
+   <name>Apache FtpServer Parent</name>
+   <version>1.1.1-SNAPSHOT</version>
+   <url>http://mina.apache.org/ftpserver</url>
+   <issueManagement>
+     <system>Jira</system>
+     <url>http://issues.apache.org/jira/browse/FTPSERVER</url>
+   </issueManagement>
+   <inceptionYear>2003</inceptionYear>
+ 
+   <licenses>
+     <license>
+       <name>Apache 2.0 License</name>
+       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+       <distribution>repo</distribution>
+     </license>
+   </licenses>
+ 
+ 
+   <mailingLists>
+     <mailingList>
+       <name>FtpServer Users mailing list</name>
+       <subscribe>ftpserver-users-subscribe@mina.apache.org</subscribe>
+       <unsubscribe>ftpserver-users-unsubscribe@mina.apache.org</unsubscribe>
+       <post>ftpserver-users@mina.apache.org</post>
+       <archive>http://mail-archives.apache.org/mod_mbox/mina-ftpserver-users/</archive>
+     </mailingList>
+     <mailingList>
+       <name>MINA Development mailing list</name>
+       <subscribe>dev-subscribe@mina.apache.org</subscribe>
+       <unsubscribe>dev-unsubscribe@mina.apache.org</unsubscribe>
+       <post>dev@mina.apache.org</post>
+       <archive>http://mail-archives.apache.org/mod_mbox/mina-dev/</archive>
+       <otherArchives>
+         <otherArchive>http://www.nabble.com/Apache-MINA-f16868.html</otherArchive>
+       </otherArchives>
+     </mailingList>
+     <mailingList>
+       <name>MINA Commit mailing list</name>
+       <subscribe>commits-subscribe@mina.apache.org</subscribe>
+       <unsubscribe>commits-unsubscribe@mina.apache.org</unsubscribe>
+       <archive>http://mail-archives.apache.org/mod_mbox/mina-commits/</archive>
+     </mailingList>
+   </mailingLists>
+ 
+   <developers>
+     <developer>
+       <id>ngn</id>
+       <name>Niklas Gustavsson</name>
+       <email>niklas@protocol7.com</email>
+     </developer>
+     <developer>
+       <id>rana_b</id>
+       <name>Rana Battacharyya</name>
+       <email>rana_b.{aT}.yahoo.{d0T}.com</email>
+     </developer>
+     <developer>
+       <id>hammant</id>
+       <name>Paul Hammant</name>
+       <email>paul.{aT}.hammant.{d0T}.org</email>
+     </developer>
+     <developer>
+       <id>sergey</id>
+       <name>Sergey M Vladimirov</name>
+       <email>vlsergey.{aT}.gmail.{d0T}.com</email>
+       <organization>Netcracker corp.</organization>
+     </developer>
+   </developers>
+ 
+   <contributors>
+     <contributor>
       <name>Birkir A. Barkarson</name>
     </contributor>
     <contributor>
@@ -132,7 +132,7 @@
     <developerConnection>scm:git:http://git-wip-us.apache.org/repos/asf/mina-ftpserver.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
+ 
   <properties>
     <!-- Disbale the JAVA 8 Javadoc Lint -->
     <additionalparam>-Xdoclint:none</additionalparam>
@@ -154,7 +154,7 @@
     <ftpserver.version>${project.version}</ftpserver.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
+ 
   <dependencyManagement>
     <dependencies>
       <!-- Submodules -->
@@ -239,7 +239,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
+ 
   <build>
     <pluginManagement>
       <plugins>
@@ -310,7 +310,7 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
+ 
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -338,7 +338,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.18.1</version>
       </plugin>
-
+ 
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
         <version>2.9</version>
@@ -383,7 +383,7 @@
           <target>${maven.compile.target}</target>
         </configuration>
       </plugin>
-
+ 
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <version>2.4</version>
@@ -416,9 +416,9 @@
       </plugin>
 
       <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>2.5</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.5</version>
       </plugin>
 
       <plugin><groupId>org.apache.rat</groupId>
@@ -435,7 +435,7 @@
       </plugin>
     </plugins>
   </build>
-
+ 
   <profiles>
     <profile>
       <id>apache-release</id>
@@ -491,7 +491,4 @@
     <module>core</module>
     <module>examples</module>
   </modules>
-
-
-
 </project>
