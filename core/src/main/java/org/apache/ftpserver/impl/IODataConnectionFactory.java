@@ -223,7 +223,6 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
 
             return new InetSocketAddress(address, port);
         } catch (Exception ex) {
-            servSoc = null;
             closeDataConnection();
             throw new DataConnectionException(
                     "Failed to initate passive data connection: "
