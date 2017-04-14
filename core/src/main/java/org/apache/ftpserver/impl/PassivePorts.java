@@ -154,8 +154,8 @@ public class PassivePorts {
         if (passivePorts == null) {
             throw new NullPointerException("passivePorts can not be null");
         } else if(passivePorts.isEmpty()) {
-        	passivePorts = new HashSet<Integer>();
-        	passivePorts.add(0);
+            passivePorts = new HashSet<Integer>();
+            passivePorts.add(0);
         }
 
         this.freeList = new ArrayList<Integer>(passivePorts);
@@ -199,9 +199,9 @@ public class PassivePorts {
     }
 
     public synchronized int reserveNextPort() {
-    	// create a copy of the free ports, so that we can keep track of the tested ports
-    	List<Integer> freeCopy = new ArrayList<Integer>(freeList);
-    	
+        // create a copy of the free ports, so that we can keep track of the tested ports
+        List<Integer> freeCopy = new ArrayList<Integer>(freeList);
+        
         // Loop until we have found a port, or exhausted all available ports
         while (freeCopy.size() > 0) {
             // Otherwise, pick one at random
@@ -215,12 +215,12 @@ public class PassivePorts {
 
             } else if (checkPortUnbound(ret)) {
                 // Not used by someone else, so lets reserve it and return it
-                freeList.remove(i);
+                freeList.remove(ret);
                 usedList.add(ret);
                 return ret;
 
             } else {
-            	freeCopy.remove(i);
+                freeCopy.remove(i);
                 // log port unavailable, but left in pool
                 log.warn("Passive port in use by another process: " + ret);
             }
