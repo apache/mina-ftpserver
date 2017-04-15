@@ -17,7 +17,7 @@
     <parent>
         <artifactId>ftpserver-parent</artifactId>
         <groupId>org.apache.ftpserver</groupId>
-        <version>1.1.1-SNAPSHOT</version>
+        <version>1.1.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -26,7 +26,7 @@
   <artifactId>ftpserver-spring-war</artifactId>
   <name>FtpServer Spring web project example</name>
   <packaging>war</packaging>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.1.1</version>
   
   <dependencies>
     <dependency>
