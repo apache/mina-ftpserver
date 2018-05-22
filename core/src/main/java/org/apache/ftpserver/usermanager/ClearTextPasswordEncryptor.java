@@ -19,8 +19,7 @@
 
 package org.apache.ftpserver.usermanager;
 
-
-
+import org.apache.ftpserver.util.PasswordUtil;
 
 /**
  * Password encryptor that does no encryption, that is, keps the
@@ -48,7 +47,7 @@ public class ClearTextPasswordEncryptor implements PasswordEncryptor {
             throw new NullPointerException("passwordToCheck can not be null");
         }
         
-        return passwordToCheck.equals(storedPassword);
+        return PasswordUtil.secureCompareFast(passwordToCheck, storedPassword);
     }
 
 }
