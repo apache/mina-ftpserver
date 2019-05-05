@@ -36,8 +36,7 @@ import org.apache.ftpserver.util.ClassUtils;
 /**
  * <strong>Internal class, do not use directly.</strong>
  * 
- * Used to configure the SSL settings for the control channel or the data
- * channel.
+ * Used to configure the SSL settings for the control channel or the data channel.
  * 
  * <strong><strong>Internal class, do not use directly.</strong></strong>
  *
@@ -49,93 +48,95 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     private final TrustManagerFactory trustManagerFactory;
 
-    private String sslProtocol = "TLS";
+    private String enabledProtocol = "TLS";
 
     private final ClientAuth clientAuth;// = ClientAuth.NONE;
 
     private final String keyAlias;
 
     private final String[] enabledCipherSuites;
-    
+
     private final SSLContext sslContext;
-    
+
     private final SSLSocketFactory socketFactory;
-    
+
     /**
      * Internal constructor, do not use directly. Instead, use {@link SslConfigurationFactory}
-     * @throws GeneralSecurityException 
+     * 
+     * @throws GeneralSecurityException
      */
-    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory,
-            TrustManagerFactory trustManagerFactory, ClientAuth clientAuthReqd,
-            String sslProtocol, String[] enabledCipherSuites, String keyAlias) 
-    		throws GeneralSecurityException {
-        super();
-        this.clientAuth = clientAuthReqd;
-        this.enabledCipherSuites = enabledCipherSuites;
-        this.keyAlias = keyAlias;
-        this.keyManagerFactory = keyManagerFactory;
-        this.sslProtocol = sslProtocol;
-        this.trustManagerFactory = trustManagerFactory;
-        this.sslContext = initContext();
-        this.socketFactory = sslContext.getSocketFactory();
+    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory, ClientAuth clientAuthReqd, String sslProtocol, String[] enabledCipherSuites, String keyAlias) throws GeneralSecurityException {
+	super();
+	this.clientAuth = clientAuthReqd;
+	this.enabledCipherSuites = enabledCipherSuites;
+	this.keyAlias = keyAlias;
+	this.keyManagerFactory = keyManagerFactory;
+	this.enabledProtocol = sslProtocol;
+	this.trustManagerFactory = trustManagerFactory;
+	this.sslContext = initContext();
+	this.socketFactory = sslContext.getSocketFactory();
     }
-    
+
     public SSLSocketFactory getSocketFactory() throws GeneralSecurityException {
-    	return socketFactory;
+	return socketFactory;
     }
 
     /**
      * @see SslConfiguration#getSSLContext(String)
      */
-    public SSLContext getSSLContext(String protocol)
-            throws GeneralSecurityException {
-		return sslContext;
+    public SSLContext getSSLContext(String protocol) throws GeneralSecurityException {
+	return sslContext;
     }
-    
+
+    /**
+     * @see SslConfiguration#getEnabledProtocol()
+     */
+    public String getEnabledProtocol() {
+	return enabledProtocol;
+    }
+
     /**
      * @see SslConfiguration#getClientAuth()
      */
     public ClientAuth getClientAuth() {
-        return clientAuth;
+	return clientAuth;
     }
 
     /**
      * @see SslConfiguration#getSSLContext()
      */
     public SSLContext getSSLContext() throws GeneralSecurityException {
-        return getSSLContext(sslProtocol);
+	return getSSLContext(enabledProtocol);
     }
 
     /**
      * @see SslConfiguration#getEnabledCipherSuites()
      */
     public String[] getEnabledCipherSuites() {
-        if (enabledCipherSuites != null) {
-            return enabledCipherSuites.clone();
-        } else {
-            return null;
-        }
+	if (enabledCipherSuites != null) {
+	    return enabledCipherSuites.clone();
+	} else {
+	    return null;
+	}
     }
-    
+
     private SSLContext initContext() throws GeneralSecurityException {
-        KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
+	KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
 
-        // wrap key managers to allow us to control their behavior
-        // (FTPSERVER-93)
-        for (int i = 0; i < keyManagers.length; i++) {
-            if (ClassUtils.extendsClass(keyManagers[i].getClass(),
-                    "javax.net.ssl.X509ExtendedKeyManager")) {
-                keyManagers[i] = new ExtendedAliasKeyManager(keyManagers[i],
-                        keyAlias);
-            } else if (keyManagers[i] instanceof X509KeyManager) {
-                keyManagers[i] = new AliasKeyManager(keyManagers[i], keyAlias);
-            }
-        }
+	// wrap key managers to allow us to control their behavior
+	// (FTPSERVER-93)
+	for (int i = 0; i < keyManagers.length; i++) {
+	    if (ClassUtils.extendsClass(keyManagers[i].getClass(), "javax.net.ssl.X509ExtendedKeyManager")) {
+		keyManagers[i] = new ExtendedAliasKeyManager(keyManagers[i], keyAlias);
+	    } else if (keyManagers[i] instanceof X509KeyManager) {
+		keyManagers[i] = new AliasKeyManager(keyManagers[i], keyAlias);
+	    }
+	}
 
-        // create and initialize the SSLContext
-        SSLContext ctx = SSLContext.getInstance(sslProtocol);
-        ctx.init(keyManagers, trustManagerFactory.getTrustManagers(), null);
-        //Create the socket factory
-        return ctx;
+	// create and initialize the SSLContext
+	SSLContext ctx = SSLContext.getInstance(sslProtocol);
+	ctx.init(keyManagers, trustManagerFactory.getTrustManagers(), null);
+	// Create the socket factory
+	return ctx;
     }
 }
