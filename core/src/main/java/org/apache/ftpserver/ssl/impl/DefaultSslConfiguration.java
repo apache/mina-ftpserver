@@ -134,7 +134,7 @@ public class DefaultSslConfiguration implements SslConfiguration {
 	}
 
 	// create and initialize the SSLContext
-	SSLContext ctx = SSLContext.getInstance(sslProtocol);
+	SSLContext ctx = SSLContext.getInstance(enabledProtocol);
 	ctx.init(keyManagers, trustManagerFactory.getTrustManagers(), null);
 	// Create the socket factory
 	return ctx;

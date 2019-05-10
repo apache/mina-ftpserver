@@ -114,40 +114,38 @@ public class AUTH extends AbstractCommand {
 	}
     }
 
-    private void secureSession(final FtpIoSession session, final String type)
-            throws GeneralSecurityException, FtpException {
-        SslConfiguration ssl = session.getListener().getSslConfiguration();
+    private void secureSession(final FtpIoSession session, final String type) throws GeneralSecurityException, FtpException {
+	SslConfiguration ssl = session.getListener().getSslConfiguration();
 
-        if (ssl != null) {
-            session.setAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE);
+	if (ssl != null) {
+	    session.setAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE);
 
-            SslFilter sslFilter = new SslFilter(ssl.getSSLContext());
-            if (ssl.getClientAuth() == ClientAuth.NEED) {
-                sslFilter.setNeedClientAuth(true);
-            } else if (ssl.getClientAuth() == ClientAuth.WANT) {
-                sslFilter.setWantClientAuth(true);
-            }
+	    SslFilter sslFilter = new SslFilter(ssl.getSSLContext());
+	    if (ssl.getClientAuth() == ClientAuth.NEED) {
+		sslFilter.setNeedClientAuth(true);
+	    } else if (ssl.getClientAuth() == ClientAuth.WANT) {
+		sslFilter.setWantClientAuth(true);
+	    }
 
-            // note that we do not care about the protocol, we allow both types
-            // and leave it to the SSL handshake to determine the protocol to
-            // use. Thus the type argument is ignored.
+	    // note that we do not care about the protocol, we allow both types
+	    // and leave it to the SSL handshake to determine the protocol to
+	    // use. Thus the type argument is ignored.
 
-            if (ssl.getEnabledCipherSuites() != null) {
-                sslFilter.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
-            }
-            
-            if(ssl.getEnabledProtocol() != null ) {
-        	sslFilter.setEnabledProtocols(new String[] {ssl.getEnabledProtocol()});
-            }
+	    if (ssl.getEnabledCipherSuites() != null) {
+		sslFilter.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
+	    }
 
-            session.getFilterChain().addFirst(SSL_SESSION_FILTER_NAME,
-                    sslFilter);
+	    if (ssl.getEnabledProtocol() != null) {
+		sslFilter.setEnabledProtocols(new String[] { ssl.getEnabledProtocol() });
+	    }
 
-            if("SSL".equals(type)) {
-                session.getDataConnection().setSecure(true);
-            }
-        } else {
-            throw new FtpException("Socket factory SSL not configured");
-        }
+	    session.getFilterChain().addFirst(SSL_SESSION_FILTER_NAME, sslFilter);
+
+	    if ("SSL".equals(type)) {
+		session.getDataConnection().setSecure(true);
+	    }
+	} else {
+	    throw new FtpException("Socket factory SSL not configured");
+	}
     }
 }
