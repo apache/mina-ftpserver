@@ -29,17 +29,17 @@
    <packaging>pom</packaging>
    <name>Apache FtpServer Parent</name>
    <version>1.1.2-SNAPSHOT</version>
-   <url>http://mina.apache.org/ftpserver</url>
+   <url>https://mina.apache.org/ftpserver</url>
    <issueManagement>
      <system>Jira</system>
-     <url>http://issues.apache.org/jira/browse/FTPSERVER</url>
+     <url>https://issues.apache.org/jira/browse/FTPSERVER</url>
    </issueManagement>
    <inceptionYear>2003</inceptionYear>
  
    <licenses>
      <license>
        <name>Apache 2.0 License</name>
-       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
        <distribution>repo</distribution>
      </license>
    </licenses>
@@ -51,14 +51,14 @@
        <subscribe>ftpserver-users-subscribe@mina.apache.org</subscribe>
        <unsubscribe>ftpserver-users-unsubscribe@mina.apache.org</unsubscribe>
        <post>ftpserver-users@mina.apache.org</post>
-       <archive>http://mail-archives.apache.org/mod_mbox/mina-ftpserver-users/</archive>
+       <archive>https://mail-archives.apache.org/mod_mbox/mina-ftpserver-users/</archive>
      </mailingList>
      <mailingList>
        <name>MINA Development mailing list</name>
        <subscribe>dev-subscribe@mina.apache.org</subscribe>
        <unsubscribe>dev-unsubscribe@mina.apache.org</unsubscribe>
        <post>dev@mina.apache.org</post>
-       <archive>http://mail-archives.apache.org/mod_mbox/mina-dev/</archive>
+       <archive>https://mail-archives.apache.org/mod_mbox/mina-dev/</archive>
        <otherArchives>
          <otherArchive>http://www.nabble.com/Apache-MINA-f16868.html</otherArchive>
        </otherArchives>
@@ -67,7 +67,7 @@
        <name>MINA Commit mailing list</name>
        <subscribe>commits-subscribe@mina.apache.org</subscribe>
        <unsubscribe>commits-unsubscribe@mina.apache.org</unsubscribe>
-       <archive>http://mail-archives.apache.org/mod_mbox/mina-commits/</archive>
+       <archive>https://mail-archives.apache.org/mod_mbox/mina-commits/</archive>
      </mailingList>
    </mailingLists>
  
@@ -127,10 +127,10 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:https://git-wip-us.apache.org/repos/as/mina-ftpserver.git</connection>
-    <url>https://git-wip-us.apache.org/repos/asf?p=mina-ftpserver.git</url>
-    <developerConnection>scm:git:http://git-wip-us.apache.org/repos/asf/mina-ftpserver.git</developerConnection>
-    <tag>HEAD</tag>
+    <connection>scm:git:https://gitbox.apache.org/repos/asf/mina-ftpserver.git</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/mina-ftpserver.git</developerConnection>
+    <url>https://github.com/apache/mina-ftpserver/tree/${project.scm.tag}</url>
+    <tag>master</tag>
   </scm>
  
   <properties>
@@ -144,7 +144,7 @@
     <jcl.over.slf4j.version>1.7.21</jcl.over.slf4j.version>
     <junit.version>4.12</junit.version>
     <log4j.version>1.2.17</log4j.version>
-    <mina.core.version>2.0.16</mina.core.version>
+    <mina.core.version>2.0.21</mina.core.version>
     <slf4j.api.version>1.7.21</slf4j.api.version>
     <slf4j.log4j12.version>1.7.21</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
@@ -247,6 +247,7 @@
           <groupId>org.apache.rat</groupId>
           <artifactId>apache-rat-plugin</artifactId>
           <version>0.12</version>
+          <inherited>true</inherited>
           <configuration>
             <excludeSubProjects>false</excludeSubProjects>
             <excludes>
@@ -274,6 +275,14 @@
               <exclude>**/dependency-reduced-pom.xml</exclude>
             </excludes>
           </configuration>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>
