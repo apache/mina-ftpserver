@@ -45,7 +45,7 @@ import org.apache.ftpserver.util.IoUtils;
 public abstract class SSLTestTemplate extends ClientTestTemplate {
 
     protected static final File FTPCLIENT_KEYSTORE = new File(TestUtil
-            .getBaseDir(), "src/test/resources/client.jks");
+            .getBaseDir(), "src/test/resources/ftpclient.jks");
 
     protected static final String KEYSTORE_PASSWORD = "password";
 
