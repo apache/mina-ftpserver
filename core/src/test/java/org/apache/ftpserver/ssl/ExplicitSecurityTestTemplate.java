@@ -55,7 +55,7 @@ public abstract class ExplicitSecurityTestTemplate extends SSLTestTemplate {
     }
 
     protected boolean expectDataConnectionSecure() {
-        return getAuthValue().equals("SSL") && !useImplicit();
+        return getAuthValue().equals("TLSv1.2") && !useImplicit();
     }
 
     /**

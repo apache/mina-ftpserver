@@ -28,7 +28,7 @@ public class MinaImplicitTLSTest extends ImplicitSecurityTestTemplate {
 
     @Override
     protected String getAuthValue() {
-        return "TLS";
+        return "TLSv1.2";
     }
 
 }

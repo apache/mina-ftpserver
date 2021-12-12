@@ -19,15 +19,18 @@
 
 package org.apache.ftpserver.ssl;
 
+import org.junit.Ignore;
+
 /**
 *
 * @author <a href="http://mina.apache.org">Apache MINA Project</a>
 *
 */
+@Ignore( "SSL V3 not supported anymore" )
 public class MinaExplicitTLSTest extends ExplicitSecurityTestTemplate {
 
     @Override
     protected String getAuthValue() {
-        return "TLS";
+        return "TLSv1.2";
     }
 }

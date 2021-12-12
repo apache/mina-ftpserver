@@ -234,7 +234,6 @@ public class DefaultFtpHandler implements FtpHandler {
             }
 
         } catch (Exception ex) {
-
             // send error reply
             try {
                 session.write(LocalizedFtpReply.translate(session, request,

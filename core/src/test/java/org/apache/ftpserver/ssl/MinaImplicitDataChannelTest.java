@@ -45,7 +45,7 @@ public class MinaImplicitDataChannelTest extends ImplicitSecurityTestTemplate {
 
     @Override
     protected String getAuthValue() {
-        return "SSL";
+        return "TLSv1.2";
     }
 
     @Override
@@ -124,7 +124,7 @@ public class MinaImplicitDataChannelTest extends ImplicitSecurityTestTemplate {
 
         // FTPSClient does not support implicit data connections, so we hack it ourselves
         FTPSClient sclient = (FTPSClient) client;
-        SSLContext context = SSLContext.getInstance("TLS");
+        SSLContext context = SSLContext.getInstance("TLSv1.2");
 
         // these are the same key and trust managers that we initialize the client with
         context.init(new KeyManager[] { clientKeyManager },

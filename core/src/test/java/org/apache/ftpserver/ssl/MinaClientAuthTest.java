@@ -57,7 +57,7 @@ public class MinaClientAuthTest extends SSLTestTemplate {
 
     @Override
     protected String getAuthValue() {
-        return "TLS";
+        return "TLSv1.2";
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MinaClientAuthTest extends SSLTestTemplate {
         X509Certificate cert = (X509Certificate) session
                 .getClientCertificates()[0];
 
-        assertTrue(cert.getSubjectDN().toString().contains("FtpClient"));
+        assertTrue(cert.getSubjectDN().toString().contains("ftpclient"));
     }
 
 }

@@ -55,14 +55,16 @@ public class AUTH extends AbstractCommand {
     /**
      * Execute command
      */
-    public void execute(final FtpIoSession session, final FtpServerContext context, final FtpRequest request) throws IOException, FtpException {
+    public void execute(final FtpIoSession session, final FtpServerContext context, final FtpRequest request)
+	    throws IOException, FtpException {
 
 	// reset state variables
 	session.resetState();
 
 	// argument check
 	if (!request.hasArgument()) {
-	    session.write(LocalizedFtpReply.translate(session, request, context, FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "AUTH", null));
+	    session.write(LocalizedFtpReply.translate(session, request, context,
+		    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "AUTH", null));
 	    return;
 	}
 
@@ -110,11 +112,13 @@ public class AUTH extends AbstractCommand {
 		throw new FtpException("AUTH.execute()", ex);
 	    }
 	} else {
-	    session.write(LocalizedFtpReply.translate(session, request, context, FtpReply.REPLY_502_COMMAND_NOT_IMPLEMENTED, "AUTH", null));
+	    session.write(LocalizedFtpReply.translate(session, request, context,
+		    FtpReply.REPLY_502_COMMAND_NOT_IMPLEMENTED, "AUTH", null));
 	}
     }
 
-    private void secureSession(final FtpIoSession session, final String type) throws GeneralSecurityException, FtpException {
+    private void secureSession(final FtpIoSession session, final String type)
+	    throws GeneralSecurityException, FtpException {
 	SslConfiguration ssl = session.getListener().getSslConfiguration();
 
 	if (ssl != null) {

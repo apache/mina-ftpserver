@@ -32,7 +32,7 @@ public class MinaCipherSuitesTest extends SSLTestTemplate {
 
     @Override
     protected String getAuthValue() {
-	return "TLS";
+	return "TLSv1.2";
     }
 
     @Override
