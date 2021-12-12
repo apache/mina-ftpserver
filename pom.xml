@@ -10,9 +10,7 @@
 	OF ANY KIND, either express or implied. See the License for the specific 
 	language governing permissions and limitations under the License. -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>apache</artifactId>
 		<groupId>org.apache</groupId>
@@ -23,7 +21,7 @@
 	<artifactId>ftpserver-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Apache FtpServer Parent</name>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 	<url>https://mina.apache.org/ftpserver</url>
 	<issueManagement>
 		<system>Jira</system>
@@ -125,7 +123,7 @@
 		<connection>scm:git:https://gitbox.apache.org/repos/asf/mina-ftpserver.git</connection>
 		<developerConnection>scm:git:https://gitbox.apache.org/repos/asf/mina-ftpserver.git</developerConnection>
 		<url>https://github.com/apache/mina-ftpserver/tree/${project.scm.tag}</url>
-		<tag>master</tag>
+		<tag>ftpserver-1.1.2</tag>
 	</scm>
 
 	<properties>
