@@ -33,19 +33,6 @@
     session.</description>
   <url>http://mina.apache.org/ftpserver</url>
   
-  <scm>
-    <connection>
-      scm:svn:http://svn.apache.org/repos/asf/mina/ftpserver/trunk/ftplet-api
-    </connection>
-    
-    <developerConnection>
-      scm:svn:https://svn.apache.org/repos/asf/mina/ftpserver/trunk/ftplet-api
-    </developerConnection>
-    <url>http://svn.apache.org/viewvc/mina/ftpserver/trunk/ftplet-api
-    </url>
-    <tag>HEAD</tag>
-  </scm>
-  
   <build>
     <plugins>
       <plugin>
