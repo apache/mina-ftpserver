@@ -156,7 +156,7 @@
     <project.build.outputTimestamp>${maven.build.timestamp}</project.build.outputTimestamp>
 
     <!-- Disable the JAVA 8 Javadoc Lint -->
-    <additionalparam>-Xdoclint:none</additionalparam>
+    <doclint>none</doclint>
 
     <!-- Set versions for depending jars -->
     <commons.codec.version>1.15</commons.codec.version>
