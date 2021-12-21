@@ -21,9 +21,7 @@
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.ftpserver</groupId>
   <artifactId>ftplet-api</artifactId>
-  <version>1.1.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>Apache Ftplet API</name>
   
@@ -72,7 +70,7 @@
   </reporting>
   
   <properties>
-    <maven.compile.source>1.7</maven.compile.source>
-    <maven.compile.target>1.7</maven.compile.target>
+    <maven.compile.source>1.8</maven.compile.source>
+    <maven.compile.target>1.8</maven.compile.target>
   </properties>
 </project>

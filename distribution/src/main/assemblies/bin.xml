@@ -18,7 +18,7 @@
 -->
 
 <assembly>
-    <id></id>
+    <id>bin</id>
     <formats>
         <format>zip</format>
         <format>tar.gz</format>
