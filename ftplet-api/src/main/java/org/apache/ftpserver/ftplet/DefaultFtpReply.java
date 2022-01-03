@@ -81,15 +81,15 @@ public class DefaultFtpReply implements FtpReply {
     }
     
     public long getSentTime() {
-    	return sentTime;
+        return sentTime;
     }
     
     public boolean isPositive() {
-    	return code < 400;
+        return code < 400;
     }
     
     private boolean isDigit(char c) {
-    	return c >= 48 && c <= 57;
+        return c >= 48 && c <= 57;
     }
     
     /*
@@ -139,13 +139,13 @@ public class DefaultFtpReply implements FtpReply {
                 // "If an intermediary line begins with a 3-digit number, the Server
                 // must pad the front  to avoid confusion.
                 if(i > 0 
-                		&& i + 1 < lines.length 
-                		&& line.length() > 2 
-                		&& isDigit(line.charAt(0))
-                		&& isDigit(line.charAt(1))
-                		&& isDigit(line.charAt(2))
-                	) {
-                	sb.append("  ");
+                        && i + 1 < lines.length 
+                        && line.length() > 2 
+                        && isDigit(line.charAt(0))
+                        && isDigit(line.charAt(1))
+                        && isDigit(line.charAt(2))
+                    ) {
+                    sb.append("  ");
                 }
                 sb.append(line);
                 sb.append(CRLF);

@@ -75,7 +75,7 @@ public class SpringConfigTest extends TestCase {
                 .getDataConnectionConfiguration().isImplicitSsl());
         
         assertEquals(InetAddress.getByName("1.2.3.4"), InetAddress.getByName(((NioListener) listener)
-        		.getDataConnectionConfiguration().getActiveLocalAddress()) );
+                .getDataConnectionConfiguration().getActiveLocalAddress()) );
         assertEquals("123-125", ((NioListener) listener)
                 .getDataConnectionConfiguration().getPassivePorts());
         assertEquals(false, ((NioListener) listener)

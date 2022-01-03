@@ -135,7 +135,7 @@ public class MLSTFileFormaterTest extends TestCase {
         }
         
         public Object getPhysicalFile() {
-        	return "/short";
+            return "/short";
         }
     }
 

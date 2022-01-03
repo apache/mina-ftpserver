@@ -29,12 +29,12 @@ package org.apache.ftpserver.ftplet;
 
 public interface FileActionFtpReply extends FtpReply {
 
-	/**
-	 * Returns the file (or directory) on which the action was taken 
-	 * (e.g. uploaded, created, listed)
-	 * 
-	 * @return the file on which the action was taken. May return
-	 *         <code>null</code>, if the file information is not available.
-	 */
-	public FtpFile getFile();
+    /**
+     * Returns the file (or directory) on which the action was taken 
+     * (e.g. uploaded, created, listed)
+     * 
+     * @return the file on which the action was taken. May return
+     *         <code>null</code>, if the file information is not available.
+     */
+    public FtpFile getFile();
 }

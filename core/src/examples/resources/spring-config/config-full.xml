@@ -17,44 +17,50 @@
  specific language governing permissions and limitations
  under the License. --> 
 <beans:beans xmlns="http://mina.apache.org/ftpserver/spring/v1"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-	   http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd	
-	   ">
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+     http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd  
+     ">
 
-    <server id="myServer">
-        <listeners>
-            <nio-listener name="default" port="2222" implicit-ssl="true"  idle-timeout="60" local-address="1.2.3.4">
-                <ssl>
-                    <keystore file="mykeystore.jks" password="secret" key-password="otherSecret" />
-                    <truststore file="mytruststore.jks" password="secret"/>
-                </ssl>
-                <data-connection idle-timeout="60">
-                    <active enabled="true" local-address="1.2.3.4" local-port="2323" ip-check="true"/>
-                    <passive ports="123-125" address="1.2.3.4" external-address="1.2.3.4" />
-                </data-connection>
-                <blacklist>1.2.3.0/16, 1.2.4.0/16, 1.2.3.4</blacklist>              
-            </nio-listener>
-            <listener name="myCustomListener">
-                <beans:bean class="org.apache.ftpserver.examples.MyListener" />
-            </listener>
-        </listeners>
-        <ftplets>
-            <ftplet name="ftplet1">
-                <beans:bean class="org.apache.ftpserver.examples.MyFtplet">
-                    <beans:property name="foo" value="123"/>
-                </beans:bean>
-            </ftplet>
-        </ftplets>
-        <file-user-manager file="users.properties" encrypt-passwords="true" />
-        <native-filesystem case-insensitive="false" create-home="true" />
-        <commands use-default="false">
-            <command name="MYHELP">
-                <beans:bean class="org.apache.ftpserver.examples.MYHELP" />
-            </command>
-        </commands>
-        <messages languages="se, no ,da" />
-    </server>
+  <server id="myServer">
+    <listeners>
+      <nio-listener name="default" port="2222" implicit-ssl="true"  idle-timeout="60" local-address="1.2.3.4">
+        <ssl>
+          <keystore file="mykeystore.jks" password="secret" key-password="otherSecret" />
+          <truststore file="mytruststore.jks" password="secret"/>
+        </ssl>
+
+        <data-connection idle-timeout="60">
+          <active enabled="true" local-address="1.2.3.4" local-port="2323" ip-check="true"/>
+          <passive ports="123-125" address="1.2.3.4" external-address="1.2.3.4" />
+        </data-connection>
+        <blacklist>1.2.3.0/16, 1.2.4.0/16, 1.2.3.4</blacklist>              
+      </nio-listener>
+      
+      <listener name="myCustomListener">
+        beans:bean class="org.apache.ftpserver.examples.MyListener" />
+      </listener>
+    </listeners>
+
+    <ftplets>
+      <ftplet name="ftplet1">
+        <beans:bean class="org.apache.ftpserver.examples.MyFtplet">
+          <beans:property name="foo" value="123"/>
+        </beans:bean>
+      </ftplet>
+    </ftplets>
+
+    <file-user-manager file="users.properties" encrypt-passwords="true" />
+    <native-filesystem case-insensitive="false" create-home="true" />
+
+    <commands use-default="false">
+      <command name="MYHELP">
+        <beans:bean class="org.apache.ftpserver.examples.MYHELP" />
+      </command>
+    </commands>
+
+    <messages languages="se, no ,da" />
+  </server>
 </beans:beans>

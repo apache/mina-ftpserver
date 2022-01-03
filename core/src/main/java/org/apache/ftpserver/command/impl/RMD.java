@@ -125,7 +125,7 @@ public class RMD extends AbstractCommand {
             ftpStat.setRmdir(session, file);
 
         } else {
-        	 
+             
             session.write(LocalizedFileActionFtpReply.translate(session, request, context,
                     FtpReply.REPLY_450_REQUESTED_FILE_ACTION_NOT_TAKEN, "RMD",
                     fileName, file));

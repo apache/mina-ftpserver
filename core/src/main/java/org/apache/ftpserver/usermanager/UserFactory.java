@@ -50,110 +50,110 @@ public class UserFactory {
      * @return The created user
      */
     public User createUser() {
-    	BaseUser user = new BaseUser();
-    	user.setName(name);
-    	user.setPassword(password);
-    	user.setHomeDirectory(homeDir);
-    	user.setEnabled(isEnabled);
-    	user.setAuthorities(authorities);
-    	user.setMaxIdleTime(maxIdleTimeSec);
-    	
-    	return user;
+        BaseUser user = new BaseUser();
+        user.setName(name);
+        user.setPassword(password);
+        user.setHomeDirectory(homeDir);
+        user.setEnabled(isEnabled);
+        user.setAuthorities(authorities);
+        user.setMaxIdleTime(maxIdleTimeSec);
+        
+        return user;
     }
     
     /**
      * Get the user name for users created by this factory
      * @return The user name
      */
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Set the user name for users created by this factory
-	 * @param name The user name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Set the user name for users created by this factory
+     * @param name The user name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Get the password for users created by this factory
-	 * @return The password
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Get the password for users created by this factory
+     * @return The password
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * Set the user name for users created by this factory
-	 * @param password The password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Set the user name for users created by this factory
+     * @param password The password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * Get the max idle time for users created by this factory
-	 * @return The max idle time in seconds
-	 */
-	public int getMaxIdleTime() {
-		return maxIdleTimeSec;
-	}
+    /**
+     * Get the max idle time for users created by this factory
+     * @return The max idle time in seconds
+     */
+    public int getMaxIdleTime() {
+        return maxIdleTimeSec;
+    }
 
-	/**
-	 * Set the user name for users created by this factory
-	 * @param maxIdleTimeSec The max idle time in seconds
-	 */
-	public void setMaxIdleTime(int maxIdleTimeSec) {
-		this.maxIdleTimeSec = maxIdleTimeSec;
-	}
+    /**
+     * Set the user name for users created by this factory
+     * @param maxIdleTimeSec The max idle time in seconds
+     */
+    public void setMaxIdleTime(int maxIdleTimeSec) {
+        this.maxIdleTimeSec = maxIdleTimeSec;
+    }
 
-	/**
-	 * Get the home directory for users created by this factory
-	 * @return The home directory path
-	 */
-	public String getHomeDirectory() {
-		return homeDir;
-	}
+    /**
+     * Get the home directory for users created by this factory
+     * @return The home directory path
+     */
+    public String getHomeDirectory() {
+        return homeDir;
+    }
 
-	/**
-	 * Set the user name for users created by this factory
-	 * @param homeDir The home directory path
-	 */
-	public void setHomeDirectory(String homeDir) {
-		this.homeDir = homeDir;
-	}
+    /**
+     * Set the user name for users created by this factory
+     * @param homeDir The home directory path
+     */
+    public void setHomeDirectory(String homeDir) {
+        this.homeDir = homeDir;
+    }
 
-	/**
-	 * Get the enabled status for users created by this factory
-	 * @return true if the user is enabled (allowed to log in)
-	 */
-	public boolean isEnabled() {
-		return isEnabled;
-	}
+    /**
+     * Get the enabled status for users created by this factory
+     * @return true if the user is enabled (allowed to log in)
+     */
+    public boolean isEnabled() {
+        return isEnabled;
+    }
 
-	/**
-	 * Get the enabled status for users created by this factory
-	 * @param isEnabled true if the user should be enabled (allowed to log in)
-	 */
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
-	}
+    /**
+     * Get the enabled status for users created by this factory
+     * @param isEnabled true if the user should be enabled (allowed to log in)
+     */
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
 
-	/**
-	 * Get the authorities for users created by this factory
-	 * @return The authorities
-	 */
-	public List<? extends Authority> getAuthorities() {
-		return authorities;
-	}
+    /**
+     * Get the authorities for users created by this factory
+     * @return The authorities
+     */
+    public List<? extends Authority> getAuthorities() {
+        return authorities;
+    }
 
-	/**
-	 * Set the authorities for users created by this factory
-	 * @param authorities The authorities
-	 */
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
-	}
+    /**
+     * Set the authorities for users created by this factory
+     * @param authorities The authorities
+     */
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

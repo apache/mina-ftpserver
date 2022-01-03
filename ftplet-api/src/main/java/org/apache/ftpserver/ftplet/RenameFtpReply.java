@@ -29,20 +29,20 @@ package org.apache.ftpserver.ftplet;
 
 public interface RenameFtpReply extends FtpReply {
 
-	/**
-	 * Returns the file before the rename.
-	 * 
-	 * @return the file before the rename. May return <code>null</code>, if
-	 *         the file information is not available.
-	 */
-	public FtpFile getFrom();
+    /**
+     * Returns the file before the rename.
+     * 
+     * @return the file before the rename. May return <code>null</code>, if
+     *         the file information is not available.
+     */
+    public FtpFile getFrom();
 
-	/**
-	 * Returns the file after the rename.
-	 * 
-	 * @return the file after the rename. May return <code>null</code>, if
-	 *         the file information is not available.
-	 */
-	public FtpFile getTo();
+    /**
+     * Returns the file after the rename.
+     * 
+     * @return the file after the rename. May return <code>null</code>, if
+     *         the file information is not available.
+     */
+    public FtpFile getTo();
 
 }

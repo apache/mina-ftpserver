@@ -264,10 +264,10 @@ public class SpringUtil {
      * @return The attribute string value.
      */
     public static String parseStringFromInetAddress(final Element parent,
-    		final String attrName){
-    	if ( parseInetAddress(parent, attrName)!=null){
-    		return parent.getAttribute(attrName);
-    	}
-    	return null;
+            final String attrName){
+        if ( parseInetAddress(parent, attrName)!=null){
+            return parent.getAttribute(attrName);
+        }
+        return null;
     }
 }

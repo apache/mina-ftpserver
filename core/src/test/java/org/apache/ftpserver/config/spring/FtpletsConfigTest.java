@@ -41,7 +41,7 @@ public class FtpletsConfigTest extends SpringConfigTestTemplate {
 
     public void testFtplet() throws Throwable {
         Map<String, Ftplet> ftplets = createFtplets("<ftplet name=\"foo\">" +
-        		"<beans:bean class=\"" + TestFtplet.class.getName() +  "\">" +
+                "<beans:bean class=\"" + TestFtplet.class.getName() +  "\">" +
                         "<beans:property name=\"foo\" value=\"123\" />" +
                         "</beans:bean></ftplet>");
 

@@ -134,7 +134,7 @@ public class LISTFileFormaterTest extends TestCase {
         }
         
         public Object getPhysicalFile() {
-        	return "/short";
+            return "/short";
         }
     }
 

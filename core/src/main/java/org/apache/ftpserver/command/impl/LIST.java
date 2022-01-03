@@ -124,7 +124,7 @@ public class LIST extends AbstractCommand {
             // transfer listing data
             boolean failure = false;
             String dirList = directoryLister.listFiles(parsedArg, 
-            	session.getFileSystemView(), LIST_FILE_FORMATER);
+                session.getFileSystemView(), LIST_FILE_FORMATER);
             try {
                 dataConnection.transferToClient(session.getFtpletSession(), dirList);
             } catch (SocketException ex) {

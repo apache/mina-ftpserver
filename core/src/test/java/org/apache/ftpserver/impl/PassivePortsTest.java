@@ -83,13 +83,13 @@ public class PassivePortsTest extends TestCase {
     }
     
     private void assertReserveAll(String portString, int... validPorts) {
-    	PassivePorts ports = new PassivePorts(portString, false);
-    	
+        PassivePorts ports = new PassivePorts(portString, false);
+        
         List<Integer> valid = valid(validPorts);
 
         int len = valid.size();
         for(int i = 0; i<len; i++) {
-        	assertContains(valid, ports.reserveNextPort());
+            assertContains(valid, ports.reserveNextPort());
         }
         assertEquals(-1, ports.reserveNextPort());
         assertTrue(valid.isEmpty());
@@ -99,7 +99,7 @@ public class PassivePortsTest extends TestCase {
     private List<Integer> valid(int... ints) {
         List<Integer> valid = new ArrayList<Integer>();
         for(int i : ints) {
-        	valid.add(i);
+            valid.add(i);
         }
         return valid;
     }
@@ -149,8 +149,8 @@ public class PassivePortsTest extends TestCase {
     }
     
     public void testReserveNextPortBound() throws IOException {
-    	ServerSocket ss = new ServerSocket(0);
-    	
+        ServerSocket ss = new ServerSocket(0);
+        
         PassivePorts ports = new PassivePorts(Integer.toString(ss.getLocalPort()), true);
 
         assertEquals(-1, ports.reserveNextPort());

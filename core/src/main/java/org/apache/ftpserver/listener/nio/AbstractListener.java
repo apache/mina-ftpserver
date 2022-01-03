@@ -73,8 +73,8 @@ public abstract class AbstractListener implements Listener {
         this.ssl = sslConfiguration;
         this.idleTimeout = idleTimeout;
         this.sessionFilter = createBlackListFilter(blockedAddresses, blockedSubnets);
-    	this.blockedAddresses = blockedAddresses;
-    	this.blockedSubnets = blockedSubnets;
+        this.blockedAddresses = blockedAddresses;
+        this.blockedSubnets = blockedSubnets;
     }
     
     /**

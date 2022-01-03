@@ -258,7 +258,7 @@ public class ListenerBeanDefinitionParser extends
                 String localAddress = SpringUtil.parseStringFromInetAddress(
                         activeElm, "local-address");
                 if (localAddress != null) {
-                	dc.setActiveLocalAddress(localAddress);
+                    dc.setActiveLocalAddress(localAddress);
                 }
             }
 
@@ -268,7 +268,7 @@ public class ListenerBeanDefinitionParser extends
                 String address = SpringUtil.parseStringFromInetAddress(passiveElm,
                         "address");
                 if (address != null) {
-                	dc.setPassiveAddress(address);
+                    dc.setPassiveAddress(address);
                 }
 
                 String externalAddress = SpringUtil.parseStringFromInetAddress(

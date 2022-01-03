@@ -17,28 +17,29 @@
  specific language governing permissions and limitations
  under the License. --> 
 <beans:beans xmlns="http://mina.apache.org/ftpserver/spring/v1"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-	   http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd	
-	   ">
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+     http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd  
+     ">
 
     <beans:bean id="ftpletBean2" class="org.apache.ftpserver.examples.MyFtplet">
         <beans:property name="foo" value="123"/>
     </beans:bean>
 
 
-	<server id="myServer">
-		<ftplets>
-			<ftplet name="ftplet1">
-				<beans:bean class="org.apache.ftpserver.examples.MyFtplet">
-					<beans:property name="foo" value="123"/>
-				</beans:bean>
-			</ftplet>
-            <ftplet name="ftplet2">
-                <beans:ref name="ftpletBean2" />
-            </ftplet>
-		</ftplets>
-	</server>
+  <server id="myServer">
+    <ftplets>
+      <ftplet name="ftplet1">
+        <beans:bean class="org.apache.ftpserver.examples.MyFtplet">
+          <beans:property name="foo" value="123"/>
+        </beans:bean>
+      </ftplet>
+      
+      <ftplet name="ftplet2">
+        <beans:ref name="ftpletBean2" />
+      </ftplet>
+    </ftplets>
+  </server>
 </beans:beans>

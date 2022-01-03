@@ -86,8 +86,8 @@ public class FtpLetReturnDefaultTest extends ClientTestTemplate {
     }
 
     public void testLogin() throws Exception {
-    	final LinkedBlockingQueue<User> loggedInUser = new LinkedBlockingQueue<User>();
-    	
+        final LinkedBlockingQueue<User> loggedInUser = new LinkedBlockingQueue<User>();
+        
         MockFtplet.callback = new MockFtpletCallback() {
             public FtpletResult onLogin(FtpSession session, FtpRequest request)
                     throws FtpException, IOException {

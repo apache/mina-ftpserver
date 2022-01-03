@@ -417,12 +417,12 @@ public class NativeFtpFile implements FtpFile {
         return false;
     }
     
-	@Override
-	public int hashCode() {
-		try {
-			return file.getCanonicalPath().hashCode();
-		} catch (IOException e) {
-			return 0;
-		}
-	}
+    @Override
+    public int hashCode() {
+        try {
+            return file.getCanonicalPath().hashCode();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
 }

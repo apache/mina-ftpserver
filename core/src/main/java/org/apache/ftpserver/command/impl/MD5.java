@@ -137,11 +137,11 @@ public class MD5 extends AbstractCommand {
                 }
                 boolean nameHasSpaces = fileName.indexOf(' ') >= 0;
                 if(nameHasSpaces) {
-                	sb.append('"');
+                    sb.append('"');
                 }
                 sb.append(fileName);
                 if(nameHasSpaces) {
-                	sb.append('"');
+                    sb.append('"');
                 }
                 sb.append(' ');
                 sb.append(md5Hash);

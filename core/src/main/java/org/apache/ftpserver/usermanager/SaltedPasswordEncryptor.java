@@ -36,51 +36,51 @@ import org.apache.ftpserver.util.PasswordUtil;
  */
 public class SaltedPasswordEncryptor implements PasswordEncryptor {
 
-	private SecureRandom rnd = new SecureRandom();
+    private SecureRandom rnd = new SecureRandom();
 
-	private static final int MAX_SEED = 99999999;
-	private static final int HASH_ITERATIONS = 1000;
+    private static final int MAX_SEED = 99999999;
+    private static final int HASH_ITERATIONS = 1000;
 
-	private String encrypt(String password, String salt) {
-		String hash = salt + password;
-		for (int i = 0; i < HASH_ITERATIONS; i++) {
-			hash = EncryptUtils.encryptMD5(hash);
-		}
-		return salt + ":" + hash;
-	}
+    private String encrypt(String password, String salt) {
+        String hash = salt + password;
+        for (int i = 0; i < HASH_ITERATIONS; i++) {
+            hash = EncryptUtils.encryptMD5(hash);
+        }
+        return salt + ":" + hash;
+    }
 
-	/**
-	 * Encrypts the password using a salt concatenated with the password and a
-	 * series of MD5 steps.
-	 */
-	public String encrypt(String password) {
-		String seed = Integer.toString(rnd.nextInt(MAX_SEED));
+    /**
+     * Encrypts the password using a salt concatenated with the password and a
+     * series of MD5 steps.
+     */
+    public String encrypt(String password) {
+        String seed = Integer.toString(rnd.nextInt(MAX_SEED));
 
-		return encrypt(password, seed);
-	}
+        return encrypt(password, seed);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public boolean matches(String passwordToCheck, String storedPassword) {
-		if (storedPassword == null) {
-			throw new NullPointerException("storedPassword can not be null");
-		}
-		if (passwordToCheck == null) {
-			throw new NullPointerException("passwordToCheck can not be null");
-		}
+    /**
+     * {@inheritDoc}
+     */
+    public boolean matches(String passwordToCheck, String storedPassword) {
+        if (storedPassword == null) {
+            throw new NullPointerException("storedPassword can not be null");
+        }
+        if (passwordToCheck == null) {
+            throw new NullPointerException("passwordToCheck can not be null");
+        }
 
-		// look for divider for hash
-		int divider = storedPassword.indexOf(':');
+        // look for divider for hash
+        int divider = storedPassword.indexOf(':');
 
-		if (divider < 1) {
-			throw new IllegalArgumentException("stored password does not contain salt");
-		}
+        if (divider < 1) {
+            throw new IllegalArgumentException("stored password does not contain salt");
+        }
 
-		String storedSalt = storedPassword.substring(0, divider);
+        String storedSalt = storedPassword.substring(0, divider);
 
-		return PasswordUtil.secureCompareFast(encrypt(passwordToCheck, storedSalt).toLowerCase(),
-				storedPassword.toLowerCase());
-	}
+        return PasswordUtil.secureCompareFast(encrypt(passwordToCheck, storedSalt).toLowerCase(),
+                storedPassword.toLowerCase());
+    }
 
 }

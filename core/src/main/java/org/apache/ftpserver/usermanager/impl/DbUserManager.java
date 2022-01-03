@@ -436,17 +436,17 @@ public class DbUserManager extends AbstractUserManager {
 
     private void closeQuitely(Statement stmt) {
         if(stmt != null) {
-	    Connection con = null;
-	    try {
-		con = stmt.getConnection();
-	    } catch (Exception e) {
-	    }
-	    try {
+        Connection con = null;
+        try {
+        con = stmt.getConnection();
+        } catch (Exception e) {
+        }
+        try {
                 stmt.close();
             } catch (SQLException e) {
                 // ignore
             }
-	    closeQuitely(con);
+        closeQuitely(con);
         }
     }
 
@@ -461,13 +461,13 @@ public class DbUserManager extends AbstractUserManager {
     }
 
     protected void closeQuitely(Connection con) {
-	if (con != null) {
-	    try {
-		con.close();
-	    } catch (SQLException e) {
-		// ignore
-	    }
-	}
+        if (con != null) {
+            try {
+            con.close();
+            } catch (SQLException e) {
+            // ignore
+            }
+        }
     }
 
     private BaseUser selectUserByName(String name) throws SQLException {

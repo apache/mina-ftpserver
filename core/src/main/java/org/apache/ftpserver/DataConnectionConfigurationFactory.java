@@ -59,7 +59,7 @@ public class DataConnectionConfigurationFactory {
      * @return The {@link DataConnectionConfiguration} instance
      */
     public DataConnectionConfiguration createDataConnectionConfiguration() {
-    	checkValidAddresses();
+        checkValidAddresses();
         return new DefaultDataConnectionConfiguration(idleTime,
                 ssl, activeEnabled, activeIpCheck,
                 activeLocalAddress, activeLocalPort,
@@ -72,12 +72,12 @@ public class DataConnectionConfigurationFactory {
      *  are valid.
      */
     private void checkValidAddresses(){
-    	try{
-    		InetAddress.getByName(passiveAddress);
-    		InetAddress.getByName(passiveExternalAddress);
-    	}catch(UnknownHostException ex){
-    		throw new FtpServerConfigurationException("Unknown host", ex);
-    	}
+        try{
+            InetAddress.getByName(passiveAddress);
+            InetAddress.getByName(passiveExternalAddress);
+        }catch(UnknownHostException ex){
+            throw new FtpServerConfigurationException("Unknown host", ex);
+        }
     }
     
     /**
@@ -199,30 +199,30 @@ public class DataConnectionConfigurationFactory {
     }
     
     /**
-	 * Tells whether or not IP address check is performed when accepting a
-	 * passive data connection.
-	 * 
-	 * @return <code>true</code>, if the IP address checking is enabled;
-	 *         <code>false</code>, otherwise. A value of <code>true</code> means
-	 *         that site to site transfers are disabled. In other words, a
-	 *         passive data connection MUST be made from the same IP address
-	 *         that issued the PASV command.
-	 */
-	public boolean isPassiveIpCheck() {
-		return passiveIpCheck;
-	}
-	
-	/**
-	 * Sets whether or not IP check is performed before accepting a passive data
-	 * connection.
-	 * 
-	 * @param passiveIpCheck
-	 *            whether or not IP check is performed before accepting a
-	 *            passive data connection.
-	 */
-	public void setPassiveIpCheck(boolean passiveIpCheck) {
-		this.passiveIpCheck = passiveIpCheck;
-	}
+     * Tells whether or not IP address check is performed when accepting a
+     * passive data connection.
+     * 
+     * @return <code>true</code>, if the IP address checking is enabled;
+     *         <code>false</code>, otherwise. A value of <code>true</code> means
+     *         that site to site transfers are disabled. In other words, a
+     *         passive data connection MUST be made from the same IP address
+     *         that issued the PASV command.
+     */
+    public boolean isPassiveIpCheck() {
+        return passiveIpCheck;
+    }
+    
+    /**
+     * Sets whether or not IP check is performed before accepting a passive data
+     * connection.
+     * 
+     * @param passiveIpCheck
+     *            whether or not IP check is performed before accepting a
+     *            passive data connection.
+     */
+    public void setPassiveIpCheck(boolean passiveIpCheck) {
+        this.passiveIpCheck = passiveIpCheck;
+    }
     
     /**
      * Get passive data port. Data port number zero (0) means that any available

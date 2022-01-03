@@ -124,13 +124,13 @@ public class LoginTest extends ClientTestTemplate {
     }
 
     public void testLoginCount() throws Exception {
-    	FtpStatistics stats = server.getServerContext().getFtpStatistics();
-    	 assertTrue(client.login(ADMIN_USERNAME, ADMIN_PASSWORD));
-    	 int n =stats.getCurrentLoginNumber();
-    	 assertEquals(1,n );
-    	 client.rein();
-    	 client.logout();
-    	 assertEquals(0, stats.getCurrentLoginNumber());
+        FtpStatistics stats = server.getServerContext().getFtpStatistics();
+         assertTrue(client.login(ADMIN_USERNAME, ADMIN_PASSWORD));
+         int n =stats.getCurrentLoginNumber();
+         assertEquals(1,n );
+         client.rein();
+         client.logout();
+         assertEquals(0, stats.getCurrentLoginNumber());
     }
 
     /*

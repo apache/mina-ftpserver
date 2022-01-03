@@ -55,8 +55,8 @@ public class IpFilterTest extends ClientTestTemplate {
     }
 
     public void testDenyBlackList() throws Exception {
-    	filter.clear();
-    	filter.setType(IpFilterType.DENY);
+        filter.clear();
+        filter.setType(IpFilterType.DENY);
         filter.add(new Subnet(InetAddress.getByName("localhost"), 32));
         try {
             client.connect("localhost", getListenerPort());
@@ -67,8 +67,8 @@ public class IpFilterTest extends ClientTestTemplate {
     }
 
     public void testDenyEmptyWhiteList() throws Exception {
-    	filter.clear();
-    	filter.setType(IpFilterType.ALLOW);
+        filter.clear();
+        filter.setType(IpFilterType.ALLOW);
         try {
             client.connect("localhost", getListenerPort());
             fail("Must throw");
@@ -78,8 +78,8 @@ public class IpFilterTest extends ClientTestTemplate {
     }
 
     public void testWhiteList() throws Exception {
-    	filter.clear();
-    	filter.setType(IpFilterType.ALLOW);
+        filter.clear();
+        filter.setType(IpFilterType.ALLOW);
         filter.add(new Subnet(InetAddress.getByName("localhost"), 32));
         client.connect("localhost", getListenerPort());
     }

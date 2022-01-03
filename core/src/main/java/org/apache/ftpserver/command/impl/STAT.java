@@ -81,14 +81,13 @@ public class STAT extends AbstractCommand {
 
                 int replyCode;
                 if(file.isDirectory()) {
-                	replyCode = FtpReply.REPLY_212_DIRECTORY_STATUS;
+                    replyCode = FtpReply.REPLY_212_DIRECTORY_STATUS;
                 } else {
-                	replyCode = FtpReply.REPLY_213_FILE_STATUS;
+                    replyCode = FtpReply.REPLY_213_FILE_STATUS;
                 }
                 
                 session.write(LocalizedFileActionFtpReply.translate(session, request, context,
-                		replyCode, "STAT",
-                        dirList, file));
+                        replyCode, "STAT", dirList, file));
                 
             } catch (FtpException e) {
                 session

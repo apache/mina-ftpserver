@@ -29,12 +29,10 @@ package org.apache.ftpserver.ftplet;
  */
 
 public interface DataTransferFtpReply extends FileActionFtpReply {
-
-	/**
-	 * Returns the number of bytes transferred.
-	 * 
-	 * @return the number of bytes transferred.
-	 */
-	long getBytesTransferred();
-
+    /**
+     * Returns the number of bytes transferred.
+     * 
+     * @return the number of bytes transferred.
+     */
+    long getBytesTransferred();
 }

@@ -26,20 +26,21 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd    
        ">
-    <context:property-placeholder location="src/test/resources/spring-config/placeholder.properties"/>
+  <context:property-placeholder location="src/test/resources/spring-config/placeholder.properties"/>
     
-    <server id="server">
-		<listeners>
-			<listener name="listener0">
-                <beans:bean class="org.apache.ftpserver.config.spring.MyCustomListener">
-                    <beans:property name="port" value="${port1}"/>
-                </beans:bean>
-			</listener>
-            <listener name="listener1">
-                <beans:bean class="org.apache.ftpserver.config.spring.MyCustomListener">
-                    <beans:property name="port" value="${port2}"/>
-                </beans:bean>
-            </listener>
-        </listeners>
-	</server>
+  <server id="server">
+    <listeners>
+      <listener name="listener0">
+        <beans:bean class="org.apache.ftpserver.config.spring.MyCustomListener">
+          <beans:property name="port" value="${port1}"/>
+        </beans:bean>
+      </listener>
+
+      <listener name="listener1">
+        <beans:bean class="org.apache.ftpserver.config.spring.MyCustomListener">
+          <beans:property name="port" value="${port2}"/>
+        </beans:bean>
+      </listener>
+    </listeners>
+  </server>
 </beans:beans>

@@ -32,72 +32,72 @@ import org.apache.ftpserver.ftplet.RenameFtpReply;
  */
 
 public class LocalizedRenameFtpReply extends LocalizedFtpReply implements
-	RenameFtpReply {
+    RenameFtpReply {
 
-	/**
-	 * The from file
-	 */
-	private final FtpFile from;
+    /**
+     * The from file
+     */
+    private final FtpFile from;
 
-	/**
-	 * The to file
-	 */
-	private final FtpFile to;
+    /**
+     * The to file
+     */
+    private final FtpFile to;
 
-	/**
-	 * Creates a new instance of <code>LocalizedRenameFtpReply</code>.
-	 * 
-	 * @param code
-	 *            the reply code
-	 * @param message
-	 *            the detailed message
-	 * @param from
-	 *            the old file
-	 * @param to
-	 *            the new file
-	 */
-	public LocalizedRenameFtpReply(int code, String message, FtpFile from,
-		FtpFile to) {
-		super(code, message);
-		this.from = from;
-		this.to = to;
-	}
+    /**
+     * Creates a new instance of <code>LocalizedRenameFtpReply</code>.
+     * 
+     * @param code
+     *            the reply code
+     * @param message
+     *            the detailed message
+     * @param from
+     *            the old file
+     * @param to
+     *            the new file
+     */
+    public LocalizedRenameFtpReply(int code, String message, FtpFile from,
+        FtpFile to) {
+        super(code, message);
+        this.from = from;
+        this.to = to;
+    }
 
-	public FtpFile getFrom() {
-		return from;
-	}
+    public FtpFile getFrom() {
+        return from;
+    }
 
-	public FtpFile getTo() {
-		return to;
-	}
+    public FtpFile getTo() {
+        return to;
+    }
 
-	/**
-	 * Returns the localized reply that contains all details about the rename
-	 * operation.
-	 * 
-	 * @param session
-	 *            the FTP session
-	 * @param request
-	 *            the FTP request
-	 * @param context
-	 *            the FTP server context
-	 * @param code
-	 *            the reply code
-	 * @param subId
-	 *            the sub message ID
-	 * @param basicMsg
-	 *            the basic message
-	 * @param from
-	 *            the file or directory as it was before the rename
-	 * @param to
-	 *            the file or directory after the rename
-	 * @return the localized reply
-	 */
-	public static LocalizedRenameFtpReply translate(FtpIoSession session,
-		FtpRequest request, FtpServerContext context, int code, String subId,
-		String basicMsg, FtpFile from, FtpFile to) {
-		String msg = FtpReplyTranslator.translateMessage(session, request,
-			context, code, subId, basicMsg);
-		return new LocalizedRenameFtpReply(code, msg, from, to);
-	}
+    /**
+     * Returns the localized reply that contains all details about the rename
+     * operation.
+     * 
+     * @param session
+     *            the FTP session
+     * @param request
+     *            the FTP request
+     * @param context
+     *            the FTP server context
+     * @param code
+     *            the reply code
+     * @param subId
+     *            the sub message ID
+     * @param basicMsg
+     *            the basic message
+     * @param from
+     *            the file or directory as it was before the rename
+     * @param to
+     *            the file or directory after the rename
+     * @return the localized reply
+     */
+    public static LocalizedRenameFtpReply translate(FtpIoSession session,
+        FtpRequest request, FtpServerContext context, int code, String subId,
+        String basicMsg, FtpFile from, FtpFile to) {
+        String msg = FtpReplyTranslator.translateMessage(session, request,
+            context, code, subId, basicMsg);
+        return new LocalizedRenameFtpReply(code, msg, from, to);
+    }
 }

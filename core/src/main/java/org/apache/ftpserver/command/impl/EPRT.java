@@ -73,7 +73,7 @@ public class EPRT extends AbstractCommand {
                 .getDataConnectionConfiguration();
         if (!dataCfg.isActiveEnabled()) {
             session.write(LocalizedFtpReply.translate(session, request, context,
-            		FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT.disabled", null));
+                    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT.disabled", null));
             return;
         }
 
@@ -88,7 +88,7 @@ public class EPRT extends AbstractCommand {
         } catch (Exception ex) {
             LOG.debug("Exception parsing host and port: " + arg, ex);
             session.write(LocalizedFtpReply.translate(session, request, context,
-            		FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT", null));
+                    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT", null));
             return;
         }
 

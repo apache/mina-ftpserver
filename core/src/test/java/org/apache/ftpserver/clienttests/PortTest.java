@@ -36,7 +36,7 @@ public class PortTest extends ClientTestTemplate {
     }
 
     public void testInvalidIpAndPort() throws Exception {
-    	assertEquals(501, client.port(InetAddress.getByName("0.0.0.0"), 0));
+        assertEquals(501, client.port(InetAddress.getByName("0.0.0.0"), 0));
     }
     
 }

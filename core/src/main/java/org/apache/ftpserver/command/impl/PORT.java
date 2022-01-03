@@ -84,7 +84,7 @@ public class PORT extends AbstractCommand {
                 .getDataConnectionConfiguration();
         if (!dataCfg.isActiveEnabled()) {
             session.write(LocalizedFtpReply.translate(session, request, context,
-            		FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "PORT.disabled", null));
+                    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "PORT.disabled", null));
             return;
         }
 
@@ -94,11 +94,11 @@ public class PORT extends AbstractCommand {
             
             // port must not be 0
             if(address.getPort() == 0) {
-            	throw new IllegalPortException("PORT port must not be 0");
+                throw new IllegalPortException("PORT port must not be 0");
             }
         } catch (IllegalInetAddressException e) {
             session.write(LocalizedFtpReply.translate(session, request, context,
-            		FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "PORT", null));
+                    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "PORT", null));
             return;
         } catch (IllegalPortException e) {
             LOG.debug("Invalid data port: " + request.getArgument(), e);
