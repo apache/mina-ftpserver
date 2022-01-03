@@ -173,6 +173,9 @@
     <slf4j.api.version>1.7.32</slf4j.api.version>
     <slf4j.log4j12.version>1.7.32</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
+    <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
+    <checkstyle.version>8.45.1</checkstyle.version>
+    <checkstyle.configdir>${basedir}</checkstyle.configdir>
   </properties>
 
   <dependencyManagement>
@@ -500,6 +503,42 @@
         <module>core</module>
         <module>examples</module>
       </modules>
+    </profile>
+    <profile>
+      <id>enforce</id>
+      <activation>
+        <property>
+          <name>enforce.activate</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${checkstyle.plugin.version}</version>
+            <configuration>
+              <configLocation>${checkstyle.configdir}/checkstyle.xml</configLocation>
+              <suppressionsLocation>${checkstyle.configdir}/checkstyle-suppressions.xml</suppressionsLocation>
+              <enableRulesSummary>false</enableRulesSummary>
+              <propertyExpansion>basedir=${basedir}</propertyExpansion>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>com.puppycrawl.tools</groupId>
+                <artifactId>checkstyle</artifactId>
+                <version>9.2</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 

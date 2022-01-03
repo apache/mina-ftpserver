@@ -23,6 +23,10 @@
   <packaging>pom</packaging>
   <name>Apache FtpServer</name>
 
+  <properties>
+    <checkstyle.configdir>${basedir}/..</checkstyle.configdir>
+  </properties>
+
   <build>
     <finalName>apache-ftpserver-${project.version}</finalName>
     <plugins>
