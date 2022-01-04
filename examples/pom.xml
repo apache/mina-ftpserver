@@ -34,4 +34,9 @@
     <module>ftpserver-osgi-ftplet-service</module>
     <module>ftpserver-osgi-spring-service</module>
   </modules>
+
+  <properties>
+    <checkstyle.configdir>${basedir}/..</checkstyle.configdir>
+  </properties>
+
 </project>
