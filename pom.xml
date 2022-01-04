@@ -174,7 +174,7 @@
     <slf4j.log4j12.version>1.7.32</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
-    <checkstyle.version>8.45.1</checkstyle.version>
+    <checkstyle.version>9.2.1</checkstyle.version>
     <checkstyle.configdir>${basedir}</checkstyle.configdir>
   </properties>
 
@@ -333,6 +333,19 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${checkstyle.plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -526,7 +539,7 @@
               <dependency>
                 <groupId>com.puppycrawl.tools</groupId>
                 <artifactId>checkstyle</artifactId>
-                <version>9.2</version>
+                <version>${checksytyle.version}</version>
               </dependency>
             </dependencies>
             <executions>

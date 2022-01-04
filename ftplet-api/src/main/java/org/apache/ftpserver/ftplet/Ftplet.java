@@ -23,14 +23,14 @@ import java.io.IOException;
 
 /**
  * Defines methods that all ftplets must implement.
- * 
+ *
  * A ftplet is a small Java program that runs within an FTP server. Ftplets
  * receive and respond to requests from FTP clients.
- * 
+ *
  * This interface defines methods to initialize a ftplet, to service requests,
  * and to remove a ftplet from the server. These are known as life-cycle methods
  * and are called in the following sequence:
- * 
+ *
  * <ol>
  * <li>The ftplet is constructed.</li>
  * <li>Then initialized with the init method.</li>
@@ -39,7 +39,7 @@ import java.io.IOException;
  * method.</li>
  * <li>Then garbage collected and finalized.</li>
  * </ol>
- * 
+ *
  * All the callback methods return FtpletEnum. If it returns null
  * FtpletEnum.DEFAULT will be assumed. If any ftplet callback method throws
  * exception, that particular connection will be disconnected.
@@ -54,7 +54,7 @@ public interface Ftplet {
      * exactly once after instantiating the ftplet. The init method must
      * complete successfully before the ftplet can receive any requests.
      * @param ftpletContext The current {@link FtpletContext}
-     * @throws FtpException 
+     * @throws FtpException
      */
     void init(FtpletContext ftpletContext) throws FtpException;
 
@@ -84,7 +84,7 @@ public interface Ftplet {
      * disconnect the client.</li>
      * <li>Ftplet throws exception: Same as {@link FtpletResult#DISCONNECT}</li>
      * </ul>
-     * 
+     *
      * @param session
      *            The current session
      * @param request
@@ -109,7 +109,7 @@ public interface Ftplet {
      * disconnect the client.</li>
      * <li>Ftplet throws exception: Same as {@link FtpletResult#DISCONNECT}</li>
      * </ul>
-     * 
+     *
      * @param session
      *            The current session
      * @param request
@@ -129,8 +129,8 @@ public interface Ftplet {
      * Client connect notification method.
      * @param session The current {@link FtpSession}
      * @return The desired action to be performed by the server
-     * @throws FtpException 
-     * @throws IOException 
+     * @throws FtpException
+     * @throws IOException
      */
     FtpletResult onConnect(FtpSession session) throws FtpException, IOException;
 
@@ -138,8 +138,8 @@ public interface Ftplet {
      * Client disconnect notification method. This is the last callback method.
      * @param session The current {@link FtpSession}
      * @return The desired action to be performed by the server
-     * @throws FtpException 
-     * @throws IOException 
+     * @throws FtpException
+     * @throws IOException
      */
     FtpletResult onDisconnect(FtpSession session) throws FtpException,
             IOException;
