@@ -24,4 +24,5 @@ limitations under the License.
     <suppress checks="RedundantModifier" files="ConstructorUtilsTest" lines="0-99999"/>
     <!-- Windows-only workaround -->
     <suppress checks="NewlineAtEndOfFile" files="target[/\\]maven-archiver[/\\]pom.properties"/>
+    <suppress checks="FinalParametersCheck" files=".*"/>
 </suppressions>

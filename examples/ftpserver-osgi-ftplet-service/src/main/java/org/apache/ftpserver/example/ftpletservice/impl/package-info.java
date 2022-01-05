@@ -16,36 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-package org.apache.ftpserver.example.ftpletservice.impl;
-
-import java.util.Dictionary;
-import java.util.Hashtable;
-
-import org.apache.ftpserver.example.ftpletservice.MyFtplet;
-import org.apache.ftpserver.ftplet.Ftplet;
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-
-/*
+/**
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
-public class Activator implements BundleActivator {
-    /**
-     * {@inheritDoc}
-     */
-    public void start(BundleContext context) throws Exception {
-        Dictionary<String, String> properties = new Hashtable<String, String>();
-        properties.put("name", "myftplet");
-
-        context.registerService(Ftplet.class.getName(),
-            new MyFtplet(), properties);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void stop(BundleContext context) throws Exception {
-        // do nothing
-    }
-}
+package org.apache.ftpserver.example.ftpletservice.impl;

@@ -30,35 +30,42 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class FtpServerListener implements ServletContextListener {
-
+    /** The context name. */
     public static final String FTPSERVER_CONTEXT_NAME = "org.apache.ftpserver";
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Stopping FtpServer");
-        
-        FtpServer server = (FtpServer) sce.getServletContext().getAttribute(FTPSERVER_CONTEXT_NAME);
-        
-        if(server != null) {
+
+        FtpServer server = (FtpServer) sce.getServletContext().
+            getAttribute(FTPSERVER_CONTEXT_NAME);
+
+        if (server != null) {
             server.stop();
-            
+
             sce.getServletContext().removeAttribute(FTPSERVER_CONTEXT_NAME);
-            
+
             System.out.println("FtpServer stopped");
         } else {
             System.out.println("No running FtpServer found");
         }
-        
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Starting FtpServer");   
+        System.out.println("Starting FtpServer");
 
-        WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
-        
+        WebApplicationContext ctx = WebApplicationContextUtils.
+            getWebApplicationContext(sce.getServletContext());
+
         FtpServer server = (FtpServer) ctx.getBean("myServer");
-        
+
         sce.getServletContext().setAttribute(FTPSERVER_CONTEXT_NAME, server);
-        
+
         try {
             server.start();
             System.out.println("FtpServer started");
@@ -66,5 +73,5 @@ public class FtpServerListener implements ServletContextListener {
             throw new RuntimeException("Failed to start FtpServer", e);
         }
     }
-
 }
+

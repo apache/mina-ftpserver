@@ -31,23 +31,25 @@ import org.apache.ftpserver.ftplet.FtpletResult;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class MyFtplet extends DefaultFtplet {
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FtpletResult onConnect(FtpSession session) throws FtpException,
             IOException {
         System.out.println("User connected to FtpServer");
-        
+
         return super.onConnect(session);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FtpletResult onDisconnect(FtpSession session) throws FtpException,
             IOException {
         System.out.println("User connected to FtpServer");
-        
+
         return super.onDisconnect(session);
     }
-
-    
-    
 }

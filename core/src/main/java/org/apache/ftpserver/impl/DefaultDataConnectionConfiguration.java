@@ -25,7 +25,7 @@ import org.apache.ftpserver.ssl.SslConfiguration;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Data connection configuration.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -41,12 +41,12 @@ public class DefaultDataConnectionConfiguration implements
     private final String activeLocalAddress;
     private final int activeLocalPort;
     private final boolean activeIpCheck;
-    
+
     private final String passiveAddress;
     private final String passiveExternalAddress;
     private final PassivePorts passivePorts;
     private final boolean passiveIpCheck;
-    
+
     private final boolean implicitSsl;
 
     /**
@@ -119,11 +119,11 @@ public class DefaultDataConnectionConfiguration implements
     public String getPassiveExernalAddress()  {
         return passiveExternalAddress;
     }
-    
+
     public boolean isPassiveIpCheck() {
         return passiveIpCheck;
     }
-    
+
     /**
      * Get passive data port. Data port number zero (0) means that any available
      * port will be used.
@@ -134,7 +134,7 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Retrive the passive ports configured for this data connection
-     * 
+     *
      * @return The String of passive ports
      */
     public String getPassivePorts() {

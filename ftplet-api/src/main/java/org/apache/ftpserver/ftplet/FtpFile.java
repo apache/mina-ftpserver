@@ -19,7 +19,6 @@
 
 package org.apache.ftpserver.ftplet;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,7 +39,7 @@ public interface FtpFile {
     String getAbsolutePath();
 
     /**
-     * Get the file name of the file
+     * Get the file name of the file.
      * @return the last part of the file path (the part after the last '/').
      */
     String getName();
@@ -112,26 +111,27 @@ public interface FtpFile {
     long getLastModified();
 
     /**
-     * Set the last modified time stamp of a file
+     * Set the last modified time stamp of a file.
      * @param time The last modified time, in milliseconds since the epoch. See {@link File#setLastModified(long)}.
+     * @return <code>true</code> if and only if the operation succeeded; <code>false</code> otherwise
      */
     boolean setLastModified(long time);
-    
+
     /**
      * Get file size.
      * @return The size of the {@link FtpFile} in bytes
      */
     long getSize();
-    
+
     /**
-     * Returns the physical location or path of the file. It is completely up to 
-     * the implementation to return appropriate value based on the file system 
+     * Returns the physical location or path of the file. It is completely up to
+     * the implementation to return appropriate value based on the file system
      * implementation.
-     *  
-     * @return the physical location or path of the file. 
+     *
+     * @return the physical location or path of the file.
      */
     Object getPhysicalFile();
-    
+
     /**
      * Create directory.
      * @return true if the operation was successful
@@ -160,22 +160,22 @@ public interface FtpFile {
     List<? extends FtpFile> listFiles();
 
     /**
-     * Create output stream for writing. 
+     * Create output stream for writing.
      * @param offset The number of bytes at where to start writing.
      *      If the file is not random accessible,
      *      any offset other than zero will throw an exception.
      * @return An {@link OutputStream} used to write to the {@link FtpFile}
-     * @throws IOException 
+     * @throws IOException
      */
     OutputStream createOutputStream(long offset) throws IOException;
 
     /**
-     * Create input stream for reading. 
-     * @param offset The number of bytes of where to start reading. 
+     * Create input stream for reading.
+     * @param offset The number of bytes of where to start reading.
      *          If the file is not random accessible,
      *          any offset other than zero will throw an exception.
      * @return An {@link InputStream} used to read the {@link FtpFile}
-     * @throws IOException 
+     * @throws IOException
      */
     InputStream createInputStream(long offset) throws IOException;
 }
