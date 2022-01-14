@@ -21,9 +21,10 @@
   xmlns:beans="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-     http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd  
-     "
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+     http://mina.apache.org/ftpserver/spring/v1 
+     https://mina.apache.org/ftpserver-project/ftpserver-1.0.xsd"
      max-logins="500"
      anon-enabled="false"
      max-anon-logins="123"
@@ -31,12 +32,11 @@
      login-failure-delay="125"
      >
 
-
   <listeners>
     <nio-listener name="listener0" port="2222" local-address="1.2.3.4">
-              <ssl>
-                  <keystore file="src/test/resources/ftpserver.jks" password="password"/>
-              </ssl>
+      <ssl>
+        <keystore file="src/test/resources/ftpserver.jks" password="password"/>
+      </ssl>
 
       <data-connection idle-timeout="100" implicit-ssl="true">
         <active enabled="true" local-address="1.2.3.4"/>
@@ -44,6 +44,7 @@
       </data-connection>
       <blacklist>1.2.3.0/16, 1.2.4.0/16, 1.2.3.4</blacklist>        
     </nio-listener>
+    
     <listener name="listener1">
       <beans:bean id="listener1" class="org.apache.ftpserver.config.spring.MyCustomListener">
         <beans:property name="port" value="2223"/>
@@ -75,7 +76,9 @@
   <user-manager>
     <beans:bean class="org.apache.ftpserver.config.spring.MockUserManager"/>
   </user-manager>
+  
   <native-filesystem case-insensitive="true" create-home="true" />
+  
   <commands use-default="false">
     <command name="FOO">
       <beans:bean class="org.apache.ftpserver.command.impl.HELP" />

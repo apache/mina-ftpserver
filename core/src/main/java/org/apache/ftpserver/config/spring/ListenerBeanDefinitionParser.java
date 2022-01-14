@@ -215,6 +215,7 @@ public class ListenerBeanDefinitionParser extends
             }
 
             String protocol = SpringUtil.parseString(sslElm, "protocol");
+            
             if (protocol != null) {
                 ssl.setSslProtocol(protocol);
             }

@@ -60,7 +60,7 @@ public class SslConfigurationFactory {
 
     private String trustStoreAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
 
-    private String sslProtocol = "TLS";
+    private String[] sslProtocols = new String[] {"TLSv1.2"};
 
     private ClientAuth clientAuth = ClientAuth.NONE;
 
@@ -158,20 +158,22 @@ public class SslConfigurationFactory {
      * 
      * @return The SSL protocol
      */
-    public String getSslProtocol() {
-    return sslProtocol;
+    public String[] getSslProtocols() {
+	return sslProtocols;
     }
 
     /**
-     * Set the SSL protocol used for this channel. Supported values are "SSL" and "TLS". Defaults to "TLS".
+     * Set the SSL protocols used for this channel. Defaults to "TLSv1.2".
      * 
-     * @param sslProtocol
-     *            The SSL protocol
+     * @param sslProtocols
+     *            The SSL protocols
      */
-    public void setSslProtocol(String sslProtocol) {
-    if (sslProtocol == null || sslProtocol.length() == 0)
-        throw new FtpServerConfigurationException("SslProcotol must not be null or zero length");
-    this.sslProtocol = sslProtocol;
+    public void setSslProtocol(String... sslProtocols) {
+        if (sslProtocols == null || sslProtocols.length == 0) {
+            throw new FtpServerConfigurationException("SslProcotol must not be null or zero length");
+        }
+        
+        this.sslProtocols = sslProtocols;
     }
 
     /**
@@ -182,13 +184,13 @@ public class SslConfigurationFactory {
      *            The desired authentication level
      */
     public void setClientAuthentication(String clientAuthReqd) {
-    if ("true".equalsIgnoreCase(clientAuthReqd) || "yes".equalsIgnoreCase(clientAuthReqd) || "need".equalsIgnoreCase(clientAuthReqd)) {
-        this.clientAuth = ClientAuth.NEED;
-    } else if ("want".equalsIgnoreCase(clientAuthReqd)) {
-        this.clientAuth = ClientAuth.WANT;
-    } else {
-        this.clientAuth = ClientAuth.NONE;
-    }
+        if ("true".equalsIgnoreCase(clientAuthReqd) || "yes".equalsIgnoreCase(clientAuthReqd) || "need".equalsIgnoreCase(clientAuthReqd)) {
+            this.clientAuth = ClientAuth.NEED;
+        } else if ("want".equalsIgnoreCase(clientAuthReqd)) {
+            this.clientAuth = ClientAuth.WANT;
+        } else {
+            this.clientAuth = ClientAuth.NONE;
+        }
     }
 
     /**
@@ -324,19 +326,22 @@ public class SslConfigurationFactory {
         KeyStore keyStore = loadStore(keystoreFile, keystoreType, keystorePass);
 
         KeyStore trustStore;
+        
         if (trustStoreFile != null) {
-        LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"", trustStoreFile.getAbsolutePath(), trustStoreType);
-        trustStore = loadStore(trustStoreFile, trustStoreType, trustStorePass);
+            LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"", trustStoreFile.getAbsolutePath(), trustStoreType);
+            trustStore = loadStore(trustStoreFile, trustStoreType, trustStorePass);
         } else {
-        trustStore = keyStore;
+            trustStore = keyStore;
         }
 
         String keyPassToUse;
+        
         if (keyPass == null) {
-        keyPassToUse = keystorePass;
+            keyPassToUse = keystorePass;
         } else {
-        keyPassToUse = keyPass;
+            keyPassToUse = keyPass;
         }
+        
         // initialize key manager factory
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(keystoreAlgorithm);
         keyManagerFactory.init(keyStore, keyPassToUse.toCharArray());
@@ -345,7 +350,8 @@ public class SslConfigurationFactory {
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(trustStoreAlgorithm);
         trustManagerFactory.init(trustStore);
 
-        return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocol, enabledCipherSuites, keyAlias);
+        return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocols, 
+        	enabledCipherSuites, keyAlias);
     } catch (Exception ex) {
         LOG.error("DefaultSsl.configure()", ex);
         throw new FtpServerConfigurationException("DefaultSsl.configure()", ex);

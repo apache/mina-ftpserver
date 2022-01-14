@@ -28,12 +28,20 @@ import java.util.Map;
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
-public class StringUtils {
+public final class StringUtils {
+    private StringUtils() {
+        // Nothing to do
+    }
 
     /**
      * This is a string replacement method.
+     *
+     * @param source The original string
+     * @param oldStr The substring to replace
+     * @param newStr The replacement string
+     * @return The modified string
      */
-    public static final String replaceString(String source, String oldStr,
+    public static String replaceString(String source, String oldStr,
             String newStr) {
         StringBuilder sb = new StringBuilder(source.length());
         int sind = 0;
@@ -48,9 +56,19 @@ public class StringUtils {
     }
 
     /**
-     * Replace string.
+     * Replace strings using placeholders. Each occurence of {} in the original
+     * string will be replaced with the object at the same index. For instance:
+     * <br>
+     * <code>replaceString( "This {} a {}", ["is', "string"])</code><br>
+     * will produce:<br>
+     * <code>"This is a string"</code><br>
+     *
+     * @param source The original string
+     * @param args The array of object to replace the placeholders in
+     * the original string
+     * @return The modified string
      */
-    public static final String replaceString(String source, Object[] args) {
+    public static String replaceString(String source, Object[] args) {
         int startIndex = 0;
         int openIndex = source.indexOf('{', startIndex);
         if (openIndex == -1) {
@@ -87,9 +105,19 @@ public class StringUtils {
     }
 
     /**
-     * Replace string.
+     * Replace strings using placeholders. Each occurence of {} in the original
+     * string will be replaced with the object at the same index. For instance:
+     * <br>
+     * <code>replaceString( "This {} a {}", Map("is', "string"))</code><br>
+     * will produce:<br>
+     * <code>"This is a string"</code><br>
+     *
+     * @param source The original string
+     * @param args The map of object to replace the placeholders in
+     * the original string
+     * @return The modified string
      */
-    public static final String replaceString(String source,
+    public static String replaceString(String source,
             Map<String, Object> args) {
         int startIndex = 0;
         int openIndex = source.indexOf('{', startIndex);
@@ -129,15 +157,15 @@ public class StringUtils {
     }
 
     /**
-         * This method is used to insert HTML block dynamically.
-         *
-         * @param source the HTML code to be processes
-         * @param bReplaceNl if true '\n' will be replaced by <br>
-         * @param bReplaceTag if true '<' will be replaced by &lt; and
-         *                          '>' will be replaced by &gt;
-         * @param bReplaceQuote if true '\"' will be replaced by &quot;
-         */
-    public static final String formatHtml(String source, boolean bReplaceNl,
+     * This method is used to insert HTML block dynamically.
+     *
+     * @param source the HTML code to be processes
+     * @param bReplaceNl if true '\n' will be replaced by <br>
+     * @param bReplaceTag if true '<' will be replaced by &lt; and
+     *                          '>' will be replaced by &gt;
+     * @param bReplaceQuote if true '\"' will be replaced by &quot;
+     */
+    public static String formatHtml(String source, boolean bReplaceNl,
             boolean bReplaceTag, boolean bReplaceQuote) {
 
         StringBuilder sb = new StringBuilder();
@@ -169,7 +197,7 @@ public class StringUtils {
                     } else {
                         sb.append(c);
                     }
-                    
+
                     break;
 
                 case '\n':
@@ -203,7 +231,7 @@ public class StringUtils {
     /**
      * Pad string object.
      */
-    public static final String pad(String src, char padChar, boolean rightPad,
+    public static String pad(String src, char padChar, boolean rightPad,
             int totalLength) {
 
         int srcLength = src.length();
@@ -227,7 +255,7 @@ public class StringUtils {
     /**
      * Get hex string from byte array.
      */
-    public static final String toHexString(byte[] res) {
+    public static String toHexString(byte[] res) {
         StringBuilder sb = new StringBuilder(res.length << 1);
         for (int i = 0; i < res.length; i++) {
             String digit = Integer.toHexString(0xFF & res[i]);
@@ -242,7 +270,7 @@ public class StringUtils {
     /**
      * Get byte array from hex string.
      */
-    public static final byte[] toByteArray(String hexString) {
+    public static byte[] toByteArray(String hexString) {
         int arrLength = hexString.length() >> 1;
         byte buff[] = new byte[arrLength];
         for (int i = 0; i < arrLength; i++) {

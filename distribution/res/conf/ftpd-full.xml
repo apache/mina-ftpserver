@@ -17,7 +17,7 @@
   xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-     http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd  
+     http://mina.apache.org/ftpserver/spring/v1 https://mina.apache.org/ftpserver-project/ftpserver-1.0.xsd  
      "
   id="myServer">
   <!--
@@ -33,8 +33,7 @@
         <truststore file="mytruststore.jks" password="secret" />
       </ssl>
       <data-connection idle-timeout="60">
-        <active enabled="true" local-address="1.2.3.4" local-port="2323"
-          ip-check="true" />
+        <active enabled="true" local-address="1.2.3.4" local-port="2323" ip-check="true" />
         <passive ports="123-125" address="1.2.3.4" external-address="1.2.3.4" />
       </data-connection>
       <blacklist>1.2.3.0/16, 1.2.4.0/16, 1.2.3.4</blacklist>

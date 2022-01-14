@@ -24,7 +24,7 @@
     xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-       http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver/ftpserver-1.0.xsd    
+       http://mina.apache.org/ftpserver/spring/v1 https://mina.apache.org/ftpserver-project/ftpserver-1.0.xsd    
        ">
   <context:property-placeholder location="src/test/resources/spring-config/placeholder.properties"/>
     

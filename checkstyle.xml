@@ -25,6 +25,10 @@ limitations under the License.
   <property name="localeLanguage" value="en"/>
   <module name="JavadocPackage"/>
 
+  <module name="ArrayTypeStyle">
+    <property name="javaStyle" value="true"/>
+  </module>
+
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
     <property name="max" value="120"/>

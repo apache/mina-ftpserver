@@ -139,8 +139,8 @@ public class AUTH extends AbstractCommand {
             sslFilter.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
             }
     
-            if (ssl.getEnabledProtocol() != null) {
-            sslFilter.setEnabledProtocols(new String[] { ssl.getEnabledProtocol() });
+            if (ssl.getEnabledProtocols() != null) {
+                sslFilter.setEnabledProtocols(ssl.getEnabledProtocols());
             }
     
             session.getFilterChain().addFirst(SSL_SESSION_FILTER_NAME, sslFilter);

@@ -16,7 +16,7 @@
 <server xmlns="http://mina.apache.org/ftpserver/spring/v1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
-     http://mina.apache.org/ftpserver/spring/v1 http://mina.apache.org/ftpserver-project/ftpserver-1.0.xsd  
+     http://mina.apache.org/ftpserver/spring/v1 https://mina.apache.org/ftpserver-project/ftpserver-1.0.xsd  
      "
   id="myServer">
   <listeners>

@@ -146,8 +146,8 @@ public class NioListener extends AbstractListener {
             ssl_filter.setWantClientAuth(true);
         }
 
-        if (ssl_conf.getEnabledProtocol() != null) {
-            ssl_filter.setEnabledProtocols(new String[] { ssl_conf.getEnabledProtocol() });
+        if (ssl_conf.getEnabledProtocols() != null) {
+            ssl_filter.setEnabledProtocols(ssl_conf.getEnabledProtocols());
         }
 
         if (ssl_conf.getEnabledCipherSuites() != null) {

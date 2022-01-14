@@ -72,7 +72,7 @@ public interface SslConfiguration {
      * 
      * @return The name of the protocol as a String
      */
-    String getEnabledProtocol();
+    String[] getEnabledProtocols();
 
     /**
      * Return the required client authentication setting
