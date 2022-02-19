@@ -12,6 +12,19 @@ It is also a FTP application platform. We have developed a Java API to let
 you write Java code to process FTP event notifications that we call the Ftplet 
 API. Apache FtpServer provides an implementation of FTP server to support 
 this API. 
+1.1.3
+--------------------------------
+This release uses updated versions of some dependencies (MINA 2.1.6 and
+Log4j 2.17.1)
+
+1.1.2
+--------------------------------
+This release fixes the Log4J issue foound in december 2021 (Log4Shell)
+
+1.1.1
+--------------------------------
+This release is a bug fix release, fixing an urgent issue (see FTPSERVER-424)
+
 
 1.0.0
 --------------------------------
