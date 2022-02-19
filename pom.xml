@@ -166,16 +166,20 @@
     <jcl.over.slf4j.version>1.7.36</jcl.over.slf4j.version>
     <junit.version>4.13.2</junit.version>
     <log4j.version>2.17.1</log4j.version>
-    <maven.compile.source>1.8</maven.compile.source>
-    <maven.compile.target>1.8</maven.compile.target>
     <mina.core.version>2.1.6</mina.core.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <slf4j.log4j12.version>1.7.36</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
+
+    <!-- Checkstyle configuration -->
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
-    <checkstyle.version>9.2.1</checkstyle.version>
+    <checkstyle.version>9.3</checkstyle.version>
     <checkstyle.configdir>${basedir}</checkstyle.configdir>
+
+    <!-- Java version to use -->
+    <maven.compile.source>1.8</maven.compile.source>
+    <maven.compile.target>1.8</maven.compile.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencyManagement>
@@ -378,7 +382,7 @@
 
       <plugin>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
+        <version>2.10</version>
         <configuration>
           <downloadSources>true</downloadSources>
         </configuration>
