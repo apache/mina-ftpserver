@@ -78,6 +78,24 @@ public class DefaultSslConfiguration implements SslConfiguration {
         this.socketFactory = sslContext.getSocketFactory();
     }
 
+    /**
+     * Internal constructor, do not use directly. Instead, use {@link SslConfigurationFactory}
+     * 
+     * @throws GeneralSecurityException
+     */
+    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory, 
+        ClientAuth clientAuthReqd, String sslProtocol, String[] enabledCipherSuites, String keyAlias) throws GeneralSecurityException {
+        super();
+        this.clientAuth = clientAuthReqd;
+        this.enabledCipherSuites = enabledCipherSuites;
+        this.keyAlias = keyAlias;
+        this.keyManagerFactory = keyManagerFactory;
+        this.enabledProtocols = new String[] {sslProtocol};
+        this.trustManagerFactory = trustManagerFactory;
+        this.sslContext = initContext();
+        this.socketFactory = sslContext.getSocketFactory();
+    }
+
     public SSLSocketFactory getSocketFactory() throws GeneralSecurityException {
         return socketFactory;
     }
@@ -91,6 +109,18 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getEnabledProtocol()
+     */
+    public String getEnabledProtoco() {
+        if ((enabledProtocols != null) && (enabledProtocols.length > 0)) {
+            // We use the first one
+            return enabledProtocols[0];
+        } else {
+            return DEFAULT_ENABLED_PROTOCOL;
+        }
+    }
+
+    /**
+     * @see SslConfiguration#getEnabledProtocols()
      */
     public String[] getEnabledProtocols() {
         return enabledProtocols;
