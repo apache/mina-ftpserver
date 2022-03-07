@@ -30,8 +30,6 @@ import javax.net.ssl.SSLSocketFactory;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public interface SslConfiguration {
-    public static final String DEFAULT_ENABLED_PROTOCOL = "TLSv1.2";
-    
     /**
      * Returns the socket factory that can be used to create sockets using this <code>SslConfiguration</code>.
      * 
@@ -73,16 +71,7 @@ public interface SslConfiguration {
      * 
      * @return The name of the protocol as a String
      */
-    default String getEnabledProtocol() {
-        return DEFAULT_ENABLED_PROTOCOL;
-    }
-
-    /**
-     * Returns the list of ssl protocols
-     * 
-     * @return The list of enabled protocols as a String
-     */
-    String[] getEnabledProtocols();
+    String getEnabledProtocol();
 
     /**
      * Return the required client authentication setting

@@ -260,8 +260,8 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
                         ssoc.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
                     }
         
-                    if (ssl.getEnabledProtocols() != null) {
-                        ssoc.setEnabledProtocols(ssl.getEnabledProtocols());
+                    if (ssl.getEnabledProtocol() != null) {
+                        ssoc.setEnabledProtocols(new String[] {ssl.getEnabledProtocol()});
                     }
                     
                     dataSoc = ssoc;
@@ -318,8 +318,8 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
                     sslSocket.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
                 }
     
-                if (ssl.getEnabledProtocols() != null) {
-                    sslSocket.setEnabledProtocols(ssl.getEnabledProtocols());
+                if (ssl.getEnabledProtocol() != null) {
+                    sslSocket.setEnabledProtocols(new String[] {ssl.getEnabledProtocol()});
                 }
     
                 dataSoc = sslSocket;

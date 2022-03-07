@@ -60,7 +60,7 @@ public class SslConfigurationFactory {
 
     private String trustStoreAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
 
-    private String[] sslProtocols = new String[] {"TLSv1.2"};
+    private String sslProtocol = "TLSv1.2";
 
     private ClientAuth clientAuth = ClientAuth.NONE;
 
@@ -76,7 +76,7 @@ public class SslConfigurationFactory {
      * @return The key store file
      */
     public File getKeystoreFile() {
-    return keystoreFile;
+        return keystoreFile;
     }
 
     /**
@@ -86,9 +86,11 @@ public class SslConfigurationFactory {
      *            A path to an existing key store file
      */
     public void setKeystoreFile(File keyStoreFile) {
-    if (keyStoreFile == null || keyStoreFile.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreFile must not be null or zero length");
-    this.keystoreFile = keyStoreFile;
+        if (keyStoreFile == null || keyStoreFile.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreFile must not be null or zero length");
+        }
+        
+        this.keystoreFile = keyStoreFile;
     }
 
     /**
@@ -97,7 +99,7 @@ public class SslConfigurationFactory {
      * @return The password
      */
     public String getKeystorePassword() {
-    return keystorePass;
+        return keystorePass;
     }
 
     /**
@@ -107,7 +109,7 @@ public class SslConfigurationFactory {
      *            The password
      */
     public void setKeystorePassword(String keystorePass) {
-    this.keystorePass = keystorePass;
+        this.keystorePass = keystorePass;
     }
 
     /**
@@ -116,7 +118,7 @@ public class SslConfigurationFactory {
      * @return The key store type
      */
     public String getKeystoreType() {
-    return keystoreType;
+        return keystoreType;
     }
 
     /**
@@ -126,9 +128,11 @@ public class SslConfigurationFactory {
      *            The key store type
      */
     public void setKeystoreType(String keystoreType) {
-    if (keystoreType == null || keystoreType.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreType must not be null or zero length");
-    this.keystoreType = keystoreType;
+        if (keystoreType == null || keystoreType.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreType must not be null or zero length");
+        }
+        
+        this.keystoreType = keystoreType;
     }
 
     /**
@@ -137,7 +141,7 @@ public class SslConfigurationFactory {
      * @return The key store algorithm
      */
     public String getKeystoreAlgorithm() {
-    return keystoreAlgorithm;
+        return keystoreAlgorithm;
     }
 
     /**
@@ -147,10 +151,11 @@ public class SslConfigurationFactory {
      *            The key store algorithm
      */
     public void setKeystoreAlgorithm(String keystoreAlgorithm) {
-    if (keystoreAlgorithm == null || keystoreAlgorithm.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreAlgorithm must not be null or zero length");
-    this.keystoreAlgorithm = keystoreAlgorithm;
-
+        if (keystoreAlgorithm == null || keystoreAlgorithm.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreAlgorithm must not be null or zero length");
+        }
+        
+        this.keystoreAlgorithm = keystoreAlgorithm;
     }
 
     /**
@@ -158,8 +163,8 @@ public class SslConfigurationFactory {
      * 
      * @return The SSL protocol
      */
-    public String[] getSslProtocols() {
-	return sslProtocols;
+    public String getSslProtocol() {
+        return sslProtocol;
     }
 
     /**
@@ -168,12 +173,12 @@ public class SslConfigurationFactory {
      * @param sslProtocols
      *            The SSL protocols
      */
-    public void setSslProtocol(String... sslProtocols) {
-        if (sslProtocols == null || sslProtocols.length == 0) {
+    public void setSslProtocol(String sslProtocol) {
+        if (sslProtocol == null || sslProtocol.length() == 0) {
             throw new FtpServerConfigurationException("SslProcotol must not be null or zero length");
         }
         
-        this.sslProtocols = sslProtocols;
+        this.sslProtocol = sslProtocol;
     }
 
     /**
@@ -199,7 +204,7 @@ public class SslConfigurationFactory {
      * @return The password
      */
     public String getKeyPassword() {
-    return keyPass;
+        return keyPass;
     }
 
     /**
@@ -209,7 +214,7 @@ public class SslConfigurationFactory {
      *            The password
      */
     public void setKeyPassword(String keyPass) {
-    this.keyPass = keyPass;
+        this.keyPass = keyPass;
     }
 
     /**
@@ -218,7 +223,7 @@ public class SslConfigurationFactory {
      * @return The {@link File} containing the truststore
      */
     public File getTruststoreFile() {
-    return trustStoreFile;
+        return trustStoreFile;
     }
 
     /**
@@ -228,7 +233,7 @@ public class SslConfigurationFactory {
      *            The password
      */
     public void setTruststoreFile(File trustStoreFile) {
-    this.trustStoreFile = trustStoreFile;
+        this.trustStoreFile = trustStoreFile;
     }
 
     /**
@@ -237,7 +242,7 @@ public class SslConfigurationFactory {
      * @return The password
      */
     public String getTruststorePassword() {
-    return trustStorePass;
+        return trustStorePass;
     }
 
     /**
@@ -247,7 +252,7 @@ public class SslConfigurationFactory {
      *            The password
      */
     public void setTruststorePassword(String trustStorePass) {
-    this.trustStorePass = trustStorePass;
+        this.trustStorePass = trustStorePass;
     }
 
     /**
@@ -257,7 +262,7 @@ public class SslConfigurationFactory {
      */
     public String getTruststoreType() {
     return trustStoreType;
-    }
+        }
 
     /**
      * Set the trust store type
@@ -266,7 +271,7 @@ public class SslConfigurationFactory {
      *            The trust store type
      */
     public void setTruststoreType(String trustStoreType) {
-    this.trustStoreType = trustStoreType;
+        this.trustStoreType = trustStoreType;
     }
 
     /**
@@ -275,7 +280,7 @@ public class SslConfigurationFactory {
      * @return The trust store algorithm
      */
     public String getTruststoreAlgorithm() {
-    return trustStoreAlgorithm;
+        return trustStoreAlgorithm;
     }
 
     /**
@@ -285,32 +290,31 @@ public class SslConfigurationFactory {
      *            The trust store algorithm
      */
     public void setTruststoreAlgorithm(String trustStoreAlgorithm) {
-    this.trustStoreAlgorithm = trustStoreAlgorithm;
-
+        this.trustStoreAlgorithm = trustStoreAlgorithm;
     }
 
     private KeyStore loadStore(File storeFile, String storeType, String storePass) throws IOException, GeneralSecurityException {
-    InputStream fin = null;
-    try {
-        if (storeFile.exists()) {
-        LOG.debug("Trying to load store from file");
-        fin = new FileInputStream(storeFile);
-        } else {
-        LOG.debug("Trying to load store from classpath");
-        fin = getClass().getClassLoader().getResourceAsStream(storeFile.getPath());
-
-        if (fin == null) {
-            throw new FtpServerConfigurationException("Key store could not be loaded from " + storeFile.getPath());
+        InputStream fin = null;
+        try {
+            if (storeFile.exists()) {
+                LOG.debug("Trying to load store from file");
+                fin = new FileInputStream(storeFile);
+            } else {
+                LOG.debug("Trying to load store from classpath");
+                fin = getClass().getClassLoader().getResourceAsStream(storeFile.getPath());
+        
+                if (fin == null) {
+                    throw new FtpServerConfigurationException("Key store could not be loaded from " + storeFile.getPath());
+                }
+            }
+    
+            KeyStore store = KeyStore.getInstance(storeType);
+            store.load(fin, storePass.toCharArray());
+    
+            return store;
+        } finally {
+            IoUtils.close(fin);
         }
-        }
-
-        KeyStore store = KeyStore.getInstance(storeType);
-        store.load(fin, storePass.toCharArray());
-
-        return store;
-    } finally {
-        IoUtils.close(fin);
-    }
     }
 
     /**
@@ -319,43 +323,42 @@ public class SslConfigurationFactory {
      * @return The {@link SslConfiguration} instance
      */
     public SslConfiguration createSslConfiguration() {
-
-    try {
-        // initialize keystore
-        LOG.debug("Loading key store from \"{}\", using the key store type \"{}\"", keystoreFile.getAbsolutePath(), keystoreType);
-        KeyStore keyStore = loadStore(keystoreFile, keystoreType, keystorePass);
-
-        KeyStore trustStore;
-        
-        if (trustStoreFile != null) {
-            LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"", trustStoreFile.getAbsolutePath(), trustStoreType);
-            trustStore = loadStore(trustStoreFile, trustStoreType, trustStorePass);
-        } else {
-            trustStore = keyStore;
+        try {
+            // initialize keystore
+            LOG.debug("Loading key store from \"{}\", using the key store type \"{}\"", keystoreFile.getAbsolutePath(), keystoreType);
+            KeyStore keyStore = loadStore(keystoreFile, keystoreType, keystorePass);
+    
+            KeyStore trustStore;
+            
+            if (trustStoreFile != null) {
+                LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"", trustStoreFile.getAbsolutePath(), trustStoreType);
+                trustStore = loadStore(trustStoreFile, trustStoreType, trustStorePass);
+            } else {
+                trustStore = keyStore;
+            }
+    
+            String keyPassToUse;
+            
+            if (keyPass == null) {
+                keyPassToUse = keystorePass;
+            } else {
+                keyPassToUse = keyPass;
+            }
+            
+            // initialize key manager factory
+            KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(keystoreAlgorithm);
+            keyManagerFactory.init(keyStore, keyPassToUse.toCharArray());
+    
+            // initialize trust manager factory
+            TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(trustStoreAlgorithm);
+            trustManagerFactory.init(trustStore);
+    
+            return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocol, 
+                enabledCipherSuites, keyAlias);
+        } catch (Exception ex) {
+            LOG.error("DefaultSsl.configure()", ex);
+            throw new FtpServerConfigurationException("DefaultSsl.configure()", ex);
         }
-
-        String keyPassToUse;
-        
-        if (keyPass == null) {
-            keyPassToUse = keystorePass;
-        } else {
-            keyPassToUse = keyPass;
-        }
-        
-        // initialize key manager factory
-        KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(keystoreAlgorithm);
-        keyManagerFactory.init(keyStore, keyPassToUse.toCharArray());
-
-        // initialize trust manager factory
-        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(trustStoreAlgorithm);
-        trustManagerFactory.init(trustStore);
-
-        return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocols, 
-        	enabledCipherSuites, keyAlias);
-    } catch (Exception ex) {
-        LOG.error("DefaultSsl.configure()", ex);
-        throw new FtpServerConfigurationException("DefaultSsl.configure()", ex);
-    }
     }
 
     /**
@@ -365,7 +368,7 @@ public class SslConfigurationFactory {
      *         authentication is wanted or {@link ClientAuth#NONE} if no client authentication is the be performed
      */
     public ClientAuth getClientAuth() {
-    return clientAuth;
+        return clientAuth;
     }
 
     /**
@@ -375,11 +378,11 @@ public class SslConfigurationFactory {
      * @return An array of cipher suites, or null.
      */
     public String[] getEnabledCipherSuites() {
-    if (enabledCipherSuites != null) {
-        return enabledCipherSuites.clone();
-    } else {
-        return null;
-    }
+        if (enabledCipherSuites != null) {
+            return enabledCipherSuites.clone();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -389,11 +392,11 @@ public class SslConfigurationFactory {
      * @param enabledCipherSuites
      */
     public void setEnabledCipherSuites(String[] enabledCipherSuites) {
-    if (enabledCipherSuites != null) {
-        this.enabledCipherSuites = enabledCipherSuites.clone();
-    } else {
-        this.enabledCipherSuites = null;
-    }
+        if (enabledCipherSuites != null) {
+            this.enabledCipherSuites = enabledCipherSuites.clone();
+        } else {
+            this.enabledCipherSuites = null;
+        }
     }
 
     /**
@@ -402,7 +405,7 @@ public class SslConfigurationFactory {
      * @return The alias, or null if none is set
      */
     public String getKeyAlias() {
-    return keyAlias;
+        return keyAlias;
     }
 
     /**
@@ -413,6 +416,6 @@ public class SslConfigurationFactory {
      *            The alias to use, or null if JSSE should be allowed to choose the key.
      */
     public void setKeyAlias(String keyAlias) {
-    this.keyAlias = keyAlias;
+        this.keyAlias = keyAlias;
     }
 }
