@@ -22,7 +22,6 @@
   <artifactId>ftpserver-spring-war</artifactId>
   <name>FtpServer Spring web project example</name>
   <packaging>war</packaging>
-  <version>1.1.4-SNAPSHOT</version>
 
   <properties>
     <checkstyle.configdir>${basedir}/../..</checkstyle.configdir>
@@ -76,8 +75,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>
