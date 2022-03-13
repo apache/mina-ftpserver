@@ -37,16 +37,20 @@ import org.apache.mina.filter.codec.demux.MessageEncoder;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class FtpResponseEncoder extends ProtocolEncoderAdapter {
-    private static final CharsetEncoder ENCODER = Charset.forName("UTF-8")
-            .newEncoder();
-
+    private static final ThreadLocal<CharsetEncoder> ENCODER = new ThreadLocal<CharsetEncoder>() {
+        @Override
+        protected CharsetEncoder initialValue() {
+            return Charset.forName("UTF-8").newEncoder();
+        }
+    };
+    
     public void encode(IoSession session, Object message,
             ProtocolEncoderOutput out) throws Exception {
         String value = message.toString();
 
         IoBuffer buf = IoBuffer.allocate(value.length()).setAutoExpand(true);
 
-        buf.putString(value, ENCODER);
+        buf.putString(value, ENCODER.get());
 
         buf.flip();
         out.write(buf);
