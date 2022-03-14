@@ -82,7 +82,9 @@ public interface SslConfiguration {
      * 
      * @return The list of enabled protocols as a String
      */
-    String[] getEnabledProtocols();
+     default String[] getEnabledProtocols() {
+    	 return new String[] { getEnabledProtocol() };
+     }
 
     /**
      * Return the required client authentication setting
