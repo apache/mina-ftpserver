@@ -34,7 +34,7 @@
   </modules>
 
   <properties>
-    <checkstyle.configdir>${basedir}/..</checkstyle.configdir>
+    <checkstyle.configdir>..</checkstyle.configdir>
   </properties>
 
 </project>

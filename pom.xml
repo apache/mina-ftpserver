@@ -14,7 +14,7 @@
   <parent>
     <artifactId>apache</artifactId>
     <groupId>org.apache</groupId>
-    <version>24</version>
+    <version>25</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
@@ -174,7 +174,7 @@
     <!-- Checkstyle configuration -->
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
     <checkstyle.version>9.3</checkstyle.version>
-    <checkstyle.configdir>${basedir}</checkstyle.configdir>
+    <checkstyle.configdir>.</checkstyle.configdir>
 
     <!-- Java version to use -->
     <maven.compile.source>1.8</maven.compile.source>
@@ -541,8 +541,8 @@
             <artifactId>maven-checkstyle-plugin</artifactId>
             <version>${checkstyle.plugin.version}</version>
             <configuration>
-              <configLocation>${checkstyle.configdir}/checkstyle.xml</configLocation>
-              <suppressionsLocation>${checkstyle.configdir}/checkstyle-suppressions.xml</suppressionsLocation>
+              <configLocation>${basedir}/${checkstyle.configdir}/checkstyle.xml</configLocation>
+              <suppressionsLocation>${basedir}/${checkstyle.configdir}/checkstyle-suppressions.xml</suppressionsLocation>
               <enableRulesSummary>false</enableRulesSummary>
               <propertyExpansion>basedir=${basedir}</propertyExpansion>
             </configuration>
@@ -550,7 +550,7 @@
               <dependency>
                 <groupId>com.puppycrawl.tools</groupId>
                 <artifactId>checkstyle</artifactId>
-                <version>${checksytyle.version}</version>
+                <version>${checkstyle.version}</version>
               </dependency>
             </dependencies>
             <executions>
