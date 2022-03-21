@@ -24,7 +24,7 @@
   <packaging>war</packaging>
 
   <properties>
-    <checkstyle.configdir>${basedir}/../..</checkstyle.configdir>
+    <checkstyle.configdir>../..</checkstyle.configdir>
   </properties>
 
   <dependencies>

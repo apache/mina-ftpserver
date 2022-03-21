@@ -24,7 +24,7 @@
   <name>Apache FtpServer</name>
 
   <properties>
-    <checkstyle.configdir>${basedir}/..</checkstyle.configdir>
+    <checkstyle.configdir>..</checkstyle.configdir>
   </properties>
 
   <build>
