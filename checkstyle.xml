@@ -25,10 +25,6 @@ limitations under the License.
   <property name="localeLanguage" value="en"/>
   <module name="JavadocPackage"/>
 
-  <module name="ArrayTypeStyle">
-    <property name="javaStyle" value="true"/>
-  </module>
-
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
     <property name="max" value="120"/>
@@ -52,11 +48,15 @@ limitations under the License.
     <property name="file" value="checkstyle-suppressions.xml"/>
   </module>
 
-  <module name="FinalParameters">
-    <property name="ignorePrimitiveTypes" value="true"/>
-  </module>
-  
   <module name="TreeWalker">
+    <module name="ArrayTypeStyle">
+      <property name="javaStyle" value="true"/>
+    </module>
+   
+    <module name="FinalParameters">
+      <property name="ignorePrimitiveTypes" value="true"/>
+    </module>
+
     <module name="AvoidStarImport"/>
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
