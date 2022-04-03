@@ -394,7 +394,7 @@ public abstract class UserManagerTestTemplate extends TestCase {
         assertEquals(user.getName(), actualUser.getName());
         assertNull(actualUser.getPassword());
         assertEquals("/", actualUser.getHomeDirectory());
-        assertEquals(true, actualUser.getEnabled());
+        assertTrue(actualUser.getEnabled());
         assertNull(user.authorize(new WriteRequest()));
         assertEquals(0, getMaxDownloadRate(actualUser));
         assertEquals(0, actualUser.getMaxIdleTime());

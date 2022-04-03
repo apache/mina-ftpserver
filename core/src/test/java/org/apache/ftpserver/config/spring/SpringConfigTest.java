@@ -51,7 +51,7 @@ public class SpringConfigTest extends TestCase {
         DefaultFtpServer server = (DefaultFtpServer) factory.getBean("server");
 
         assertEquals(500, server.getConnectionConfig().getMaxLogins());
-        assertEquals(false, server.getConnectionConfig()
+        assertFalse(server.getConnectionConfig()
                 .isAnonymousLoginEnabled());
         assertEquals(123, server.getConnectionConfig().getMaxAnonymousLogins());
         assertEquals(124, server.getConnectionConfig().getMaxLoginFailures());
@@ -78,7 +78,7 @@ public class SpringConfigTest extends TestCase {
                 .getDataConnectionConfiguration().getActiveLocalAddress()) );
         assertEquals("123-125", ((NioListener) listener)
                 .getDataConnectionConfiguration().getPassivePorts());
-        assertEquals(false, ((NioListener) listener)
+        assertFalse(((NioListener) listener)
                 .getDataConnectionConfiguration().isPassiveIpCheck());
         
         RemoteIpFilter filter = (RemoteIpFilter) listener.getSessionFilter();

@@ -54,13 +54,13 @@ public class ExtendedAliasKeymanagerTest extends TestCase {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km, "dsakey");
 
         assertEquals("dsakey", akm.chooseServerAlias("DSA", null, null));
-        assertEquals(null, akm.chooseServerAlias("RSA", null, null));
+        assertNull(akm.chooseServerAlias("RSA", null, null));
     }
 
     public void testServerAliasWithAliasRSAKey() throws Exception {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km, "rsakey");
 
-        assertEquals(null, akm.chooseServerAlias("DSA", null, null));
+        assertNull(akm.chooseServerAlias("DSA", null, null));
         assertEquals("rsakey", akm.chooseServerAlias("RSA", null, null));
     }
 
@@ -75,21 +75,21 @@ public class ExtendedAliasKeymanagerTest extends TestCase {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km,
                 "nonexisting");
 
-        assertEquals(null, akm.chooseServerAlias("DSA", null, null));
-        assertEquals(null, akm.chooseServerAlias("RSA", null, null));
+        assertNull(akm.chooseServerAlias("DSA", null, null));
+        assertNull(akm.chooseServerAlias("RSA", null, null));
     }
 
     public void testEngineServerAliasWithAliasDSAKey() throws Exception {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km, "dsakey");
 
         assertEquals("dsakey", akm.chooseEngineServerAlias("DSA", null, null));
-        assertEquals(null, akm.chooseEngineServerAlias("RSA", null, null));
+        assertNull(akm.chooseEngineServerAlias("RSA", null, null));
     }
 
     public void testEngineServerAliasWithAliasRSAKey() throws Exception {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km, "rsakey");
 
-        assertEquals(null, akm.chooseEngineServerAlias("DSA", null, null));
+        assertNull(akm.chooseEngineServerAlias("DSA", null, null));
         assertEquals("rsakey", akm.chooseEngineServerAlias("RSA", null, null));
     }
 
@@ -104,7 +104,7 @@ public class ExtendedAliasKeymanagerTest extends TestCase {
         ExtendedAliasKeyManager akm = new ExtendedAliasKeyManager(km,
                 "nonexisting");
 
-        assertEquals(null, akm.chooseEngineServerAlias("DSA", null, null));
-        assertEquals(null, akm.chooseEngineServerAlias("RSA", null, null));
+        assertNull(akm.chooseEngineServerAlias("DSA", null, null));
+        assertNull(akm.chooseEngineServerAlias("RSA", null, null));
     }
 }

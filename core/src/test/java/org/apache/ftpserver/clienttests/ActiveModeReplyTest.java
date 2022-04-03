@@ -58,7 +58,7 @@ public class ActiveModeReplyTest extends ClientTestTemplate {
     }
 
     public void testStoreInActiveModeIfNotAllowed() throws Exception {
-        assertTrue(client.getDataConnectionMode() == FTPClient.ACTIVE_LOCAL_DATA_CONNECTION_MODE);
+        assertEquals(FTPClient.ACTIVE_LOCAL_DATA_CONNECTION_MODE, client.getDataConnectionMode());
 
         sendCommand("APPE " + TEST_FILE1.getAbsolutePath());
         sendCommand("LIST");
