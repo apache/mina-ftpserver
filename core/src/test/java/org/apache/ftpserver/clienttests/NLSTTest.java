@@ -20,6 +20,7 @@
 package org.apache.ftpserver.clienttests;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.ftpserver.test.TestUtil;
@@ -54,7 +55,7 @@ public class NLSTTest extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = "TESDATA".getBytes("UTF-8");
+        testData = "TESDATA".getBytes(StandardCharsets.UTF_8);
 
         FTPClientConfig config = new FTPClientConfig("UNIX");
         client.configure(config);

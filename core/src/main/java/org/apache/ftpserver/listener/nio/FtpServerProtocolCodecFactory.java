@@ -20,6 +20,7 @@
 package org.apache.ftpserver.listener.nio;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
@@ -35,8 +36,7 @@ import org.apache.mina.filter.codec.textline.TextLineDecoder;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class FtpServerProtocolCodecFactory implements ProtocolCodecFactory {
-    private final ProtocolDecoder decoder = new TextLineDecoder(Charset
-            .forName("UTF-8"));
+    private final ProtocolDecoder decoder = new TextLineDecoder(StandardCharsets.UTF_8);
 
     private final ProtocolEncoder encoder = new FtpResponseEncoder();
 

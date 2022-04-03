@@ -20,6 +20,7 @@
 package org.apache.ftpserver.clienttests;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,8 +67,8 @@ public class FtpMd5Test extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = "TESTDATA".getBytes("UTF-8");
-        testData2 = "Hello world".getBytes("UTF-8");
+        testData = "TESTDATA".getBytes(StandardCharsets.UTF_8);
+        testData2 = "Hello world".getBytes(StandardCharsets.UTF_8);
         testDataHash = DigestUtils.md5Hex(testData).toUpperCase();
         testData2Hash = DigestUtils.md5Hex(testData2).toUpperCase();
 

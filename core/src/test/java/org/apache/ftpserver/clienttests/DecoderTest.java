@@ -26,6 +26,7 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.MalformedInputException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
@@ -46,7 +47,7 @@ public class DecoderTest extends ClientTestTemplate {
     }
     
     public void testDecodeError() throws CharacterCodingException {
-        CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+        CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
         ByteBuffer buffer = ByteBuffer.wrap(b);
         
         try {
