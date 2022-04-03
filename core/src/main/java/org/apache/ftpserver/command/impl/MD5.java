@@ -61,11 +61,7 @@ public class MD5 extends AbstractCommand {
         // reset state variables
         session.resetState();
 
-        boolean isMMD5 = false;
-
-        if ("MMD5".equals(request.getCommand())) {
-            isMMD5 = true;
-        }
+        boolean isMMD5 = "MMD5".equals(request.getCommand());
 
         // print file information
         String argument = request.getArgument();

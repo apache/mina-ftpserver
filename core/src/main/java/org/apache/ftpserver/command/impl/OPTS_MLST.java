@@ -76,15 +76,9 @@ public class OPTS_MLST extends AbstractCommand {
         }
         // set the list types
         String[] validatedTypes = validateSelectedTypes(types);
-        if (validatedTypes != null) {
-            session.setAttribute("MLST.types", validatedTypes);
-            session.write(LocalizedFtpReply.translate(session, request, context,
-                    FtpReply.REPLY_200_COMMAND_OKAY, "OPTS.MLST", listTypes));
-        } else {
-            session.write(LocalizedFtpReply.translate(session, request, context,
-                    FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS,
-                    "OPTS.MLST", listTypes));
-        }
+        session.setAttribute("MLST.types", validatedTypes);
+        session.write(LocalizedFtpReply.translate(session, request, context,
+                FtpReply.REPLY_200_COMMAND_OKAY, "OPTS.MLST", listTypes));
     }
 
     private String[] validateSelectedTypes(final String types[]) {
