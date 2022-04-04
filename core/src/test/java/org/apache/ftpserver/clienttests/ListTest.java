@@ -20,6 +20,7 @@
 package org.apache.ftpserver.clienttests;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 
 import org.apache.commons.net.ftp.FTPClientConfig;
@@ -58,7 +59,7 @@ public class ListTest extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = "TESDATA".getBytes("UTF-8");
+        testData = "TESDATA".getBytes(StandardCharsets.UTF_8);
 
         FTPClientConfig config = new FTPClientConfig("UNIX");
         client.configure(config);

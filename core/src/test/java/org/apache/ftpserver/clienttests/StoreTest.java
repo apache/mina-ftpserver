@@ -20,6 +20,7 @@ package org.apache.ftpserver.clienttests;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -39,7 +40,6 @@ public class StoreTest extends ClientTestTemplate {
     private static final String TESTDATA = "TESTDATA" + EOL + "line2" + EOL;
     private static final String TESTDATA_CRLF = "TESTDATA" + CRLF + "line2" + CRLF;
     private static final String TESTDATA_LF = "TESTDATA" + LF + "line2" + LF;
-    private static final String ENCODING = "UTF-8";
     private static final String TEST_FILENAME = "test.txt";
     private static final String TEST_FILENAME_WITH_LEADING_SPACE = " leading.txt";
     private static final int SKIP_LEN = 4;
@@ -59,11 +59,11 @@ public class StoreTest extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = TESTDATA.getBytes(ENCODING);
-        testDataCrLf = TESTDATA_CRLF.getBytes(ENCODING);
-        testDataLf = TESTDATA_LF.getBytes(ENCODING);
-        doubleTestData = (TESTDATA + TESTDATA).getBytes(ENCODING);
-        oneAndAHalfTestData = ("TEST" + TESTDATA).getBytes(ENCODING);
+        testData = TESTDATA.getBytes(StandardCharsets.UTF_8);
+        testDataCrLf = TESTDATA_CRLF.getBytes(StandardCharsets.UTF_8);
+        testDataLf = TESTDATA_LF.getBytes(StandardCharsets.UTF_8);
+        doubleTestData = (TESTDATA + TESTDATA).getBytes(StandardCharsets.UTF_8);
+        oneAndAHalfTestData = ("TEST" + TESTDATA).getBytes(StandardCharsets.UTF_8);
 
         client.login(ADMIN_USERNAME, ADMIN_PASSWORD);
     }

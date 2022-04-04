@@ -22,6 +22,7 @@ package org.apache.ftpserver.clienttests;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.ftpserver.test.TestUtil;
@@ -35,8 +36,6 @@ public class I18NTest extends ClientTestTemplate {
 
     private static final String TESTDATA = "TESTDATA";
 
-    private static final String ENCODING = "UTF-8";
-
     private static byte[] testData = null;
 
     /*
@@ -48,7 +47,7 @@ public class I18NTest extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = TESTDATA.getBytes(ENCODING);
+        testData = TESTDATA.getBytes(StandardCharsets.UTF_8);
 
         client.login(ADMIN_USERNAME, ADMIN_PASSWORD);
     }

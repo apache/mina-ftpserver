@@ -21,6 +21,7 @@ package org.apache.ftpserver.clienttests;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPClientConfig;
@@ -47,7 +48,7 @@ public class ActiveModeReplyTest extends ClientTestTemplate {
         TEST_FILE1.createNewFile();
         assertTrue(TEST_FILE1.exists());
 
-        testData = ("TESTDATA").getBytes("UTF-8");
+        testData = ("TESTDATA").getBytes(StandardCharsets.UTF_8);
         TestUtil.writeDataToFile(TEST_FILE, testData);
         assertTrue(TEST_FILE.exists());
 

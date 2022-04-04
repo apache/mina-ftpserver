@@ -19,8 +19,8 @@
  */
 package org.apache.ftpserver.listener.nio;
 
-import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.ftpserver.ftplet.FtpReply;
 import org.apache.mina.core.buffer.IoBuffer;
@@ -40,7 +40,7 @@ public class FtpResponseEncoder extends ProtocolEncoderAdapter {
     private static final ThreadLocal<CharsetEncoder> ENCODER = new ThreadLocal<CharsetEncoder>() {
         @Override
         protected CharsetEncoder initialValue() {
-            return Charset.forName("UTF-8").newEncoder();
+            return StandardCharsets.UTF_8.newEncoder();
         }
     };
 
