@@ -48,6 +48,11 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class MD5 extends AbstractCommand {
+    /** The MD5 String constant */
+    public static final String MD5 = "MD5";
+    
+    /** The MMD5 String constant */
+    public static final String MMD5 = "MMD5";
 
     private final Logger LOG = LoggerFactory.getLogger(MD5.class);
 
@@ -61,11 +66,7 @@ public class MD5 extends AbstractCommand {
         // reset state variables
         session.resetState();
 
-        boolean isMMD5 = false;
-
-        if ("MMD5".equals(request.getCommand())) {
-            isMMD5 = true;
-        }
+        boolean isMMD5 = MMD5.equals(request.getCommand());
 
         // print file information
         String argument = request.getArgument();
@@ -83,6 +84,7 @@ public class MD5 extends AbstractCommand {
         }
 
         String[] fileNames = null;
+        
         if (isMMD5) {
             fileNames = argument.split(",");
         } else {
@@ -90,6 +92,7 @@ public class MD5 extends AbstractCommand {
         }
 
         StringBuilder sb = new StringBuilder();
+        
         for (int i = 0; i < fileNames.length; i++) {
             String fileName = fileNames[i].trim();
 
@@ -128,6 +131,7 @@ public class MD5 extends AbstractCommand {
             }
 
             InputStream is = null;
+            
             try {
                 is = file.createInputStream(0);
                 String md5Hash = md5(is);
@@ -135,14 +139,19 @@ public class MD5 extends AbstractCommand {
                 if (i > 0) {
                     sb.append(", ");
                 }
+                
                 boolean nameHasSpaces = fileName.indexOf(' ') >= 0;
+                
                 if(nameHasSpaces) {
                     sb.append('"');
                 }
+                
                 sb.append(fileName);
+                
                 if(nameHasSpaces) {
                     sb.append('"');
                 }
+                
                 sb.append(' ');
                 sb.append(md5Hash);
 
@@ -157,10 +166,10 @@ public class MD5 extends AbstractCommand {
         }
         if (isMMD5) {
             session.write(LocalizedFtpReply.translate(session, request, context,
-                    252, "MMD5", sb.toString()));
+                    252, MMD5, sb.toString()));
         } else {
             session.write(LocalizedFtpReply.translate(session, request, context,
-                    251, "MD5", sb.toString()));
+                    251, MD5, sb.toString()));
         }
     }
 
@@ -173,12 +182,13 @@ public class MD5 extends AbstractCommand {
      */
     private String md5(InputStream is) throws IOException,
             NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("MD5");
+        MessageDigest digest = MessageDigest.getInstance(MD5);
         DigestInputStream dis = new DigestInputStream(is, digest);
 
         byte[] buffer = new byte[1024];
 
         int read = dis.read(buffer);
+        
         while (read > -1) {
             read = dis.read(buffer);
         }

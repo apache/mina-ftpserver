@@ -99,9 +99,9 @@ public class CommandFactoryFactory {
         DEFAULT_COMMAND_MAP.put("HELP", new HELP());
         DEFAULT_COMMAND_MAP.put("LANG", new LANG());
         DEFAULT_COMMAND_MAP.put("LIST", new LIST());
-        DEFAULT_COMMAND_MAP.put("MD5", new MD5());
+        DEFAULT_COMMAND_MAP.put(MD5.MD5, new MD5());
         DEFAULT_COMMAND_MAP.put("MFMT", new MFMT());
-        DEFAULT_COMMAND_MAP.put("MMD5", new MD5());
+        DEFAULT_COMMAND_MAP.put(MD5.MMD5, new MD5());
         DEFAULT_COMMAND_MAP.put("MDTM", new MDTM());
         DEFAULT_COMMAND_MAP.put("MLST", new MLST());
         DEFAULT_COMMAND_MAP.put("MKD", new MKD());

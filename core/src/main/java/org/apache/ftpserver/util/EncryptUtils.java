@@ -22,6 +22,8 @@ package org.apache.ftpserver.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.ftpserver.command.impl.MD5;
+
 /**
  * <strong>Internal class, do not use directly.</strong>
  * 
@@ -61,7 +63,7 @@ public class EncryptUtils {
 
         String result = "";
         try {
-            result = encrypt(source, "MD5");
+            result = encrypt(source, MD5.MD5);
         } catch (NoSuchAlgorithmException ex) {
             // this should never happen
             throw new RuntimeException(ex);

@@ -74,6 +74,7 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
     public IODataConnectionFactory(final FtpServerContext serverContext, final FtpIoSession session) {
         this.session = session;
         this.serverContext = serverContext;
+        
         if ((session != null) && (session.getListener() != null) && session.getListener().getDataConnectionConfiguration().isImplicitSsl()) {
             secure = true;
         }
@@ -83,37 +84,37 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
      * Close data socket. This method must be idempotent as we might call it multiple times during disconnect.
      */
     public synchronized void closeDataConnection() {
-
-    // close client socket if any
-    if (dataSoc != null) {
-        try {
-        dataSoc.close();
-        } catch (Exception ex) {
-        LOG.warn("FtpDataConnection.closeDataSocket()", ex);
+        // close client socket if any
+        if (dataSoc != null) {
+            try {
+                dataSoc.close();
+            } catch (Exception ex) {
+                LOG.warn("FtpDataConnection.closeDataSocket()", ex);
+            }
+            dataSoc = null;
         }
-        dataSoc = null;
-    }
+    
+        // close server socket if any
+        if (servSoc != null) {
+            try {
+                servSoc.close();
+            } catch (Exception ex) {
+                LOG.warn("FtpDataConnection.closeDataSocket()", ex);
+            }
+    
+            if (session != null) {
+                DataConnectionConfiguration dcc = session.getListener().getDataConnectionConfiguration();
 
-    // close server socket if any
-    if (servSoc != null) {
-        try {
-        servSoc.close();
-        } catch (Exception ex) {
-        LOG.warn("FtpDataConnection.closeDataSocket()", ex);
+                if (dcc != null) {
+                    dcc.releasePassivePort(port);
+                }
+            }
+    
+            servSoc = null;
         }
-
-        if (session != null) {
-        DataConnectionConfiguration dcc = session.getListener().getDataConnectionConfiguration();
-        if (dcc != null) {
-            dcc.releasePassivePort(port);
-        }
-        }
-
-        servSoc = null;
-    }
-
-    // reset request time
-    requestTime = 0L;
+    
+        // reset request time
+        requestTime = 0L;
     }
 
     /**
@@ -128,9 +129,9 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
         this.address = address.getAddress();
         port = address.getPort();
         requestTime = System.currentTimeMillis();
-        }
+    }
     
-        private SslConfiguration getSslConfiguration() {
+    private SslConfiguration getSslConfiguration() {
         DataConnectionConfiguration dataCfg = session.getListener().getDataConnectionConfiguration();
     
         SslConfiguration configuration = dataCfg.getSslConfiguration();
@@ -153,6 +154,7 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
     
         // get the passive port
         int passivePort = session.getListener().getDataConnectionConfiguration().requestPassivePort();
+        
         if (passivePort == -1) {
             servSoc = null;
             throw new DataConnectionException("Cannot find an available passive port.");
@@ -200,6 +202,7 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
             return new InetSocketAddress(address, port);
         } catch (Exception ex) {
             closeDataConnection();
+            
             throw new DataConnectionException("Failed to initate passive data connection: " + ex.getMessage(), ex);
         }
     }
@@ -238,6 +241,7 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
         // get socket depending on the selection
         dataSoc = null;
         DataConnectionConfiguration dataConfig = session.getListener().getDataConnectionConfiguration();
+        
         try {
             if (!passive) {
                 if (secure) {
@@ -286,71 +290,74 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
         
                 dataSoc.connect(new InetSocketAddress(address, port));
             } else {
-    
-            if (secure) {
-                LOG.debug("Opening secure passive data connection");
-                // this is where we wrap the unsecured socket as a SSLSocket. This is
-                // due to the JVM bug described in FTPSERVER-241.
-    
-                // get server socket factory
-                SslConfiguration ssl = getSslConfiguration();
-    
-                // we've already checked this, but let's do it again
-                if (ssl == null) {
-                throw new FtpException("Data connection SSL not configured");
+                if (secure) {
+                    LOG.debug("Opening secure passive data connection");
+                    // this is where we wrap the unsecured socket as a SSLSocket. This is
+                    // due to the JVM bug described in FTPSERVER-241.
+        
+                    // get server socket factory
+                    SslConfiguration ssl = getSslConfiguration();
+        
+                    // we've already checked this, but let's do it again
+                    if (ssl == null) {
+                        throw new FtpException("Data connection SSL not configured");
+                    }
+        
+                    SSLSocketFactory ssocketFactory = ssl.getSocketFactory();
+        
+                    Socket serverSocket = servSoc.accept();
+        
+                    SSLSocket sslSocket = (SSLSocket) ssocketFactory.createSocket(serverSocket, serverSocket.getInetAddress().getHostAddress(), serverSocket.getPort(), true);
+                    sslSocket.setUseClientMode(false);
+        
+                    // initialize server socket
+                    if (ssl.getClientAuth() == ClientAuth.NEED) {
+                        sslSocket.setNeedClientAuth(true);
+                    } else if (ssl.getClientAuth() == ClientAuth.WANT) {
+                        sslSocket.setWantClientAuth(true);
+                    }
+        
+                    if (ssl.getEnabledCipherSuites() != null) {
+                        sslSocket.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
+                    }
+        
+                    if (ssl.getEnabledProtocol() != null) {
+                        sslSocket.setEnabledProtocols(new String[] {ssl.getEnabledProtocol()});
+                    }
+        
+                    dataSoc = sslSocket;
+                } else {
+                    LOG.debug("Opening passive data connection");
+        
+                    dataSoc = servSoc.accept();
                 }
-    
-                SSLSocketFactory ssocketFactory = ssl.getSocketFactory();
-    
-                Socket serverSocket = servSoc.accept();
-    
-                SSLSocket sslSocket = (SSLSocket) ssocketFactory.createSocket(serverSocket, serverSocket.getInetAddress().getHostAddress(), serverSocket.getPort(), true);
-                sslSocket.setUseClientMode(false);
-    
-                // initialize server socket
-                if (ssl.getClientAuth() == ClientAuth.NEED) {
-                    sslSocket.setNeedClientAuth(true);
-                } else if (ssl.getClientAuth() == ClientAuth.WANT) {
-                    sslSocket.setWantClientAuth(true);
+        
+                if (dataConfig.isPassiveIpCheck()) {
+                    // Let's make sure we got the connection from the same
+                    // client that we are expecting
+                    InetAddress remoteAddress = ((InetSocketAddress) session.getRemoteAddress()).getAddress();
+                    InetAddress dataSocketAddress = dataSoc.getInetAddress();
+                    
+                    if (!dataSocketAddress.equals(remoteAddress)) {
+                        LOG.warn("Passive IP Check failed. Closing data connection from " + dataSocketAddress + " as it does not match the expected address " + remoteAddress);
+                        closeDataConnection();
+
+                        return null;
+                    }
                 }
-    
-                if (ssl.getEnabledCipherSuites() != null) {
-                    sslSocket.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
-                }
-    
-                if (ssl.getEnabledProtocol() != null) {
-                    sslSocket.setEnabledProtocols(new String[] {ssl.getEnabledProtocol()});
-                }
-    
-                dataSoc = sslSocket;
-            } else {
-                LOG.debug("Opening passive data connection");
-    
-                dataSoc = servSoc.accept();
-            }
-    
-            if (dataConfig.isPassiveIpCheck()) {
-                // Let's make sure we got the connection from the same
-                // client that we are expecting
-                InetAddress remoteAddress = ((InetSocketAddress) session.getRemoteAddress()).getAddress();
-                InetAddress dataSocketAddress = dataSoc.getInetAddress();
-                if (!dataSocketAddress.equals(remoteAddress)) {
-                LOG.warn("Passive IP Check failed. Closing data connection from " + dataSocketAddress + " as it does not match the expected address " + remoteAddress);
-                closeDataConnection();
-                return null;
-                }
-            }
-    
-            DataConnectionConfiguration dataCfg = session.getListener().getDataConnectionConfiguration();
-    
-            dataSoc.setSoTimeout(dataCfg.getIdleTime() * 1000);
-            LOG.debug("Passive data connection opened");
+        
+                DataConnectionConfiguration dataCfg = session.getListener().getDataConnectionConfiguration();
+        
+                dataSoc.setSoTimeout(dataCfg.getIdleTime() * 1000);
+                LOG.debug("Passive data connection opened");
             }
         } catch (Exception ex) {
             closeDataConnection();
             LOG.warn("FtpDataConnection.getDataSocket()", ex);
+            
             throw ex;
         }
+        
         dataSoc.setSoTimeout(dataConfig.getIdleTime() * 1000);
     
         // Make sure we initiate the SSL handshake, or we'll
@@ -371,9 +378,9 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
             return null;
         } else {
             try {
-            return InetAddress.getByName(host);
+                return InetAddress.getByName(host);
             } catch (UnknownHostException ex) {
-            throw new DataConnectionException("Failed to resolve address", ex);
+                throw new DataConnectionException("Failed to resolve address", ex);
             }
         }
     }
@@ -384,14 +391,14 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
      * @see org.apache.ftpserver.DataConnectionFactory#isSecure()
      */
     public boolean isSecure() {
-    return secure;
+        return secure;
     }
 
     /**
      * Set the security protocol.
      */
     public void setSecure(final boolean secure) {
-    this.secure = secure;
+        this.secure = secure;
     }
 
     /*
@@ -400,56 +407,52 @@ public class IODataConnectionFactory implements ServerDataConnectionFactory {
      * @see org.apache.ftpserver.DataConnectionFactory#isZipMode()
      */
     public boolean isZipMode() {
-    return isZip;
+        return isZip;
     }
 
     /**
      * Set zip mode.
      */
     public void setZipMode(final boolean zip) {
-    isZip = zip;
+        isZip = zip;
     }
 
     /**
      * Check the data connection idle status.
      */
     public synchronized boolean isTimeout(final long currTime) {
+        // data connection not requested - not a timeout
+        if (requestTime == 0L) {
+            return false;
+        }
+    
+        // data connection active - not a timeout
+        if (dataSoc != null) {
+            return false;
+        }
+    
+        // no idle time limit - not a timeout
+        int maxIdleTime = session.getListener().getDataConnectionConfiguration().getIdleTime() * 1000;
 
-    // data connection not requested - not a timeout
-    if (requestTime == 0L) {
-        return false;
-    }
-
-    // data connection active - not a timeout
-    if (dataSoc != null) {
-        return false;
-    }
-
-    // no idle time limit - not a timeout
-    int maxIdleTime = session.getListener().getDataConnectionConfiguration().getIdleTime() * 1000;
-    if (maxIdleTime == 0) {
-        return false;
-    }
-
-    // idle time is within limit - not a timeout
-    if ((currTime - requestTime) < maxIdleTime) {
-        return false;
-    }
-
-    return true;
+        if (maxIdleTime == 0) {
+            return false;
+        }
+    
+        // idle time is within limit - not a timeout
+        return ((currTime - requestTime) >= maxIdleTime);
     }
 
     /**
      * Dispose data connection - close all the sockets.
      */
     public void dispose() {
-    closeDataConnection();
+        closeDataConnection();
     }
 
     /**
      * Sets the server's control address.
      */
     public void setServerControlAddress(final InetAddress serverControlAddress) {
-    this.serverControlAddress = serverControlAddress;
+        this.serverControlAddress = serverControlAddress;
     }
 }
