@@ -49,6 +49,7 @@
         <exclude>core/res/**/*</exclude>
 
         <exclude>**/target</exclude>
+        <exclude>**/ftpserver.properties</exclude>
         <exclude>**/target/**/*</exclude>
         <exclude>**/.settings</exclude>
         <exclude>**/.settings/**/*</exclude>
