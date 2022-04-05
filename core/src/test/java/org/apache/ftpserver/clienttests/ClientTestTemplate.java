@@ -22,8 +22,6 @@ package org.apache.ftpserver.clienttests;
 import java.io.File;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.net.ProtocolCommandEvent;
 import org.apache.commons.net.ProtocolCommandListener;
 import org.apache.commons.net.ftp.FTPClient;
@@ -41,15 +39,15 @@ import org.apache.ftpserver.util.IoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import junit.framework.TestCase;
+
 /**
 *
 * @author <a href="http://mina.apache.org">Apache MINA Project</a>
 *
 */
 public abstract class ClientTestTemplate extends TestCase {
-
-    private final Logger LOG = LoggerFactory
-            .getLogger(ClientTestTemplate.class);
+    private final Logger LOG = LoggerFactory.getLogger(ClientTestTemplate.class);
 
     protected static final String ADMIN_PASSWORD = "admin";
 
@@ -77,13 +75,11 @@ public abstract class ClientTestTemplate extends TestCase {
     protected static final File ROOT_DIR = new File(TEST_TMP_DIR, "ftproot");
 
     protected FtpServerFactory createServer() throws Exception {
-        assertTrue(USERS_FILE.getAbsolutePath() + " must exist", USERS_FILE
-                .exists());
+        assertTrue(USERS_FILE.getAbsolutePath() + " must exist", USERS_FILE.exists());
 
         FtpServerFactory serverFactory = new FtpServerFactory();
 
-        serverFactory.setConnectionConfig(createConnectionConfigFactory()
-                .createConnectionConfig());
+        serverFactory.setConnectionConfig(createConnectionConfigFactory().createConnectionConfig());
 
         ListenerFactory listenerFactory = new ListenerFactory();
 
@@ -161,6 +157,7 @@ public abstract class ClientTestTemplate extends TestCase {
     protected FTPClient createFTPClient() throws Exception {
         FTPClient client = new FTPClient();
         client.setDefaultTimeout(10000);
+        
         return client;
     }
 
@@ -170,7 +167,6 @@ public abstract class ClientTestTemplate extends TestCase {
     protected void connectClient() throws Exception {
         client = createFTPClient();
         client.addProtocolCommandListener(new ProtocolCommandListener() {
-
             public void protocolCommandSent(ProtocolCommandEvent event) {
                 LOG.debug("> " + event.getMessage().trim());
 
@@ -207,8 +203,7 @@ public abstract class ClientTestTemplate extends TestCase {
     }
 
     protected FtpIoSession getActiveSession() {
-        return server.getListener("default").getActiveSessions().iterator()
-                .next();
+        return server.getListener("default").getActiveSessions().iterator().next();
     }
 
     /*
@@ -237,5 +232,4 @@ public abstract class ClientTestTemplate extends TestCase {
 
         cleanTmpDirs();
     }
-
 }

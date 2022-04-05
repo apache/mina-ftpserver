@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -176,13 +177,13 @@ public class IODataConnection implements DataConnection {
         OutputStream out = getDataOutputStream();
         Writer writer = null;
         try {
-            writer = new OutputStreamWriter(out, "UTF-8");
+            writer = new OutputStreamWriter(out, StandardCharsets.UTF_8);
             writer.write(str);
 
             // update session
             if (session instanceof DefaultFtpSession) {
                 ((DefaultFtpSession) session).increaseWrittenDataBytes(str
-                        .getBytes("UTF-8").length);
+                        .getBytes(StandardCharsets.UTF_8).length);
             }
         } finally {
             if (writer != null) {
