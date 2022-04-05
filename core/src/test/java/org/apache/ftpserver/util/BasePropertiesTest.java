@@ -27,9 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import junit.framework.TestCase;
-
 import org.apache.ftpserver.ftplet.FtpException;
+
+import junit.framework.TestCase;
 
 /**
 *
@@ -49,14 +49,14 @@ public class BasePropertiesTest extends TestCase {
         props.setProperty("bool7", "foo");
         props.setProperty("bool8", "");
 
-        assertEquals(true, props.getBoolean("bool1"));
-        assertEquals(true, props.getBoolean("bool2"));
-        assertEquals(true, props.getBoolean("bool3"));
-        assertEquals(false, props.getBoolean("bool4"));
-        assertEquals(false, props.getBoolean("bool5"));
-        assertEquals(false, props.getBoolean("bool6"));
-        assertEquals(false, props.getBoolean("bool7"));
-        assertEquals(false, props.getBoolean("bool8"));
+        assertTrue(props.getBoolean("bool1"));
+        assertTrue(props.getBoolean("bool2"));
+        assertTrue(props.getBoolean("bool3"));
+        assertFalse(props.getBoolean("bool4"));
+        assertFalse(props.getBoolean("bool5"));
+        assertFalse(props.getBoolean("bool6"));
+        assertFalse(props.getBoolean("bool7"));
+        assertFalse(props.getBoolean("bool8"));
 
         // Unknown key
         try {
@@ -67,17 +67,17 @@ public class BasePropertiesTest extends TestCase {
         }
 
         // default values
-        assertEquals(true, props.getBoolean("foo", true));
-        assertEquals(false, props.getBoolean("foo", false));
-        assertEquals(true, props.getBoolean("bool1", false));
-        assertEquals(false, props.getBoolean("bool4", true));
+        assertTrue(props.getBoolean("foo", true));
+        assertFalse(props.getBoolean("foo", false));
+        assertTrue(props.getBoolean("bool1", false));
+        assertFalse(props.getBoolean("bool4", true));
     }
 
     public void testSetBoolean() throws FtpException {
         BaseProperties props = new BaseProperties();
         props.setProperty("b1", true);
 
-        assertEquals(true, props.getBoolean("b1"));
+        assertTrue(props.getBoolean("b1"));
         assertEquals("true", props.getProperty("b1"));
         assertEquals("true", props.getString("b1"));
     }
