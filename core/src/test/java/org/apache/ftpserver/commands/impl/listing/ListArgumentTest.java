@@ -19,11 +19,11 @@
 
 package org.apache.ftpserver.commands.impl.listing;
 
-import java.util.Arrays;
-
-import junit.framework.TestCase;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.apache.ftpserver.command.impl.listing.ListArgument;
+
+import junit.framework.TestCase;
 
 /**
 *
@@ -42,7 +42,7 @@ public class ListArgumentTest extends TestCase {
         assertEquals("bar", arg.getFile());
         assertEquals("foo", arg.getPattern());
 
-        assertTrue(Arrays.equals(OPTIONS, arg.getOptions()));
+        assertArrayEquals(OPTIONS, arg.getOptions());
     }
 
     public void testArgumentAndEmptyOptions() {

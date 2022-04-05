@@ -93,30 +93,30 @@ public class RmDirTest extends ClientTestTemplate {
         assertEquals(450, client.sendCommand("RMD ."));
         assertTrue(TEST_CWD.exists());
 
-        assertEquals(false, client.removeDirectory("."));
+        assertFalse(client.removeDirectory("."));
         assertTrue(TEST_CWD.exists());
 
         assertEquals(450, client.sendCommand("RMD " + "/" + TEST_CWD.getName()));
         assertTrue(TEST_CWD.exists());
 
-        assertEquals(false, client.removeDirectory("/" + TEST_CWD.getName()));
+        assertFalse(client.removeDirectory("/" + TEST_CWD.getName()));
         assertTrue(TEST_CWD.exists());
 
         assertEquals(450, client.sendCommand("RMD " + "../" + TEST_CWD.getName()));
         assertTrue(TEST_CWD.exists());
 
-        assertEquals(false, client.removeDirectory("../" + TEST_CWD.getName()));
+        assertFalse(client.removeDirectory("../" + TEST_CWD.getName()));
         assertTrue(TEST_CWD.exists());
 
         assertEquals(450, client.sendCommand("RMD " + "././."));
         assertTrue(TEST_CWD.exists());
 
-        assertEquals(false, client.removeDirectory("././."));
+        assertFalse(client.removeDirectory("././."));
         assertTrue(TEST_CWD.exists());
 
         // Test for case-insensitive servers. In case it is case sensitive we'll receive a 550 response
         // so this test should  end successfully in both cases.
-        assertEquals(false, client.removeDirectory("/" + TEST_CWD.getName().toUpperCase()));
+        assertFalse(client.removeDirectory("/" + TEST_CWD.getName().toUpperCase()));
         assertTrue(TEST_CWD.exists());
     }
 }

@@ -23,8 +23,6 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.apache.ftpserver.command.CommandFactory;
 import org.apache.ftpserver.command.impl.HELP;
 import org.apache.ftpserver.command.impl.STAT;
@@ -36,6 +34,8 @@ import org.apache.ftpserver.listener.nio.NioListener;
 import org.apache.mina.filter.firewall.Subnet;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.FileSystemResource;
+
+import junit.framework.TestCase;
 
 /**
 *
@@ -51,8 +51,7 @@ public class SpringConfigTest extends TestCase {
         DefaultFtpServer server = (DefaultFtpServer) factory.getBean("server");
 
         assertEquals(500, server.getConnectionConfig().getMaxLogins());
-        assertEquals(false, server.getConnectionConfig()
-                .isAnonymousLoginEnabled());
+        assertFalse(server.getConnectionConfig().isAnonymousLoginEnabled());
         assertEquals(123, server.getConnectionConfig().getMaxAnonymousLogins());
         assertEquals(124, server.getConnectionConfig().getMaxLoginFailures());
         assertEquals(125, server.getConnectionConfig().getLoginFailureDelay());
@@ -78,7 +77,7 @@ public class SpringConfigTest extends TestCase {
                 .getDataConnectionConfiguration().getActiveLocalAddress()) );
         assertEquals("123-125", ((NioListener) listener)
                 .getDataConnectionConfiguration().getPassivePorts());
-        assertEquals(false, ((NioListener) listener)
+        assertFalse(((NioListener) listener)
                 .getDataConnectionConfiguration().isPassiveIpCheck());
         
         RemoteIpFilter filter = (RemoteIpFilter) listener.getSessionFilter();

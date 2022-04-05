@@ -22,8 +22,6 @@ package org.apache.ftpserver.usermanager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.apache.ftpserver.ftplet.Authentication;
 import org.apache.ftpserver.ftplet.AuthenticationFailedException;
 import org.apache.ftpserver.ftplet.Authority;
@@ -31,6 +29,8 @@ import org.apache.ftpserver.ftplet.User;
 import org.apache.ftpserver.ftplet.UserManager;
 import org.apache.ftpserver.usermanager.UserManagerFactory;
 import org.apache.ftpserver.usermanager.UsernamePasswordAuthentication;
+
+import junit.framework.TestCase;
 
 /**
 *
@@ -394,7 +394,7 @@ public abstract class UserManagerTestTemplate extends TestCase {
         assertEquals(user.getName(), actualUser.getName());
         assertNull(actualUser.getPassword());
         assertEquals("/", actualUser.getHomeDirectory());
-        assertEquals(true, actualUser.getEnabled());
+        assertTrue(actualUser.getEnabled());
         assertNull(user.authorize(new WriteRequest()));
         assertEquals(0, getMaxDownloadRate(actualUser));
         assertEquals(0, actualUser.getMaxIdleTime());
