@@ -271,6 +271,7 @@
   </dependencyManagement>
 
   <build>
+    <defaultGoal>clean verify</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -541,8 +542,8 @@
             <artifactId>maven-checkstyle-plugin</artifactId>
             <version>${checkstyle.plugin.version}</version>
             <configuration>
-              <configLocation>${basedir}/${checkstyle.configdir}/checkstyle.xml</configLocation>
-              <suppressionsLocation>${basedir}/${checkstyle.configdir}/checkstyle-suppressions.xml</suppressionsLocation>
+              <configLocation>${checkstyle.configdir}/checkstyle.xml</configLocation>
+              <suppressionsLocation>${checkstyle.configdir}/checkstyle-suppressions.xml</suppressionsLocation>
               <enableRulesSummary>false</enableRulesSummary>
               <propertyExpansion>basedir=${basedir}</propertyExpansion>
             </configuration>
