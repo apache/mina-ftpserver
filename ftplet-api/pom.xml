@@ -29,7 +29,7 @@
     request lifecycle of FtpServer. Ftplets are called on session connect
     and disconnect as well as before and after each command within a user
     session.</description>
-  <url>http://mina.apache.org/ftpserver</url>
+  <url>https://mina.apache.org/ftpserver-project</url>
   
   <build>
     <plugins>
