@@ -109,9 +109,18 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getEnabledProtocol()
+     *
+     * @deprecated Use {@link #getEnabledProtocol()}
      */
     public String getEnabledProtoco() {
-        if ((enabledProtocols != null) && (enabledProtocols.length > 0)) {
+        return getEnabledProtocol();
+    }
+
+    /**
+     * @see SslConfiguration#getEnabledProtocol()
+     */
+    public String getEnabledProtocol() {
+        if (enabledProtocols != null && enabledProtocols.length > 0) {
             // We use the first one
             return enabledProtocols[0];
         } else {

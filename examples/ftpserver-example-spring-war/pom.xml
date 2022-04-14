@@ -26,6 +26,7 @@
 
   <properties>
     <checkstyle.configdir>${basedir}/../..</checkstyle.configdir>
+    <japicmp.skip>true</japicmp.skip>
   </properties>
 
   <dependencies>

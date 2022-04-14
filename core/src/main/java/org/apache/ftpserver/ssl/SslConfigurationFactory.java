@@ -157,10 +157,36 @@ public class SslConfigurationFactory {
      * The SSL protocol used for this channel. Supported values are "SSL" and "TLS". Defaults to "TLS".
      * 
      * @return The SSL protocol
+     * @deprecated Use {@link #getSslProtocols()}.
+     */
+    @Deprecated
+    public String getSslProtocol() {
+        return sslProtocols[0];
+    }
+
+    /**
+     * The SSL protocols used for this channel. Supported values are "SSL" and "TLS". Defaults to "TLS".
+     * 
+     * @return The SSL protocol
      */
     public String[] getSslProtocols() {
-	return sslProtocols;
+        return sslProtocols;
     }
+
+    /**
+     * Set the SSL protocols used for this channel. Defaults to "TLSv1.2".
+     * 
+     * @param sslProtocols
+     *            The SSL protocols
+     * @deprecated Use {@link #setSslProtocol(String...)}.
+     */
+	public void setSslProtocol(String sslProtocols) {
+		if (sslProtocols == null) {
+			throw new FtpServerConfigurationException("SslProcotol must not be null");
+		}
+
+		this.sslProtocols = new String[] { sslProtocols };
+	}
 
     /**
      * Set the SSL protocols used for this channel. Defaults to "TLSv1.2".

@@ -73,16 +73,16 @@ public interface SslConfiguration {
      * 
      * @return The name of the protocol as a String
      */
-    default String getEnabledProtocol() {
-        return DEFAULT_ENABLED_PROTOCOL;
-    }
+    String getEnabledProtocol();
 
     /**
      * Returns the list of ssl protocols
      * 
      * @return The list of enabled protocols as a String
      */
-    String[] getEnabledProtocols();
+	default String[] getEnabledProtocols() {
+		return new String[] { getEnabledProtocol() };
+	}
 
     /**
      * Return the required client authentication setting
