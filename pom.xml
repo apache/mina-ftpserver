@@ -14,7 +14,7 @@
   <parent>
     <artifactId>apache</artifactId>
     <groupId>org.apache</groupId>
-    <version>25</version>
+    <version>26</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
