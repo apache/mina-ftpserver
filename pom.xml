@@ -40,18 +40,6 @@
     </license>
   </licenses>
 
-  <!-- Temporary add snapshot repository here to be able to resolve snapshot parent pom -->
-  <repositories>
-    <repository>
-      <id>apache.snapshots</id>
-      <name>Apache Snapshot Repository</name>
-      <url>https://repository.apache.org/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
   <mailingLists>
     <mailingList>
       <name>FtpServer Users mailing list</name>
@@ -271,7 +259,7 @@
   </dependencyManagement>
 
   <build>
-    <defaultGoal>clean verify</defaultGoal>
+    <defaultGoal>clean verify japicmp:cmp</defaultGoal>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -359,6 +347,50 @@
             </dependency>
           </dependencies>
         </plugin>
+        
+        <plugin>
+          <groupId>com.github.siom79.japicmp</groupId>
+          <artifactId>japicmp-maven-plugin</artifactId>
+          <version>0.15.7</version>
+          <configuration>
+            <oldVersion>
+              <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <!-- 
+                Pick 1.1.2 for FTPSERVER-506 but it should be the previous version in more normal usage
+                when you've been sure that binary compatibility has not been broken from release to release. 
+                -->
+                <version>1.1.2</version>
+                <type>jar</type>
+             </dependency>
+            </oldVersion>
+            <newVersion>
+              <file>
+                <path>${project.build.directory}/${project.artifactId}-${project.version}.jar</path>
+              </file>
+            </newVersion>
+            <parameter>
+              <onlyModified>true</onlyModified>
+              <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
+              <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
+              <!-- skip japicmp on "mvn site" - use "mvn package site" to include report -->
+              <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
+              <reportOnlyFilename>true</reportOnlyFilename>
+              <skipPomModules>true</skipPomModules>
+              <ignoreMissingClasses>false</ignoreMissingClasses>
+              <overrideCompatibilityChangeParameters>
+                <overrideCompatibilityChangeParameter>
+                  <compatibilityChange>METHOD_NEW_DEFAULT</compatibilityChange>
+                  <binaryCompatible>true</binaryCompatible>
+                  <sourceCompatible>true</sourceCompatible>
+                  <semanticVersionLevel>PATCH</semanticVersionLevel>
+                </overrideCompatibilityChangeParameter>
+              </overrideCompatibilityChangeParameters>
+            </parameter>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
@@ -565,6 +597,30 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>japicmp</id>
+      <activation>
+        <property>
+          <name>enforce.japicmp</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.siom79.japicmp</groupId>
+            <artifactId>japicmp-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>cmp</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>    
   </profiles>
 
   <modules>

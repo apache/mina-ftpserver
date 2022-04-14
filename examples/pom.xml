@@ -35,6 +35,7 @@
 
   <properties>
     <checkstyle.configdir>..</checkstyle.configdir>
+    <japicmp.skip>true</japicmp.skip>
   </properties>
 
 </project>

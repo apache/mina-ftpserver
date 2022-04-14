@@ -28,8 +28,13 @@ import java.util.Map;
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
-public final class StringUtils {
-    private StringUtils() {
+public class StringUtils {
+	
+	/**
+	 * @deprecated Do not instantiate.
+	 */
+	@Deprecated
+    public StringUtils() {
         // Nothing to do
     }
 
@@ -41,7 +46,7 @@ public final class StringUtils {
      * @param newStr The replacement string
      * @return The modified string
      */
-    public static String replaceString(String source, String oldStr,
+    public static final String replaceString(String source, String oldStr,
             String newStr) {
         StringBuilder sb = new StringBuilder(source.length());
         int sind = 0;
@@ -68,7 +73,7 @@ public final class StringUtils {
      * the original string
      * @return The modified string
      */
-    public static String replaceString(String source, Object[] args) {
+    public static final String replaceString(String source, Object[] args) {
         int startIndex = 0;
         int openIndex = source.indexOf('{', startIndex);
         if (openIndex == -1) {
@@ -117,7 +122,7 @@ public final class StringUtils {
      * the original string
      * @return The modified string
      */
-    public static String replaceString(String source,
+    public static final String replaceString(String source,
             Map<String, Object> args) {
         int startIndex = 0;
         int openIndex = source.indexOf('{', startIndex);
@@ -165,7 +170,7 @@ public final class StringUtils {
      *                          '>' will be replaced by &gt;
      * @param bReplaceQuote if true '\"' will be replaced by &quot;
      */
-    public static String formatHtml(String source, boolean bReplaceNl,
+    public static final String formatHtml(String source, boolean bReplaceNl,
             boolean bReplaceTag, boolean bReplaceQuote) {
 
         StringBuilder sb = new StringBuilder();
@@ -231,7 +236,7 @@ public final class StringUtils {
     /**
      * Pad string object.
      */
-    public static String pad(String src, char padChar, boolean rightPad,
+    public static final String pad(String src, char padChar, boolean rightPad,
             int totalLength) {
 
         int srcLength = src.length();
@@ -255,7 +260,7 @@ public final class StringUtils {
     /**
      * Get hex string from byte array.
      */
-    public static String toHexString(byte[] res) {
+    public static final String toHexString(byte[] res) {
         StringBuilder sb = new StringBuilder(res.length << 1);
         for (int i = 0; i < res.length; i++) {
             String digit = Integer.toHexString(0xFF & res[i]);
@@ -270,7 +275,7 @@ public final class StringUtils {
     /**
      * Get byte array from hex string.
      */
-    public static byte[] toByteArray(String hexString) {
+    public static final byte[] toByteArray(String hexString) {
         int arrLength = hexString.length() >> 1;
         byte buff[] = new byte[arrLength];
         for (int i = 0; i < arrLength; i++) {
