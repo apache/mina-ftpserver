@@ -40,20 +40,6 @@
     </license>
   </licenses>
 
-  <!-- Temporary add snapshot repository here to be able to resolve snapshot parent pom -->
-  <!--
-  <repositories>
-    <repository>
-      <id>apache.snapshots</id>
-      <name>Apache Snapshot Repository</name>
-      <url>https://repository.apache.org/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-  -->
-  
   <mailingLists>
     <mailingList>
       <name>FtpServer Users mailing list</name>
