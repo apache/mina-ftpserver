@@ -748,7 +748,6 @@ public class FtpIoSession implements IoSession {
 
     public void updateLastAccessTime() {
         setAttribute(ATTRIBUTE_LAST_ACCESS_TIME, new Date());
-
     }
 
     /**
