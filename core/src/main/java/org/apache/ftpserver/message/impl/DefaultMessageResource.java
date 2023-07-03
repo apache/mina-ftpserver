@@ -21,11 +21,9 @@ package org.apache.ftpserver.message.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -33,40 +31,41 @@ import java.util.Properties;
 import org.apache.ftpserver.FtpServerConfigurationException;
 import org.apache.ftpserver.message.MessageResource;
 import org.apache.ftpserver.message.MessageResourceFactory;
-import org.apache.ftpserver.util.IoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
- * Class to get FtpServer reply messages. This supports i18n. Basic message
- * search path is:
- * 
- * <strong><strong>Internal class, do not use directly.</strong></strong>
+ * <br>
+ * Class to get FtpServer reply messages. This supports i18n. 
+ * <br>
+ * Basic message search path is:
  * 
  * Custom Language Specific Messages -> Default Language Specific Messages ->
  * Custom Common Messages -> Default Common Messages -> null (not found)
+ * <br>
+ * <strong>Internal class, do not use directly.</strong>
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class DefaultMessageResource implements MessageResource {
+    /** A logger for this class */
+    private final Logger LOG = LoggerFactory.getLogger(DefaultMessageResource.class);
 
-    private final Logger LOG = LoggerFactory
-            .getLogger(DefaultMessageResource.class);
-
+    /** The default path for the message root */
     private final static String RESOURCE_PATH = "org/apache/ftpserver/message/";
 
+    /** The requested languages. Default to none, ie EN */
     private final List<String> languages;
 
+    /** The <language, properties> list of messages */
     private final Map<String, PropertiesPair> messages;
 
     /**
      * Internal constructor, do not use directly. Use {@link MessageResourceFactory} instead.
      */
-    public DefaultMessageResource(List<String> languages,
-            File customMessageDirectory) {
-        if(languages != null) {
+    public DefaultMessageResource(List<String> languages, File customMessageDirectory) {
+        if (languages != null) {
             this.languages = Collections.unmodifiableList(languages);
         } else {
             this.languages = null;
@@ -74,77 +73,76 @@ public class DefaultMessageResource implements MessageResource {
 
         // populate different properties
         messages = new HashMap<String, PropertiesPair>();
+        
         if (languages != null) {
             for (String language : languages) {
                 PropertiesPair pair = createPropertiesPair(language, customMessageDirectory);
                 messages.put(language, pair);
             }
         }
+        
+        // The default property pair
         PropertiesPair pair = createPropertiesPair(null, customMessageDirectory);
         messages.put(null, pair);
 
     }
 
+    /**
+     * Define a pair of default and custom properties.
+     *
+     * @author <a href="mailto:dev@directory.apache.org">Apache Directory Project</a>
+     */
     private static class PropertiesPair {
+        /** The default properties */
         public Properties defaultProperties = new Properties();
 
+        /** The custom properties */
         public Properties customProperties = new Properties();
     }
 
     /**
      * Create Properties pair object. It stores the default and the custom
      * messages.
+     * The  default file to read will be stored in <em>org/apache/ftpserver/message/FtpStatus.properties</em>
+     * or <em>org/apache/ftpserver/message/FtpStatus_<lang>.properties</em> if a language is provided.
+     * The custom file to read will be stored in <em>org/apache/ftpserver/message/FtpStatus.gen</em>
+     * or <em>org/apache/ftpserver/message/FtpStatus_<lang>.gen</em> if a language is provided.
      */
     private PropertiesPair createPropertiesPair(String lang, File customMessageDirectory) {
         PropertiesPair pair = new PropertiesPair();
 
         // load default resource
         String defaultResourceName;
+        
         if (lang == null) {
             defaultResourceName = RESOURCE_PATH + "FtpStatus.properties";
         } else {
-            defaultResourceName = RESOURCE_PATH + "FtpStatus_" + lang
-                    + ".properties";
+            defaultResourceName = RESOURCE_PATH + "FtpStatus_" + lang + ".properties";
         }
-        InputStream in = null;
-        try {
-            in = getClass().getClassLoader().getResourceAsStream(
-                    defaultResourceName);
-            if (in != null) {
-                try {
-                    pair.defaultProperties.load(in);
-                } catch (IOException e) {
-                    throw new FtpServerConfigurationException(
-                            "Failed to load messages from \"" + defaultResourceName + "\", file not found in classpath");
-                }
-            } else {
-                throw new FtpServerConfigurationException(
-                        "Failed to load messages from \"" + defaultResourceName + "\", file not found in classpath");
-            }
-        } finally {
-            IoUtils.close(in);
+        
+        try (InputStream in = getClass().getClassLoader().getResourceAsStream(defaultResourceName)) {
+            pair.defaultProperties.load(in);
+        } catch (Exception ex){
+            throw new FtpServerConfigurationException(
+                "Failed to load messages from \"" + defaultResourceName + "\", file not found in classpath");
         }
 
         // load custom resource
         File resourceFile = null;
+        
         if (lang == null) {
             resourceFile = new File(customMessageDirectory, "FtpStatus.gen");
         } else {
-            resourceFile = new File(customMessageDirectory, "FtpStatus_" + lang
-                    + ".gen");
+            resourceFile = new File(customMessageDirectory, "FtpStatus_" + lang + ".gen");
         }
-        in = null;
-        try {
-            if (resourceFile.exists()) {
-                in = new FileInputStream(resourceFile);
+        
+        if (resourceFile.exists()) {
+            try (InputStream in = new FileInputStream(resourceFile)) {
                 pair.customProperties.load(in);
+            } catch (Exception ex) {
+                LOG.warn("MessageResourceImpl.createPropertiesPair()", ex);
+                throw new FtpServerConfigurationException("MessageResourceImpl.createPropertiesPair()", ex);
             }
-        } catch (Exception ex) {
-            LOG.warn("MessageResourceImpl.createPropertiesPair()", ex);
-            throw new FtpServerConfigurationException(
-                    "MessageResourceImpl.createPropertiesPair()", ex);
-        } finally {
-            IoUtils.close(in);
         }
 
         return pair;
@@ -152,6 +150,8 @@ public class DefaultMessageResource implements MessageResource {
 
     /**
      * Get all the available languages.
+     * 
+     * @return The list of available languages
      */
     public List<String> getAvailableLanguages() {
         if (languages == null) {
@@ -163,22 +163,32 @@ public class DefaultMessageResource implements MessageResource {
 
     /**
      * Get the message. If the message not found, it will return null.
+     * 
+     * @param code The FTP code for which we want the message
+     * @param subId The FTP command for this code
+     * @param language The language to use  
+     * @return The message for this code and command
      */
     public String getMessage(int code, String subId, String language) {
         // find the message key
         String key = String.valueOf(code);
+        
         if (subId != null) {
             key = key + '.' + subId;
         }
 
         // get language specific value
         String value = null;
+        
         PropertiesPair pair = null;
+        
         if (language != null) {
             language = language.toLowerCase();
             pair = messages.get(language);
+            
             if (pair != null) {
                 value = pair.customProperties.getProperty(key);
+                
                 if (value == null) {
                     value = pair.defaultProperties.getProperty(key);
                 }
@@ -188,8 +198,10 @@ public class DefaultMessageResource implements MessageResource {
         // if not available get the default value
         if (value == null) {
             pair = messages.get(null);
+            
             if (pair != null) {
                 value = pair.customProperties.getProperty(key);
+                
                 if (value == null) {
                     value = pair.defaultProperties.getProperty(key);
                 }
@@ -200,7 +212,10 @@ public class DefaultMessageResource implements MessageResource {
     }
 
     /**
-     * Get all messages.
+     * Get all messages for a specific language.
+     * 
+     * @param language The language we are interested in. If <code>null</code>, we will use the default properties.
+     * @return The resulting messages
      */
     public Map<String, String> getMessages(String language) {
         Properties messages = new Properties();
@@ -208,13 +223,16 @@ public class DefaultMessageResource implements MessageResource {
         // load properties sequentially
         // (default,custom,default language,custom language)
         PropertiesPair pair = this.messages.get(null);
+        
         if (pair != null) {
             messages.putAll(pair.defaultProperties);
             messages.putAll(pair.customProperties);
         }
+        
         if (language != null) {
             language = language.toLowerCase();
             pair = this.messages.get(language);
+            
             if (pair != null) {
                 messages.putAll(pair.defaultProperties);
                 messages.putAll(pair.customProperties);
@@ -222,6 +240,7 @@ public class DefaultMessageResource implements MessageResource {
         }
         
         Map<String, String> result = new HashMap<String, String>();
+        
         for(Object key : messages.keySet()) {
             result.put(key.toString(), messages.getProperty(key.toString()));
         }
@@ -233,13 +252,13 @@ public class DefaultMessageResource implements MessageResource {
      * Dispose component - clear all maps.
      */
     public void dispose() {
-        Iterator<String> it = messages.keySet().iterator();
-        while (it.hasNext()) {
-            String language = it.next();
+        
+        for (String language : messages.keySet()) {
             PropertiesPair pair = messages.get(language);
             pair.customProperties.clear();
             pair.defaultProperties.clear();
         }
+        
         messages.clear();
     }
 }

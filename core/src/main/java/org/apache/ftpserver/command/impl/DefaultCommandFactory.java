@@ -37,7 +37,10 @@ import org.apache.ftpserver.command.CommandFactoryFactory;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class DefaultCommandFactory implements CommandFactory {
+    /** The list of supported commands */
+    private final Map<String, Command> commandMap;
 
+    /** Internal constructor, use {@link CommandFactoryFactory} instead */
     public DefaultCommandFactory() {
         this(new HashMap<String, Command>());
     }
@@ -49,16 +52,16 @@ public class DefaultCommandFactory implements CommandFactory {
         this.commandMap = commandMap;
     }
 
-    private final Map<String, Command> commandMap;
 
     /**
-     * Get command. Returns null if not found.
+     * {@inheritDoc}
      */
+    @Override
     public Command getCommand(final String cmdName) {
-        if (cmdName == null || cmdName.equals("")) {
+        if (cmdName == null || (cmdName.length() == 0)) {
             return null;
         }
-        String upperCaseCmdName = cmdName.toUpperCase();
-        return commandMap.get(upperCaseCmdName);
+        
+        return commandMap.get(cmdName.toUpperCase());
     }
 }

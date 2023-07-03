@@ -57,30 +57,37 @@ public class DbUserManagerFactory implements UserManagerFactory {
             throw new FtpServerConfigurationException(
                     "Required data source not provided");
         }
+        
         if (insertUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required insert user SQL statement not provided");
         }
+        
         if (updateUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required update user SQL statement not provided");
         }
+        
         if (deleteUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required delete user SQL statement not provided");
         }
+        
         if (selectUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required select user SQL statement not provided");
         }
+        
         if (selectAllStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required select all users SQL statement not provided");
         }
+        
         if (isAdminStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required is admin user SQL statement not provided");
         }
+        
         if (authenticateStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required authenticate user SQL statement not provided");

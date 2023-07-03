@@ -76,6 +76,7 @@ public class DefaultFtpServer implements FtpServer {
         
         try {
             Map<String, Listener> listeners = serverContext.getListeners();
+            
             for (Listener listener : listeners.values()) {
                 listener.start(serverContext);
                 startedListeners.add(listener);

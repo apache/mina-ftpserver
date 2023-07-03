@@ -113,19 +113,21 @@ public class FtpReplyTranslator {
      *            the basic message
      * @return the translated message
      */
-    public static String translateMessage(FtpIoSession session,
-        FtpRequest request, FtpServerContext context, int code, String subId,
-        String basicMsg) {
+    public static String translateMessage(FtpIoSession session, FtpRequest request, FtpServerContext context, 
+                int code, String subId, String basicMsg) {
         MessageResource resource = context.getMessageResource();
         String lang = session.getLanguage();
 
         String msg = null;
+        
         if (resource != null) {
             msg = resource.getMessage(code, subId, lang);
         }
+        
         if (msg == null) {
             msg = "";
         }
+        
         msg = replaceVariables(session, request, context, code, basicMsg, msg);
 
         return msg;

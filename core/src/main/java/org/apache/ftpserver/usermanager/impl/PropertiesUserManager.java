@@ -140,8 +140,7 @@ public class PropertiesUserManager extends AbstractUserManager {
     /**
      * Internal constructor, do not use directly. Use {@link PropertiesUserManagerFactory} instead.
      */
-    public PropertiesUserManager(PasswordEncryptor passwordEncryptor,
-            URL userDataPath, String adminName) {
+    public PropertiesUserManager(PasswordEncryptor passwordEncryptor, URL userDataPath, String adminName) {
         super(adminName, passwordEncryptor);
 
         loadFromUrl(userDataPath);

@@ -24,16 +24,11 @@ public class PasswordUtil {
      * Securely compares two strings up to a maximum number of characters in a way
      * that obscures the password length from timing attacks
      * 
-     * @param input
-     *            user input
-     * @param password
-     *            correct password
-     * @param loops
-     *            number of characters to compare; must be larger than password
-     *            length; 1024 is a good number
+     * @param input user input
+     * @param password correct password
+     * @param loops number of characters to compare; must be larger than password length; 1024 is a good number
      * 
-     * @throws IllegalArgumentException
-     *             when the limit is less than the password length
+     * @throws IllegalArgumentException when the limit is less than the password length
      * 
      * @return true if the passwords match
      */
@@ -41,11 +36,13 @@ public class PasswordUtil {
         if (loops < password.length()) {
             throw new IllegalArgumentException("loops must be equal or greater than the password length");
         }
+        
         /*
          * Set the default result based on the string lengths; if the lengths do not
          * match then we know that this comparison should always fail.
          */
         int result = (input.length() ^ password.length());
+        
         /*
          * Cycle through all of the characters up to the limit value
          * 
@@ -66,12 +63,9 @@ public class PasswordUtil {
      * Securely compares two strings forcing the number of loops equal to password length
      * thereby obscuring the password length based on user input
      * 
-     * @param input
-     *            user input
-     * @param password
-     *            correct password
-     * @throws IllegalArgumentException
-     *             when the limit is less than the password length
+     * @param input user input
+     * @param password correct password
+     * @throws IllegalArgumentException when the limit is less than the password length
      * 
      * @return true if the passwords match
      */
@@ -80,11 +74,13 @@ public class PasswordUtil {
          * the number of compare loops
          */
         int loops = password.length();
+        
         /*
          * Set the default result based on the string lengths; if the lengths do not
          * match then we know that this comparison should always fail.
          */
         int result = (input.length() ^ password.length());
+        
         /*
          * Cycle through all of the characters up to the limit value
          * 

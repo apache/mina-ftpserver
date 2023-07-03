@@ -30,9 +30,10 @@ import org.apache.ftpserver.message.impl.DefaultMessageResource;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class MessageResourceFactory {
-
+    /** The supported languages */
     private List<String> languages;
 
+    /** The directory where the message are stored */
     private File customMessageDirectory;
 
     /**

@@ -31,13 +31,14 @@ import org.apache.ftpserver.usermanager.impl.PropertiesUserManager;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class PropertiesUserManagerFactory implements UserManagerFactory {
-
+    /** The default admin name */
     private String adminName = "admin";
 
     private File userDataFile;
 
     private URL userDataURL;
 
+    /** The default password encryption method*/
     private PasswordEncryptor passwordEncryptor = new Md5PasswordEncryptor();
 
     /**
@@ -45,17 +46,15 @@ public class PropertiesUserManagerFactory implements UserManagerFactory {
      */
     public UserManager createUserManager() {
         if (userDataURL != null) {
-            return new PropertiesUserManager(passwordEncryptor, userDataURL,
-                    adminName);
+            return new PropertiesUserManager(passwordEncryptor, userDataURL, adminName);
         } else {
-
-            return new PropertiesUserManager(passwordEncryptor, userDataFile,
-                    adminName);
+            return new PropertiesUserManager(passwordEncryptor, userDataFile, adminName);
         }
     }
 
     /**
      * Get the admin name.
+     * 
      * @return The admin user name
      */
     public String getAdminName() {
@@ -66,8 +65,7 @@ public class PropertiesUserManagerFactory implements UserManagerFactory {
      * Set the name to use as the administrator of the server. The default value
      * is "admin".
      * 
-     * @param adminName
-     *            The administrator user name
+     * @param adminName The administrator user name
      */
     public void setAdminName(String adminName) {
         this.adminName = adminName;

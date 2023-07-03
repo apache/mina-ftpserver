@@ -86,62 +86,82 @@ public class CommandFactoryFactory {
 
     static {
         // first populate the default command list
-        DEFAULT_COMMAND_MAP.put("ABOR", new ABOR());
-        DEFAULT_COMMAND_MAP.put("ACCT", new ACCT());
-        DEFAULT_COMMAND_MAP.put("APPE", new APPE());
-        DEFAULT_COMMAND_MAP.put("AUTH", new AUTH());
-        DEFAULT_COMMAND_MAP.put("CDUP", new CDUP());
-        DEFAULT_COMMAND_MAP.put("CWD", new CWD());
-        DEFAULT_COMMAND_MAP.put("DELE", new DELE());
-        DEFAULT_COMMAND_MAP.put("EPRT", new EPRT());
-        DEFAULT_COMMAND_MAP.put("EPSV", new EPSV());
-        DEFAULT_COMMAND_MAP.put("FEAT", new FEAT());
-        DEFAULT_COMMAND_MAP.put("HELP", new HELP());
-        DEFAULT_COMMAND_MAP.put("LANG", new LANG());
-        DEFAULT_COMMAND_MAP.put("LIST", new LIST());
-        DEFAULT_COMMAND_MAP.put(MD5.MD5, new MD5());
-        DEFAULT_COMMAND_MAP.put("MFMT", new MFMT());
-        DEFAULT_COMMAND_MAP.put(MD5.MMD5, new MD5());
-        DEFAULT_COMMAND_MAP.put("MDTM", new MDTM());
-        DEFAULT_COMMAND_MAP.put("MLST", new MLST());
-        DEFAULT_COMMAND_MAP.put("MKD", new MKD());
-        DEFAULT_COMMAND_MAP.put("MLSD", new MLSD());
-        DEFAULT_COMMAND_MAP.put("MODE", new MODE());
-        DEFAULT_COMMAND_MAP.put("NLST", new NLST());
-        DEFAULT_COMMAND_MAP.put("NOOP", new NOOP());
-        DEFAULT_COMMAND_MAP.put("OPTS", new OPTS());
-        DEFAULT_COMMAND_MAP.put("PASS", new PASS());
-        DEFAULT_COMMAND_MAP.put("PASV", new PASV());
-        DEFAULT_COMMAND_MAP.put("PBSZ", new PBSZ());
-        DEFAULT_COMMAND_MAP.put("PORT", new PORT());
-        DEFAULT_COMMAND_MAP.put("PROT", new PROT());
-        DEFAULT_COMMAND_MAP.put("PWD", new PWD());
-        DEFAULT_COMMAND_MAP.put("QUIT", new QUIT());
-        DEFAULT_COMMAND_MAP.put("REIN", new REIN());
-        DEFAULT_COMMAND_MAP.put("REST", new REST());
-        DEFAULT_COMMAND_MAP.put("RETR", new RETR());
-        DEFAULT_COMMAND_MAP.put("RMD", new RMD());
-        DEFAULT_COMMAND_MAP.put("RNFR", new RNFR());
-        DEFAULT_COMMAND_MAP.put("RNTO", new RNTO());
-        DEFAULT_COMMAND_MAP.put("SITE", new SITE());
-        DEFAULT_COMMAND_MAP.put("SIZE", new SIZE());
-        DEFAULT_COMMAND_MAP.put("SITE_DESCUSER", new SITE_DESCUSER());
-        DEFAULT_COMMAND_MAP.put("SITE_HELP", new SITE_HELP());
-        DEFAULT_COMMAND_MAP.put("SITE_STAT", new SITE_STAT());
-        DEFAULT_COMMAND_MAP.put("SITE_WHO", new SITE_WHO());
-        DEFAULT_COMMAND_MAP.put("SITE_ZONE", new SITE_ZONE());
-
-        DEFAULT_COMMAND_MAP.put("STAT", new STAT());
-        DEFAULT_COMMAND_MAP.put("STOR", new STOR());
-        DEFAULT_COMMAND_MAP.put("STOU", new STOU());
-        DEFAULT_COMMAND_MAP.put("STRU", new STRU());
-        DEFAULT_COMMAND_MAP.put("SYST", new SYST());
-        DEFAULT_COMMAND_MAP.put("TYPE", new TYPE());
-        DEFAULT_COMMAND_MAP.put("USER", new USER());
+        DEFAULT_COMMAND_MAP.put("ABOR", new ABOR());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("ACCT", new ACCT());                    // rfc959, 4.1.1
+        // ADAT, rfc2228, 3?
+        // ALLO, rfc959?
+        DEFAULT_COMMAND_MAP.put("APPE", new APPE());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("AUTH", new AUTH());                    // rfc2228, 3
+        //AVBL, draft-peterson-streamlined-ftp-command-extensions?
+        // CCC, rfc2228, 3?
+        DEFAULT_COMMAND_MAP.put("CDUP", new CDUP());                    // rfc959, 4.1.1
+        // CONF, rfc2228, 3?
+        // CSID, draft-peterson-streamlined-ftp-command-extensions?
+        DEFAULT_COMMAND_MAP.put("CWD", new CWD());                      // rfc959, 4.1.1
+        DEFAULT_COMMAND_MAP.put("DELE", new DELE());                    // rfc959, 4.1.3
+        // DSIZ, draft-peterson-streamlined-ftp-command-extensions?
+        // ENC, rfc2228, 3?
+        DEFAULT_COMMAND_MAP.put("EPRT", new EPRT());                    // rfc2428, 2
+        DEFAULT_COMMAND_MAP.put("EPSV", new EPSV());                    // rfc2428, 3
+        DEFAULT_COMMAND_MAP.put("FEAT", new FEAT());                    // rfc2389, 3
+        DEFAULT_COMMAND_MAP.put("HELP", new HELP());                    // rfc959, 4.1.3
+        // HOST, rfc7151?
+        DEFAULT_COMMAND_MAP.put("LANG", new LANG());                    // rfc2640, 4.1
+        DEFAULT_COMMAND_MAP.put("LIST", new LIST());                    // rfc959, 4.1.3
+        // LPRT, rfc1639 2?
+        // LPSV, rfc1639 2?
+        DEFAULT_COMMAND_MAP.put(MD5.MD5, new MD5());                    // draft-twine-ftpmd5-00.txt, 3.1
+        // MIC, rfc2228, 3?
+        DEFAULT_COMMAND_MAP.put(MD5.MMD5, new MD5());                   // draft-twine-ftpmd5-00.txt , 3.2
+        DEFAULT_COMMAND_MAP.put("MDTM", new MDTM());                    // rfc3659, 3
+        // "MFCT, draft-somers-ftp-mfxx, 4
+        // "MFF, draft-somers-ftp-mfxx, 5
+        DEFAULT_COMMAND_MAP.put("MFMT", new MFMT());                    // draft-somers-ftp-mfxx, 3
+        DEFAULT_COMMAND_MAP.put("MKD", new MKD());                      // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("MLSD", new MLSD());                    // rfc3659, 7
+        DEFAULT_COMMAND_MAP.put("MLST", new MLST());                    // rfc3659, 7
+        DEFAULT_COMMAND_MAP.put("MODE", new MODE());                    // rfc959, 4.1.2
+        DEFAULT_COMMAND_MAP.put("NLST", new NLST());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("NOOP", new NOOP());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("OPTS", new OPTS());                    // rfc2389, 4
+        DEFAULT_COMMAND_MAP.put("PASS", new PASS());                    // rfc959, 4.1.1
+        DEFAULT_COMMAND_MAP.put("PASV", new PASV());                    // rfc959, 4.1.2
+        DEFAULT_COMMAND_MAP.put("PBSZ", new PBSZ());                    // rfc2228, 3
+        DEFAULT_COMMAND_MAP.put("PORT", new PORT());                    // rfc959, 4.1.2
+        DEFAULT_COMMAND_MAP.put("PROT", new PROT());                    // rfc2228, 3
+        DEFAULT_COMMAND_MAP.put("PWD", new PWD());                      // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("QUIT", new QUIT());                    // rfc959, 4.1.1
+        DEFAULT_COMMAND_MAP.put("REIN", new REIN());                    // rfc959, 4.1.1
+        DEFAULT_COMMAND_MAP.put("REST", new REST());                    // rfc959, 4.1.3, rfc3659, 5
+        DEFAULT_COMMAND_MAP.put("RETR", new RETR());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("RMD", new RMD());                      // rfc959, 4.1.3
+        // RMDA, draft-peterson-streamlined-ftp-command-extensions?
+        DEFAULT_COMMAND_MAP.put("RNFR", new RNFR());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("RNTO", new RNTO());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE", new SITE());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE_DESCUSER", new SITE_DESCUSER());  // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE_HELP", new SITE_HELP());          // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE_STAT", new SITE_STAT());          // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE_WHO", new SITE_WHO());            // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SITE_ZONE", new SITE_ZONE());          // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("SIZE", new SIZE());                    // rfc3659, 4
+        // SMNT, rfc959?
+        // SPSV, draft-rosenau-ftp-single-port
+        DEFAULT_COMMAND_MAP.put("STAT", new STAT());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("STOR", new STOR());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("STOU", new STOU());                    // rfc959, 4.1.3
+        DEFAULT_COMMAND_MAP.put("STRU", new STRU());                    // rfc959, 4.1.2
+        DEFAULT_COMMAND_MAP.put("SYST", new SYST());                    // rfc959, 4.1.3
+        // THMB, draft-peterson-streamlined-ftp-command-extensions
+        DEFAULT_COMMAND_MAP.put("TYPE", new TYPE());                    // rfc959, 4.1.2
+        // TVFS, rfc3659, 6?
+        DEFAULT_COMMAND_MAP.put("USER", new USER());                    // rfc959, 4.1.1
     }
 
+    /** The commands map */
     private Map<String, Command> commandMap = new HashMap<String, Command>();
 
+    /** A flag indicating of we have non-default commands */
     private boolean useDefaultCommands = true;
 
     /**
@@ -151,7 +171,8 @@ public class CommandFactoryFactory {
     public CommandFactory createCommandFactory() {
         
         Map<String, Command> mergedCommands = new HashMap<String, Command>();
-        if(useDefaultCommands) {
+        
+        if (useDefaultCommands) {
             mergedCommands.putAll(DEFAULT_COMMAND_MAP);
         }
         
@@ -172,8 +193,7 @@ public class CommandFactoryFactory {
     /**
      * Sets whether the default commands will be used.
      * 
-     * @param useDefaultCommands
-     *            true if default commands should be used
+     * @param useDefaultCommands <code>true</code> if default commands should be used
      */
     public void setUseDefaultCommands(final boolean useDefaultCommands) {
         this.useDefaultCommands = useDefaultCommands;
@@ -194,10 +214,11 @@ public class CommandFactoryFactory {
      * @param command The command
      */
     public void addCommand(String commandName, Command command) {
-        if(commandName == null) {
+        if (commandName == null) {
             throw new NullPointerException("commandName can not be null");
         }
-        if(command == null) {
+        
+        if (command == null) {
             throw new NullPointerException("command can not be null");
         }
         
@@ -207,8 +228,7 @@ public class CommandFactoryFactory {
     /**
      * Set commands to add or override to the default commands
      * 
-     * @param commandMap
-     *            The map of commands, the key will be used to map to requests.
+     * @param commandMap The map of commands, the key will be used to map to requests.
      */
     public void setCommandMap(final Map<String, Command> commandMap) {
         if (commandMap == null) {

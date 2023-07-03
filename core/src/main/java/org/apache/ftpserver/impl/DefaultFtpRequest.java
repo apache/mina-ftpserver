@@ -29,20 +29,22 @@ import org.apache.ftpserver.ftplet.FtpRequest;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class DefaultFtpRequest implements FtpRequest {
-
+    /** The request line */ 
     private final String line;
 
+    /** The FTP command */
     private final String command;
 
+    /** The FTP argument */
     private final String argument;
     
-    /**
-     * timestamp when this request was received
-     */
+    /** timestamp when this request was received */
     private final long receivedTime;
 
     /**
      * Default constructor.
+     * 
+     * @param requestLine The request line
      */
     public DefaultFtpRequest(final String requestLine) {
         //Assuming we create the request as soon as we receive the command from 
@@ -50,7 +52,7 @@ public class DefaultFtpRequest implements FtpRequest {
         //bunch of things after we receive the command from the client and 
         //before constructing this FtpRequest object, then this method is not 
         //going to be accurate and need to look for an alternative solution. 
-        this.receivedTime = System.currentTimeMillis();
+        receivedTime = System.currentTimeMillis();
         line = requestLine.trim();
         int spInd = line.indexOf(' ');
         command = parseCmd(line, spInd);
@@ -62,14 +64,17 @@ public class DefaultFtpRequest implements FtpRequest {
      */
     private String parseCmd(final String lineToParse, int spInd) {
         String cmd = null;
+        
         if (spInd != -1) {
             cmd = line.substring(0, spInd).toUpperCase();
         } else {
             cmd = line.toUpperCase();
         }
+        
         if ((cmd.length() > 0) && (cmd.charAt(0) == 'X')) {
             cmd = cmd.substring(1);
         }
+        
         return cmd;
     }
 
@@ -77,10 +82,12 @@ public class DefaultFtpRequest implements FtpRequest {
         String arg = null;
         if (spInd != -1) {
             arg = line.substring(spInd + 1);
+            
             if (arg.equals("")) {
                 arg = null;
             }
         }
+        
         return arg;
     }
 
@@ -109,7 +116,7 @@ public class DefaultFtpRequest implements FtpRequest {
      * Has argument.
      */
     public boolean hasArgument() {
-        return getArgument() != null;
+        return argument != null;
     }
     
     public long getReceivedTime() {
@@ -123,6 +130,6 @@ public class DefaultFtpRequest implements FtpRequest {
      */
     @Override
     public String toString() {
-        return getRequestLine();
+        return line;
     }
 }

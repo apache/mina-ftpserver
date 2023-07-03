@@ -63,6 +63,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
     private final Logger LOG = LoggerFactory
             .getLogger(DefaultFtpServerContext.class);
 
+    /** The FTP messages per language */
     private MessageResource messageResource = new MessageResourceFactory().createMessageResource();
 
     private UserManager userManager = new PropertiesUserManagerFactory().createUserManager();
@@ -101,7 +102,11 @@ public class DefaultFtpServerContext implements FtpServerContext {
     }
 
     /**
-     * Create default users.
+     * Create default users:
+     * <ul>
+     *  <li>Admin</li>
+     *  <li>Anonymous</ul>
+     * </ul>
      */
     public void createDefaultUsers() throws Exception {
         UserManager userManager = getUserManager();
