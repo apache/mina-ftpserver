@@ -22,13 +22,12 @@ package org.apache.ftpserver.usermanager;
 import org.apache.ftpserver.util.PasswordUtil;
 
 /**
- * Password encryptor that does no encryption, that is, keps the
+ * Password encryptor that does no encryption, that is, keeps the
  * password in clear text
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class ClearTextPasswordEncryptor implements PasswordEncryptor {
-
     /**
      * Returns the clear text password
      */
@@ -43,6 +42,7 @@ public class ClearTextPasswordEncryptor implements PasswordEncryptor {
         if(storedPassword == null) {
             throw new NullPointerException("storedPassword can not be null");
         }
+        
         if(passwordToCheck == null) {
             throw new NullPointerException("passwordToCheck can not be null");
         }
