@@ -19,6 +19,7 @@
 
 package org.apache.ftpserver.util;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,20 +37,24 @@ public class EncryptUtils {
     /**
      * Encrypt byte array.
      */
-    public final static byte[] encrypt(byte[] source, String algorithm)
-            throws NoSuchAlgorithmException {
+    public final static byte[] encrypt(byte[] source, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance(algorithm);
         md.reset();
         md.update(source);
+        
         return md.digest();
     }
 
     /**
      * Encrypt string
      */
-    public final static String encrypt(String source, String algorithm)
-            throws NoSuchAlgorithmException {
-        byte[] resByteArray = encrypt(source.getBytes(), algorithm);
+    public final static String encrypt(String source, String algorithm) throws NoSuchAlgorithmException {
+        if (source == null) {
+            source = "";
+        }
+
+        byte[] resByteArray = encrypt(source.getBytes( StandardCharsets.UTF_8 ), algorithm);
+        
         return StringUtils.toHexString(resByteArray);
     }
 
@@ -57,36 +62,49 @@ public class EncryptUtils {
      * Encrypt string using MD5 algorithm
      */
     public final static String encryptMD5(String source) {
-        if (source == null) {
-            source = "";
-        }
-
-        String result = "";
         try {
-            result = encrypt(source, MD5.MD5);
+            return encrypt(source, MD5.MD5);
         } catch (NoSuchAlgorithmException ex) {
             // this should never happen
             throw new RuntimeException(ex);
         }
-        return result;
     }
 
     /**
-     * Encrypt string using SHA algorithm
+     * Encrypt string using SHA-1 algorithm
      */
     public final static String encryptSHA(String source) {
-        if (source == null) {
-            source = "";
-        }
-
-        String result = "";
         try {
-            result = encrypt(source, "SHA");
+            return encrypt(source, "SHA");
         } catch (NoSuchAlgorithmException ex) {
             // this should never happen
             throw new RuntimeException(ex);
         }
-        return result;
     }
 
+
+    /**
+     * Encrypt string using SHA-256 algorithm
+     */
+    public final static String encryptSHA256(String source) {
+        try {
+            return encrypt(source, "SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            // this should never happen
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+    /**
+     * Encrypt string using SHA-512 algorithm
+     */
+    public final static String encryptSHA512(String source) {
+        try {
+            return encrypt(source, "SHA-512");
+        } catch (NoSuchAlgorithmException ex) {
+            // this should never happen
+            throw new RuntimeException(ex);
+        }
+    }
 }
