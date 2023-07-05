@@ -175,7 +175,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
                         LOGGER
                                 .debug(
                                         "Allowing connection from {} because it matches with the whitelist subnet {}",
-                                        new Object[] { address, subnet });
+                                        address, subnet);
                     }
                     return true;
                 }
@@ -184,7 +184,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
                 LOGGER
                         .debug(
                                 "Denying connection from {} because it does not match any of the whitelist subnets",
-                                new Object[] { address });
+                                address);
             }
             return false;
         case DENY:
@@ -193,7 +193,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
                     LOGGER
                             .debug(
                                     "Allowing connection from {} because blacklist is empty",
-                                    new Object[] { address });
+                                    address);
                 }
                 return true;
             }
@@ -203,7 +203,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
                         LOGGER
                                 .debug(
                                         "Denying connection from {} because it matches with the blacklist subnet {}",
-                                        new Object[] { address, subnet });
+                                        address, subnet);
                     }
                     return false;
                 }
@@ -212,7 +212,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
                 LOGGER
                         .debug(
                                 "Allowing connection from {} because it does not match any of the blacklist subnets",
-                                new Object[] { address });
+                                address);
             }
             return true;
         default:
