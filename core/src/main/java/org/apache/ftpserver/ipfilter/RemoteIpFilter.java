@@ -216,7 +216,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
             }
             return true;
         default:
-            throw new RuntimeException("Unknown or unimplemented filter type: "
+            throw new IllegalStateException("Unknown or unimplemented filter type: "
                     + type);
         }
     }
