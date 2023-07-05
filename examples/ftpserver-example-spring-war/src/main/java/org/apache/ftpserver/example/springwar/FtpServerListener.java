@@ -70,7 +70,7 @@ public class FtpServerListener implements ServletContextListener {
             server.start();
             System.out.println("FtpServer started");
         } catch (Exception e) {
-            throw new RuntimeException("Failed to start FtpServer", e);
+            throw new IllegalArgumentException("Failed to start FtpServer", e);
         }
     }
 }
