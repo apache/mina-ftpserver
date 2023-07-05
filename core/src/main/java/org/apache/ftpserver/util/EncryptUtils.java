@@ -64,7 +64,7 @@ public class EncryptUtils {
             result = encrypt(source, "MD5");
         } catch (NoSuchAlgorithmException ex) {
             // this should never happen
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
         return result;
     }
@@ -82,7 +82,7 @@ public class EncryptUtils {
             result = encrypt(source, "SHA");
         } catch (NoSuchAlgorithmException ex) {
             // this should never happen
-            throw new RuntimeException(ex);
+            throw new IllegalArgumentException(ex);
         }
         return result;
     }
