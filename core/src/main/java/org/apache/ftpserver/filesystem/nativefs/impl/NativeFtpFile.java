@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -408,7 +409,7 @@ public class NativeFtpFile implements FtpFile {
                 otherCanonicalPath = ((NativeFtpFile) obj).file
                         .getCanonicalPath();
             } catch (IOException e) {
-                throw new RuntimeException("Failed to get the canonical path",
+                throw new UncheckedIOException("Failed to get the canonical path",
                         e);
             }
 
