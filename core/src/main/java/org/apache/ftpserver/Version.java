@@ -21,6 +21,7 @@ package org.apache.ftpserver;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.Properties;
 
 import org.apache.ftpserver.util.IoUtils;
@@ -45,7 +46,7 @@ public class Version {
             props.load(in);
             return props.getProperty("ftpserver.version");
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read version", e);
+            throw new UncheckedIOException("Failed to read version", e);
         } finally {
             IoUtils.close(in);
         }
