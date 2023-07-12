@@ -20,7 +20,6 @@
 package org.apache.ftpserver.usermanager;
 
 import org.apache.ftpserver.ftplet.Authentication;
-import org.apache.ftpserver.usermanager.impl.UserMetadata;
 
 /**
  * Class representing a normal authentication attempt using username and
