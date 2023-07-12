@@ -60,9 +60,9 @@ public class AddUser extends CommandLine {
         AddUser addUser = new AddUser();
         
         try {
-
             // get configuration
             FtpServer server = addUser.getConfiguration(args);
+            
             if (server == null) {
                 return;
             } 
@@ -77,6 +77,7 @@ public class AddUser extends CommandLine {
             
             System.out.println();
             String userName = askForString(in, "User name:", "User name is mandatory");
+            
             if(userName == null) {
                 return;
             }
@@ -85,13 +86,13 @@ public class AddUser extends CommandLine {
             user.setPassword(askForString(in, "Password:"));
             
             String home = askForString(in, "Home directory:", "Home directory is mandatory");
-            if(home == null) {
-                return;            
-            }
-            user.setHomeDirectory(home);
             
+            if(home == null) {
+                return;
+            }
+            
+            user.setHomeDirectory(home);
             user.setEnabled(askForBoolean(in, "Enabled (Y/N):"));
-
             user.setMaxIdleTime(askForInt(in, "Max idle time in seconds (0 for none):"));
             
             List<Authority> authorities = new ArrayList<Authority>();
@@ -128,18 +129,20 @@ public class AddUser extends CommandLine {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     private static String askForString(BufferedReader in, String question) throws IOException {
         System.out.println(question);
+        
         return in.readLine();
     }
 
     private static String askForString(BufferedReader in, String question, String mandatoryMessage) throws IOException {
         String s = askForString(in, question);
+        
         if(isEmpty(s)) {
             System.err.println(mandatoryMessage);
+            
             return null;
         } else {
             return s;
