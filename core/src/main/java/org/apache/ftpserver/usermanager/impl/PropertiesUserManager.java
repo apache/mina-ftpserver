@@ -163,8 +163,6 @@ public class PropertiesUserManager extends AbstractUserManager {
                     // try loading it from the classpath
                     LOG.debug("File not found on file system, try loading from classpath");
 
-                    //InputStream is = getClass().getClassLoader().getResourceAsStream(userDataFile.getPath());
-
                     try (InputStream is = getClass().getClassLoader().getResourceAsStream(userDataFile.getPath())) {
                         if (is != null) {
                             userDataProp.load(is);
