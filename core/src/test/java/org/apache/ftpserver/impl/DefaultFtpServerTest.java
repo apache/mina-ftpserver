@@ -21,21 +21,21 @@ package org.apache.ftpserver.impl;
 
 import java.net.BindException;
 
-import junit.framework.TestCase;
-
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerConfigurationException;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.listener.Listener;
 import org.apache.ftpserver.listener.ListenerFactory;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  *
  */
-public class DefaultFtpServerTest extends TestCase {
-
+public class DefaultFtpServerTest {
+    @Test
     public void testFailStartingSecondListener() throws Exception {
         // FTPSERVER-197
         
@@ -74,6 +74,7 @@ public class DefaultFtpServerTest extends TestCase {
         }
     }
     
+    @Test
     public void testStartFtpServer() throws Exception {
         // FTPSERVER-197
         
