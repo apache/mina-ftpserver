@@ -42,7 +42,6 @@ import org.apache.ftpserver.usermanager.PasswordEncryptor;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.UsernamePasswordAuthentication;
 import org.apache.ftpserver.util.BaseProperties;
-import org.apache.ftpserver.util.IoUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,8 +129,7 @@ public class PropertiesUserManager extends AbstractUserManager {
     /**
      * Internal constructor, do not use directly. Use {@link PropertiesUserManagerFactory} instead.
      */
-    public PropertiesUserManager(PasswordEncryptor passwordEncryptor,
-            File userDataFile, String adminName) {
+    public PropertiesUserManager(PasswordEncryptor passwordEncryptor, File userDataFile, String adminName) {
         super(adminName, passwordEncryptor);
 
         loadFromFile(userDataFile);
@@ -157,32 +155,25 @@ public class PropertiesUserManager extends AbstractUserManager {
                     this.userDataFile = userDataFile;
 
                     LOG.debug("File found on file system");
-                    FileInputStream fis = null;
-                    try {
-                        fis = new FileInputStream(userDataFile);
+
+                    try ( FileInputStream fis = new FileInputStream(userDataFile)) {
                         userDataProp.load(fis);
-                    } finally {
-                        IoUtils.close(fis);
                     }
                 } else {
                     // try loading it from the classpath
-                    LOG
-                            .debug("File not found on file system, try loading from classpath");
+                    LOG.debug("File not found on file system, try loading from classpath");
 
-                    InputStream is = getClass().getClassLoader()
-                            .getResourceAsStream(userDataFile.getPath());
+                    //InputStream is = getClass().getClassLoader().getResourceAsStream(userDataFile.getPath());
 
-                    if (is != null) {
-                        try {
+                    try (InputStream is = getClass().getClassLoader().getResourceAsStream(userDataFile.getPath())) {
+                        if (is != null) {
                             userDataProp.load(is);
-                        } finally {
-                            IoUtils.close(is);
-                        }
-                    } else {
-                        throw new FtpServerConfigurationException(
+                        } else {
+                            throw new FtpServerConfigurationException(
                                 "User data file specified but could not be located, "
                                         + "neither on the file system or in the classpath: "
                                         + userDataFile.getPath());
+                        }
                     }
                 }
             }
@@ -200,14 +191,9 @@ public class PropertiesUserManager extends AbstractUserManager {
                 LOG.debug("URL configured, will try loading");
 
                 userUrl = userDataPath;
-                InputStream is = null;
-
-                is = userDataPath.openStream();
-
-                try {
+                
+                try (InputStream is = userDataPath.openStream()) {
                     userDataProp.load(is);
-                } finally {
-                    IoUtils.close(is);
                 }
             }
         } catch (IOException e) {
@@ -251,47 +237,41 @@ public class PropertiesUserManager extends AbstractUserManager {
         if (usr.getName() == null) {
             throw new NullPointerException("User name is null.");
         }
+        
         String thisPrefix = PREFIX + usr.getName() + '.';
 
         // set other properties
         userDataProp.setProperty(thisPrefix + ATTR_PASSWORD, getPassword(usr));
 
         String home = usr.getHomeDirectory();
+        
         if (home == null) {
             home = "/";
         }
+        
         userDataProp.setProperty(thisPrefix + ATTR_HOME, home);
         userDataProp.setProperty(thisPrefix + ATTR_ENABLE, usr.getEnabled());
-        userDataProp.setProperty(thisPrefix + ATTR_WRITE_PERM, usr
-                .authorize(new WriteRequest()) != null);
-        userDataProp.setProperty(thisPrefix + ATTR_MAX_IDLE_TIME, usr
-                .getMaxIdleTime());
+        userDataProp.setProperty(thisPrefix + ATTR_WRITE_PERM, usr.authorize(new WriteRequest()) != null);
+        userDataProp.setProperty(thisPrefix + ATTR_MAX_IDLE_TIME, usr.getMaxIdleTime());
 
         TransferRateRequest transferRateRequest = new TransferRateRequest();
-        transferRateRequest = (TransferRateRequest) usr
-                .authorize(transferRateRequest);
+        transferRateRequest = (TransferRateRequest) usr.authorize(transferRateRequest);
 
         if (transferRateRequest != null) {
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_UPLOAD_RATE,
-                    transferRateRequest.getMaxUploadRate());
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_DOWNLOAD_RATE,
-                    transferRateRequest.getMaxDownloadRate());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_UPLOAD_RATE,transferRateRequest.getMaxUploadRate());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_DOWNLOAD_RATE,transferRateRequest.getMaxDownloadRate());
         } else {
             userDataProp.remove(thisPrefix + ATTR_MAX_UPLOAD_RATE);
             userDataProp.remove(thisPrefix + ATTR_MAX_DOWNLOAD_RATE);
         }
 
         // request that always will succeed
-        ConcurrentLoginRequest concurrentLoginRequest = new ConcurrentLoginRequest(
-                0, 0);
-        concurrentLoginRequest = (ConcurrentLoginRequest) usr
-                .authorize(concurrentLoginRequest);
+        ConcurrentLoginRequest concurrentLoginRequest = new ConcurrentLoginRequest(0, 0);
+        concurrentLoginRequest = (ConcurrentLoginRequest) usr.authorize(concurrentLoginRequest);
 
         if (concurrentLoginRequest != null) {
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_NUMBER,
-                    concurrentLoginRequest.getMaxConcurrentLogins());
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_PER_IP,
-                    concurrentLoginRequest.getMaxConcurrentLoginsPerIP());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_NUMBER,concurrentLoginRequest.getMaxConcurrentLogins());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_PER_IP,concurrentLoginRequest.getMaxConcurrentLoginsPerIP());
         } else {
             userDataProp.remove(thisPrefix + ATTR_MAX_LOGIN_NUMBER);
             userDataProp.remove(thisPrefix + ATTR_MAX_LOGIN_PER_IP);
@@ -309,22 +289,18 @@ public class PropertiesUserManager extends AbstractUserManager {
         }
 
         File dir = userDataFile.getAbsoluteFile().getParentFile();
+        
         if (dir != null && !dir.exists() && !dir.mkdirs()) {
-            String dirName = dir.getAbsolutePath();
             throw new FtpServerConfigurationException(
-                    "Cannot create directory for user data file : " + dirName);
+                    "Cannot create directory for user data file : " + dir.getAbsolutePath());
         }
 
         // save user data
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(userDataFile);
+        try (FileOutputStream fos = new FileOutputStream(userDataFile)){
             userDataProp.store(fos, "Generated file - don't edit (please)");
         } catch (IOException ex) {
             LOG.error("Failed saving user data", ex);
             throw new FtpException("Failed saving user data", ex);
-        } finally {
-            IoUtils.close(fos);
         }
     }
 
@@ -337,13 +313,17 @@ public class PropertiesUserManager extends AbstractUserManager {
         String thisPrefix = PREFIX + usrName + '.';
         Enumeration<?> propNames = userDataProp.propertyNames();
         ArrayList<String> remKeys = new ArrayList<String>();
+        
         while (propNames.hasMoreElements()) {
             String thisKey = propNames.nextElement().toString();
+            
             if (thisKey.startsWith(thisPrefix)) {
                 remKeys.add(thisKey);
             }
         }
+        
         Iterator<String> remKeysIt = remKeys.iterator();
+        
         while (remKeysIt.hasNext()) {
             userDataProp.remove(remKeysIt.next());
         }
@@ -380,6 +360,7 @@ public class PropertiesUserManager extends AbstractUserManager {
                 password = blankPassword;
             }
         }
+        
         return password;
     }
 
@@ -393,8 +374,10 @@ public class PropertiesUserManager extends AbstractUserManager {
         Enumeration<?> allKeys = userDataProp.propertyNames();
         int prefixlen = PREFIX.length();
         int suffixlen = suffix.length();
+        
         while (allKeys.hasMoreElements()) {
             String key = (String) allKeys.nextElement();
+        
             if (key.endsWith(suffix)) {
                 String name = key.substring(prefixlen);
                 int endIndex = name.length() - suffixlen;
@@ -404,6 +387,7 @@ public class PropertiesUserManager extends AbstractUserManager {
         }
 
         Collections.sort(ulst);
+        
         return ulst.toArray(new String[0]);
     }
 
@@ -419,8 +403,7 @@ public class PropertiesUserManager extends AbstractUserManager {
         BaseUser user = new BaseUser();
         user.setName(userName);
         user.setEnabled(userDataProp.getBoolean(baseKey + ATTR_ENABLE, true));
-        user.setHomeDirectory(userDataProp
-                .getProperty(baseKey + ATTR_HOME, "/"));
+        user.setHomeDirectory(userDataProp.getProperty(baseKey + ATTR_HOME, "/"));
 
         List<Authority> authorities = new ArrayList<Authority>();
 
@@ -428,24 +411,17 @@ public class PropertiesUserManager extends AbstractUserManager {
             authorities.add(new WritePermission());
         }
 
-        int maxLogin = userDataProp.getInteger(baseKey + ATTR_MAX_LOGIN_NUMBER,
-                0);
-        int maxLoginPerIP = userDataProp.getInteger(baseKey
-                + ATTR_MAX_LOGIN_PER_IP, 0);
+        int maxLogin = userDataProp.getInteger(baseKey + ATTR_MAX_LOGIN_NUMBER, 0);
+        int maxLoginPerIP = userDataProp.getInteger(baseKey + ATTR_MAX_LOGIN_PER_IP, 0);
 
         authorities.add(new ConcurrentLoginPermission(maxLogin, maxLoginPerIP));
 
-        int uploadRate = userDataProp.getInteger(
-                baseKey + ATTR_MAX_UPLOAD_RATE, 0);
-        int downloadRate = userDataProp.getInteger(baseKey
-                + ATTR_MAX_DOWNLOAD_RATE, 0);
+        int uploadRate = userDataProp.getInteger(baseKey + ATTR_MAX_UPLOAD_RATE, 0);
+        int downloadRate = userDataProp.getInteger(baseKey + ATTR_MAX_DOWNLOAD_RATE, 0);
 
         authorities.add(new TransferRatePermission(downloadRate, uploadRate));
-
         user.setAuthorities(authorities);
-
-        user.setMaxIdleTime(userDataProp.getInteger(baseKey
-                + ATTR_MAX_IDLE_TIME, 0));
+        user.setMaxIdleTime(userDataProp.getInteger(baseKey + ATTR_MAX_IDLE_TIME, 0));
 
         return user;
     }
@@ -455,14 +431,14 @@ public class PropertiesUserManager extends AbstractUserManager {
      */
     public boolean doesExist(String name) {
         String key = PREFIX + name + '.' + ATTR_HOME;
+        
         return userDataProp.containsKey(key);
     }
 
     /**
      * User authenticate method
      */
-    public User authenticate(Authentication authentication)
-            throws AuthenticationFailedException {
+    public User authenticate(Authentication authentication) throws AuthenticationFailedException {
         if (authentication instanceof UsernamePasswordAuthentication) {
             UsernamePasswordAuthentication upauth = (UsernamePasswordAuthentication) authentication;
 
@@ -477,8 +453,7 @@ public class PropertiesUserManager extends AbstractUserManager {
                 password = "";
             }
 
-            String storedPassword = userDataProp.getProperty(PREFIX + user
-                    + '.' + ATTR_PASSWORD);
+            String storedPassword = userDataProp.getProperty(PREFIX + user + '.' + ATTR_PASSWORD);
 
             if (storedPassword == null) {
                 // user does not exist
@@ -512,5 +487,4 @@ public class PropertiesUserManager extends AbstractUserManager {
             userDataProp = null;
         }
     }
-
 }
