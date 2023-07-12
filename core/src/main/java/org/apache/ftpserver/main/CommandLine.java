@@ -43,17 +43,18 @@ public class CommandLine {
      * This method is the FtpServer starting point when running by using the
      * command line mode.
      * 
-     * @param args
-     *            The first element of this array must specify the kind of
-     *            configuration to be used to start the server.
+     * @param args The first element of this array must specify the kind of
+     * configuration to be used to start the server.
      */
     public static void main(String args[]) {
 
         CommandLine cli = new CommandLine();
+        
         try {
 
             // get configuration
             FtpServer server = cli.getConfiguration(args);
+            
             if (server == null) {
                 return;
             }
@@ -91,67 +92,73 @@ public class CommandLine {
      * Print the usage message.
      */
     protected void usage() {
-        System.err
-                .println("Usage: java org.apache.ftpserver.main.CommandLine [OPTION] [CONFIGFILE]");
-        System.err
-                .println("Starts FtpServer using the default configuration of the ");
+        System.err.println("Usage: java org.apache.ftpserver.main.CommandLine [OPTION] [CONFIGFILE]");
+        System.err.println("Starts FtpServer using the default configuration of the ");
         System.err.println("configuration file if provided.");
         System.err.println("");
-        System.err
-                .println("      --default              use the default configuration, ");
-        System.err
-                .println("                             also used if no command line argument is given ");
-        System.err.println("  -?, --help                 print this message");
+        System.err.println("      --default              use the default configuration, ");
+        System.err.println("                             also used if no command line argument is given ");
+        System.err.println("      -?, --help             print this message");
     }
 
     /**
      * Get the configuration object.
      */
     protected FtpServer getConfiguration(String[] args) throws Exception {
+        switch (args.length) {
+            case 0:
+                System.out.println("Using default configuration");
+                
+                return new FtpServerFactory().createServer();
 
-        FtpServer server = null;
-        if (args.length == 0) {
-            System.out.println("Using default configuration");
-            server = new FtpServerFactory().createServer();
-        } else if ((args.length == 1) && args[0].equals("-default")) {
-            // supported for backwards compatibility, but not documented
-            System.out
-                    .println("The -default switch is deprecated, please use --default instead");
-            System.out.println("Using default configuration");
-            server = new FtpServerFactory().createServer();
-        } else if ((args.length == 1) && args[0].equals("--default")) {
-            System.out.println("Using default configuration");
-            server = new FtpServerFactory().createServer();
-        } else if ((args.length == 1) && args[0].equals("--help")) {
-            usage();
-        } else if ((args.length == 1) && args[0].equals("-?")) {
-            usage();
-        } else if (args.length == 1) {
-            System.out.println("Using XML configuration file " + args[0]
-                    + "...");
-            FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(
-                    args[0]);
+            case 1:
+                // Standard config
+                if (args[0].equals("-default")) {
+                    // supported for backwards compatibility, but not documented
+                    System.out.println("The -default switch is deprecated, please use --default instead");
+                    System.out.println("Using default configuration");
 
-            if (ctx.containsBean("server")) {
-                server = (FtpServer) ctx.getBean("server");
-            } else {
-                String[] beanNames = ctx.getBeanNamesForType(FtpServer.class);
-                if (beanNames.length == 1) {
-                    server = (FtpServer) ctx.getBean(beanNames[0]);
-                } else if (beanNames.length > 1) {
-                    System.out
-                            .println("Using the first server defined in the configuration, named "
-                                    + beanNames[0]);
-                    server = (FtpServer) ctx.getBean(beanNames[0]);
-                } else {
-                    System.err
-                            .println("XML configuration does not contain a server configuration");
+                    return new FtpServerFactory().createServer();
                 }
-            }
-        } else {
-            usage();
-        }
+                
+                if (args[0].equals("--default")) {
+                    System.out.println("Using default configuration");
 
-        return server;
+                    return new FtpServerFactory().createServer();
+                }
+                
+                // Help
+                if (args[0].equals("--help")||args[0].equals("-?")) {
+                    usage();
+                    
+                    return null;
+                }
+                
+                // We assume we are provided a Spring config
+                System.out.println("Using XML configuration file " + args[0] + "...");
+                FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(args[0]);
+
+                if (ctx.containsBean("server")) {
+                    return (FtpServer) ctx.getBean("server");
+                } else {
+                    String[] beanNames = ctx.getBeanNamesForType(FtpServer.class);
+                    
+                    if (beanNames.length == 1) {
+                        return (FtpServer) ctx.getBean(beanNames[0]);
+                    } else if (beanNames.length > 1) {
+                        System.out.println("Using the first server defined in the configuration, named " + beanNames[0]);
+
+                        return (FtpServer) ctx.getBean(beanNames[0]);
+                    } else {
+                        System.err.println("XML configuration does not contain a server configuration");
+                        
+                        return null;
+                    }
+                }
+            default:
+                usage();
+                
+                return null;
+        }
     }
 }
