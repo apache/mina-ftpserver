@@ -75,7 +75,7 @@ public class FtpLetReturnDisconnectTest extends ClientTestTemplate {
     protected FtpServerFactory createServer() throws Exception {
         FtpServerFactory server = super.createServer();
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("f1", new MockFtplet());
         server.setFtplets(ftplets);
         

@@ -47,7 +47,7 @@ public class OPTS extends AbstractCommand {
 
     private final Logger LOG = LoggerFactory.getLogger(OPTS.class);
 
-    private static final HashMap<String, Command> COMMAND_MAP = new HashMap<String, Command>(
+    private static final HashMap<String, Command> COMMAND_MAP = new HashMap<>(
             16);
 
     /**

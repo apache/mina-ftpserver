@@ -249,7 +249,7 @@ public class NioListener extends AbstractListener {
     public synchronized Set<FtpIoSession> getActiveSessions() {
         Map<Long, IoSession> sessions = acceptor.getManagedSessions();
     
-        Set<FtpIoSession> ftpSessions = new HashSet<FtpIoSession>();
+        Set<FtpIoSession> ftpSessions = new HashSet<>();
         
         for (IoSession session : sessions.values()) {
             ftpSessions.add(new FtpIoSession(session, context));

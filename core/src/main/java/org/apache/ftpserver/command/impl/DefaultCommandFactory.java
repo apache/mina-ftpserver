@@ -42,7 +42,7 @@ public class DefaultCommandFactory implements CommandFactory {
 
     /** Internal constructor, use {@link CommandFactoryFactory} instead */
     public DefaultCommandFactory() {
-        this(new HashMap<String, Command>());
+        this(new HashMap<>());
     }
 
     /**

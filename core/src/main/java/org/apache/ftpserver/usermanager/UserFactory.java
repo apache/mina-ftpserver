@@ -43,7 +43,7 @@ public class UserFactory {
 
     private boolean isEnabled = true;
 
-    private List<Authority> authorities = new ArrayList<Authority>();
+    private List<Authority> authorities = new ArrayList<>();
 
     /**
      * Creates a user based on the configuration set on the factory

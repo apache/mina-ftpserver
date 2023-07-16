@@ -72,7 +72,7 @@ public class PassivePorts {
      *             integer or too large for a port number)
      */
     private static Set<Integer> parse(final String portsString) {
-        Set<Integer> passivePortsList = new HashSet<Integer>();
+        Set<Integer> passivePortsList = new HashSet<>();
 
         boolean inRange = false;
         Integer lastPort = Integer.valueOf(1);
@@ -154,12 +154,12 @@ public class PassivePorts {
         if (passivePorts == null) {
             throw new NullPointerException("passivePorts can not be null");
         } else if(passivePorts.isEmpty()) {
-            passivePorts = new HashSet<Integer>();
+            passivePorts = new HashSet<>();
             passivePorts.add(0);
         }
 
-        this.freeList = new ArrayList<Integer>(passivePorts);
-        this.usedList = new HashSet<Integer>(passivePorts.size());
+        this.freeList = new ArrayList<>(passivePorts);
+        this.usedList = new HashSet<>(passivePorts.size());
 
         this.checkIfBound = checkIfBound;
     }
@@ -200,7 +200,7 @@ public class PassivePorts {
 
     public synchronized int reserveNextPort() {
         // create a copy of the free ports, so that we can keep track of the tested ports
-        List<Integer> freeCopy = new ArrayList<Integer>(freeList);
+        List<Integer> freeCopy = new ArrayList<>(freeList);
         
         // Loop until we have found a port, or exhausted all available ports
         while (freeCopy.size() > 0) {

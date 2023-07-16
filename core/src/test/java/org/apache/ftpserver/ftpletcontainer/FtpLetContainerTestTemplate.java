@@ -45,7 +45,7 @@ import org.apache.ftpserver.impl.DefaultFtpSession;
  */
 public abstract class FtpLetContainerTestTemplate extends TestCase {
 
-    private final List<String> calls = new ArrayList<String>();
+    private final List<String> calls = new ArrayList<>();
 
     @Override
     protected void setUp() throws Exception {
@@ -77,7 +77,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
         MockFtplet ftplet1 = new MockFtplet();
         MockFtplet ftplet2 = new MockFtplet();
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
         
@@ -90,7 +90,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
     public void testFtpletLifecyclePreContainerInit() throws FtpException {
         MockFtplet ftplet = new MockFtplet();
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet);
 
         FtpletContainer container = createFtpletContainer(ftplets);
@@ -127,7 +127,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -158,7 +158,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -189,7 +189,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -221,7 +221,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -253,7 +253,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -285,7 +285,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -317,7 +317,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -349,7 +349,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -381,7 +381,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -413,7 +413,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -445,7 +445,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -477,7 +477,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -509,7 +509,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -541,7 +541,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -573,7 +573,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -605,7 +605,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -637,7 +637,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -669,7 +669,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -701,7 +701,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -733,7 +733,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -768,7 +768,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet1", ftplet1);
         ftplets.put("ftplet2", ftplet2);
 
@@ -802,7 +802,7 @@ public abstract class FtpLetContainerTestTemplate extends TestCase {
             }
         };
 
-        Map<String, Ftplet> ftplets = new LinkedHashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new LinkedHashMap<>();
         ftplets.put("ftplet2", ftplet2);
         ftplets.put("ftplet1", ftplet1);
 

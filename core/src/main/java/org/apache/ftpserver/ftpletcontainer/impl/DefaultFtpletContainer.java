@@ -52,7 +52,7 @@ public class DefaultFtpletContainer implements FtpletContainer {
     private final Map<String, Ftplet> ftplets ;
 
     public DefaultFtpletContainer() {
-        this(new ConcurrentHashMap<String, Ftplet>());
+        this(new ConcurrentHashMap<>());
     }
     
     public DefaultFtpletContainer(Map<String, Ftplet> ftplets) {

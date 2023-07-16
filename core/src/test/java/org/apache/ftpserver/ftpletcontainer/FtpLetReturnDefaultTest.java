@@ -77,7 +77,7 @@ public class FtpLetReturnDefaultTest extends ClientTestTemplate {
     protected FtpServerFactory createServer() throws Exception {
         FtpServerFactory server = super.createServer();
 
-        Map<String, Ftplet> ftplets = new HashMap<String, Ftplet>();
+        Map<String, Ftplet> ftplets = new HashMap<>();
         ftplets.put("f1", new MockFtplet());
         
         server.setFtplets(ftplets);
@@ -86,7 +86,7 @@ public class FtpLetReturnDefaultTest extends ClientTestTemplate {
     }
 
     public void testLogin() throws Exception {
-        final LinkedBlockingQueue<User> loggedInUser = new LinkedBlockingQueue<User>();
+        final LinkedBlockingQueue<User> loggedInUser = new LinkedBlockingQueue<>();
         
         MockFtplet.callback = new MockFtpletCallback() {
             public FtpletResult onLogin(FtpSession session, FtpRequest request)

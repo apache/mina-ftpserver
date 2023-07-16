@@ -64,7 +64,7 @@ public class VolatilePropertiesUserManagerTest extends UserManagerTestTemplate {
         user2.setEnabled(false);
         user2.setMaxIdleTime(2);
         
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(new WritePermission());
         authorities.add(new TransferRatePermission(1, 5));
         authorities.add(new ConcurrentLoginPermission(3, 4));

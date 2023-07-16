@@ -40,7 +40,7 @@ public class SubnetBlacklistTest extends ClientTestTemplate {
 
         ListenerFactory factory = new ListenerFactory(server.getListener("default"));
 
-        List<Subnet> blockedSubnets = new ArrayList<Subnet>();
+        List<Subnet> blockedSubnets = new ArrayList<>();
         blockedSubnets.add(new Subnet(InetAddress.getByName("localhost"), 32));
 
         factory.setBlockedSubnets(blockedSubnets);

@@ -96,7 +96,7 @@ public class DirectoryLister {
         try {
             FtpFile virtualFile = fileSystemView.getFile(file);
             if (virtualFile.isFile()) {
-                List<FtpFile> auxFiles = new ArrayList<FtpFile>();
+                List<FtpFile> auxFiles = new ArrayList<>();
                 auxFiles.add(virtualFile);
                 files = auxFiles;
             } else {
