@@ -64,7 +64,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
      *            the filter type
      */
     public RemoteIpFilter(IpFilterType type) {
-        this(type, new HashSet<Subnet>(0));
+        this(type, new HashSet<>(0));
     }
 
     /**

@@ -77,7 +77,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     private AtomicLong bytesDownload = new AtomicLong(0L);
 
     private static class UserLogins {
-        private Map<InetAddress, AtomicInteger> perAddress = new ConcurrentHashMap<InetAddress, AtomicInteger>();
+        private Map<InetAddress, AtomicInteger> perAddress = new ConcurrentHashMap<>();
 
         public UserLogins(InetAddress address) {
             // init with the first connection
@@ -100,7 +100,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     /**
      *The user login information.
      */
-    private Map<String, UserLogins> userLoginTable = new ConcurrentHashMap<String, UserLogins>();
+    private Map<String, UserLogins> userLoginTable = new ConcurrentHashMap<>();
 
     public static final String LOGIN_NUMBER = "login_number";
 

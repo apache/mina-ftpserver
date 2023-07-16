@@ -70,7 +70,7 @@ public class BaseUserTest extends TestCase {
     private BaseUser user = new BaseUser();
 
     public void testAllow() {
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(ALWAYS_ALLOW_AUTHORITY);
 
         user.setAuthorities(authorities);
@@ -79,7 +79,7 @@ public class BaseUserTest extends TestCase {
     }
 
     public void testDisallow() {
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(NEVER_ALLOW_AUTHORITY);
 
         user.setAuthorities(authorities);
@@ -88,7 +88,7 @@ public class BaseUserTest extends TestCase {
     }
 
     public void testMultipleDisallowLast() {
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(ALWAYS_ALLOW_AUTHORITY);
         authorities.add(NEVER_ALLOW_AUTHORITY);
         
@@ -98,7 +98,7 @@ public class BaseUserTest extends TestCase {
     }
 
     public void testMultipleAllowLast() {
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(NEVER_ALLOW_AUTHORITY);
         authorities.add(ALWAYS_ALLOW_AUTHORITY);
 
@@ -108,7 +108,7 @@ public class BaseUserTest extends TestCase {
     }
 
     public void testNonCanAuthorize() {
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(CANT_AUTHORITY);
 
         user.setAuthorities(authorities);

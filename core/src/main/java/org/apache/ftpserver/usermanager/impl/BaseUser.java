@@ -57,7 +57,7 @@ public class BaseUser implements User {
 
     private boolean isEnabled = true;
 
-    private List<? extends Authority> authorities = new ArrayList<Authority>();
+    private List<? extends Authority> authorities = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -209,7 +209,7 @@ public class BaseUser implements User {
      * {@inheritDoc}
      */
     public List<Authority> getAuthorities(Class<? extends Authority> clazz) {
-        List<Authority> selected = new ArrayList<Authority>();
+        List<Authority> selected = new ArrayList<>();
 
         for (Authority authority : authorities) {
             if (authority.getClass().equals(clazz)) {

@@ -194,7 +194,7 @@ public class FtpMd5Test extends ClientTestTemplate {
 
         String[] tokens = s.split(",");
 
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = new HashMap<>();
         for (int i = 0; i < tokens.length; i++) {
             String token = tokens[i].trim();
             int hashStart = token.lastIndexOf(' ');

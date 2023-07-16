@@ -49,7 +49,7 @@ public class SpringUtil {
      * @return All children
      */
     public static List<Element> getChildElements(final Element elm) {
-        List<Element> elements = new ArrayList<Element>();
+        List<Element> elements = new ArrayList<>();
         NodeList childs = elm.getChildNodes();
         for (int i = 0; i < childs.getLength(); i++) {
             Node child = childs.item(i);

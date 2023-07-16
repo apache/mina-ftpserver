@@ -283,7 +283,7 @@ public class DbUserManager extends AbstractUserManager {
         try {
 
             // create the sql query
-            HashMap<String, Object> map = new HashMap<String, Object>();
+            HashMap<String, Object> map = new HashMap<>();
             map.put(ATTR_LOGIN, escapeString(login));
             String sql = StringUtils.replaceString(isAdminStmt, map);
             LOG.info(sql);
@@ -317,7 +317,7 @@ public class DbUserManager extends AbstractUserManager {
      */
     public void delete(String name) throws FtpException {
         // create sql query
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<>();
         map.put(ATTR_LOGIN, escapeString(name));
         String sql = StringUtils.replaceString(deleteUserStmt, map);
         LOG.info(sql);
@@ -348,7 +348,7 @@ public class DbUserManager extends AbstractUserManager {
         try {
 
             // create sql query
-            HashMap<String, Object> map = new HashMap<String, Object>();
+            HashMap<String, Object> map = new HashMap<>();
             map.put(ATTR_LOGIN, escapeString(user.getName()));
 
             String password = null;
@@ -472,7 +472,7 @@ public class DbUserManager extends AbstractUserManager {
 
     private BaseUser selectUserByName(String name) throws SQLException {
         // create sql query
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<>();
         map.put(ATTR_LOGIN, escapeString(name));
         String sql = StringUtils.replaceString(selectUserStmt, map);
         LOG.info(sql);
@@ -494,7 +494,7 @@ public class DbUserManager extends AbstractUserManager {
                 thisUser.setEnabled(rs.getBoolean(ATTR_ENABLE));
                 thisUser.setMaxIdleTime(rs.getInt(ATTR_MAX_IDLE_TIME));
 
-                List<Authority> authorities = new ArrayList<Authority>();
+                List<Authority> authorities = new ArrayList<>();
                 if (rs.getBoolean(ATTR_WRITE_PERM)) {
                     authorities.add(new WritePermission());
                 }
@@ -551,7 +551,7 @@ public class DbUserManager extends AbstractUserManager {
         try {
 
             // create the sql
-            HashMap<String, Object> map = new HashMap<String, Object>();
+            HashMap<String, Object> map = new HashMap<>();
             map.put(ATTR_LOGIN, escapeString(name));
             String sql = StringUtils.replaceString(selectUserStmt, map);
             LOG.info(sql);
@@ -587,7 +587,7 @@ public class DbUserManager extends AbstractUserManager {
             rs = stmt.executeQuery(sql);
 
             // populate list
-            ArrayList<String> names = new ArrayList<String>();
+            ArrayList<String> names = new ArrayList<>();
             while (rs.next()) {
                 names.add(rs.getString(ATTR_LOGIN));
             }
@@ -625,7 +625,7 @@ public class DbUserManager extends AbstractUserManager {
             try {
 
                 // create the sql query
-                HashMap<String, Object> map = new HashMap<String, Object>();
+                HashMap<String, Object> map = new HashMap<>();
                 map.put(ATTR_LOGIN, escapeString(user));
                 String sql = StringUtils.replaceString(authenticateStmt, map);
                 LOG.info(sql);

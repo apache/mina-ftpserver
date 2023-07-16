@@ -82,7 +82,7 @@ import org.apache.ftpserver.command.impl.USER;
  */
 public class CommandFactoryFactory {
 
-    private static final HashMap<String, Command> DEFAULT_COMMAND_MAP = new HashMap<String, Command>();
+    private static final HashMap<String, Command> DEFAULT_COMMAND_MAP = new HashMap<>();
 
     static {
         // first populate the default command list
@@ -140,7 +140,7 @@ public class CommandFactoryFactory {
         DEFAULT_COMMAND_MAP.put("USER", new USER());
     }
 
-    private Map<String, Command> commandMap = new HashMap<String, Command>();
+    private Map<String, Command> commandMap = new HashMap<>();
 
     private boolean useDefaultCommands = true;
 
@@ -150,7 +150,7 @@ public class CommandFactoryFactory {
      */
     public CommandFactory createCommandFactory() {
         
-        Map<String, Command> mergedCommands = new HashMap<String, Command>();
+        Map<String, Command> mergedCommands = new HashMap<>();
         if(useDefaultCommands) {
             mergedCommands.putAll(DEFAULT_COMMAND_MAP);
         }

@@ -39,7 +39,7 @@ import org.apache.ftpserver.command.CommandFactoryFactory;
 public class DefaultCommandFactory implements CommandFactory {
 
     public DefaultCommandFactory() {
-        this(new HashMap<String, Command>());
+        this(new HashMap<>());
     }
 
     /**

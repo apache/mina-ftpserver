@@ -47,7 +47,7 @@ public class NativeFtpFileTest extends FtpFileTestTemplate {
 
     private static final File TEST_FILE3 = new File(ROOT_DIR, "file3");
 
-    private static final Map<String, File> FILE_MAPPINGS = new HashMap<String, File>();
+    private static final Map<String, File> FILE_MAPPINGS = new HashMap<>();
 
     static {
         FILE_MAPPINGS.put("/", ROOT_DIR);

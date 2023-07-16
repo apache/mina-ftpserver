@@ -94,7 +94,7 @@ public class AddUser extends CommandLine {
 
             user.setMaxIdleTime(askForInt(in, "Max idle time in seconds (0 for none):"));
             
-            List<Authority> authorities = new ArrayList<Authority>();
+            List<Authority> authorities = new ArrayList<>();
             
             if(askForBoolean(in, "Write permission (Y/N):")) {
                 authorities.add(new WritePermission());

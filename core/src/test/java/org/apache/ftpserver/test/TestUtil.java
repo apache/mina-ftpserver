@@ -127,7 +127,7 @@ public class TestUtil {
         Enumeration<NetworkInterface> nifs = NetworkInterface
                 .getNetworkInterfaces();
 
-        List<String> hostIps = new ArrayList<String>();
+        List<String> hostIps = new ArrayList<>();
         while (nifs.hasMoreElements()) {
             NetworkInterface nif = nifs.nextElement();
             Enumeration<InetAddress> ips = nif.getInetAddresses();

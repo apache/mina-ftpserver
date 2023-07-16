@@ -39,7 +39,7 @@ public class InetAddressBlacklistTest extends ClientTestTemplate {
 
         ListenerFactory factory = new ListenerFactory(server.getListener("default"));
 
-        List<InetAddress> blockedAddresses = new ArrayList<InetAddress>();
+        List<InetAddress> blockedAddresses = new ArrayList<>();
         blockedAddresses.add(InetAddress.getByName("localhost"));
 
         factory.setBlockedAddresses(blockedAddresses);

@@ -73,7 +73,7 @@ public class DefaultMessageResource implements MessageResource {
         }
 
         // populate different properties
-        messages = new HashMap<String, PropertiesPair>();
+        messages = new HashMap<>();
         if (languages != null) {
             for (String language : languages) {
                 PropertiesPair pair = createPropertiesPair(language, customMessageDirectory);
@@ -221,7 +221,7 @@ public class DefaultMessageResource implements MessageResource {
             }
         }
         
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = new HashMap<>();
         for(Object key : messages.keySet()) {
             result.put(key.toString(), messages.getProperty(key.toString()));
         }

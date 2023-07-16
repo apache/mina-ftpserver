@@ -77,10 +77,10 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     private ConnectionConfig connectionConfig = new ConnectionConfigFactory().createConnectionConfig();
 
-    private Map<String, Listener> listeners = new HashMap<String, Listener>();
+    private Map<String, Listener> listeners = new HashMap<>();
 
-    private static final List<Authority> ADMIN_AUTHORITIES = new ArrayList<Authority>();
-    private static final List<Authority> ANON_AUTHORITIES = new ArrayList<Authority>();
+    private static final List<Authority> ADMIN_AUTHORITIES = new ArrayList<>();
+    private static final List<Authority> ANON_AUTHORITIES = new ArrayList<>();
     
     /**
      * The thread pool executor to be used by the server using this context

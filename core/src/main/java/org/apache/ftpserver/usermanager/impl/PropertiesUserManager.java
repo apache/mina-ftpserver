@@ -337,7 +337,7 @@ public class PropertiesUserManager extends AbstractUserManager {
         // remove entries from properties
         String thisPrefix = PREFIX + usrName + '.';
         Enumeration<?> propNames = userDataProp.propertyNames();
-        ArrayList<String> remKeys = new ArrayList<String>();
+        ArrayList<String> remKeys = new ArrayList<>();
         while (propNames.hasMoreElements()) {
             String thisKey = propNames.nextElement().toString();
             if (thisKey.startsWith(thisPrefix)) {
@@ -390,7 +390,7 @@ public class PropertiesUserManager extends AbstractUserManager {
     public String[] getAllUserNames() {
         // get all user names
         String suffix = '.' + ATTR_HOME;
-        ArrayList<String> ulst = new ArrayList<String>();
+        ArrayList<String> ulst = new ArrayList<>();
         Enumeration<?> allKeys = userDataProp.propertyNames();
         int prefixlen = PREFIX.length();
         int suffixlen = suffix.length();
@@ -423,7 +423,7 @@ public class PropertiesUserManager extends AbstractUserManager {
         user.setHomeDirectory(userDataProp
                 .getProperty(baseKey + ATTR_HOME, "/"));
 
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
 
         if (userDataProp.getBoolean(baseKey + ATTR_WRITE_PERM, false)) {
             authorities.add(new WritePermission());

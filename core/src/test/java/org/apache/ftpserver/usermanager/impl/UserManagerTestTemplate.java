@@ -234,7 +234,7 @@ public abstract class UserManagerTestTemplate extends TestCase {
         user.setEnabled(false);
         user.setMaxIdleTime(2);
 
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(new WritePermission());
         authorities.add(new ConcurrentLoginPermission(3, 4));
         authorities.add(new TransferRatePermission(1, 5));
@@ -300,7 +300,7 @@ public abstract class UserManagerTestTemplate extends TestCase {
         user.setEnabled(false);
         user.setMaxIdleTime(2);
 
-        List<Authority> authorities = new ArrayList<Authority>();
+        List<Authority> authorities = new ArrayList<>();
         authorities.add(new WritePermission());
         authorities.add(new ConcurrentLoginPermission(3, 4));
         authorities.add(new TransferRatePermission(1, 5));

@@ -94,7 +94,7 @@ public class OPTS_MLST extends AbstractCommand {
             return new String[0];
         }
 
-        List<String> selectedTypes = new ArrayList<String>();
+        List<String> selectedTypes = new ArrayList<>();
         // check all the types
         for (int i = 0; i < types.length; ++i) {
             for (int j = 0; j < AVAILABLE_TYPES.length; ++j) {

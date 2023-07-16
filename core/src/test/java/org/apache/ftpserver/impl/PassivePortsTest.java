@@ -97,7 +97,7 @@ public class PassivePortsTest extends TestCase {
     }
     
     private List<Integer> valid(int... ints) {
-        List<Integer> valid = new ArrayList<Integer>();
+        List<Integer> valid = new ArrayList<>();
         for(int i : ints) {
             valid.add(i);
         }
