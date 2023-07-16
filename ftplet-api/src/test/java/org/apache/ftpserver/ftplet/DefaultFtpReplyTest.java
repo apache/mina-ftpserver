@@ -21,8 +21,6 @@ package org.apache.ftpserver.ftplet;
 
 import junit.framework.TestCase;
 
-import org.apache.ftpserver.ftplet.DefaultFtpReply;
-
 /**
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
