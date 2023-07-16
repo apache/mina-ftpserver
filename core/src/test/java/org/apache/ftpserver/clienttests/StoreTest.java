@@ -20,6 +20,8 @@ package org.apache.ftpserver.clienttests;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -39,7 +41,7 @@ public class StoreTest extends ClientTestTemplate {
     private static final String TESTDATA = "TESTDATA" + EOL + "line2" + EOL;
     private static final String TESTDATA_CRLF = "TESTDATA" + CRLF + "line2" + CRLF;
     private static final String TESTDATA_LF = "TESTDATA" + LF + "line2" + LF;
-    private static final String ENCODING = "UTF-8";
+    private static final Charset ENCODING = StandardCharsets.UTF_8;
     private static final String TEST_FILENAME = "test.txt";
     private static final String TEST_FILENAME_WITH_LEADING_SPACE = " leading.txt";
     private static final int SKIP_LEN = 4;

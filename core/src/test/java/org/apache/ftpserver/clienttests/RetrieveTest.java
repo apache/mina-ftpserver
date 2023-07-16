@@ -21,6 +21,7 @@ package org.apache.ftpserver.clienttests;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.ftpserver.test.TestUtil;
 
@@ -52,7 +53,7 @@ public class RetrieveTest extends ClientTestTemplate {
     protected void setUp() throws Exception {
         super.setUp();
 
-        testData = ("TESTDATA" + EOL).getBytes("UTF-8");
+        testData = ("TESTDATA" + EOL).getBytes(StandardCharsets.UTF_8);
 
         client.login(ADMIN_USERNAME, ADMIN_PASSWORD);
     }
