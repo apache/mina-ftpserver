@@ -15,6 +15,7 @@
  limitations under the License.
 -->
 # mina-ftpserver
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Blessings-Nthara_Apache-FtpServer--Software-Dependability&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Blessings-Nthara_Apache-FtpServer--Software-Dependability)
 The active branches are:
 - 1.1.x
 - 1.2.x
