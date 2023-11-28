@@ -40,7 +40,7 @@ public class FileRegularFilter implements FilenameFilter {
      *            regular expression
      */
     public FileRegularFilter(String pattern) {
-        if ((pattern == null) || pattern.equals("") || pattern.equals("*")) {
+        if ((pattern == null) || pattern.isEmpty() || pattern.equals("*")) {
             regularExpr = null;
         } else {
             regularExpr = new RegularExpr(pattern);
