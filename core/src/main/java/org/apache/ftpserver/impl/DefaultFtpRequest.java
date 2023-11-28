@@ -77,7 +77,7 @@ public class DefaultFtpRequest implements FtpRequest {
         String arg = null;
         if (spInd != -1) {
             arg = line.substring(spInd + 1);
-            if (arg.equals("")) {
+            if (arg.isEmpty()) {
                 arg = null;
             }
         }

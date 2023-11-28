@@ -55,7 +55,7 @@ public class DefaultCommandFactory implements CommandFactory {
      * Get command. Returns null if not found.
      */
     public Command getCommand(final String cmdName) {
-        if (cmdName == null || cmdName.equals("")) {
+        if (cmdName == null || cmdName.isEmpty()) {
             return null;
         }
         String upperCaseCmdName = cmdName.toUpperCase();
