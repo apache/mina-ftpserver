@@ -73,8 +73,12 @@ public class DataConnectionConfigurationFactory {
      */
     private void checkValidAddresses(){
         try{
-            InetAddress.getByName(passiveAddress);
-            InetAddress.getByName(passiveExternalAddress);
+            if(passiveAddress!=null) {
+                InetAddress.getByName(passiveAddress);
+            }
+            if(passiveExternalAddress!=null) {
+                InetAddress.getByName(passiveExternalAddress);
+            }
         }catch(UnknownHostException ex){
             throw new FtpServerConfigurationException("Unknown host", ex);
         }
