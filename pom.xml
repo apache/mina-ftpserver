@@ -361,7 +361,7 @@
                 Pick 1.1.2 for FTPSERVER-506 but it should be the previous version in more normal usage
                 when you've been sure that binary compatibility has not been broken from release to release. 
                 -->
-                <version>1.2.0</version>
+                <version>1.1.2</version>
                 <type>jar</type>
              </dependency>
             </oldVersion>
