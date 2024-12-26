@@ -30,7 +30,7 @@ jobs:
 #          - java: 19-ea
 #            experimental: true        
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/cache@v2.1.7
       with:
         path: ~/.m2/repository
