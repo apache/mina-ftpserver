@@ -154,13 +154,13 @@
     <jcl.over.slf4j.version>1.7.36</jcl.over.slf4j.version>
     <junit.version>4.13.2</junit.version>
     <log4j.version>2.20.0</log4j.version>
-    <mina.core.version>2.2.2</mina.core.version>
+    <mina.core.version>2.2.4</mina.core.version>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <slf4j.log4j12.version>1.7.36</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
 
     <!-- Checkstyle configuration -->
-    <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
+    <checkstyle.plugin.version>3.6.0</checkstyle.plugin.version>
     <checkstyle.version>9.3</checkstyle.version>
     <checkstyle.configdir>.</checkstyle.configdir>
 
@@ -170,7 +170,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Maven plugin version -->
-    <maven-javadoc-plugin-version>3.3.2</maven-javadoc-plugin-version>
+    <maven-javadoc-plugin-version>3.11.2</maven-javadoc-plugin-version>
   </properties>
 
   <dependencyManagement>
@@ -269,6 +269,9 @@
           <configuration>
             <excludeSubProjects>false</excludeSubProjects>
             <excludes>
+              <!-- Jenv local version -->
+              <exclude>.java-version</exclude>
+
               <!-- MAVEN_DEFAULT_EXCLUDES -->
               <exclude>**/target/**/*</exclude>
               <exclude>**/cobertura.ser</exclude>
@@ -351,7 +354,7 @@
         <plugin>
           <groupId>com.github.siom79.japicmp</groupId>
           <artifactId>japicmp-maven-plugin</artifactId>
-          <version>0.15.7</version>
+          <version>0.23.0</version>
           <configuration>
             <oldVersion>
               <dependency>

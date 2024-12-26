@@ -40,6 +40,7 @@ import org.apache.mina.core.filterchain.IoFilterChain;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ReadFuture;
 import org.apache.mina.core.future.WriteFuture;
+import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoService;
 import org.apache.mina.core.service.TransportMetadata;
@@ -729,7 +730,7 @@ public class FtpIoSession implements IoSession {
             SslFilter sslFilter = (SslFilter) getFilterChain().get(
                     SslFilter.class);
 
-            SSLSession sslSession = sslFilter.getSslSession(this);
+            SSLSession sslSession = SSLSession.class.cast(getAttribute(SslFilter.SSL_SECURED));
 
             if (sslSession != null) {
                 try {
@@ -863,5 +864,10 @@ public class FtpIoSession implements IoSession {
 
     public boolean isSecured() {
         return getFilterChain().contains(SslFilter.class);
+    }
+
+    @Override
+    public boolean isServer() {
+        return (getService() instanceof IoAcceptor);
     }
 }

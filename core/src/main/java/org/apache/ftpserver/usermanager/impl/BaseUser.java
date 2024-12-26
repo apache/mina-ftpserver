@@ -182,14 +182,27 @@ public class BaseUser implements User {
         if(authorities == null) {
             return null;
         }
-        
+       
+        boolean someoneCouldAuthorize = false;
+ 
         for (Authority authority : authorities) {
             if (authority.canAuthorize(request)) {
-                return authority.authorize(request);
+                someoneCouldAuthorize = true;
+
+                request = authority.authorize(request);
+
+                // authorization failed, return null
+                if (request == null) {
+                    return null;
+                }
             }
         }
 
-        return null;
+        if (someoneCouldAuthorize) {
+            return request;
+        } else {
+            return null;
+        }
     }
 
     /**
