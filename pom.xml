@@ -160,7 +160,7 @@
 
     <!-- Set versions for depending jars -->
     <commons.codec.version>1.16.0</commons.codec.version>
-    <commons.net.version>3.9.0</commons.net.version>
+    <commons.net.version>3.11.1</commons.net.version>
     <ftpserver.version>${project.version}</ftpserver.version>
     <hsqldb.version>1.8.0.10</hsqldb.version>
     <jcl.over.slf4j.version>1.7.36</jcl.over.slf4j.version>
