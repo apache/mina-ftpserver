@@ -33,6 +33,8 @@ import org.apache.ftpserver.impl.FtpServerContext;
 import org.apache.ftpserver.impl.LocalizedFtpReply;
 import org.apache.ftpserver.ssl.ClientAuth;
 import org.apache.ftpserver.ssl.SslConfiguration;
+import org.apache.mina.core.session.IoSession;
+import org.apache.mina.core.write.WriteRequest;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,8 +105,10 @@ public class AUTH extends AbstractCommand {
         }
 
         try {
-        secureSession(session, authType);
-        session.write(LocalizedFtpReply.translate(session, request, context, 234, "AUTH." + authType, null));
+                LocalizedFtpReply reply = LocalizedFtpReply.translate(session, request, context, 234, "AUTH." + authType, null);
+                secureSession(session, authType, reply);
+
+                session.write(reply);
         } catch (FtpException ex) {
         throw ex;
         } catch (Exception ex) {
@@ -117,14 +121,21 @@ public class AUTH extends AbstractCommand {
     }
     }
 
-    private void secureSession(final FtpIoSession session, final String type)
+    private void secureSession(final FtpIoSession session, final String type, LocalizedFtpReply reply)
         throws GeneralSecurityException, FtpException {
         SslConfiguration ssl = session.getListener().getSslConfiguration();
     
         if (ssl != null) {
-            session.setAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE);
-    
-            SslFilter sslFilter = new SslFilter(ssl.getSSLContext());
+            SslFilter sslFilter = new SslFilter(ssl.getSSLContext()) {
+                @Override
+                public void filterWrite(NextFilter next, IoSession session, WriteRequest request) throws Exception {
+                    if (request.getOriginalMessage() == reply) {
+                       next.filterWrite(session, request);
+                    } else {
+                        super.filterWrite(next, session, request);
+                    }
+                }
+            };
             if (ssl.getClientAuth() == ClientAuth.NEED) {
             sslFilter.setNeedClientAuth(true);
             } else if (ssl.getClientAuth() == ClientAuth.WANT) {
