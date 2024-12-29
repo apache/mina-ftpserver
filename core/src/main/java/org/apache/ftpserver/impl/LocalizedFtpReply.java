@@ -24,7 +24,7 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * FTP reply translator.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -41,7 +41,7 @@ public class LocalizedFtpReply extends DefaultFtpReply {
 
     /**
      * Creates a new instance of <code>LocalizedFtpReply</code>.
-     * 
+     *
      * @param code
      *            the reply code
      * @param message

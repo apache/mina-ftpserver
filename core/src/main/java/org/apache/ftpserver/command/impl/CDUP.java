@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>CDUP &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command is a special case of CWD, and is included to simplify the
  * implementation of programs for transferring directory trees between operating
  * systems having different syntaxes for naming the parent directory. The reply
@@ -51,6 +51,8 @@ public class CDUP extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

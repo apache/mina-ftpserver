@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This server supports explicit SSL support.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -56,6 +56,8 @@ public class AUTH extends AbstractCommand {
 
     /**
      * Execute command
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session, final FtpServerContext context, final FtpRequest request)
             throws IOException, FtpException {
@@ -65,7 +67,8 @@ public class AUTH extends AbstractCommand {
 
         // argument check
         if (!request.hasArgument()) {
-            session.write(LocalizedFtpReply.translate(session, request, context, FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "AUTH", null));
+            session.write(LocalizedFtpReply.translate(session, request, context,
+                FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "AUTH", null));
             return;
         }
 
@@ -104,7 +107,8 @@ public class AUTH extends AbstractCommand {
             }
 
             try {
-                LocalizedFtpReply reply = LocalizedFtpReply.translate(session, request, context, 234, "AUTH." + authType, null);
+                LocalizedFtpReply reply = LocalizedFtpReply.translate(session, request, context, 234,
+                    "AUTH." + authType, null);
                 secureSession(session, authType, reply);
 
                 session.write(reply);
@@ -115,14 +119,15 @@ public class AUTH extends AbstractCommand {
                 throw new FtpException("AUTH.execute()", ex);
             }
         } else {
-            session.write(LocalizedFtpReply.translate(session, request, context, FtpReply.REPLY_502_COMMAND_NOT_IMPLEMENTED, "AUTH", null));
+            session.write(LocalizedFtpReply.translate(session, request, context,
+                FtpReply.REPLY_502_COMMAND_NOT_IMPLEMENTED, "AUTH", null));
         }
     }
 
     private void secureSession(final FtpIoSession session, final String type, LocalizedFtpReply reply)
         throws GeneralSecurityException, FtpException {
         SslConfiguration ssl = session.getListener().getSslConfiguration();
-    
+
         if (ssl != null) {
             SslFilter sslFilter = new SslFilter(ssl.getSSLContext()) {
                 @Override
@@ -139,21 +144,21 @@ public class AUTH extends AbstractCommand {
             } else if (ssl.getClientAuth() == ClientAuth.WANT) {
                 sslFilter.setWantClientAuth(true);
             }
-    
+
             // note that we do not care about the protocol, we allow both types
             // and leave it to the SSL handshake to determine the protocol to
             // use. Thus the type argument is ignored.
-    
+
             if (ssl.getEnabledCipherSuites() != null) {
                 sslFilter.setEnabledCipherSuites(ssl.getEnabledCipherSuites());
             }
-    
+
             if (ssl.getEnabledProtocols() != null) {
                 sslFilter.setEnabledProtocols(ssl.getEnabledProtocols());
             }
-    
+
             session.getFilterChain().addFirst(SSL_SESSION_FILTER_NAME, sslFilter);
-    
+
             if ("SSL".equals(type)) {
                 session.getDataConnection().setSecure(true);
             }

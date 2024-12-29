@@ -32,9 +32,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>PWD  &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the name of the current working directory to be returned
  * in the reply.
  *
@@ -43,7 +43,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 public class PWD extends AbstractCommand {
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

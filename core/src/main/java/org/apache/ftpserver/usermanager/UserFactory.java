@@ -57,10 +57,10 @@ public class UserFactory {
         user.setEnabled(isEnabled);
         user.setAuthorities(authorities);
         user.setMaxIdleTime(maxIdleTimeSec);
-        
+
         return user;
     }
-    
+
     /**
      * Get the user name for users created by this factory
      * @return The user name

@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This SITE command returns the specified user information.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -49,6 +49,8 @@ public class SITE_DESCUSER extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Command for changing the modified time of a file. 
+ * Command for changing the modified time of a file.
  * <p>
  * Specified in the following document:
  * http://www.omz13.com/downloads/draft-somers-ftp-mfxx-00.html#anchor8
@@ -48,12 +48,14 @@ public class MFMT extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
             throws IOException {
 
-        
+
         // reset state variables
         session.resetState();
 
@@ -70,10 +72,10 @@ public class MFMT extends AbstractCommand {
                                     "MFMT.invalid", null));
             return;
         }
-        
-        String[] arguments = argument.split(" ",2);
 
-        if(arguments.length != 2) {
+        String[] arguments = argument.split(" ", 2);
+
+        if (arguments.length != 2) {
             session
             .write(LocalizedFtpReply
                     .translate(
@@ -84,24 +86,24 @@ public class MFMT extends AbstractCommand {
                             "MFMT.invalid", null));
             return;
         }
-       
+
         String timestamp = arguments[0].trim();
-       
+
         try {
-            
+
             Date time = DateUtils.parseFTPDate(timestamp);
-            
+
             String fileName = arguments[1].trim();
-            
+
             // get file object
             FtpFile file = null;
-            
+
             try {
                 file = session.getFileSystemView().getFile(fileName);
             } catch (Exception ex) {
                 LOG.debug("Exception getting the file object: " + fileName, ex);
             }
-            
+
             if (file == null || !file.doesExist()) {
                 session
                 .write(LocalizedFtpReply
@@ -113,7 +115,7 @@ public class MFMT extends AbstractCommand {
                                 "MFMT.filemissing", fileName));
                 return;
             }
-            
+
             // check file
             if (!file.isFile()) {
                 session
@@ -158,7 +160,7 @@ public class MFMT extends AbstractCommand {
                             "MFMT.invalid", null));
             return;
         }
-        
+
 
     }
 }

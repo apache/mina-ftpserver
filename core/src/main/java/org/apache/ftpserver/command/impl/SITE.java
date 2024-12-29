@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Handle SITE command.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -45,6 +45,8 @@ public class SITE extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

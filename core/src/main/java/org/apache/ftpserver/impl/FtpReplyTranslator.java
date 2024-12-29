@@ -32,9 +32,9 @@ import org.apache.ftpserver.util.DateUtils;
 /**
  * A utility class for returning translated messages. The utility method,
  * <code>translateMessage</code> also expands any variables in the message.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
+ *
  */
 
 public class FtpReplyTranslator {
@@ -98,7 +98,7 @@ public class FtpReplyTranslator {
 
     /**
      * Returns the translated message.
-     * 
+     *
      * @param session
      *            the FTP session for which a reply is to be sent
      * @param request
@@ -113,21 +113,21 @@ public class FtpReplyTranslator {
      *            the basic message
      * @return the translated message
      */
-    public static String translateMessage(FtpIoSession session, FtpRequest request, FtpServerContext context, 
+    public static String translateMessage(FtpIoSession session, FtpRequest request, FtpServerContext context,
                 int code, String subId, String basicMsg) {
         MessageResource resource = context.getMessageResource();
         String lang = session.getLanguage();
 
         String msg = null;
-        
+
         if (resource != null) {
             msg = resource.getMessage(code, subId, lang);
         }
-        
+
         if (msg == null) {
             msg = "";
         }
-        
+
         msg = replaceVariables(session, request, context, code, basicMsg, msg);
 
         return msg;
@@ -153,6 +153,7 @@ public class FtpReplyTranslator {
 
         StringBuilder sb = new StringBuilder(128);
         sb.append(str.substring(startIndex, openIndex));
+
         while (true) {
             String varName = str.substring(openIndex + 1, closeIndex);
             sb.append(getVariableValue(session, request, context, code,
@@ -160,18 +161,22 @@ public class FtpReplyTranslator {
 
             startIndex = closeIndex + 1;
             openIndex = str.indexOf('{', startIndex);
+
             if (openIndex == -1) {
                 sb.append(str.substring(startIndex));
                 break;
             }
 
             closeIndex = str.indexOf('}', startIndex);
+
             if ((closeIndex == -1) || (openIndex > closeIndex)) {
                 sb.append(str.substring(startIndex));
                 break;
             }
+
             sb.append(str.substring(startIndex, openIndex));
         }
+
         return sb.toString();
     }
 
@@ -181,37 +186,29 @@ public class FtpReplyTranslator {
     private static String getVariableValue(FtpIoSession session,
         FtpRequest request, FtpServerContext context, int code,
         String basicMsg, String varName) {
-
         String varVal = null;
 
-        // all output variables
         if (varName.startsWith("output.")) {
+            // all output variables
             varVal = getOutputVariableValue(session, code, basicMsg, varName);
-        }
-
-        // all server variables
-        else if (varName.startsWith("server.")) {
+        } else if (varName.startsWith("server.")) {
+            // all server variables
             varVal = getServerVariableValue(session, varName);
-        }
-
-        // all request variables
-        else if (varName.startsWith("request.")) {
+        } else if (varName.startsWith("request.")) {
+            // all request variables
             varVal = getRequestVariableValue(session, request, varName);
-        }
-
-        // all statistical variables
-        else if (varName.startsWith("stat.")) {
+        } else if (varName.startsWith("stat.")) {
+            // all statistical variables
             varVal = getStatisticalVariableValue(session, context, varName);
-        }
-
-        // all client variables
-        else if (varName.startsWith("client.")) {
+        } else if (varName.startsWith("client.")) {
+            // all client variables
             varVal = getClientVariableValue(session, varName);
         }
 
         if (varVal == null) {
             varVal = "";
         }
+
         return varVal;
     }
 
@@ -221,77 +218,70 @@ public class FtpReplyTranslator {
     private static String getClientVariableValue(FtpIoSession session,
         String varName) {
 
-        String varVal = null;
-
-        // client ip
-        if (varName.equals(CLIENT_IP)) {
-            if (session.getRemoteAddress() instanceof InetSocketAddress) {
-                InetSocketAddress remoteSocketAddress = (InetSocketAddress) session.getRemoteAddress();
-                varVal = remoteSocketAddress.getAddress().getHostAddress();
-            }
-
-        }
-
-        // client connection time
-        else if (varName.equals(CLIENT_CON_TIME)) {
-            varVal = DateUtils.getISO8601Date(session.getCreationTime());
-        }
-
-        // client login name
-        else if (varName.equals(CLIENT_LOGIN_NAME)) {
-            if (session.getUser() != null) {
-                varVal = session.getUser().getName();
-            }
-        }
-
-        // client login time
-        else if (varName.equals(CLIENT_LOGIN_TIME)) {
-            varVal = DateUtils.getISO8601Date(session.getLoginTime().getTime());
-        }
-
-        // client last access time
-        else if (varName.equals(CLIENT_ACCESS_TIME)) {
-            varVal = DateUtils.getISO8601Date(session.getLastAccessTime().getTime());
-        }
-
-        // client home
-        else if (varName.equals(CLIENT_HOME)) {
-            varVal = session.getUser().getHomeDirectory();
-        }
-
-        // client directory
-        else if (varName.equals(CLIENT_DIR)) {
-            FileSystemView fsView = session.getFileSystemView();
-            if (fsView != null) {
-                try {
-                    varVal = fsView.getWorkingDirectory().getAbsolutePath();
+        switch (varName) {
+            case CLIENT_IP:
+                // client ip
+                if (session.getRemoteAddress() instanceof InetSocketAddress) {
+                    InetSocketAddress remoteSocketAddress = (InetSocketAddress) session.getRemoteAddress();
+                    return remoteSocketAddress.getAddress().getHostAddress();
+                } else {
+                    return null;
                 }
-                catch (Exception ex) {
-                    varVal = "";
+
+            case CLIENT_CON_TIME:
+                // client connection time
+                return DateUtils.getISO8601Date(session.getCreationTime());
+
+            case CLIENT_LOGIN_NAME:
+                // client login name
+                return session.getUser().getName();
+
+            case CLIENT_LOGIN_TIME:
+                // client login time
+                return DateUtils.getISO8601Date(session.getLoginTime().getTime());
+
+            case CLIENT_ACCESS_TIME:
+                // client last access time
+                return DateUtils.getISO8601Date(session.getLastAccessTime().getTime());
+
+            case CLIENT_HOME:
+                // client home
+                return session.getUser().getHomeDirectory();
+
+            case CLIENT_DIR:
+                // client directory
+                FileSystemView fsView = session.getFileSystemView();
+
+                if (fsView != null) {
+                    try {
+                        return fsView.getWorkingDirectory().getAbsolutePath();
+                    } catch (Exception ex) {
+                        return "";
+                    }
                 }
-            }
+
+            default:
+                return null;
         }
-        return varVal;
     }
 
     /**
      * Get output variable value.
      */
-    private static String getOutputVariableValue(FtpIoSession session,
-        int code, String basicMsg, String varName) {
-        String varVal = null;
+    private static String getOutputVariableValue(FtpIoSession session, int code, String basicMsg, String varName) {
 
-        // output code
-        if (varName.equals(OUTPUT_CODE)) {
-            varVal = String.valueOf(code);
+        switch (varName) {
+            case OUTPUT_CODE:
+                // output code
+                return String.valueOf(code);
+
+            case OUTPUT_MSG:
+                // output message
+                return basicMsg;
+
+            default:
+                return null;
         }
-
-        // output message
-        else if (varName.equals(OUTPUT_MSG)) {
-            varVal = basicMsg;
-        }
-
-        return varVal;
     }
 
     /**
@@ -300,59 +290,59 @@ public class FtpReplyTranslator {
     private static String getRequestVariableValue(FtpIoSession session,
         FtpRequest request, String varName) {
 
-        String varVal = null;
-
         if (request == null) {
             return "";
         }
 
-        // request line
-        if (varName.equals(REQUEST_LINE)) {
-            varVal = request.getRequestLine();
-        }
+        switch (varName) {
+            case REQUEST_LINE:
+                // request line
+                return request.getRequestLine();
 
-        // request command
-        else if (varName.equals(REQUEST_CMD)) {
-            varVal = request.getCommand();
-        }
+            case REQUEST_CMD:
+                // request command
+                return request.getCommand();
 
-        // request argument
-        else if (varName.equals(REQUEST_ARG)) {
-            varVal = request.getArgument();
-        }
+            case REQUEST_ARG:
+                // request argument
+                return request.getArgument();
 
-        return varVal;
+            default:
+                return null;
+        }
     }
 
     /**
      * Get server variable value.
      */
-    private static String getServerVariableValue(FtpIoSession session,
-        String varName) {
-
-        String varVal = null;
+    private static String getServerVariableValue(FtpIoSession session, String varName) {
 
         SocketAddress localSocketAddress = session.getLocalAddress();
 
         if (localSocketAddress instanceof InetSocketAddress) {
             InetSocketAddress localInetSocketAddress = (InetSocketAddress) localSocketAddress;
-            // server address
-            if (varName.equals(SERVER_IP)) {
 
-                InetAddress addr = localInetSocketAddress.getAddress();
+            switch (varName) {
+                case SERVER_IP:
+                    // server address
+                    InetAddress addr = localInetSocketAddress.getAddress();
 
-                if (addr != null) {
-                    varVal = addr.getHostAddress();
-                }
+                    if (addr != null) {
+                        return addr.getHostAddress();
+                    } else {
+                        return null;
+                    }
+
+                case SERVER_PORT:
+                    // server port
+                    return String.valueOf(localInetSocketAddress.getPort());
+
+                default:
+                    return null;
             }
-
-            // server port
-            else if (varName.equals(SERVER_PORT)) {
-                varVal = String.valueOf(localInetSocketAddress.getPort());
-            }
+        } else {
+            return null;
         }
-
-        return varVal;
     }
 
     /**
@@ -360,20 +350,20 @@ public class FtpReplyTranslator {
      */
     private static String getStatisticalConnectionVariableValue(
         FtpIoSession session, FtpServerContext context, String varName) {
-        String varVal = null;
         FtpStatistics stat = context.getFtpStatistics();
 
-        // total connection number
-        if (varName.equals(STAT_CON_TOTAL)) {
-            varVal = String.valueOf(stat.getTotalConnectionNumber());
-        }
+        switch (varName) {
+            case STAT_CON_TOTAL:
+                // total connection number
+                return String.valueOf(stat.getTotalConnectionNumber());
 
-        // current connection number
-        else if (varName.equals(STAT_CON_CURR)) {
-            varVal = String.valueOf(stat.getCurrentConnectionNumber());
-        }
+            case STAT_CON_CURR:
+                // current connection number
+                return String.valueOf(stat.getCurrentConnectionNumber());
 
-        return varVal;
+            default:
+                return null;
+        }
     }
 
     /**
@@ -381,20 +371,20 @@ public class FtpReplyTranslator {
      */
     private static String getStatisticalDirectoryVariableValue(
         FtpIoSession session, FtpServerContext context, String varName) {
-        String varVal = null;
         FtpStatistics stat = context.getFtpStatistics();
 
-        // total directory created
-        if (varName.equals(STAT_DIR_CREATE_COUNT)) {
-            varVal = String.valueOf(stat.getTotalDirectoryCreated());
-        }
+        switch (varName) {
+            case STAT_DIR_CREATE_COUNT:
+                // total directory created
+                return String.valueOf(stat.getTotalDirectoryCreated());
 
-        // total directory removed
-        else if (varName.equals(STAT_DIR_DELETE_COUNT)) {
-            varVal = String.valueOf(stat.getTotalDirectoryRemoved());
-        }
+            case STAT_DIR_DELETE_COUNT:
+                // total directory removed
+                return String.valueOf(stat.getTotalDirectoryRemoved());
 
-        return varVal;
+            default:
+                return null;
+        }
     }
 
     /**
@@ -402,35 +392,32 @@ public class FtpReplyTranslator {
      */
     private static String getStatisticalFileVariableValue(FtpIoSession session,
         FtpServerContext context, String varName) {
-        String varVal = null;
         FtpStatistics stat = context.getFtpStatistics();
 
-        // total number of file upload
-        if (varName.equals(STAT_FILE_UPLOAD_COUNT)) {
-            varVal = String.valueOf(stat.getTotalUploadNumber());
-        }
+        switch (varName) {
+            case STAT_FILE_UPLOAD_COUNT:
+                // total number of file upload
+                return String.valueOf(stat.getTotalUploadNumber());
 
-        // total bytes uploaded
-        else if (varName.equals(STAT_FILE_UPLOAD_BYTES)) {
-            varVal = String.valueOf(stat.getTotalUploadSize());
-        }
+            case STAT_FILE_UPLOAD_BYTES:
+                // total bytes uploaded
+                return String.valueOf(stat.getTotalUploadSize());
 
-        // total number of file download
-        else if (varName.equals(STAT_FILE_DOWNLOAD_COUNT)) {
-            varVal = String.valueOf(stat.getTotalDownloadNumber());
-        }
+            case STAT_FILE_DOWNLOAD_COUNT:
+                // total number of file download
+                return String.valueOf(stat.getTotalDownloadNumber());
 
-        // total bytes downloaded
-        else if (varName.equals(STAT_FILE_DOWNLOAD_BYTES)) {
-            varVal = String.valueOf(stat.getTotalDownloadSize());
-        }
+            case STAT_FILE_DOWNLOAD_BYTES:
+                // total bytes downloaded
+                return String.valueOf(stat.getTotalDownloadSize());
 
-        // total number of files deleted
-        else if (varName.equals(STAT_FILE_DELETE_COUNT)) {
-            varVal = String.valueOf(stat.getTotalDeleteNumber());
-        }
+            case STAT_FILE_DELETE_COUNT:
+                // total number of files deleted
+                return String.valueOf(stat.getTotalDeleteNumber());
 
-        return varVal;
+            default:
+                return null;
+        }
     }
 
     /**
@@ -438,30 +425,28 @@ public class FtpReplyTranslator {
      */
     private static String getStatisticalLoginVariableValue(
         FtpIoSession session, FtpServerContext context, String varName) {
-        String varVal = null;
         FtpStatistics stat = context.getFtpStatistics();
 
-        // total login number
-        if (varName.equals(STAT_LOGIN_TOTAL)) {
-            varVal = String.valueOf(stat.getTotalLoginNumber());
-        }
+        switch (varName) {
+            case STAT_LOGIN_TOTAL:
+                // total login number
+                return String.valueOf(stat.getTotalLoginNumber());
 
-        // current login number
-        else if (varName.equals(STAT_LOGIN_CURR)) {
-            varVal = String.valueOf(stat.getCurrentLoginNumber());
-        }
+            case STAT_LOGIN_CURR:
+                // current login number
+                return String.valueOf(stat.getCurrentLoginNumber());
 
-        // total anonymous login number
-        else if (varName.equals(STAT_LOGIN_ANON_TOTAL)) {
-            varVal = String.valueOf(stat.getTotalAnonymousLoginNumber());
-        }
+            case STAT_LOGIN_ANON_TOTAL:
+                // total anonymous login number
+                return String.valueOf(stat.getTotalAnonymousLoginNumber());
 
-        // current anonymous login number
-        else if (varName.equals(STAT_LOGIN_ANON_CURR)) {
-            varVal = String.valueOf(stat.getCurrentAnonymousLoginNumber());
-        }
+            case STAT_LOGIN_ANON_CURR:
+                // current anonymous login number
+                return String.valueOf(stat.getCurrentAnonymousLoginNumber());
 
-        return varVal;
+            default:
+                return null;
+        }
     }
 
     /**
@@ -469,38 +454,27 @@ public class FtpReplyTranslator {
      */
     private static String getStatisticalVariableValue(FtpIoSession session,
         FtpServerContext context, String varName) {
-
-        String varVal = null;
         FtpStatistics stat = context.getFtpStatistics();
 
-        // server start time
+        String varVal = null;
+
         if (varName.equals(STAT_START_TIME)) {
+            // server start time
             varVal = DateUtils.getISO8601Date(stat.getStartTime().getTime());
-        }
-
-        // connection statistical variables
-        else if (varName.startsWith("stat.con")) {
-            varVal = getStatisticalConnectionVariableValue(session, context,
-                varName);
-        }
-
-        // login statistical variables
-        else if (varName.startsWith("stat.login.")) {
+        } else if (varName.startsWith("stat.con")) {
+            // connection statistical variables
+            varVal = getStatisticalConnectionVariableValue(session, context, varName);
+        } else if (varName.startsWith("stat.login.")) {
+            // login statistical variables
             varVal = getStatisticalLoginVariableValue(session, context, varName);
-        }
-
-        // file statistical variable
-        else if (varName.startsWith("stat.file")) {
+        } else if (varName.startsWith("stat.file")) {
+            // file statistical variable
             varVal = getStatisticalFileVariableValue(session, context, varName);
-        }
-
-        // directory statistical variable
-        else if (varName.startsWith("stat.dir.")) {
-            varVal = getStatisticalDirectoryVariableValue(session, context,
-                varName);
+        } else if (varName.startsWith("stat.dir.")) {
+            // directory statistical variable
+            varVal = getStatisticalDirectoryVariableValue(session, context, varName);
         }
 
         return varVal;
     }
-
 }

@@ -28,7 +28,7 @@ import org.apache.ftpserver.command.CommandFactoryFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Command factory to return appropriate command implementation depending on the
  * FTP request command string.
  *
@@ -47,6 +47,8 @@ public class DefaultCommandFactory implements CommandFactory {
 
     /**
      * Internal constructor, use {@link CommandFactoryFactory} instead
+     *
+     * @param commandMap The set of commands
      */
     public DefaultCommandFactory(Map<String, Command> commandMap) {
         this.commandMap = commandMap;
@@ -61,7 +63,7 @@ public class DefaultCommandFactory implements CommandFactory {
         if (cmdName == null || (cmdName.length() == 0)) {
             return null;
         }
-        
+
         return commandMap.get(cmdName.toUpperCase());
     }
 }

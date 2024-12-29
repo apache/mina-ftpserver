@@ -30,9 +30,9 @@ public class DefaultFtpReply implements FtpReply {
     private int code;
 
     private String message;
-    
+
     /**
-     * time when this reply was sent.  
+     * time when this reply was sent.
      */
     private long sentTime = 0L;
 
@@ -79,22 +79,22 @@ public class DefaultFtpReply implements FtpReply {
     public String getMessage() {
         return message;
     }
-    
+
     public long getSentTime() {
         return sentTime;
     }
-    
+
     public boolean isPositive() {
         return code < 400;
     }
-    
+
     private boolean isDigit(char c) {
         return c >= 48 && c <= 57;
     }
-    
+
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -109,12 +109,12 @@ public class DefaultFtpReply implements FtpReply {
 
         // remove any carriage returns
         notNullMessage = notNullMessage.replace("\r", "");
-        
+
         // remove trailing line feeds
-        if(notNullMessage.endsWith("\n")) {
+        if (notNullMessage.endsWith("\n")) {
             notNullMessage = notNullMessage.substring(0, notNullMessage.length() - 1);
         }
-        
+
         String[] lines = notNullMessage.split("\n");
 
         // no newline
@@ -138,9 +138,9 @@ public class DefaultFtpReply implements FtpReply {
 
                 // "If an intermediary line begins with a 3-digit number, the Server
                 // must pad the front  to avoid confusion.
-                if(i > 0 
-                        && i + 1 < lines.length 
-                        && line.length() > 2 
+                if (i > 0
+                        && i + 1 < lines.length
+                        && line.length() > 2
                         && isDigit(line.charAt(0))
                         && isDigit(line.charAt(1))
                         && isDigit(line.charAt(2))
@@ -150,10 +150,8 @@ public class DefaultFtpReply implements FtpReply {
                 sb.append(line);
                 sb.append(CRLF);
             }
-
         }
 
         return sb.toString();
     }
-
 }

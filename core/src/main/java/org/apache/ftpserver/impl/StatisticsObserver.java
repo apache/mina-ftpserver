@@ -23,7 +23,7 @@ import java.net.InetAddress;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * FTP statistics observer interface.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -57,12 +57,14 @@ public interface StatisticsObserver {
 
     /**
      * New user login notification.
+     *
+     * @param anonymous If the notification has to be anonymous
      */
     void notifyLogin(boolean anonymous);
 
     /**
      * Failed user login notification.
-     * 
+     *
      * @param address
      *            Remote address that the failure came from
      */
@@ -70,6 +72,8 @@ public interface StatisticsObserver {
 
     /**
      * User logout notification.
+     *
+     * @param anonymous If the notification has to be anonymous
      */
     void notifyLogout(boolean anonymous);
 

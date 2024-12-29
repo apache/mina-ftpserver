@@ -61,7 +61,7 @@ public class NativeFileSystemFactory implements FileSystemFactory {
     }
 
     /**
-     * Is this file system case insensitive. 
+     * Is this file system case insensitive.
      * Enabling might cause problems when working against case-sensitive file systems, like on Linux
      * @return true if this file system is case insensitive
      */
@@ -70,7 +70,7 @@ public class NativeFileSystemFactory implements FileSystemFactory {
     }
 
     /**
-     * Should this file system be case insensitive. 
+     * Should this file system be case insensitive.
      * Enabling might cause problems when working against case-sensitive file systems, like on Linux
      * @param caseInsensitive true if this file system should be case insensitive
      */
@@ -80,6 +80,8 @@ public class NativeFileSystemFactory implements FileSystemFactory {
 
     /**
      * Create the appropriate user file system view.
+     *
+     * {@inheritDoc}
      */
     public FileSystemView createFileSystemView(User user) throws FtpException {
         synchronized (user) {

@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This is the starting point of all the servers. It invokes a new listener
  * thread. <code>Server</code> implementation is used to create the server
  * socket and handle client connection.
@@ -57,6 +57,8 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Internal constructor, do not use directly. Use {@link FtpServerFactory} instead
+     *
+     * @param serverContext The server context
      */
     public DefaultFtpServer(final FtpServerContext serverContext) {
         this.serverContext = serverContext;
@@ -64,7 +66,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Start the server. Open a new listener thread.
-     * @throws FtpException 
+     * @throws FtpException
      */
     public void start() throws FtpException {
         if (serverContext == null) {
@@ -73,38 +75,38 @@ public class DefaultFtpServer implements FtpServer {
         }
 
         List<Listener> startedListeners = new ArrayList<>();
-        
+
         try {
             Map<String, Listener> listeners = serverContext.getListeners();
-            
+
             for (Listener listener : listeners.values()) {
                 listener.start(serverContext);
                 startedListeners.add(listener);
             }
-    
+
             // init the Ftplet container
             serverContext.getFtpletContainer().init(serverContext);
-        
+
             started = true;
 
             LOG.info("FTP server started");
-        } catch(Exception e) {
+        } catch (Exception e) {
             // must close listeners that we were able to start
-            for(Listener listener : startedListeners) {
+            for (Listener listener : startedListeners) {
                 listener.stop();
             }
-            
-            if(e instanceof FtpException) {
-                throw (FtpException)e;
+
+            if (e instanceof FtpException) {
+                throw (FtpException) e;
             } else {
-                throw (RuntimeException)e;
+                throw (RuntimeException) e;
             }
-            
+
         }
     }
 
     /**
-     * Stop the server. Stopping the server will close completely and 
+     * Stop the server. Stopping the server will close completely and
      * it not supported to restart using {@link #start()}.
      */
     public void stop() {
@@ -133,6 +135,8 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Get the server status.
+     *
+     * {@inheritDoc}
      */
     public boolean isStopped() {
         return !started;
@@ -177,6 +181,8 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Is the server suspended
+     *
+     * {@inheritDoc}
      */
     public boolean isSuspended() {
         return suspended;
@@ -184,6 +190,8 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Get the root server context.
+     *
+     * {@inheritDoc}
      */
     public FtpServerContext getServerContext() {
         return serverContext;
@@ -191,7 +199,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Get all listeners available one this server
-     * 
+     *
      * @return The current listeners
      */
     public Map<String, Listener> getListeners() {
@@ -200,9 +208,8 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Get a specific listener identified by its name
-     * 
-     * @param name
-     *            The name of the listener
+     *
+     * @param name The name of the listener
      * @return The {@link Listener} matching the provided name
      */
     public Listener getListener(final String name) {
@@ -211,7 +218,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Get all {@link Ftplet}s registered at this server
-     * 
+     *
      * @return All {@link Ftplet}s
      */
     public Map<String, Ftplet> getFtplets() {
@@ -220,7 +227,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Retrieve the user manager used with this server
-     * 
+     *
      * @return The user manager
      */
     public UserManager getUserManager() {
@@ -229,7 +236,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Retrieve the file system used with this server
-     * 
+     *
      * @return The {@link FileSystemFactory}
      */
     public FileSystemFactory getFileSystem() {
@@ -238,7 +245,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Retrieve the command factory used with this server
-     * 
+     *
      * @return The {@link CommandFactory}
      */
     public CommandFactory getCommandFactory() {
@@ -247,7 +254,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Retrieve the message resource used with this server
-     * 
+     *
      * @return The {@link MessageResource}
      */
     public MessageResource getMessageResource() {
@@ -256,7 +263,7 @@ public class DefaultFtpServer implements FtpServer {
 
     /**
      * Retrieve the connection configuration this server
-     * 
+     *
      * @return The {@link MessageResource}
      */
     public ConnectionConfig getConnectionConfig() {

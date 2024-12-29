@@ -55,9 +55,9 @@ public class CommandFactoryBeanDefinitionParser extends
     protected void doParse(final Element element,
             final ParserContext parserContext,
             final BeanDefinitionBuilder builder) {
-        
+
         BeanDefinitionBuilder factoryBuilder = BeanDefinitionBuilder.genericBeanDefinition(CommandFactoryFactory.class);
-        
+
         ManagedMap commands = new ManagedMap();
 
         List<Element> childs = SpringUtil.getChildElements(element);
@@ -75,10 +75,10 @@ public class CommandFactoryBeanDefinitionParser extends
             factoryBuilder.addPropertyValue("useDefaultCommands", Boolean
                     .valueOf(element.getAttribute("use-default")));
         }
-        
+
         BeanDefinition factoryDefinition = factoryBuilder.getBeanDefinition();
         String factoryId = parserContext.getReaderContext().generateBeanName(factoryDefinition);
-        
+
         BeanDefinitionHolder factoryHolder = new BeanDefinitionHolder(factoryDefinition, factoryId);
         registerBeanDefinition(factoryHolder, parserContext.getRegistry());
 

@@ -38,10 +38,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>MD5 &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
  * <code>MMD5 &lt;SP&gt; &lt;pathnames&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * Returns the MD5 value for a file or multiple files according to
  * draft-twine-ftpmd5-00.txt.
  *
@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
 public class MD5 extends AbstractCommand {
     /** The MD5 String constant */
     public static final String MD5 = "MD5";
-    
+
     /** The MMD5 String constant */
     public static final String MMD5 = "MMD5";
 
@@ -58,6 +58,8 @@ public class MD5 extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -137,11 +139,11 @@ public class MD5 extends AbstractCommand {
                     sb.append(", ");
                 }
                 boolean nameHasSpaces = fileName.indexOf(' ') >= 0;
-                if(nameHasSpaces) {
+                if (nameHasSpaces) {
                     sb.append('"');
                 }
                 sb.append(fileName);
-                if(nameHasSpaces) {
+                if (nameHasSpaces) {
                     sb.append('"');
                 }
                 sb.append(' ');
@@ -192,7 +194,7 @@ public class MD5 extends AbstractCommand {
      * hexidecimal values of each byte in order. The returned array will be
      * double the length of the passed array, as it takes two characters to
      * represent any given byte.
-     * 
+     *
      * @param data
      *            a byte[] to convert to Hex characters
      * @return A char[] containing hexidecimal characters

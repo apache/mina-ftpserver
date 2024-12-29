@@ -31,7 +31,7 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Client-Server encoding negotiation. Force server from default encoding to
  * UTF-8 and back. Note that the servers default encoding is UTF-8. So this
  * command has no effect.
@@ -42,6 +42,8 @@ public class OPTS_UTF8 extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

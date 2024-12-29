@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <p>Properties file based <code>UserManager</code> implementation. We use
  * <code>user.properties</code> file to store user data.</p>
  *
@@ -63,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * </tr>
  * <tr>
  *      <td>ftpserver.user.{username}.userpassword</td>
- *      <td>The password for the user. Can be in clear text, MD5 hash or salted SHA hash based on the 
+ *      <td>The password for the user. Can be in clear text, MD5 hash or salted SHA hash based on the
  *              configuration on the user manager
  *      </td>
  * </tr>
@@ -77,7 +77,7 @@ import org.slf4j.LoggerFactory;
  * </tr>
  * <tr>
  *      <td>ftpserver.user.{username}.idletime</td>
- *      <td>The number of seconds the user is allowed to be idle before disconnected. 
+ *      <td>The number of seconds the user is allowed to be idle before disconnected.
  *              0 disables the idle timeout
  *      </td>
  * </tr>
@@ -98,7 +98,7 @@ import org.slf4j.LoggerFactory;
  *      <td>The maximum number of bytes per second the user is allowed to download files. 0 disables the check.</td>
  * </tr>
  * </table>
- * 
+ *
  * <p>Example:</p>
  * <pre>
  * ftpserver.user.admin.homedirectory=/ftproot
@@ -118,7 +118,7 @@ public class PropertiesUserManager extends AbstractUserManager {
     private final Logger LOG = LoggerFactory
             .getLogger(PropertiesUserManager.class);
 
-    private final static String PREFIX = "ftpserver.user.";
+    private static final  String PREFIX = "ftpserver.user.";
 
     private BaseProperties userDataProp;
 
@@ -128,6 +128,10 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * Internal constructor, do not use directly. Use {@link PropertiesUserManagerFactory} instead.
+     *
+     * @param passwordEncryptor The password encryption method
+     * @param userDataFile The propeerty files containing the user's data
+     * @param adminName The adminisatrtor name
      */
     public PropertiesUserManager(PasswordEncryptor passwordEncryptor, File userDataFile, String adminName) {
         super(adminName, passwordEncryptor);
@@ -137,6 +141,10 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * Internal constructor, do not use directly. Use {@link PropertiesUserManagerFactory} instead.
+     *
+     * @param passwordEncryptor The password encryption method
+     * @param userDataPath The URL where to findthe user's data
+     * @param adminName The adminisatrtor name
      */
     public PropertiesUserManager(PasswordEncryptor passwordEncryptor, URL userDataPath, String adminName) {
         super(adminName, passwordEncryptor);
@@ -189,7 +197,7 @@ public class PropertiesUserManager extends AbstractUserManager {
                 LOG.debug("URL configured, will try loading");
 
                 userUrl = userDataPath;
-                
+
                 try (InputStream is = userDataPath.openStream()) {
                     userDataProp.load(is);
                 }
@@ -201,7 +209,8 @@ public class PropertiesUserManager extends AbstractUserManager {
     }
 
     /**
-     * Reloads the contents of the user.properties file. This allows any manual modifications to the file to be recognised by the running server.
+     * Reloads the contents of the user.properties file.
+     * This allows any manual modifications to the file to be recognised by the running server.
      */
     public void refresh() {
         synchronized (userDataProp) {
@@ -209,7 +218,7 @@ public class PropertiesUserManager extends AbstractUserManager {
                 LOG.debug("Refreshing user manager using file: "
                         + userDataFile.getAbsolutePath());
                 loadFromFile(userDataFile);
-    
+
             } else {
                 //file is null, must have been created using URL
                 LOG.debug("Refreshing user manager using URL: "
@@ -221,6 +230,7 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * Retrive the file backing this user manager
+     *
      * @return The file
      */
     public File getFile() {
@@ -229,24 +239,27 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * Save user data. Store the properties.
+     *
+     * @param usr The user to save
+     * @throws FtpException If the data can't be saved
      */
     public synchronized void save(User usr) throws FtpException {
         // null value check
         if (usr.getName() == null) {
             throw new NullPointerException("User name is null.");
         }
-        
+
         String thisPrefix = PREFIX + usr.getName() + '.';
 
         // set other properties
         userDataProp.setProperty(thisPrefix + ATTR_PASSWORD, getPassword(usr));
 
         String home = usr.getHomeDirectory();
-        
+
         if (home == null) {
             home = "/";
         }
-        
+
         userDataProp.setProperty(thisPrefix + ATTR_HOME, home);
         userDataProp.setProperty(thisPrefix + ATTR_ENABLE, usr.getEnabled());
         userDataProp.setProperty(thisPrefix + ATTR_WRITE_PERM, usr.authorize(new WriteRequest()) != null);
@@ -256,8 +269,8 @@ public class PropertiesUserManager extends AbstractUserManager {
         transferRateRequest = (TransferRateRequest) usr.authorize(transferRateRequest);
 
         if (transferRateRequest != null) {
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_UPLOAD_RATE,transferRateRequest.getMaxUploadRate());
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_DOWNLOAD_RATE,transferRateRequest.getMaxDownloadRate());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_UPLOAD_RATE, transferRateRequest.getMaxUploadRate());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_DOWNLOAD_RATE, transferRateRequest.getMaxDownloadRate());
         } else {
             userDataProp.remove(thisPrefix + ATTR_MAX_UPLOAD_RATE);
             userDataProp.remove(thisPrefix + ATTR_MAX_DOWNLOAD_RATE);
@@ -268,8 +281,10 @@ public class PropertiesUserManager extends AbstractUserManager {
         concurrentLoginRequest = (ConcurrentLoginRequest) usr.authorize(concurrentLoginRequest);
 
         if (concurrentLoginRequest != null) {
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_NUMBER,concurrentLoginRequest.getMaxConcurrentLogins());
-            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_PER_IP,concurrentLoginRequest.getMaxConcurrentLoginsPerIP());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_NUMBER,
+                concurrentLoginRequest.getMaxConcurrentLogins());
+            userDataProp.setProperty(thisPrefix + ATTR_MAX_LOGIN_PER_IP,
+                concurrentLoginRequest.getMaxConcurrentLoginsPerIP());
         } else {
             userDataProp.remove(thisPrefix + ATTR_MAX_LOGIN_NUMBER);
             userDataProp.remove(thisPrefix + ATTR_MAX_LOGIN_PER_IP);
@@ -279,7 +294,7 @@ public class PropertiesUserManager extends AbstractUserManager {
     }
 
     /**
-     * @throws FtpException
+     * Save the user's data on disk
      */
     private void saveUserData() throws FtpException {
         if (userDataFile == null) {
@@ -287,7 +302,7 @@ public class PropertiesUserManager extends AbstractUserManager {
         }
 
         File dir = userDataFile.getAbsoluteFile().getParentFile();
-        
+
         if (dir != null && !dir.exists() && !dir.mkdirs()) {
             throw new FtpServerConfigurationException(
                     "Cannot create directory for user data file : " + dir.getAbsolutePath());
@@ -305,23 +320,26 @@ public class PropertiesUserManager extends AbstractUserManager {
     /**
      * Delete an user. Removes all this user entries from the properties. After
      * removing the corresponding from the properties, save the data.
+     *
+     * @param usrName The user name to delete
+     * @throws FtpException If the deletion failed
      */
     public void delete(String usrName) throws FtpException {
         // remove entries from properties
         String thisPrefix = PREFIX + usrName + '.';
         Enumeration<?> propNames = userDataProp.propertyNames();
         ArrayList<String> remKeys = new ArrayList<>();
-        
+
         while (propNames.hasMoreElements()) {
             String thisKey = propNames.nextElement().toString();
-            
+
             if (thisKey.startsWith(thisPrefix)) {
                 remKeys.add(thisKey);
             }
         }
-        
+
         Iterator<String> remKeysIt = remKeys.iterator();
-        
+
         while (remKeysIt.hasNext()) {
             userDataProp.remove(remKeysIt.next());
         }
@@ -331,14 +349,14 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * Get user password. Returns the encrypted value.
-     * 
+     *
      * <pre>
      * If the password value is not null
-     *    password = new password 
-     * else 
+     *    password = new password
+     * else
      *   if user does exist
      *     password = old password
-     *   else 
+     *   else
      *     password = &quot;&quot;
      * </pre>
      */
@@ -358,12 +376,14 @@ public class PropertiesUserManager extends AbstractUserManager {
                 password = blankPassword;
             }
         }
-        
+
         return password;
     }
 
     /**
      * Get all user names.
+     *
+     * @return The user's names
      */
     public String[] getAllUserNames() {
         // get all user names
@@ -372,10 +392,10 @@ public class PropertiesUserManager extends AbstractUserManager {
         Enumeration<?> allKeys = userDataProp.propertyNames();
         int prefixlen = PREFIX.length();
         int suffixlen = suffix.length();
-        
+
         while (allKeys.hasMoreElements()) {
             String key = (String) allKeys.nextElement();
-        
+
             if (key.endsWith(suffix)) {
                 String name = key.substring(prefixlen);
                 int endIndex = name.length() - suffixlen;
@@ -385,12 +405,15 @@ public class PropertiesUserManager extends AbstractUserManager {
         }
 
         Collections.sort(ulst);
-        
+
         return ulst.toArray(new String[0]);
     }
 
     /**
      * Load user data.
+     *
+     * @param userName The user's name to fetch
+     * @return The found user
      */
     public User getUserByName(String userName) {
         if (!doesExist(userName)) {
@@ -426,15 +449,22 @@ public class PropertiesUserManager extends AbstractUserManager {
 
     /**
      * User existance check
+     *
+     * @param name tThe user name to check for existence
+     * @return <code>true</code> if the user exists
      */
     public boolean doesExist(String name) {
         String key = PREFIX + name + '.' + ATTR_HOME;
-        
+
         return userDataProp.containsKey(key);
     }
 
     /**
      * User authenticate method
+     *
+     * @param authentication The users authentication
+     * @return The user's instance
+     * @throws AuthenticationFailedException If the authentication failed
      */
     public User authenticate(Authentication authentication) throws AuthenticationFailedException {
         if (authentication instanceof UsernamePasswordAuthentication) {

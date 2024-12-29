@@ -27,13 +27,12 @@ package org.apache.ftpserver.usermanager;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public interface PasswordEncryptor {
-
     /**
      * Encrypts the password
      * @param password The clear text password
      * @return The encrypted password
      */
-    String encrypt(String password); 
+    String encrypt(String password);
 
     /**
      * Matches an encrypted password with that stored
@@ -42,5 +41,4 @@ public interface PasswordEncryptor {
      * @return true if the password match
      */
     boolean matches(String passwordToCheck, String storedPassword);
-    
 }

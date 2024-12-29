@@ -39,9 +39,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>USER &lt;SP&gt; &lt;username&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * The argument field is a Telnet string identifying the user. The user
  * identification is that which is required by the server for access to its file
  * system. This command will normally be the first command transmitted by the
@@ -52,9 +52,11 @@ import org.slf4j.LoggerFactory;
 public class USER extends AbstractCommand {
 
     private final Logger LOG = LoggerFactory.getLogger(USER.class);
-    
+
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -115,7 +117,7 @@ public class USER extends AbstractCommand {
             int currAnonLogin = stat.getCurrentAnonymousLoginNumber();
             int maxAnonLogin = context.getConnectionConfig()
                     .getMaxAnonymousLogins();
-            if(maxAnonLogin == 0) {
+            if (maxAnonLogin == 0) {
                 LOG.debug("Currently {} anonymous users logged in, unlimited allowed", currAnonLogin);
             } else {
                 LOG.debug("Currently {} out of {} anonymous users logged in", currAnonLogin, maxAnonLogin);
@@ -137,8 +139,8 @@ public class USER extends AbstractCommand {
             // login limit check
             int currLogin = stat.getCurrentLoginNumber();
             int maxLogin = context.getConnectionConfig().getMaxLogins();
-            
-            if(maxLogin == 0) {
+
+            if (maxLogin == 0) {
                 LOG.debug("Currently {} users logged in, unlimited allowed", currLogin);
             } else {
                 LOG.debug("Currently {} out of {} users logged in", currLogin, maxLogin);

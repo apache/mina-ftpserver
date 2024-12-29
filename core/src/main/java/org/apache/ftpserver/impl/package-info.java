@@ -18,7 +18,7 @@
  */
 /**
  * <strong>Internal classes, do not use directly!</strong>
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 package org.apache.ftpserver.impl;

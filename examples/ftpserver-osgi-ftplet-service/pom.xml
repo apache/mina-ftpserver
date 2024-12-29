@@ -29,7 +29,6 @@
   <packaging>bundle</packaging>
 
   <properties>
-    <checkstyle.configdir>../..</checkstyle.configdir>
     <japicmp.skip>true</japicmp.skip>
   </properties>
 
@@ -43,7 +42,6 @@
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>osgi_R4_core</artifactId>
-      <version>1.0</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

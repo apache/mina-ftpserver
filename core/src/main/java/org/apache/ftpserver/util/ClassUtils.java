@@ -31,7 +31,7 @@ public class ClassUtils {
      * Checks if a class is a subclass of a class with the specified name. Used
      * as an instanceOf without having to load the class, useful when trying to
      * check for classes that might not be available in the runtime JRE.
-     * 
+     *
      * @param clazz
      *            The class to check
      * @param className

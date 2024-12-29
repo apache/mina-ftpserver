@@ -24,7 +24,7 @@ import org.apache.ftpserver.ftplet.AuthorizationRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * The max upload rate permission
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -43,6 +43,8 @@ public class ConcurrentLoginPermission implements Authority {
 
     /**
      * @see Authority#authorize(AuthorizationRequest)
+     *
+     * {@inheritDoc}
      */
     public AuthorizationRequest authorize(AuthorizationRequest request) {
         if (request instanceof ConcurrentLoginRequest) {
@@ -71,6 +73,8 @@ public class ConcurrentLoginPermission implements Authority {
 
     /**
      * @see Authority#canAuthorize(AuthorizationRequest)
+     *
+     * {@inheritDoc}
      */
     public boolean canAuthorize(AuthorizationRequest request) {
         return request instanceof ConcurrentLoginRequest;

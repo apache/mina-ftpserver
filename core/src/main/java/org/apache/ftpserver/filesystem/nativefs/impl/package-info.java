@@ -21,7 +21,7 @@
  * <p>
  * Native file system implementation.
  * </p>
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 package org.apache.ftpserver.filesystem.nativefs.impl;

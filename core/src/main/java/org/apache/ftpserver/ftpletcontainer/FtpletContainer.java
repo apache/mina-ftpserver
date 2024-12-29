@@ -35,7 +35,7 @@ public interface FtpletContainer extends Ftplet {
     /**
      * Retrieve the {@link Ftplet} identified by the name (as provided in the
      * {@link #addFtplet(String, Ftplet)} method.
-     * 
+     *
      * @param name
      *            The name of the Ftplet to retrive
      * @return The Ftplet if found, or null if the name is unknown to the
@@ -45,7 +45,7 @@ public interface FtpletContainer extends Ftplet {
 
     /**
      * Retrive all Ftplets registered with this container
-     * 
+     *
      * @return A map of all Ftplets with their name as the key
      */
     Map<String, Ftplet> getFtplets();

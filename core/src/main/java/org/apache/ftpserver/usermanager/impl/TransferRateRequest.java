@@ -23,7 +23,7 @@ import org.apache.ftpserver.ftplet.AuthorizationRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Request for getting the maximum allowed transfer rates for a user
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>

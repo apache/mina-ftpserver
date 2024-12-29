@@ -37,6 +37,8 @@ public class NotSupportedCommand extends AbstractCommand {
 
     /**
      * Execute command
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

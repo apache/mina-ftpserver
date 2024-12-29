@@ -45,9 +45,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>LIST [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes a list to be sent from the server to the passive DTP. If
  * the pathname specifies a directory or other group of files, the server should
  * transfer a list of files in the specified directory. If the pathname
@@ -67,6 +67,8 @@ public class LIST extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -83,15 +85,15 @@ public class LIST extends AbstractCommand {
 
             // checl that the directory or file exists
             FtpFile file = session.getFileSystemView().getFile(parsedArg.getFile());
-            
-            if(!file.doesExist()) {
+
+            if (!file.doesExist()) {
                 LOG.debug("Listing on a non-existing file");
                 session.write(LocalizedDataTransferFtpReply.translate(session, request, context,
                         FtpReply.REPLY_450_REQUESTED_FILE_ACTION_NOT_TAKEN, "LIST",
-                        null, file));             
+                        null, file));
                 return;
             }
-            
+
             // 24-10-2007 - added check if PORT or PASV is issued, see
             // https://issues.apache.org/jira/browse/FTPSERVER-110
             DataConnectionFactory connFactory = session.getDataConnection();
@@ -123,7 +125,7 @@ public class LIST extends AbstractCommand {
 
             // transfer listing data
             boolean failure = false;
-            String dirList = directoryLister.listFiles(parsedArg, 
+            String dirList = directoryLister.listFiles(parsedArg,
                 session.getFileSystemView(), LIST_FILE_FORMATER);
             try {
                 dataConnection.transferToClient(session.getFtpletSession(), dirList);

@@ -30,9 +30,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>ACCT &lt;CRLF&gt;</code><br>
- * 
+ *
  * Acknowledges the ACCT (account) command with a 202 reply. The command however
  * is irrelevant to any workings.
  *
@@ -42,6 +42,8 @@ public class ACCT extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

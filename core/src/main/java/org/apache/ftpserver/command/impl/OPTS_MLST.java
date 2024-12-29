@@ -34,7 +34,7 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Client-Server listing negotation. Instruct the server what listing types to
  * include in machine directory/file listings.
  *
@@ -42,11 +42,12 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
  */
 public class OPTS_MLST extends AbstractCommand {
 
-    private final static String[] AVAILABLE_TYPES = { "Size", "Modify", "Type",
-            "Perm" };
+    private static final String[] AVAILABLE_TYPES = { "Size", "Modify", "Type", "Perm" };
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -59,27 +60,27 @@ public class OPTS_MLST extends AbstractCommand {
         String argument = request.getArgument();
 
         String listTypes;
-        String types[];
+        String[] types;
         int spIndex = argument.indexOf(' ');
-        
+
         if (spIndex == -1) {
             types = new String[0];
             listTypes = "";
         } else {
             listTypes = argument.substring(spIndex + 1);
-    
+
             // parse all the type tokens
             StringTokenizer st = new StringTokenizer(listTypes, ";");
             types = new String[st.countTokens()];
-            
+
             for (int i = 0; i < types.length; ++i) {
                 types[i] = st.nextToken();
             }
         }
-        
+
         // set the list types
         String[] validatedTypes = validateSelectedTypes(types);
-        
+
         //if (validatedTypes.length != 0) {
             session.setAttribute("MLST.types", validatedTypes);
             session.write(LocalizedFtpReply.translate(session, request, context,
@@ -99,7 +100,7 @@ public class OPTS_MLST extends AbstractCommand {
         }
 
         List<String> selectedTypes = new ArrayList<>();
-        
+
         // check all the types
         for (String type:types) {
             for (String availableType: AVAILABLE_TYPES) {

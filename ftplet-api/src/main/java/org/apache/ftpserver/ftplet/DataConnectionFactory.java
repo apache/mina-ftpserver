@@ -27,7 +27,7 @@ public interface DataConnectionFactory {
 
     /**
      * Open an active data connection
-     * 
+     *
      * @return The open data connection
      * @throws Exception
      */
@@ -36,7 +36,7 @@ public interface DataConnectionFactory {
     /**
      * Indicates whether the data socket created by this factory will be secure
      * that is, running over SSL/TLS.
-     * 
+     *
      * @return true if the data socket will be secured
      */
 
@@ -47,5 +47,4 @@ public interface DataConnectionFactory {
      * this will silently ignore the call.
      */
     void closeDataConnection();
-
 }

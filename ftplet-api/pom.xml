@@ -68,10 +68,4 @@
       </plugin>
     </plugins>
   </reporting>
-  
-  <properties>
-    <maven.compile.source>1.8</maven.compile.source>
-    <maven.compile.target>1.8</maven.compile.target>
-    <checkstyle.configdir>${basedir}/..</checkstyle.configdir>
-  </properties>
 </project>

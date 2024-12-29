@@ -44,6 +44,9 @@ public interface FtpHandler {
      * thread that handles I/O of multiple sessions, please implement this
      * method to perform tasks that consumes minimal amount of time such as
      * socket parameter and user-defined session attribute initialization.
+     *
+     * @param session The FTP session
+     * @throws Exception If the operation failed
      */
     void sessionCreated(FtpIoSession session) throws Exception;
 
@@ -52,11 +55,17 @@ public interface FtpHandler {
      * {@link #sessionCreated(FtpIoSession)}. The biggest difference from
      * {@link #sessionCreated(FtpIoSession)} is that it's invoked from other thread
      * than an I/O processor thread once thread modesl is configured properly.
+     *
+     * @param session The FTP session
+     * @throws Exception If the operation failed
      */
     void sessionOpened(FtpIoSession session) throws Exception;
 
     /**
      * Invoked when a connection is closed.
+     *
+     * @param session The FTP session
+     * @throws Exception If the operation failed
      */
     void sessionClosed(FtpIoSession session) throws Exception;
 
@@ -64,6 +73,10 @@ public interface FtpHandler {
      * Invoked with the related {@link IdleStatus} when a connection becomes
      * idle. This method is not invoked if the transport type is UDP; it's a
      * known bug, and will be fixed in 2.0.
+     *
+     * @param session The FTP session
+     * @param status The Idle Status
+     * @throws Exception If the operation failed
      */
     void sessionIdle(FtpIoSession session, IdleStatus status) throws Exception;
 
@@ -71,12 +84,20 @@ public interface FtpHandler {
      * Invoked when any exception is thrown by user {@link IoHandler}
      * implementation or by MINA. If <code>cause</code> is instanceof
      * {@link IOException}, MINA will close the connection automatically.
+     *
+     * @param session The FTP session
+     * @param cause The error cause
+     * @throws Exception If the operation failed
      */
     void exceptionCaught(FtpIoSession session, Throwable cause)
             throws Exception;
 
     /**
      * Invoked when a message is received.
+     *
+     * @param session The FTP session
+     * @param request The received FtpRequest
+     * @throws Exception If the operation failed
      */
     void messageReceived(FtpIoSession session, FtpRequest request)
             throws Exception;
@@ -84,6 +105,10 @@ public interface FtpHandler {
     /**
      * Invoked when a message written by {@link IoSession#write(Object)} is sent
      * out.
+     *
+     * @param session The FTP session
+     * @param reply The FtpReply sent
+     * @throws Exception If the operation failed
      */
     void messageSent(FtpIoSession session, FtpReply reply) throws Exception;
 }

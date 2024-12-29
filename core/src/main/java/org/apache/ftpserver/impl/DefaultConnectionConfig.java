@@ -39,7 +39,7 @@ public class DefaultConnectionConfig implements ConnectionConfig {
     private final int maxLoginFailures;
 
     private final int loginFailureDelay;
-    
+
     private final int maxThreads;
 
     public DefaultConnectionConfig() {
@@ -48,6 +48,13 @@ public class DefaultConnectionConfig implements ConnectionConfig {
 
     /**
      * Internal constructor, do not use directly. Use {@link ConnectionConfigFactory} instead
+     *
+     * @param anonymousLoginEnabled If anonymous logins are accepted or not
+     * @param loginFailureDelay Delay between two login failures
+     * @param maxLogins Max number of login attempts
+     * @param maxAnonymousLogins Max number of anonymous login
+     * @param maxLoginFailures Max number of login failures
+     * @param maxThreads Number of threads to use
      */
     public DefaultConnectionConfig(boolean anonymousLoginEnabled,
             int loginFailureDelay, int maxLogins, int maxAnonymousLogins,
@@ -79,9 +86,9 @@ public class DefaultConnectionConfig implements ConnectionConfig {
     public boolean isAnonymousLoginEnabled() {
         return anonymousLoginEnabled;
     }
-    
+
     public int getMaxThreads() {
         return maxThreads;
     }
-    
+
 }

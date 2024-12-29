@@ -52,9 +52,9 @@ public class ConnectionConfigFactory {
     }
 
     /**
-     * The delay in number of milliseconds between login failures. Important to 
+     * The delay in number of milliseconds between login failures. Important to
      * make brute force attacks harder.
-     * 
+     *
      * @return The delay time in milliseconds
      */
     public int getLoginFailureDelay() {
@@ -105,7 +105,7 @@ public class ConnectionConfigFactory {
     /**
      * Returns the maximum number of threads the server is allowed to create for
      * processing client requests.
-     * 
+     *
      * @return the maximum number of threads the server is allowed to create for
      *         processing client requests.
      */
@@ -116,7 +116,7 @@ public class ConnectionConfigFactory {
     /**
      * Sets the maximum number of threads the server is allowed to create for
      * processing client requests.
-     * 
+     *
      * @param maxThreads
      *            the maximum number of threads the server is allowed to create
      *            for processing client requests.
@@ -150,9 +150,9 @@ public class ConnectionConfigFactory {
     }
 
     /**
-     * Set the delay in number of milliseconds between login failures. Important to 
+     * Set the delay in number of milliseconds between login failures. Important to
      * make brute force attacks harder.
-     * 
+     *
      * @param loginFailureDelay The delay time in milliseconds
      */
     public void setLoginFailureDelay(final int loginFailureDelay) {

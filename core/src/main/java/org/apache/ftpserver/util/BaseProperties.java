@@ -33,7 +33,7 @@ import org.apache.ftpserver.ftplet.FtpException;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This class encapsulates <code>java.util.Properties</code> to add java
  * primitives and some other java classes.
  *
@@ -51,6 +51,8 @@ public class BaseProperties extends Properties {
 
     /**
      * Load existing property.
+     *
+     * @param prop The properties to load
      */
     public BaseProperties(final Properties prop) {
         super(prop);
@@ -61,6 +63,10 @@ public class BaseProperties extends Properties {
     // ////////////////////////////////////////
     /**
      * Get boolean value.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return <code>true</code> if th property contains 'true'
      */
     public boolean getBoolean(final String str) throws FtpException {
         String prop = getProperty(str);
@@ -81,6 +87,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get integer value.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The integer value
      */
     public int getInteger(final String str) throws FtpException {
         String value = getProperty(str);
@@ -105,6 +115,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get long value.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The long value
      */
     public long getLong(final String str) throws FtpException {
         String value = getProperty(str);
@@ -129,6 +143,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get double value.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The double value
      */
     public double getDouble(final String str) throws FtpException {
         String value = getProperty(str);
@@ -153,6 +171,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>InetAddress</code>.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>InetAddress</code> value
      */
     public InetAddress getInetAddress(final String str) throws FtpException {
         String value = getProperty(str);
@@ -177,6 +199,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>String</code>.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>String</code> value
      */
     public String getString(final String str) throws FtpException {
         String value = getProperty(str);
@@ -197,6 +223,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>File</code> object.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>StriFileng</code> value
      */
     public File getFile(final String str) throws FtpException {
         String value = getProperty(str);
@@ -216,6 +246,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>Class</code> object
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>Class</code> value
      */
     public Class<?> getClass(final String str) throws FtpException {
         String value = getProperty(str);
@@ -240,6 +274,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>TimeZone</code>
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>Time Zone</code> value
      */
     public TimeZone getTimeZone(final String str) throws FtpException {
         String value = getProperty(str);
@@ -259,6 +297,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>DateFormat</code> object.
+     *
+     * @param str The property to read
+     * @throws FtpException If the property is null
+     * @return The <code>DateFormat</code> value
      */
     public SimpleDateFormat getDateFormat(final String str) throws FtpException {
         String value = getProperty(str);
@@ -283,6 +325,11 @@ public class BaseProperties extends Properties {
 
     /**
      * Get <code>Date</code> object.
+     *
+     * @param str The property to read
+     * @param fmt The date format to use
+     * @throws FtpException If the property is null
+     * @return The <code>Date</code> value
      */
     public Date getDate(final String str, final DateFormat fmt)
             throws FtpException {
@@ -311,6 +358,9 @@ public class BaseProperties extends Properties {
     // ////////////////////////////////////////
     /**
      * Set boolean value.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final boolean val) {
         setProperty(key, String.valueOf(val));
@@ -318,6 +368,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set integer value.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final int val) {
         setProperty(key, String.valueOf(val));
@@ -325,6 +378,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set double value.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final double val) {
         setProperty(key, String.valueOf(val));
@@ -332,6 +388,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set float value.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final float val) {
         setProperty(key, String.valueOf(val));
@@ -339,6 +398,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set long value.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final long val) {
         setProperty(key, String.valueOf(val));
@@ -346,6 +408,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>InetAddress</code>.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setInetAddress(final String key, final InetAddress val) {
         setProperty(key, val.getHostAddress());
@@ -353,6 +418,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>File</code> object.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final File val) {
         setProperty(key, val.getAbsolutePath());
@@ -360,6 +428,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>DateFormat</code> object.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final SimpleDateFormat val) {
         setProperty(key, val.toPattern());
@@ -367,6 +438,9 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>TimeZone</code> object.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final TimeZone val) {
         setProperty(key, val.getID());
@@ -374,6 +448,10 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>Date</code> object.
+     *
+     * @param key The property to set
+     * @param val The value to set
+     * @param fmt The date format to use
      */
     public void setProperty(final String key, final Date val,
             final DateFormat fmt) {
@@ -382,9 +460,11 @@ public class BaseProperties extends Properties {
 
     /**
      * Set <code>Class</code> object.
+     *
+     * @param key The property to set
+     * @param val The value to set
      */
     public void setProperty(final String key, final Class<?> val) {
         setProperty(key, val.getName());
     }
-
 }

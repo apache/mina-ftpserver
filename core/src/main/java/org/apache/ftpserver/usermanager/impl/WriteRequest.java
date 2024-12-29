@@ -23,7 +23,7 @@ import org.apache.ftpserver.ftplet.AuthorizationRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Class representing a write request
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -34,7 +34,7 @@ public class WriteRequest implements AuthorizationRequest {
 
     /**
      * Request write access to the user home directory (/)
-     * 
+     *
      */
     public WriteRequest() {
         this("/");
@@ -43,7 +43,7 @@ public class WriteRequest implements AuthorizationRequest {
     /**
      * Request write access to a file or directory relative to the user home
      * directory
-     * 
+     *
      * @param file
      */
     public WriteRequest(final String file) {
@@ -52,11 +52,10 @@ public class WriteRequest implements AuthorizationRequest {
 
     /**
      * Get the file or directory to which write access is requested
-     * 
+     *
      * @return the file The file or directory
      */
     public String getFile() {
         return file;
     }
-
 }

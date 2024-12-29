@@ -34,7 +34,7 @@ import org.apache.ftpserver.ssl.SslConfiguration;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Data channel protection level.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -43,19 +43,21 @@ public class PROT extends AbstractCommand {
 
     private SslConfiguration getSslConfiguration(final FtpIoSession session) {
         DataConnectionConfiguration dataCfg = session.getListener().getDataConnectionConfiguration();
-        
+
         SslConfiguration configuration = dataCfg.getSslConfiguration();
 
         // fall back if no configuration has been provided on the data connection config
-        if(configuration == null) {
+        if (configuration == null) {
             configuration = session.getListener().getSslConfiguration();
         }
-        
+
         return configuration;
     }
-    
+
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

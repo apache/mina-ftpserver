@@ -24,7 +24,7 @@ import org.apache.ftpserver.ftplet.AuthorizationRequest;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Class representing a write permission
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -43,7 +43,7 @@ public class WritePermission implements Authority {
     /**
      * Construct a write permission for a file or directory relative to the user
      * home directory
-     * 
+     *
      * @param permissionRoot
      *            The file or directory
      */
@@ -53,6 +53,8 @@ public class WritePermission implements Authority {
 
     /**
      * @see Authority#authorize(AuthorizationRequest)
+     *
+     * {@inheritDoc}
      */
     public AuthorizationRequest authorize(final AuthorizationRequest request) {
         if (request instanceof WriteRequest) {
@@ -72,9 +74,10 @@ public class WritePermission implements Authority {
 
     /**
      * @see Authority#canAuthorize(AuthorizationRequest)
+     *
+     * {@inheritDoc}
      */
     public boolean canAuthorize(final AuthorizationRequest request) {
         return request instanceof WriteRequest;
     }
-
 }

@@ -21,7 +21,7 @@ package org.apache.ftpserver.util;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Thrown if the provided string representation does not match a valid IP
  * address
  *

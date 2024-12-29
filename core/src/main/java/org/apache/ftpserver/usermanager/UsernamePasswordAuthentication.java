@@ -38,7 +38,7 @@ public class UsernamePasswordAuthentication implements Authentication {
 
     /**
      * Constructor with the minimal data for an authentication
-     * 
+     *
      * @param username
      *            The user name
      * @param password
@@ -52,7 +52,7 @@ public class UsernamePasswordAuthentication implements Authentication {
 
     /**
      * Constructor with an additonal parameter for user metadata
-     * 
+     *
      * @param username
      *            The user name
      * @param password
@@ -68,7 +68,7 @@ public class UsernamePasswordAuthentication implements Authentication {
 
     /**
      * Retrive the password
-     * 
+     *
      * @return The password
      */
     public String getPassword() {
@@ -77,7 +77,7 @@ public class UsernamePasswordAuthentication implements Authentication {
 
     /**
      * Retrive the user name
-     * 
+     *
      * @return The user name
      */
     public String getUsername() {
@@ -86,7 +86,7 @@ public class UsernamePasswordAuthentication implements Authentication {
 
     /**
      * Retrive the user metadata
-     * 
+     *
      * @return The user metadata
      */
     public UserMetadata getUserMetadata() {

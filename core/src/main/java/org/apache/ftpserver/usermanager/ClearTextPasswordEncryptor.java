@@ -30,6 +30,8 @@ import org.apache.ftpserver.util.PasswordUtil;
 public class ClearTextPasswordEncryptor implements PasswordEncryptor {
     /**
      * Returns the clear text password
+     * @param password The password to encrypt
+     * @return The encrypted password
      */
     public String encrypt(String password) {
         return password;
@@ -39,15 +41,14 @@ public class ClearTextPasswordEncryptor implements PasswordEncryptor {
      * {@inheritDoc}
      */
     public boolean matches(String passwordToCheck, String storedPassword) {
-        if(storedPassword == null) {
+        if (storedPassword == null) {
             throw new NullPointerException("storedPassword can not be null");
         }
-        
-        if(passwordToCheck == null) {
+
+        if (passwordToCheck == null) {
             throw new NullPointerException("passwordToCheck can not be null");
         }
-        
+
         return PasswordUtil.secureCompareFast(passwordToCheck, storedPassword);
     }
-
 }

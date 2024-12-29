@@ -44,9 +44,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>STOU &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command behaves like STOR except that the resultant file is to be
  * created in the current directory under a name unique to that directory. The
  * 150 Transfer Started response must include the name generated, See RFC1123
@@ -60,6 +60,8 @@ public class STOU extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -153,9 +155,9 @@ public class STOU extends AbstractCommand {
                 // transfer data
                 transSz = dataConnection.transferFromClient(session.getFtpletSession(), os);
 
-                // attempt to close the output stream so that errors in 
-                // closing it will return an error to the client (FTPSERVER-119) 
-                if(os != null) {
+                // attempt to close the output stream so that errors in
+                // closing it will return an error to the client (FTPSERVER-119)
+                if (os != null) {
                     os.close();
                 }
 
@@ -167,7 +169,7 @@ public class STOU extends AbstractCommand {
                 if (ftpStat != null) {
                     ftpStat.setUpload(session, file, transSz);
                 }
-                
+
             } catch (SocketException ex) {
                 LOG.debug("Socket exception during data transfer", ex);
                 failure = true;

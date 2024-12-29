@@ -45,9 +45,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>NLST [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes a directory listing to be sent from server to user site.
  * The pathname should specify a directory or other system-specific file group
  * descriptor; a null argument implies the current directory. The server will
@@ -67,6 +67,8 @@ public class NLST extends AbstractCommand {
 
     /**
      * Execute command
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

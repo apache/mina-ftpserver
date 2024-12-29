@@ -32,9 +32,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>REST &lt;SP&gt; <marker> &lt;CRLF&gt;</code><br>
- * 
+ *
  * The argument field represents the server marker at which file transfer is to
  * be restarted. This command does not cause file transfer but skips over the
  * file to the specified data checkpoint. This command shall be immediately
@@ -48,7 +48,9 @@ public class REST extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(REST.class);
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

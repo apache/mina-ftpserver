@@ -26,9 +26,9 @@ import org.apache.ftpserver.ftplet.RenameFtpReply;
 /**
  * An implementation of <code>RenameFtpReply</code> that is sent when a file
  * or directory is renamed.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
+ *
  */
 
 public class LocalizedRenameFtpReply extends LocalizedFtpReply implements
@@ -46,7 +46,7 @@ public class LocalizedRenameFtpReply extends LocalizedFtpReply implements
 
     /**
      * Creates a new instance of <code>LocalizedRenameFtpReply</code>.
-     * 
+     *
      * @param code
      *            the reply code
      * @param message
@@ -74,7 +74,7 @@ public class LocalizedRenameFtpReply extends LocalizedFtpReply implements
     /**
      * Returns the localized reply that contains all details about the rename
      * operation.
-     * 
+     *
      * @param session
      *            the FTP session
      * @param request

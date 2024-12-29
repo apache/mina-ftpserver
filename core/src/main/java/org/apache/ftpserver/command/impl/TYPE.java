@@ -33,9 +33,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>TYPE &lt;SP&gt; &lt;type-code&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * The argument specifies the representation type.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -45,7 +45,9 @@ public class TYPE extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(TYPE.class);
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -58,7 +60,7 @@ public class TYPE extends AbstractCommand {
         char type;
         if (request.hasArgument()) {
             type = request.getArgument().charAt(0);
-        }else{
+        } else {
             // no type specified
             session
             .write(LocalizedFtpReply

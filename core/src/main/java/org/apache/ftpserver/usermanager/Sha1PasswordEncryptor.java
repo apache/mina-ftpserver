@@ -26,13 +26,15 @@ import org.apache.ftpserver.util.PasswordUtil;
 /**
  * Password encryptor that hashes the password using SHA-1. Please note that this
  * form of encryption is sensitive to lookup attacks.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class Sha1PasswordEncryptor implements PasswordEncryptor {
 
     /**
      * Hashes the password using SHA-1
+     * @param password The password to encrypt
+     * @return The encrypted password
      */
     public String encrypt(String password) {
         return EncryptUtils.encryptSHA(password);

@@ -35,25 +35,32 @@ public interface ServerDataConnectionFactory extends DataConnectionFactory {
 
     /**
      * Port command.
+     *
+     * @param address The Inet address
      */
     void initActiveDataConnection(InetSocketAddress address);
 
     /**
      * Initiate the passive data connection.
-     * 
+     *
      * @return The {@link InetSocketAddress} on which the data connection if
      *         bound.
+     * @throws DataConnectionException If the passivation failed
      */
     InetSocketAddress initPassiveDataConnection()
             throws DataConnectionException;
 
     /**
      * Set the security protocol.
+     *
+     * @param secure Tell if the connection should be secure or not
      */
     void setSecure(boolean secure);
 
     /**
      * Sets the server's control address.
+     *
+     * @param serverControlAddress The control address
      */
     void setServerControlAddress(InetAddress serverControlAddress);
 
@@ -61,6 +68,9 @@ public interface ServerDataConnectionFactory extends DataConnectionFactory {
 
     /**
      * Check the data connection idle status.
+     *
+     * @param currTime  current time
+     * @return Tell if the connection has timed out
      */
     boolean isTimeout(long currTime);
 
@@ -71,21 +81,29 @@ public interface ServerDataConnectionFactory extends DataConnectionFactory {
 
     /**
      * Is secure?
+     *
+     * @return <code>true</code> if the connection is secure
      */
     boolean isSecure();
 
     /**
      * Is zip mode?
+     *
+     * @return <code>true</code> if the connection is in zip mode
      */
     boolean isZipMode();
 
     /**
      * Get client address.
+     *
+     * @return The Inet Address
      */
     InetAddress getInetAddress();
 
     /**
      * Get port number.
+     *
+     * @return The connection port
      */
     int getPort();
 }

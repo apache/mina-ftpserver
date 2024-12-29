@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Encodes and decodes socket addresses (IP and port) from and to the format
  * used with for example the PORT and PASV command
  *

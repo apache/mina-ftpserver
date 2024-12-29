@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>MDTM &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * Returns the date and time of when a file was modified.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -47,7 +47,9 @@ public class MDTM extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(MDTM.class);
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

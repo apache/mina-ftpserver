@@ -38,6 +38,9 @@ public class FtpServerConfigurationException extends RuntimeException {
 
     /**
      * {@link RuntimeException#RuntimeException(String, Throwable)}
+     *
+     * @param message The message to propagate
+     * @param cause The root cause
      */
     public FtpServerConfigurationException(final String message,
             final Throwable cause) {
@@ -46,6 +49,8 @@ public class FtpServerConfigurationException extends RuntimeException {
 
     /**
      * {@link RuntimeException#RuntimeException(String)}
+     *
+     * @param message The message to propagate
      */
     public FtpServerConfigurationException(final String message) {
         super(message);
@@ -53,6 +58,8 @@ public class FtpServerConfigurationException extends RuntimeException {
 
     /**
      * {@link RuntimeException#RuntimeException(Throwable)}
+     *
+     * @param cause The root cause
      */
     public FtpServerConfigurationException(final Throwable cause) {
         super(cause);

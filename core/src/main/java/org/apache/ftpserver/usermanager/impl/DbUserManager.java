@@ -76,6 +76,17 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * Internal constructor, do not use directly. Use {@link DbUserManagerFactory} instead.
+     *
+     * @param dataSource The source of data
+     * @param selectAllStmt The SQL statement used to select all users
+     * @param selectUserStmt  The SQL statement used to select a user
+     * @param insertUserStmt  The SQL statement used to insert a user
+     * @param updateUserStmt The SQL statement used to update a user
+     * @param deleteUserStmt The SQL statement used to delete a user
+     * @param authenticateStmt  The SQL statement used to authenticate
+     * @param isAdminStmt  The SQL statement used to check if teh user is an admin
+     * @param passwordEncryptor The password encryption function
+     * @param adminName The administrator name
      */
     public DbUserManager(DataSource dataSource, String selectAllStmt,
             String selectUserStmt, String insertUserStmt,
@@ -92,18 +103,18 @@ public class DbUserManager extends AbstractUserManager {
         this.authenticateStmt = authenticateStmt;
         this.isAdminStmt = isAdminStmt;
 
-        Connection con = null; 
-        try { 
-                // test the connection 
-                con = createConnection(); 
-                
-                LOG.info("Database connection opened."); 
-        } catch (SQLException ex) { 
-                LOG.error("Failed to open connection to user database", ex); 
-                throw new FtpServerConfigurationException( 
-                "Failed to open connection to user database", ex); 
-        } finally{ 
-                closeQuitely(con); 
+        Connection con = null;
+        try {
+            // test the connection
+            con = createConnection();
+
+            LOG.info("Database connection opened.");
+        } catch (SQLException ex) {
+            LOG.error("Failed to open connection to user database", ex);
+            throw new FtpServerConfigurationException(
+            "Failed to open connection to user database", ex);
+        } finally{
+            closeQuitely(con);
         }
     }
 
@@ -314,6 +325,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * Delete user. Delete the row from the table.
+     *
+     * {@inheritDoc}
      */
     public void delete(String name) throws FtpException {
         // create sql query
@@ -337,6 +350,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * Save user. If new insert a new row, else update the existing row.
+     *
+     * {@inheritDoc}
      */
     public void save(User user) throws FtpException {
         // null value check
@@ -352,7 +367,7 @@ public class DbUserManager extends AbstractUserManager {
             map.put(ATTR_LOGIN, escapeString(user.getName()));
 
             String password = null;
-            if(user.getPassword() != null) {
+            if (user.getPassword() != null) {
                 // password provided, encrypt it and store the encrypted value
                 password= getPasswordEncryptor().encrypt(user.getPassword());
             } else {
@@ -363,7 +378,7 @@ public class DbUserManager extends AbstractUserManager {
                 try {
                     User userWithPassword = selectUserByName(user.getName());
 
-                    if(userWithPassword != null) {
+                    if (userWithPassword != null) {
                         // user exists, reuse password
                         password = userWithPassword.getPassword();
                     }
@@ -435,23 +450,25 @@ public class DbUserManager extends AbstractUserManager {
     }
 
     private void closeQuitely(Statement stmt) {
-        if(stmt != null) {
-        Connection con = null;
-        try {
-        con = stmt.getConnection();
-        } catch (Exception e) {
-        }
-        try {
-                stmt.close();
-            } catch (SQLException e) {
-                // ignore
+        if (stmt != null) {
+            Connection con = null;
+            try {
+                con = stmt.getConnection();
+            } catch (Exception e) {
             }
-        closeQuitely(con);
+
+            try {
+                    stmt.close();
+            } catch (SQLException e) {
+                    // ignore
+            }
+
+            closeQuitely(con);
         }
     }
 
     private void closeQuitely(ResultSet rs) {
-        if(rs != null) {
+        if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
@@ -518,6 +535,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * Get the user object. Fetch the row from the table.
+     *
+     * {@inheritDoc}
      */
     public User getUserByName(String name) throws FtpException {
         Statement stmt = null;
@@ -526,10 +545,11 @@ public class DbUserManager extends AbstractUserManager {
 
             BaseUser user = selectUserByName(name);
 
-            if(user != null) {
+            if (user != null) {
                 // reset the password, not to be sent to API users
                 user.setPassword(null);
             }
+
             return user;
 
 
@@ -544,6 +564,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * User existance check.
+     *
+     * {@inheritDoc}
      */
     public boolean doesExist(String name) throws FtpException {
         Statement stmt = null;
@@ -571,6 +593,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * Get all user names from the database.
+     *
+     * {@inheritDoc}
      */
     public String[] getAllUserNames() throws FtpException {
 
@@ -603,6 +627,8 @@ public class DbUserManager extends AbstractUserManager {
 
     /**
      * User authentication.
+     *
+     * {@inheritDoc}
      */
     public User authenticate(Authentication authentication)
             throws AuthenticationFailedException {

@@ -40,7 +40,7 @@ import org.apache.mina.core.session.IoSession;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Sends the list of all the connected users.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -49,6 +49,8 @@ public class SITE_WHO extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

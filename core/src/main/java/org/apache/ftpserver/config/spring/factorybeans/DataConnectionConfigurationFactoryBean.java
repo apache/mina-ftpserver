@@ -25,7 +25,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 /**
  * Spring {@link FactoryBean} which extends {@link DataConnectionConfigurationFactory}
- * making it easier to use Spring's standard &lt;bean&gt; tag instead of 
+ * making it easier to use Spring's standard &lt;bean&gt; tag instead of
  * FtpServer's custom XML tags to configure things.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -44,5 +44,5 @@ public class DataConnectionConfigurationFactoryBean extends DataConnectionConfig
     public boolean isSingleton() {
         return false;
     }
-    
+
 }

@@ -34,61 +34,92 @@ public interface ServerFtpStatistics extends FtpStatistics {
 
     /**
      * Set statistics observer.
+     *
+     * @param observer observer to set
      */
     void setObserver(StatisticsObserver observer);
 
     /**
      * Set file observer.
+     *
+     * @param observer The observer to set
      */
     void setFileObserver(FileObserver observer);
 
     /**
      * Increment upload count.
+     *
+     * @param session The ongoing session
+     * @param file The file to upload
+     * @param size The file size
      */
     void setUpload(FtpIoSession session, FtpFile file, long size);
 
     /**
      * Increment download count.
+     *
+     * @param session The ongoing session
+     * @param file The file to download
+     * @param size The file size
      */
     void setDownload(FtpIoSession session, FtpFile file, long size);
 
     /**
      * Increment make directory count.
+     *
+     * @param session The ongoing session
+     * @param dir The directorty to create
      */
     void setMkdir(FtpIoSession session, FtpFile dir);
 
     /**
      * Decrement remove directory count.
+     *
+     * @param session The ongoing session
+     * @param dir The directorty to delete
      */
     void setRmdir(FtpIoSession session, FtpFile dir);
 
     /**
      * Increment delete count.
+     *
+     * @param session The ongoing session
+     * @param file The file to delete
      */
     void setDelete(FtpIoSession session, FtpFile file);
 
     /**
      * Increment current connection count.
+     *
+     * @param session The ongoing session
      */
     void setOpenConnection(FtpIoSession session);
 
     /**
      * Decrement close connection count.
+     *
+     * @param session The ongoing session
      */
     void setCloseConnection(FtpIoSession session);
 
     /**
      * Increment current login count.
+     *
+     * @param session The ongoing session
      */
     void setLogin(FtpIoSession session);
 
     /**
      * Increment failed login count.
+     *
+     * @param session The ongoing session
      */
     void setLoginFail(FtpIoSession session);
 
     /**
      * Decrement current login count.
+     *
+     * @param session The ongoing session
      */
     void setLogout(FtpIoSession session);
 

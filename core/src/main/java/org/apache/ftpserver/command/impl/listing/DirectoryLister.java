@@ -29,7 +29,7 @@ import org.apache.ftpserver.ftplet.FtpFile;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This class prints file listing.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -90,9 +90,13 @@ public class DirectoryLister {
 
     /**
      * Get the file list. Files will be listed in alphabetlical order.
+     *
+     * @param fileSystemView The view for the underlaying file system
+     * @param file The file to list
+     * @return The list of found files
      */
     private List<? extends FtpFile> listFiles(FileSystemView fileSystemView, String file) {
-        List <? extends FtpFile> files = null;
+        List<? extends FtpFile> files = null;
         try {
             FtpFile virtualFile = fileSystemView.getFile(file);
             if (virtualFile.isFile()) {

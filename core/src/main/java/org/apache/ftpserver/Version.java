@@ -40,7 +40,7 @@ public class Version {
     public static String getVersion() {
         Properties props = new Properties();
         InputStream in = null;
-        
+
         try {
             in = Version.class.getClassLoader().getResourceAsStream("org/apache/ftpserver/ftpserver.properties");
             props.load(in);

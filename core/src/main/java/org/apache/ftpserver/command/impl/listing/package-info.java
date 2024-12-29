@@ -21,7 +21,7 @@
  * <p>
  * File listing implementations used by various FTP commands
  * </p>
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 package org.apache.ftpserver.command.impl.listing;

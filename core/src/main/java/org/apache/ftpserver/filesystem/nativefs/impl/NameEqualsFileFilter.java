@@ -24,7 +24,7 @@ import java.io.FileFilter;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * FileFilter used for simple file name matching
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -37,7 +37,7 @@ public class NameEqualsFileFilter implements FileFilter {
 
     /**
      * Constructor
-     * 
+     *
      * @param nameToMatch
      *            The exact file name to match
      * @param caseInsensitive
@@ -57,5 +57,4 @@ public class NameEqualsFileFilter implements FileFilter {
             return file.getName().equals(nameToMatch);
         }
     }
-
 }

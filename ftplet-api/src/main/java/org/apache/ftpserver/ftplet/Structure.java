@@ -33,7 +33,7 @@ public enum Structure {
 
     /**
      * Parses the argument value from the STRU command into the type safe class
-     * 
+     *
      * @param argument
      *            The argument value from the STRU command. Not case sensitive
      * @return The appropriate structure

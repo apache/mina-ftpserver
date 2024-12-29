@@ -73,7 +73,7 @@ public interface FtpSession {
     Date getLoginTime();
 
     /**
-     * Get the number of failed logins. 
+     * Get the number of failed logins.
      * @return The number of failed logins. When login succeeds, this will return 0.
      */
     int getFailedLogins();
@@ -108,7 +108,7 @@ public interface FtpSession {
 
     /**
      * Returns user name entered in USER command
-     * 
+     *
      * @return user name entered in USER command
      */
     String getUserArgument();
@@ -179,7 +179,7 @@ public interface FtpSession {
 
     /**
      * Write a reply to the client
-     * 
+     *
      * @param reply
      *            The reply that will be sent to the client
      * @throws FtpException
@@ -189,17 +189,16 @@ public interface FtpSession {
     /**
      * Indicates whether the control socket for this session is secure, that is,
      * running over SSL/TLS
-     * 
+     *
      * @return true if the control socket is secured
      */
     boolean isSecure();
 
     /**
-     * Get the unique ID for this session. This ID will be maintained for 
+     * Get the unique ID for this session. This ID will be maintained for
      * the entire session and is also available to MDC logging using the "session"
-     * identifier. 
+     * identifier.
      * @return The unique ID for this session
      */
-    public UUID getSessionId();
-
+    UUID getSessionId();
 }

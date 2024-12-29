@@ -44,9 +44,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>APPE &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the server-DTP to accept the data transferred via the
  * data connection and to store the data in a file at the server site. If the
  * file specified in the pathname exists at the server site, then the data shall
@@ -61,6 +61,8 @@ public class APPE extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -163,9 +165,9 @@ public class APPE extends AbstractCommand {
                 // transfer data
                 transSz = dataConnection.transferFromClient(session.getFtpletSession(), os);
 
-                // attempt to close the output stream so that errors in 
-                // closing it will return an error to the client (FTPSERVER-119) 
-                if(os != null) {
+                // attempt to close the output stream so that errors in
+                // closing it will return an error to the client (FTPSERVER-119)
+                if (os != null) {
                     os.close();
                 }
 
@@ -175,7 +177,7 @@ public class APPE extends AbstractCommand {
                 ServerFtpStatistics ftpStat = (ServerFtpStatistics) context
                         .getFtpStatistics();
                 ftpStat.setUpload(session, file, transSz);
-                
+
             } catch (SocketException e) {
                 LOG.debug("SocketException during file upload", e);
                 failure = true;

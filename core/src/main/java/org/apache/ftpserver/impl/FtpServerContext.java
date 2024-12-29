@@ -31,7 +31,7 @@ import org.apache.ftpserver.message.MessageResource;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This is basically <code>org.apache.ftpserver.ftplet.FtpletContext</code> with
  * added connection manager, message resource functionalities.
  *
@@ -43,11 +43,15 @@ public interface FtpServerContext extends FtpletContext {
 
     /**
      * Get message resource.
+     *
+     * @return The messages resource
      */
     MessageResource getMessageResource();
 
     /**
      * Get ftplet container.
+     *
+     * @return The FtpLet container instance
      */
     FtpletContainer getFtpletContainer();
 
@@ -57,6 +61,8 @@ public interface FtpServerContext extends FtpletContext {
 
     /**
      * Get the command factory.
+     *
+     * @return The command factory instance
      */
     CommandFactory getCommandFactory();
 
@@ -64,9 +70,10 @@ public interface FtpServerContext extends FtpletContext {
      * Release all components.
      */
     void dispose();
-    
+
     /**
-     * Returns the thread pool executor for this context.  
+     * Returns the thread pool executor for this context.
+     *
      * @return the thread pool executor for this context.
      */
     ThreadPoolExecutor getThreadPoolExecutor();

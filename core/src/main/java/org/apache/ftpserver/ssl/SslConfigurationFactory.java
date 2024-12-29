@@ -72,90 +72,93 @@ public class SslConfigurationFactory {
 
     /**
      * The key store file used by this configuration
-     * 
+     *
      * @return The key store file
      */
     public File getKeystoreFile() {
-    return keystoreFile;
+        return keystoreFile;
     }
 
     /**
      * Set the key store file to be used by this configuration
-     * 
+     *
      * @param keyStoreFile
      *            A path to an existing key store file
      */
     public void setKeystoreFile(File keyStoreFile) {
-    if (keyStoreFile == null || keyStoreFile.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreFile must not be null or zero length");
-    this.keystoreFile = keyStoreFile;
+        if (keyStoreFile == null || keyStoreFile.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreFile must not be null or zero length");
+        }
+        this.keystoreFile = keyStoreFile;
     }
 
     /**
      * The password used to load the key store
-     * 
+     *
      * @return The password
      */
     public String getKeystorePassword() {
-    return keystorePass;
+        return keystorePass;
     }
 
     /**
      * Set the password used to load the key store
-     * 
+     *
      * @param keystorePass
      *            The password
      */
     public void setKeystorePassword(String keystorePass) {
-    this.keystorePass = keystorePass;
+        this.keystorePass = keystorePass;
     }
 
     /**
      * The key store type, defaults to @see {@link KeyStore#getDefaultType()}
-     * 
+     *
      * @return The key store type
      */
     public String getKeystoreType() {
-    return keystoreType;
+        return keystoreType;
     }
 
     /**
      * Set the key store type
-     * 
+     *
      * @param keystoreType
      *            The key store type
      */
     public void setKeystoreType(String keystoreType) {
-    if (keystoreType == null || keystoreType.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreType must not be null or zero length");
-    this.keystoreType = keystoreType;
+        if (keystoreType == null || keystoreType.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreType must not be null or zero length");
+        }
+        this.keystoreType = keystoreType;
     }
 
     /**
      * The algorithm used to open the key store. Defaults to "SunX509"
-     * 
+     *
      * @return The key store algorithm
      */
     public String getKeystoreAlgorithm() {
-    return keystoreAlgorithm;
+        return keystoreAlgorithm;
     }
 
     /**
      * Override the key store algorithm used to open the key store
-     * 
+     *
      * @param keystoreAlgorithm
      *            The key store algorithm
      */
     public void setKeystoreAlgorithm(String keystoreAlgorithm) {
-    if (keystoreAlgorithm == null || keystoreAlgorithm.length() == 0)
-        throw new FtpServerConfigurationException("KeystoreAlgorithm must not be null or zero length");
-    this.keystoreAlgorithm = keystoreAlgorithm;
+        if (keystoreAlgorithm == null || keystoreAlgorithm.length() == 0) {
+            throw new FtpServerConfigurationException("KeystoreAlgorithm must not be null or zero length");
+        }
+        this.keystoreAlgorithm = keystoreAlgorithm;
 
     }
 
     /**
      * The SSL protocol used for this channel. Supported values are "SSL" and "TLS". Defaults to "TLS".
-     * 
+     *
      * @return The SSL protocol
      * @deprecated Use {@link #getSslProtocols()}.
      */
@@ -166,7 +169,7 @@ public class SslConfigurationFactory {
 
     /**
      * The SSL protocols used for this channel. Supported values are "SSL" and "TLS". Defaults to "TLS".
-     * 
+     *
      * @return The SSL protocol
      */
     public String[] getSslProtocols() {
@@ -175,22 +178,23 @@ public class SslConfigurationFactory {
 
     /**
      * Set the SSL protocols used for this channel. Defaults to "TLSv1.2".
-     * 
+     *
      * @param sslProtocols
      *            The SSL protocols
      * @deprecated Use {@link #setSslProtocol(String...)}.
      */
-	public void setSslProtocol(String sslProtocols) {
-		if (sslProtocols == null) {
-			throw new FtpServerConfigurationException("SslProcotol must not be null");
-		}
 
-		this.sslProtocols = new String[] { sslProtocols };
-	}
+    public void setSslProtocol(String sslProtocols) {
+        if (sslProtocols == null) {
+            throw new FtpServerConfigurationException("SslProcotol must not be null");
+        }
+
+        this.sslProtocols = new String[] { sslProtocols };
+    }
 
     /**
      * Set the SSL protocols used for this channel. Defaults to "TLSv1.2".
-     * 
+     *
      * @param sslProtocols
      *            The SSL protocols
      */
@@ -198,19 +202,20 @@ public class SslConfigurationFactory {
         if (sslProtocols == null || sslProtocols.length == 0) {
             throw new FtpServerConfigurationException("SslProcotol must not be null or zero length");
         }
-        
+
         this.sslProtocols = sslProtocols;
     }
 
     /**
      * Set what client authentication level to use, supported values are "yes" or "true" for required authentication,
      * "want" for wanted authentication and "false" or "none" for no authentication. Defaults to "none".
-     * 
+     *
      * @param clientAuthReqd
      *            The desired authentication level
      */
     public void setClientAuthentication(String clientAuthReqd) {
-        if ("true".equalsIgnoreCase(clientAuthReqd) || "yes".equalsIgnoreCase(clientAuthReqd) || "need".equalsIgnoreCase(clientAuthReqd)) {
+        if ("true".equalsIgnoreCase(clientAuthReqd) || "yes".equalsIgnoreCase(clientAuthReqd) ||
+            "need".equalsIgnoreCase(clientAuthReqd)) {
             this.clientAuth = ClientAuth.NEED;
         } else if ("want".equalsIgnoreCase(clientAuthReqd)) {
             this.clientAuth = ClientAuth.WANT;
@@ -221,7 +226,7 @@ public class SslConfigurationFactory {
 
     /**
      * The password used to load the key
-     * 
+     *
      * @return The password
      */
     public String getKeyPassword() {
@@ -230,7 +235,7 @@ public class SslConfigurationFactory {
 
     /**
      * Set the password used to load the key
-     * 
+     *
      * @param keyPass
      *            The password
      */
@@ -240,7 +245,7 @@ public class SslConfigurationFactory {
 
     /**
      * Get the file used to load the truststore
-     * 
+     *
      * @return The {@link File} containing the truststore
      */
     public File getTruststoreFile() {
@@ -249,7 +254,7 @@ public class SslConfigurationFactory {
 
     /**
      * Set the password used to load the trust store
-     * 
+     *
      * @param trustStoreFile
      *            The password
      */
@@ -259,7 +264,7 @@ public class SslConfigurationFactory {
 
     /**
      * The password used to load the trust store
-     * 
+     *
      * @return The password
      */
     public String getTruststorePassword() {
@@ -268,7 +273,7 @@ public class SslConfigurationFactory {
 
     /**
      * Set the password used to load the trust store
-     * 
+     *
      * @param trustStorePass
      *            The password
      */
@@ -278,7 +283,7 @@ public class SslConfigurationFactory {
 
     /**
      * The trust store type, defaults to @see {@link KeyStore#getDefaultType()}
-     * 
+     *
      * @return The trust store type
      */
     public String getTruststoreType() {
@@ -287,7 +292,7 @@ public class SslConfigurationFactory {
 
     /**
      * Set the trust store type
-     * 
+     *
      * @param trustStoreType
      *            The trust store type
      */
@@ -297,7 +302,7 @@ public class SslConfigurationFactory {
 
     /**
      * The algorithm used to open the trust store. Defaults to "SunX509"
-     * 
+     *
      * @return The trust store algorithm
      */
     public String getTruststoreAlgorithm() {
@@ -306,7 +311,7 @@ public class SslConfigurationFactory {
 
     /**
      * Override the trust store algorithm used to open the trust store
-     * 
+     *
      * @param trustStoreAlgorithm
      *            The trust store algorithm
      */
@@ -315,7 +320,8 @@ public class SslConfigurationFactory {
 
     }
 
-    private KeyStore loadStore(File storeFile, String storeType, String storePass) throws IOException, GeneralSecurityException {
+    private KeyStore loadStore(File storeFile, String storeType, String storePass)
+        throws IOException, GeneralSecurityException {
     InputStream fin = null;
     try {
         if (storeFile.exists()) {
@@ -341,33 +347,35 @@ public class SslConfigurationFactory {
 
     /**
      * Create an instance of {@link SslConfiguration} based on the configuration of this factory.
-     * 
+     *
      * @return The {@link SslConfiguration} instance
      */
     public SslConfiguration createSslConfiguration() {
 
     try {
         // initialize keystore
-        LOG.debug("Loading key store from \"{}\", using the key store type \"{}\"", keystoreFile.getAbsolutePath(), keystoreType);
+        LOG.debug("Loading key store from \"{}\", using the key store type \"{}\"",
+            keystoreFile.getAbsolutePath(), keystoreType);
         KeyStore keyStore = loadStore(keystoreFile, keystoreType, keystorePass);
 
         KeyStore trustStore;
-        
+
         if (trustStoreFile != null) {
-            LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"", trustStoreFile.getAbsolutePath(), trustStoreType);
+            LOG.debug("Loading trust store from \"{}\", using the key store type \"{}\"",
+                trustStoreFile.getAbsolutePath(), trustStoreType);
             trustStore = loadStore(trustStoreFile, trustStoreType, trustStorePass);
         } else {
             trustStore = keyStore;
         }
 
         String keyPassToUse;
-        
+
         if (keyPass == null) {
             keyPassToUse = keystorePass;
         } else {
             keyPassToUse = keyPass;
         }
-        
+
         // initialize key manager factory
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(keystoreAlgorithm);
         keyManagerFactory.init(keyStore, keyPassToUse.toCharArray());
@@ -376,8 +384,8 @@ public class SslConfigurationFactory {
         TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(trustStoreAlgorithm);
         trustManagerFactory.init(trustStore);
 
-        return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocols, 
-        	enabledCipherSuites, keyAlias);
+        return new DefaultSslConfiguration(keyManagerFactory, trustManagerFactory, clientAuth, sslProtocols,
+            enabledCipherSuites, keyAlias);
     } catch (Exception ex) {
         LOG.error("DefaultSsl.configure()", ex);
         throw new FtpServerConfigurationException("DefaultSsl.configure()", ex);
@@ -386,7 +394,7 @@ public class SslConfigurationFactory {
 
     /**
      * Return the required client authentication setting
-     * 
+     *
      * @return {@link ClientAuth#NEED} if client authentication is required, {@link ClientAuth#WANT} is client
      *         authentication is wanted or {@link ClientAuth#NONE} if no client authentication is the be performed
      */
@@ -397,7 +405,7 @@ public class SslConfigurationFactory {
     /**
      * Returns the cipher suites that should be enabled for this connection. Must return null if the default (as decided
      * by the JVM) cipher suites should be used.
-     * 
+     *
      * @return An array of cipher suites, or null.
      */
     public String[] getEnabledCipherSuites() {
@@ -411,7 +419,7 @@ public class SslConfigurationFactory {
     /**
      * Set the allowed cipher suites, note that the exact list of supported cipher suites differs between JRE
      * implementations.
-     * 
+     *
      * @param enabledCipherSuites
      */
     public void setEnabledCipherSuites(String[] enabledCipherSuites) {
@@ -424,7 +432,7 @@ public class SslConfigurationFactory {
 
     /**
      * Get the server key alias to be used for SSL communication
-     * 
+     *
      * @return The alias, or null if none is set
      */
     public String getKeyAlias() {
@@ -434,7 +442,7 @@ public class SslConfigurationFactory {
     /**
      * Set the alias for the key to be used for SSL communication. If the specified key store contains multiple keys,
      * this alias can be set to select a specific key.
-     * 
+     *
      * @param keyAlias
      *            The alias to use, or null if JSSE should be allowed to choose the key.
      */

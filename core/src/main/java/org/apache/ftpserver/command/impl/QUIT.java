@@ -32,9 +32,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>QUIT &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command terminates a USER and if file transfer is not in progress, the
  * server closes the control connection.
  *
@@ -43,9 +43,11 @@ import org.slf4j.LoggerFactory;
 public class QUIT extends AbstractCommand {
 
     private final Logger LOG = LoggerFactory.getLogger(QUIT.class);
-    
+
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

@@ -23,7 +23,7 @@ import org.apache.ftpserver.ftplet.FtpFile;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This is the file related activity observer.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -32,26 +32,43 @@ public interface FileObserver {
 
     /**
      * User file upload notification.
+     *
+     * @param session The FTP session
+     * @param file The file to upload
+     * @param size The file size
      */
     void notifyUpload(FtpIoSession session, FtpFile file, long size);
 
     /**
      * User file download notification.
+     *
+     * @param session The FTP session
+     * @param file The file to download
+     * @param size The file size
      */
     void notifyDownload(FtpIoSession session, FtpFile file, long size);
 
     /**
      * User file delete notification.
+     *
+     * @param session The FTP session
+     * @param file The file to delete
      */
     void notifyDelete(FtpIoSession session, FtpFile file);
 
     /**
      * User make directory notification.
+     *
+     * @param session The FTP session
+     * @param file The directory to create
      */
     void notifyMkdir(FtpIoSession session, FtpFile file);
 
     /**
      * User remove directory notification.
+     *
+     * @param session The FTP session
+     * @param file The directory to delete
      */
     void notifyRmdir(FtpIoSession session, FtpFile file);
 

@@ -28,7 +28,6 @@ import org.apache.ftpserver.usermanager.impl.UserMetadata;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class AnonymousAuthentication implements Authentication {
-
     private UserMetadata userMetadata;
 
     /**
@@ -40,7 +39,7 @@ public class AnonymousAuthentication implements Authentication {
 
     /**
      * Constructor with an additional user metadata parameter
-     * 
+     *
      * @param userMetadata
      *            User metadata
      */
@@ -50,11 +49,10 @@ public class AnonymousAuthentication implements Authentication {
 
     /**
      * Retrive the user metadata
-     * 
+     *
      * @return The user metadata
      */
     public UserMetadata getUserMetadata() {
         return userMetadata;
     }
-
 }

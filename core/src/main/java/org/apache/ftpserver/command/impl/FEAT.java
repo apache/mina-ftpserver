@@ -31,7 +31,7 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * The FEAT command (introduced in [RFC-2389]) allows servers with additional
  * features to advertise these to a client by responding to the FEAT command. If
  * a server supports the FEAT command then it MUST advertise supported AUTH,
@@ -41,6 +41,11 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
  */
 public class FEAT extends AbstractCommand {
 
+    /**
+     * Execute command.
+     *
+     * {@inheritDoc}
+     */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
             throws IOException, FtpException {

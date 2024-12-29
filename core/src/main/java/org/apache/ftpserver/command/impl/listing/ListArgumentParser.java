@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Parses a list argument (e.g. for LIST or NLST) into a {@link ListArgument}
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -31,7 +31,7 @@ public class ListArgumentParser {
 
     /**
      * Parse the argument
-     * 
+     *
      * @param argument
      *            The argument string
      * @return The parsed argument

@@ -30,9 +30,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>ABOR &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command tells the server to abort the previous FTP service command and
  * any associated transfer of data. No action is to be taken if the previous
  * command has been completed (including data transfer). The control connection
@@ -46,6 +46,8 @@ public class ABOR extends AbstractCommand {
 
     /**
      * Execute command
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

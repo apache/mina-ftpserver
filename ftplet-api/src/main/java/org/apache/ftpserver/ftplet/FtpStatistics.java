@@ -128,7 +128,7 @@ public interface FtpStatistics {
 
     /**
      * Get the login number for the specific user from the ipAddress
-     * 
+     *
      * @param user
      *            login user account
      * @param ipAddress

@@ -29,7 +29,7 @@ import java.util.TimeZone;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Standard date related utility methods.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -38,7 +38,7 @@ public class DateUtils {
 
     private static final TimeZone TIME_ZONE_UTC = TimeZone.getTimeZone("UTC");
 
-    private final static String[] MONTHS = { "Jan", "Feb", "Mar", "Apr", "May",
+    private static final String[] MONTHS = { "Jan", "Feb", "Mar", "Apr", "May",
             "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
     /*
@@ -54,13 +54,16 @@ public class DateUtils {
             df.setTimeZone(TimeZone.getTimeZone("GMT"));
             return df;
         }
-        
+
     };
-    
+
     /**
      * Get unix style date string.
+     *
+     * @param millis The long value to convert to a unix date
+     * @return The unix date
      */
-    public final static String getUnixDate(long millis) {
+    public static final String getUnixDate(long millis) {
         if (millis < 0) {
             return "------------";
         }
@@ -111,8 +114,11 @@ public class DateUtils {
 
     /**
      * Get ISO 8601 timestamp.
+     *
+     * @param millis The long value to convert to a ISO 8601 date
+     * @return The ISO 8601 date
      */
-    public final static String getISO8601Date(long millis) {
+    public static final String getISO8601Date(long millis) {
         StringBuilder sb = new StringBuilder(19);
         Calendar cal = new GregorianCalendar();
         cal.setTimeInMillis(millis);
@@ -165,14 +171,17 @@ public class DateUtils {
 
     /**
      * Get FTP date.
+     *
+     * @param millis The long value to convert to a FTP date
+     * @return The FTP date
      */
-    public final static String getFtpDate(long millis) {
+    public static final String getFtpDate(long millis) {
         StringBuilder sb = new StringBuilder(20);
-        
+
         // MLST should use UTC
         Calendar cal = new GregorianCalendar(TIME_ZONE_UTC);
         cal.setTimeInMillis(millis);
-        
+
 
         // year
         sb.append(cal.get(Calendar.YEAR));
@@ -224,13 +233,13 @@ public class DateUtils {
         sb.append(milli);
         return sb.toString();
     }
+
     /*
-     *  Parses a date in the format used by the FTP commands 
+     *  Parses a date in the format used by the FTP commands
      *  involving dates(MFMT, MDTM)
      */
-    public final static Date parseFTPDate(String dateStr) throws ParseException{
+    public static final Date parseFTPDate(String dateStr) throws ParseException {
         return FTP_DATE_FORMAT.get().parse(dateStr);
-        
+
     }
-    
 }

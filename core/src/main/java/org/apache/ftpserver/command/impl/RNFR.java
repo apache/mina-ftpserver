@@ -34,9 +34,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>RNFR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command specifies the old pathname of the file which is to be renamed.
  * This command must be immediately followed by a "rename to" command specifying
  * the new file pathname.
@@ -48,7 +48,9 @@ public class RNFR extends AbstractCommand {
     private final Logger LOG = LoggerFactory.getLogger(RNFR.class);
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

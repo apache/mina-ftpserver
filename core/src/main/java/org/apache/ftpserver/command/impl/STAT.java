@@ -38,9 +38,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>STAT [&lt;SP&gt; &lt;pathname&gt;] &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command shall cause a status response to be sent over the control
  * connection in the form of a reply.
  *
@@ -51,9 +51,11 @@ public class STAT extends AbstractCommand {
     private static final LISTFileFormater LIST_FILE_FORMATER = new LISTFileFormater();
 
     private final DirectoryLister directoryLister = new DirectoryLister();
-    
+
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -62,33 +64,33 @@ public class STAT extends AbstractCommand {
         // reset state variables
         session.resetState();
 
-        if(request.getArgument() != null) {
+        if (request.getArgument() != null) {
             ListArgument parsedArg = ListArgumentParser.parse(request.getArgument());
 
             // check that the directory or file exists
             FtpFile file = null;
             try {
                 file = session.getFileSystemView().getFile(parsedArg.getFile());
-                if(!file.doesExist()) {
+                if (!file.doesExist()) {
                     session.write(LocalizedDataTransferFtpReply.translate(session, request, context,
                             FtpReply.REPLY_450_REQUESTED_FILE_ACTION_NOT_TAKEN, "LIST",
-                            null, file));             
+                            null, file));
                     return;
                 }
-                
-                String dirList = directoryLister.listFiles(parsedArg, 
+
+                String dirList = directoryLister.listFiles(parsedArg,
                         session.getFileSystemView(), LIST_FILE_FORMATER);
 
                 int replyCode;
-                if(file.isDirectory()) {
+                if (file.isDirectory()) {
                     replyCode = FtpReply.REPLY_212_DIRECTORY_STATUS;
                 } else {
                     replyCode = FtpReply.REPLY_213_FILE_STATUS;
                 }
-                
+
                 session.write(LocalizedFileActionFtpReply.translate(session, request, context,
                         replyCode, "STAT", dirList, file));
-                
+
             } catch (FtpException e) {
                 session
                 .write(LocalizedFileActionFtpReply
@@ -99,7 +101,7 @@ public class STAT extends AbstractCommand {
                                 FtpReply.REPLY_450_REQUESTED_FILE_ACTION_NOT_TAKEN,
                                 "STAT", null, file));
             }
-        
+
         } else {
             // write the status info
             session.write(LocalizedFtpReply.translate(session, request, context,

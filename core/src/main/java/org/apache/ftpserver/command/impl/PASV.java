@@ -38,35 +38,35 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>PASV &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command requests the server-DTP to "listen" on a data port (which is not
  * its default data port) and to wait for a connection rather than initiate one
  * upon receipt of a transfer command. The response to this command includes the
  * host and port address this server is listening on.
- * 
- * FTPServer allows the user to configure an "external address" at the listener 
+ *
+ * FTPServer allows the user to configure an "external address" at the listener
  * level which will be the one reported by PASV response. This might solve some of
  * the issues with NATed addresses ( the reported IP is internal and not accesible by the
  * client) but not all of them - for example, if the FTPServer host has a dynamic IP
  * address. The solution for all these cases would be switching to the EPSV command,
  * which doesn't report any IP address back.
- * 
+ *
  * In the case that EPSV command isn't available to the client, FTPServer integrators
  * can implement their own getPassiveExternalAddress to modify how the External IP
  * is resolved. One common approach would be retrieving this address from a webpage
  * which prints out the visitor's IP address. Another approach could be returning the
  * external IP address from  the USER configuration(as when a single server is mapped
  * into different addresses).
- * 
+ *
  * Please note that PASV command is an internal classes and thus shouldn't be extended.
  * Integrators may decide to extend it at their own risk, but they should be aware that
  * the 'internal API' can be changed at any moment. Besides, in some environments
- * (OSGI) internal classes are not accesible and thus overriding won't work.   
+ * (OSGI) internal classes are not accesible and thus overriding won't work.
  * Still, the getPassiveExternalAddress method is provided for convenience so the
- * code to overwrite when reimplementing PASV command can be easily located. 
- * 
+ * code to overwrite when reimplementing PASV command can be easily located.
+ *
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
@@ -76,6 +76,8 @@ public class PASV extends AbstractCommand {
 
     /**
      * Execute command
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
         final FtpServerContext context, final FtpRequest request)
@@ -131,7 +133,7 @@ public class PASV extends AbstractCommand {
     /*
      * (non-Javadoc)
      * Returns the server's IP address which will be reported by the PASV response.
-     * 
+     *
      */
     protected String getPassiveExternalAddress(final FtpIoSession session) {
         return session.getListener().getDataConnectionConfiguration().getPassiveExernalAddress();

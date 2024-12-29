@@ -32,9 +32,9 @@ import org.apache.ftpserver.ftplet.User;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This is FTP statistics implementation.
- * 
+ *
  * TODO revisit concurrency, right now we're a bit over zealous with both Atomic*
  * counters and synchronization
  *
@@ -79,7 +79,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     private static class UserLogins {
         private Map<InetAddress, AtomicInteger> perAddress = new ConcurrentHashMap<>();
 
-        public UserLogins(InetAddress address) {
+        UserLogins(InetAddress address) {
             // init with the first connection
             totalLogins = new AtomicInteger(1);
             perAddress.put(address, new AtomicInteger(1));
@@ -105,14 +105,14 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     public static final String LOGIN_NUMBER = "login_number";
 
     /**
-     * Set the observer.
+     * {@inheritDoc}
      */
     public void setObserver(final StatisticsObserver observer) {
         this.observer = observer;
     }
 
     /**
-     * Set the file observer.
+     * {@inheritDoc}
      */
     public void setFileObserver(final FileObserver observer) {
         fileObserver = observer;
@@ -121,7 +121,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     // //////////////////////////////////////////////////////
     // /////////////// All getter methods /////////////////
     /**
-     * Get server start time.
+     * {@inheritDoc}
      */
     public Date getStartTime() {
         if (startTime != null) {
@@ -132,105 +132,105 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Get number of files uploaded.
+     * {@inheritDoc}
      */
     public int getTotalUploadNumber() {
         return uploadCount.get();
     }
 
     /**
-     * Get number of files downloaded.
+     * {@inheritDoc}
      */
     public int getTotalDownloadNumber() {
         return downloadCount.get();
     }
 
     /**
-     * Get number of files deleted.
+     * {@inheritDoc}
      */
     public int getTotalDeleteNumber() {
         return deleteCount.get();
     }
 
     /**
-     * Get total number of bytes uploaded.
+     * {@inheritDoc}
      */
     public long getTotalUploadSize() {
         return bytesUpload.get();
     }
 
     /**
-     * Get total number of bytes downloaded.
+     * {@inheritDoc}
      */
     public long getTotalDownloadSize() {
         return bytesDownload.get();
     }
 
     /**
-     * Get total directory created.
+     * {@inheritDoc}
      */
     public int getTotalDirectoryCreated() {
         return mkdirCount.get();
     }
 
     /**
-     * Get total directory removed.
+     * {@inheritDoc}
      */
     public int getTotalDirectoryRemoved() {
         return rmdirCount.get();
     }
 
     /**
-     * Get total number of connections.
+     * {@inheritDoc}
      */
     public int getTotalConnectionNumber() {
         return totalConnections.get();
     }
 
     /**
-     * Get current number of connections.
+     * {@inheritDoc}
      */
     public int getCurrentConnectionNumber() {
         return currConnections.get();
     }
 
     /**
-     * Get total number of logins.
+     * {@inheritDoc}
      */
     public int getTotalLoginNumber() {
         return totalLogins.get();
     }
 
     /**
-     * Get total failed login number.
+     * {@inheritDoc}
      */
     public int getTotalFailedLoginNumber() {
         return totalFailedLogins.get();
     }
 
     /**
-     * Get current number of logins.
+     * {@inheritDoc}
      */
     public int getCurrentLoginNumber() {
         return currLogins.get();
     }
 
     /**
-     * Get total number of anonymous logins.
+     * {@inheritDoc}
      */
     public int getTotalAnonymousLoginNumber() {
         return totalAnonLogins.get();
     }
 
     /**
-     * Get current number of anonymous logins.
+     * {@inheritDoc}
      */
     public int getCurrentAnonymousLoginNumber() {
         return currAnonLogins.get();
     }
 
     /**
-     * Get the login number for the specific user
+     * {@inheritDoc}
      */
     public synchronized int getCurrentUserLoginNumber(final User user) {
         UserLogins userLogins = userLoginTable.get(user.getName());
@@ -243,11 +243,10 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
 
     /**
      * Get the login number for the specific user from the ipAddress
-     * 
-     * @param user
-     *            login user account
-     * @param ipAddress
-     *            the ip address of the remote user
+     *
+     * @param user login user account
+     * @param ipAddress the ip address of the remote user
+     * @return The login number
      */
     public synchronized int getCurrentUserLoginNumber(final User user,
             final InetAddress ipAddress) {
@@ -262,7 +261,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     // //////////////////////////////////////////////////////
     // /////////////// All setter methods /////////////////
     /**
-     * Increment upload count.
+     * {@inheritDoc}
      */
     public synchronized void setUpload(final FtpIoSession session,
             final FtpFile file, final long size) {
@@ -272,7 +271,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment download count.
+     * {@inheritDoc}
      */
     public synchronized void setDownload(final FtpIoSession session,
             final FtpFile file, final long size) {
@@ -282,7 +281,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment delete count.
+     * {@inheritDoc}
      */
     public synchronized void setDelete(final FtpIoSession session,
             final FtpFile file) {
@@ -291,7 +290,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment make directory count.
+     * {@inheritDoc}
      */
     public synchronized void setMkdir(final FtpIoSession session,
             final FtpFile file) {
@@ -300,7 +299,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment remove directory count.
+     * {@inheritDoc}
      */
     public synchronized void setRmdir(final FtpIoSession session,
             final FtpFile file) {
@@ -309,7 +308,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment open connection count.
+     * {@inheritDoc}
      */
     public synchronized void setOpenConnection(final FtpIoSession session) {
         currConnections.incrementAndGet();
@@ -318,7 +317,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Decrement open connection count.
+     * {@inheritDoc}
      */
     public synchronized void setCloseConnection(final FtpIoSession session) {
         if (currConnections.get() > 0) {
@@ -328,7 +327,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * New login.
+     * {@inheritDoc}
      */
     public synchronized void setLogin(final FtpIoSession session) {
         currLogins.incrementAndGet();
@@ -370,7 +369,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Increment failed login count.
+     * {@inheritDoc}
      */
     public synchronized void setLoginFail(final FtpIoSession session) {
         totalFailedLogins.incrementAndGet();
@@ -378,7 +377,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * User logout
+     * {@inheritDoc}
      */
     public synchronized void setLogout(final FtpIoSession session) {
         User user = session.getUser();
@@ -412,7 +411,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     // //////////////////////////////////////////////////////////
     // /////////////// all observer methods ////////////////////
     /**
-     * Observer upload notification.
+     * {@inheritDoc}
      */
     private void notifyUpload(final FtpIoSession session,
             final FtpFile file, long size) {
@@ -428,7 +427,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer download notification.
+     * {@inheritDoc}
      */
     private void notifyDownload(final FtpIoSession session,
             final FtpFile file, final long size) {
@@ -444,7 +443,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer delete notification.
+     * {@inheritDoc}
      */
     private void notifyDelete(final FtpIoSession session, final FtpFile file) {
         StatisticsObserver observer = this.observer;
@@ -459,7 +458,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer make directory notification.
+     * {@inheritDoc}
      */
     private void notifyMkdir(final FtpIoSession session, final FtpFile file) {
         StatisticsObserver observer = this.observer;
@@ -474,7 +473,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer remove directory notification.
+     * {@inheritDoc}
      */
     private void notifyRmdir(final FtpIoSession session, final FtpFile file) {
         StatisticsObserver observer = this.observer;
@@ -489,7 +488,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer open connection notification.
+     * {@inheritDoc}
      */
     private void notifyOpenConnection(final FtpIoSession session) {
         StatisticsObserver observer = this.observer;
@@ -499,7 +498,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer close connection notification.
+     * {@inheritDoc}
      */
     private void notifyCloseConnection(final FtpIoSession session) {
         StatisticsObserver observer = this.observer;
@@ -509,7 +508,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer login notification.
+     * {@inheritDoc}
      */
     private void notifyLogin(final FtpIoSession session) {
         StatisticsObserver observer = this.observer;
@@ -527,7 +526,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer failed login notification.
+     * {@inheritDoc}
      */
     private void notifyLoginFail(final FtpIoSession session) {
         StatisticsObserver observer = this.observer;
@@ -541,7 +540,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Observer logout notification.
+     * {@inheritDoc}
      */
     private void notifyLogout(final FtpIoSession session) {
         StatisticsObserver observer = this.observer;
@@ -558,7 +557,7 @@ public class DefaultFtpStatistics implements ServerFtpStatistics {
     }
 
     /**
-     * Reset the cumulative counters.
+     * {@inheritDoc}
      */
     public synchronized void resetStatisticsCounters() {
         startTime = new Date();

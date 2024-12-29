@@ -25,9 +25,9 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 
 /**
  * An implementation of <code>FileActionFtpReply</code>.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
+ *
  */
 
 public class LocalizedFileActionFtpReply extends LocalizedFtpReply implements
@@ -40,7 +40,7 @@ public class LocalizedFileActionFtpReply extends LocalizedFtpReply implements
 
     /**
      * Creates a new instance of <code>LocalizedFileTransferReply</code>.
-     * 
+     *
      * @param code
      *            the reply code
      * @param message
@@ -60,7 +60,7 @@ public class LocalizedFileActionFtpReply extends LocalizedFtpReply implements
     /**
      * Returns the localized reply that contains all details about the data
      * transfer.
-     * 
+     *
      * @param session
      *            the FTP session
      * @param request

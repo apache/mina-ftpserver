@@ -29,7 +29,7 @@ public interface Authority {
 
     /**
      * Indicates weather this Authority can authorize a certain request
-     * 
+     *
      * @param request
      *            The request to authorize
      * @return True if the request can be authorized by this Authority
@@ -38,13 +38,13 @@ public interface Authority {
 
     /**
      * Authorize an {@link AuthorizationRequest}.
-     * 
+     *
      * @param request
      *            The {@link AuthorizationRequest}
      * @return Returns a populated AuthorizationRequest as long as If
-     *         {@link #canAuthorize(AuthorizationRequest)} returns true for the 
-     *         AuthorizationRequest, otherwise returns null. 
-     *         {@link #canAuthorize(AuthorizationRequest)} should always be checked before 
+     *         {@link #canAuthorize(AuthorizationRequest)} returns true for the
+     *         AuthorizationRequest, otherwise returns null.
+     *         {@link #canAuthorize(AuthorizationRequest)} should always be checked before
      *         calling this method.
      */
     AuthorizationRequest authorize(AuthorizationRequest request);

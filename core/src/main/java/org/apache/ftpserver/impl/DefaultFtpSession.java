@@ -36,7 +36,7 @@ import org.apache.ftpserver.ftplet.User;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * FTP session
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -47,62 +47,64 @@ public class DefaultFtpSession implements FtpSession {
 
     /**
      * Default constructor.
+     *
+     * @param ioSession The current session
      */
     public DefaultFtpSession(final FtpIoSession ioSession) {
         this.ioSession = ioSession;
     }
 
     /**
-     * Is logged-in
+     * {@inheritDoc}
      */
     public boolean isLoggedIn() {
         return ioSession.isLoggedIn();
     }
 
     /**
-     * Get FTP data connection.
+     * {@inheritDoc}
      */
     public DataConnectionFactory getDataConnection() {
         return ioSession.getDataConnection();
     }
 
     /**
-     * Get file system view.
+     * {@inheritDoc}
      */
     public FileSystemView getFileSystemView() {
         return ioSession.getFileSystemView();
     }
 
     /**
-     * Get connection time.
+     * {@inheritDoc}
      */
     public Date getConnectionTime() {
         return new Date(ioSession.getCreationTime());
     }
 
     /**
-     * Get the login time.
+     * {@inheritDoc}
      */
     public Date getLoginTime() {
         return ioSession.getLoginTime();
     }
 
     /**
-     * Get last access time.
+     * {@inheritDoc}
      */
     public Date getLastAccessTime() {
         return ioSession.getLastAccessTime();
     }
 
     /**
-     * Get file offset.
+     * {@inheritDoc}
      */
     public long getFileOffset() {
         return ioSession.getFileOffset();
     }
 
     /**
-     * Get rename from file object.
+     * {@inheritDoc}
      */
     public FtpFile getRenameFrom() {
         return ioSession.getRenameFrom();
@@ -110,7 +112,7 @@ public class DefaultFtpSession implements FtpSession {
 
     /**
      * Returns user name entered in USER command
-     * 
+     *
      * @return user name entered in USER command
      */
     public String getUserArgument() {
@@ -118,21 +120,21 @@ public class DefaultFtpSession implements FtpSession {
     }
 
     /**
-     * Get language.
+     * {@inheritDoc}
      */
     public String getLanguage() {
         return ioSession.getLanguage();
     }
 
     /**
-     * Get user.
+     * {@inheritDoc}
      */
     public User getUser() {
         return ioSession.getUser();
     }
 
     /**
-     * Get remote address
+     * {@inheritDoc}
      */
     public InetSocketAddress getClientAddress() {
         if (ioSession.getRemoteAddress() instanceof InetSocketAddress) {
@@ -143,7 +145,7 @@ public class DefaultFtpSession implements FtpSession {
     }
 
     /**
-     * Get attribute
+     * {@inheritDoc}
      */
     public Object getAttribute(final String name) {
         if (name.startsWith(FtpIoSession.ATTRIBUTE_PREFIX)) {
@@ -155,7 +157,7 @@ public class DefaultFtpSession implements FtpSession {
     }
 
     /**
-     * Set attribute.
+     * {@inheritDoc}
      */
     public void setAttribute(final String name, final Object value) {
         if (name.startsWith(FtpIoSession.ATTRIBUTE_PREFIX)) {
@@ -175,14 +177,14 @@ public class DefaultFtpSession implements FtpSession {
     }
 
     /**
-     * Get the data type.
+     * {@inheritDoc}
      */
     public DataType getDataType() {
         return ioSession.getDataType();
     }
 
     /**
-     * Get structure.
+     * {@inheritDoc}
      */
     public Structure getStructure() {
         return ioSession.getStructure();
@@ -245,5 +247,4 @@ public class DefaultFtpSession implements FtpSession {
         return ioSession.getSessionId();
     }
 
-    
 }

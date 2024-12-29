@@ -60,20 +60,20 @@ public class UserManagerBeanDefinitionParser extends
         }
         BeanDefinitionBuilder factoryBuilder = BeanDefinitionBuilder.genericBeanDefinition(factoryClass);
 
-        
+
         // common for both user managers
         if (StringUtils.hasText(element.getAttribute("encrypt-passwords"))) {
-            String encryptionStrategy = element.getAttribute("encrypt-passwords"); 
-            
-            if(encryptionStrategy.equals("true") || encryptionStrategy.equals("md5")) {
+            String encryptionStrategy = element.getAttribute("encrypt-passwords");
+
+            if (encryptionStrategy.equals("true") || encryptionStrategy.equals("md5")) {
                 factoryBuilder.addPropertyValue("passwordEncryptor", new Md5PasswordEncryptor());
-            } else if(encryptionStrategy.equals("salted")) {
+            } else if (encryptionStrategy.equals("salted")) {
                 factoryBuilder.addPropertyValue("passwordEncryptor", new SaltedPasswordEncryptor());
             } else {
                 factoryBuilder.addPropertyValue("passwordEncryptor", new ClearTextPasswordEncryptor());
             }
         }
-        
+
         if (factoryClass == PropertiesUserManagerFactory.class) {
             if (StringUtils.hasText(element.getAttribute("file"))) {
                 factoryBuilder.addPropertyValue("file", element.getAttribute("file"));
@@ -117,7 +117,7 @@ public class UserManagerBeanDefinitionParser extends
 
         BeanDefinition factoryDefinition = factoryBuilder.getBeanDefinition();
         String factoryId = parserContext.getReaderContext().generateBeanName(factoryDefinition);
-        
+
         BeanDefinitionHolder factoryHolder = new BeanDefinitionHolder(factoryDefinition, factoryId);
         registerBeanDefinition(factoryHolder, parserContext.getRegistry());
 

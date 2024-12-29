@@ -52,6 +52,19 @@ public class DefaultDataConnectionConfiguration implements
     /**
      * Internal constructor, do not use directly. Use
      * {@link DataConnectionConfigurationFactory} instead.
+     *
+     * @param idleTime The idle time
+     * @param ssl he SSL Configuration
+     * @param activeEnabled Is active mode enabled?
+     * @param activeIpCheck The activa IP check
+     * @param activeLocalAddress The active local address
+     * @param activeLocalPort The active local port
+     * @param passiveAddress The passive address
+     * @param passivePorts The passive ports
+     * @param passiveExternalAddress The passive external address
+     * @param passiveIpCheck The passive IP check
+     * @param implicitSsl Implicit SSL
+     *
      */
     public DefaultDataConnectionConfiguration(int idleTime,
         SslConfiguration ssl, boolean activeEnabled, boolean activeIpCheck,
@@ -73,6 +86,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get the maximum idle time in seconds.
+     *
+     * {@inheritDoc}
      */
     public int getIdleTime() {
         return idleTime;
@@ -80,6 +95,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Is PORT enabled?
+     *
+     * {@inheritDoc}
      */
     public boolean isActiveEnabled() {
         return activeEnabled;
@@ -87,6 +104,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Check the PORT IP?
+     *
+     * {@inheritDoc}
      */
     public boolean isActiveIpCheck() {
         return activeIpCheck;
@@ -94,6 +113,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get the local address for active mode data transfer.
+     *
+     * {@inheritDoc}
      */
     public String getActiveLocalAddress() {
         return activeLocalAddress;
@@ -101,6 +122,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get the active local port number.
+     *
+     * {@inheritDoc}
      */
     public int getActiveLocalPort() {
         return activeLocalPort;
@@ -108,6 +131,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get passive host.
+     *
+     * {@inheritDoc}
      */
     public String getPassiveAddress() {
         return passiveAddress;
@@ -115,6 +140,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get external passive host.
+     *
+     * {@inheritDoc}
      */
     public String getPassiveExernalAddress()  {
         return passiveExternalAddress;
@@ -127,6 +154,8 @@ public class DefaultDataConnectionConfiguration implements
     /**
      * Get passive data port. Data port number zero (0) means that any available
      * port will be used.
+     *
+     * {@inheritDoc}
      */
     public synchronized int requestPassivePort() {
         return passivePorts.reserveNextPort();
@@ -143,6 +172,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Release data port
+     *
+     * {@inheritDoc}
      */
     public synchronized void releasePassivePort(final int port) {
         passivePorts.releasePort(port);
@@ -150,6 +181,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * Get SSL component.
+     *
+     * {@inheritDoc}
      */
     public SslConfiguration getSslConfiguration() {
         return ssl;
@@ -157,6 +190,8 @@ public class DefaultDataConnectionConfiguration implements
 
     /**
      * @see org.apache.ftpserver.DataConnectionConfiguration#isImplicitSsl()
+     *
+     * {@inheritDoc}
      */
     public boolean isImplicitSsl() {
         return implicitSsl;

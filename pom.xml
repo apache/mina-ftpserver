@@ -14,7 +14,7 @@
   <parent>
     <artifactId>apache</artifactId>
     <groupId>org.apache</groupId>
-    <version>26</version>
+    <version>30</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
@@ -140,11 +140,15 @@
     <tag>master</tag>
   </scm>
 
+  <prerequisites>
+    <maven>3.8.5</maven>
+  </prerequisites>
+
   <properties>
     <project.build.outputTimestamp>2022-03-07T23:34:21Z</project.build.outputTimestamp>
 
     <!-- Disable the JAVA 8 Javadoc Lint -->
-    <doclint>none</doclint>
+    <!-- doclint>none</doclint-->
 
     <!-- Set versions for depending jars -->
     <commons.codec.version>1.17.1</commons.codec.version>
@@ -155,6 +159,7 @@
     <junit.version>4.13.2</junit.version>
     <log4j.version>2.24.3</log4j.version>
     <mina.core.version>2.2.4</mina.core.version>
+    <osgi.r4.version>1.0</osgi.r4.version>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <slf4j.log4j12.version>1.7.36</slf4j.log4j12.version>
     <spring.context.version>2.5.5</spring.context.version>
@@ -204,6 +209,12 @@
             <artifactId>commons-logging</artifactId>
           </exclusion>
         </exclusions>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>osgi_R4_core</artifactId>
+        <version>${osgi.r4.version}</version>
       </dependency>
 
       <!-- Logging -->
@@ -339,19 +350,6 @@
         </plugin>
 
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>${checkstyle.plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>com.puppycrawl.tools</groupId>
-              <artifactId>checkstyle</artifactId>
-              <version>${checkstyle.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        
-        <plugin>
           <groupId>com.github.siom79.japicmp</groupId>
           <artifactId>japicmp-maven-plugin</artifactId>
           <version>0.23.0</version>
@@ -409,7 +407,6 @@
             </goals>
             <configuration>
               <rules>
-                <!-- Allow only Maven 2.0.5 and >2.0.7 -->
                 <requireMavenVersion>
                   <version>(3.8,]</version>
                 </requireMavenVersion>
@@ -419,6 +416,81 @@
         </executions>
       </plugin>
 
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${checkstyle.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>verify-style</id>
+              <phase>process-classes</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <logViolationsToConsole>true</logViolationsToConsole>
+          <checkstyleRules>
+            <module name="Checker">
+              <property name="localeLanguage" value="en"/>
+              <module name="JavadocPackage"/>
+            
+              <module name="LineLength">
+                <property name="fileExtensions" value="java"/>
+                <property name="max" value="120"/>
+              </module>
+            
+              <module name="NewlineAtEndOfFile">
+                <property name="lineSeparator" value="lf" />
+              </module>
+            
+              <module name="FileTabCharacter">
+                <property name="fileExtensions" value="java,xml"/>
+              </module>
+            
+              <module name="RegexpSingleline">
+                <!-- \s matches whitespace character, $ matches end of line. -->
+                <property name="format" value="\s+$"/>
+                <property name="message" value="Line has trailing spaces."/>
+              </module>
+            
+              <module name="SuppressionFilter">
+                <property name="file" value="checkstyle-suppressions.xml"/>
+              </module>
+            
+              <module name="TreeWalker">
+                <module name="ArrayTypeStyle">
+                  <property name="javaStyle" value="true"/>
+                </module>
+            
+                <module name="FinalParameters">
+                  <property name="ignorePrimitiveTypes" value="true"/>
+                </module>
+            
+                <module name="AvoidStarImport"/>
+                <module name="IllegalImport"/>
+                <module name="RedundantImport"/>
+                <module name="UnusedImports"/>
+                <module name="NeedBraces"/>
+                <module name="JavadocMethod">
+                  <property name="accessModifiers" value="public" />
+                </module>
+                <module name="ModifierOrder"/>
+                <module name="RedundantModifier"/>
+                <module name="UpperEll" />
+                <module name="LeftCurly"/>
+                <module name="NeedBraces"/>
+                <module name="RightCurly"/>
+                <module name="GenericWhitespace"/>
+                <module name="WhitespaceAfter"/>
+                <module name="NoWhitespaceBefore"/>
+             </module>
+            </module>
+          </checkstyleRules>
+          </configuration>
+        </plugin>
+        
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
@@ -467,18 +539,6 @@
       </plugin>
 
       <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>create-source-jar</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
         <artifactId>maven-idea-plugin</artifactId>
         <version>2.2.1</version>
         <configuration>
@@ -515,7 +575,7 @@
       </plugin>
     </plugins>
   </build>
-
+  
   <profiles>
     <profile>
       <id>apache-release</id>
@@ -564,6 +624,7 @@
         <module>examples</module>
       </modules>
     </profile>
+    
     <profile>
       <id>enforce</id>
       <activation>
@@ -571,6 +632,7 @@
           <name>enforce.activate</name>
         </property>
       </activation>
+      
       <build>
         <plugins>
           <plugin>
@@ -582,6 +644,7 @@
               <enableRulesSummary>false</enableRulesSummary>
               <propertyExpansion>basedir=${basedir}</propertyExpansion>
             </configuration>
+            
             <dependencies>
               <dependency>
                 <groupId>com.puppycrawl.tools</groupId>
@@ -589,6 +652,7 @@
                 <version>${checkstyle.version}</version>
               </dependency>
             </dependencies>
+            
             <executions>
               <execution>
                 <goals>
@@ -600,6 +664,7 @@
         </plugins>
       </build>
     </profile>
+    
     <profile>
       <id>japicmp</id>
       <activation>
@@ -607,6 +672,7 @@
           <name>enforce.japicmp</name>
         </property>
       </activation>
+      
       <build>
         <plugins>
           <plugin>

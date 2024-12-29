@@ -22,13 +22,13 @@ package org.apache.ftpserver.example.osgiservice.impl;
 
 import org.apache.ftpserver.FtpServer;
 
-/*
+/**
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class FtpServerLifecycle {
 
     private FtpServer server;
-    
+
     public FtpServer getServer() {
         return server;
     }

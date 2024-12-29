@@ -43,7 +43,7 @@ public interface Listener {
      * method should not return until the listener has started accepting socket
      * requests.
      * @param serverContext The current {@link FtpServerContext}
-     * 
+     *
      * @throws Exception
      *             On error during start up
      */
@@ -58,7 +58,7 @@ public interface Listener {
 
     /**
      * Checks if the listener is currently started.
-     * 
+     *
      * @return False if the listener is started
      */
     boolean isStopped();
@@ -78,7 +78,7 @@ public interface Listener {
 
     /**
      * Checks if the listener is currently suspended
-     * 
+     *
      * @return True if the listener is suspended
      */
     boolean isSuspended();
@@ -86,7 +86,7 @@ public interface Listener {
     /**
      * Returns the currently active sessions for this listener. If no sessions
      * are active, an empty {@link Set} would be returned.
-     * 
+     *
      * @return The currently active sessions
      */
     Set<FtpIoSession> getActiveSessions();
@@ -94,7 +94,7 @@ public interface Listener {
     /**
      * Is this listener in SSL mode automatically or must the client explicitly
      * request to use SSL
-     * 
+     *
      * @return true is the listener is automatically in SSL mode, false
      *         otherwise
      */
@@ -102,7 +102,7 @@ public interface Listener {
 
     /**
      * Get the {@link SslConfiguration} used for this listener
-     * 
+     *
      * @return The current {@link SslConfiguration}
      */
     SslConfiguration getSslConfiguration();
@@ -111,7 +111,7 @@ public interface Listener {
      * Get the port on which this listener is waiting for requests. For
      * listeners where the port is automatically assigned, this will return the
      * bound port.
-     * 
+     *
      * @return The port
      */
     int getPort();
@@ -119,21 +119,21 @@ public interface Listener {
     /**
      * Get the {@link InetAddress} used for binding the local socket. Defaults
      * to null, that is, the server binds to all available network interfaces
-     * 
+     *
      * @return The local socket {@link InetAddress}, if set
      */
     String getServerAddress();
 
     /**
      * Get configuration for data connections made within this listener
-     * 
+     *
      * @return The data connection configuration
      */
     DataConnectionConfiguration getDataConnectionConfiguration();
 
     /**
-     * Get the number of seconds during which no network activity 
-     * is allowed before a session is closed due to inactivity.  
+     * Get the number of seconds during which no network activity
+     * is allowed before a session is closed due to inactivity.
      * @return The idle time out
      */
     int getIdleTimeout();
@@ -141,7 +141,7 @@ public interface Listener {
     /**
      * @deprecated Replaced by IpFilter. Retrieves the {@link InetAddress} for
      *             which this listener blocks connections.
-     * 
+     *
      * @return The list of {@link InetAddress}es. This method returns a valid
      *         list if and only if there is an <code>IpFilter</code> set, and,
      *         if it is an instance of <code>DefaultIpFilter</code> and it is of
@@ -154,7 +154,7 @@ public interface Listener {
     /**
      * @deprecated Replaced by IpFilter. Retrieves the {@link Subnet}s for this
      *             listener blocks connections.
-     * 
+     *
      * @return The list of {@link Subnet}s. This method returns a valid list if
      *         and only if there is an <code>IpFilter</code> set, and, if it is
      *         an instance of <code>DefaultIpFilter</code> and it is of type
@@ -167,7 +167,7 @@ public interface Listener {
     /**
      * Returns the <code>SessionFilter</code> associated with this listener. May
      * return <code>null</code>.
-     * 
+     *
      * @return the <code>SessionFilter</code> associated with this listener. May
      *         return <code>null</code>.
      */

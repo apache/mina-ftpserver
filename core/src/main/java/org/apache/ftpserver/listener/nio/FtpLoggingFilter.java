@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Specialized @see {@link LoggingFilter} that optionally masks FTP passwords.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -36,7 +36,7 @@ public class FtpLoggingFilter extends LoggingFilter {
     private boolean maskPassword = true;
 
     private final Logger logger;
-    
+
     /**
      * @see LoggingFilter#LoggingFilter()
      */
@@ -46,6 +46,8 @@ public class FtpLoggingFilter extends LoggingFilter {
 
     /**
      * @see LoggingFilter#LoggingFilter(Class)
+     *
+     * {@inheritDoc}
      */
     public FtpLoggingFilter(Class<?> clazz) {
         this(clazz.getName());
@@ -53,16 +55,20 @@ public class FtpLoggingFilter extends LoggingFilter {
 
     /**
      * @see LoggingFilter#LoggingFilter(String)
+     *
+     * {@inheritDoc}
      */
     public FtpLoggingFilter(String name) {
         super(name);
-        
+
         logger = LoggerFactory.getLogger(name);
     }
 
     /**
      * @see LoggingFilter#messageReceived(org.apache.mina.core.filterchain.IoFilter.NextFilter,
      *      IoSession, Object)
+     *
+     * {@inheritDoc}
      */
     @Override
     public void messageReceived(NextFilter nextFilter, IoSession session,
@@ -87,7 +93,7 @@ public class FtpLoggingFilter extends LoggingFilter {
 
     /**
      * Are password masked?
-     * 
+     *
      * @return true if passwords are masked
      */
     public boolean isMaskPassword() {
@@ -96,7 +102,7 @@ public class FtpLoggingFilter extends LoggingFilter {
 
     /**
      * Mask password in log messages
-     * 
+     *
      * @param maskPassword
      *            true if passwords should be masked
      */

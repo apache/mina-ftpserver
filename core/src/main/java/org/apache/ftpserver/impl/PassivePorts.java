@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Provides support for parsing a passive ports string as well as keeping track
  * of reserved passive ports.
  *
@@ -59,7 +59,7 @@ public class PassivePorts {
 
     /**
      * Parse a string containing passive ports
-     * 
+     *
      * @param portsString
      *            A string of passive ports, can contain a single port (as an
      *            integer), multiple ports seperated by commas (e.g.
@@ -153,7 +153,7 @@ public class PassivePorts {
     public PassivePorts(Set<Integer> passivePorts, boolean checkIfBound) {
         if (passivePorts == null) {
             throw new NullPointerException("passivePorts can not be null");
-        } else if(passivePorts.isEmpty()) {
+        } else if (passivePorts.isEmpty()) {
             passivePorts = new HashSet<>();
             passivePorts.add(0);
         }
@@ -201,7 +201,7 @@ public class PassivePorts {
     public synchronized int reserveNextPort() {
         // create a copy of the free ports, so that we can keep track of the tested ports
         List<Integer> freeCopy = new ArrayList<>(freeList);
-        
+
         // Loop until we have found a port, or exhausted all available ports
         while (freeCopy.size() > 0) {
             // Otherwise, pick one at random

@@ -99,8 +99,8 @@ public class ListenerBeanDefinitionParser extends
         Element blacklistElm = SpringUtil.getChildElement(element,
                 FtpServerNamespaceHandler.FTPSERVER_NS, "blacklist");
         if (blacklistElm != null) {
-            LOG
-                    .warn("Element 'blacklist' is deprecated, and may be removed in a future release. Please use 'remote-ip-filter' instead. ");
+            LOG.warn("Element 'blacklist' is deprecated, and may be removed in a future release. "
+                + "Please use 'remote-ip-filter' instead. ");
             try {
                 RemoteIpFilter remoteIpFilter = new RemoteIpFilter(IpFilterType.DENY,
                         blacklistElm.getTextContent());
@@ -131,11 +131,11 @@ public class ListenerBeanDefinitionParser extends
                         "Invalid IP address or subnet in the 'remote-ip-filter' element");
             }
         }
-        
+
         BeanDefinition factoryDefinition = factoryBuilder.getBeanDefinition();
 
         String listenerFactoryName = parserContext.getReaderContext().generateBeanName(factoryDefinition);
-        
+
         BeanDefinitionHolder factoryHolder = new BeanDefinitionHolder(factoryDefinition, listenerFactoryName);
         registerBeanDefinition(factoryHolder, parserContext.getRegistry());
 
@@ -215,7 +215,7 @@ public class ListenerBeanDefinitionParser extends
             }
 
             String protocol = SpringUtil.parseString(sslElm, "protocol");
-            
+
             if (protocol != null) {
                 ssl.setSslProtocol(protocol);
             }
@@ -233,9 +233,9 @@ public class ListenerBeanDefinitionParser extends
         DataConnectionConfigurationFactory dc = new DataConnectionConfigurationFactory();
 
         if (element != null) {
-            
+
             dc.setImplicitSsl(SpringUtil.parseBoolean(element, "implicit-ssl", false));
-            
+
             // data con config element available
             SslConfiguration ssl = parseSsl(element);
 
@@ -255,7 +255,7 @@ public class ListenerBeanDefinitionParser extends
                         "ip-check", false));
                 dc.setActiveLocalPort(SpringUtil.parseInt(activeElm,
                         "local-port", 0));
-                
+
                 String localAddress = SpringUtil.parseStringFromInetAddress(
                         activeElm, "local-address");
                 if (localAddress != null) {
@@ -289,8 +289,7 @@ public class ListenerBeanDefinitionParser extends
             // no data conn config element, do we still have SSL config from the
             // parent?
             if (listenerSslConfiguration != null) {
-                LOG
-                        .debug("SSL configuration found for the listener, falling back for that for the data connection");
+                LOG.debug("SSL configuration found for the listener, falling back for that for the data connection");
                 dc.setSslConfiguration(listenerSslConfiguration);
             }
         }

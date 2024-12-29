@@ -21,7 +21,7 @@ package org.apache.ftpserver.ftplet;
 
 /**
  * This class encapsulates the return values of the ftplet methods.
- * 
+ *
  * DEFAULT < NO_FTPLET < SKIP < DISCONNECT
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>

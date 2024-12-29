@@ -21,9 +21,9 @@ package org.apache.ftpserver.ipfilter;
 
 /**
  * Defines various types of IP Filters.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
+ *
  */
 public enum IpFilterType {
 
@@ -41,7 +41,7 @@ public enum IpFilterType {
 
     /**
      * Parses the given string into its equivalent enum.
-     * 
+     *
      * @param value
      *            the string value to parse.
      * @return the equivalent enum

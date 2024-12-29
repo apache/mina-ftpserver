@@ -30,9 +30,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>SYST &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command is used to find out the type of operating system at the server.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -40,7 +40,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 public class SYST extends AbstractCommand {
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

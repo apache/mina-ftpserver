@@ -60,5 +60,4 @@ public interface DataConnection {
      * @throws IOException
      */
     void transferToClient(FtpSession session, String str) throws IOException;
-
 }

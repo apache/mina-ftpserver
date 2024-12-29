@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>MKD  &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the directory specified in the pathname to be created as
  * a directory (if the pathname is absolute) or as a subdirectory of the current
  * working directory (if the pathname is relative).
@@ -50,6 +50,8 @@ public class MKD extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

@@ -31,7 +31,7 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Protection buffer size.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -40,6 +40,8 @@ public class PBSZ extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

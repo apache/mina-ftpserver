@@ -36,13 +36,13 @@ public interface User {
 
     /**
      * Get password.
-     * @return The users password or null if the user manager can not provide the password 
+     * @return The users password or null if the user manager can not provide the password
      */
     String getPassword();
 
-    /** 
+    /**
      * Get all authorities granted to this user
-     * 
+     *
      * @return All authorities
      */
     List<? extends Authority> getAuthorities();

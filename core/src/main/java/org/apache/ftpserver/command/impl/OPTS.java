@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>OPTS&lt;SP&gt; <command> &lt;SP&gt; <option> &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command shall cause the server use optional features for the command
  * specified.
  *
@@ -52,6 +52,8 @@ public class OPTS extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

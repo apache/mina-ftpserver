@@ -38,7 +38,7 @@ public class DataConnectionException extends FtpException {
 
     /**
      * Constructs a <code>DataConnectionException</code> object with a message.
-     * 
+     *
      * @param msg
      *            a description of the exception
      */
@@ -49,7 +49,7 @@ public class DataConnectionException extends FtpException {
     /**
      * Constructs a <code>DataConnectionException</code> object with a
      * <code>Throwable</code> cause.
-     * 
+     *
      * @param th
      *            the original cause
      */
@@ -61,7 +61,7 @@ public class DataConnectionException extends FtpException {
      * Constructs a <code>DataConnectionException</code> object with a
      * <code>Throwable</code> cause.
      * @param msg a description of the exception
-     * 
+     *
      * @param th
      *            the original cause
      */

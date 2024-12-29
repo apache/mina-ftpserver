@@ -23,7 +23,7 @@ import java.util.Locale;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Condition that tests the OS type.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -83,7 +83,7 @@ public final class OS {
      * <li>z/os</li>
      * <li>os/400</li>
      * </ul>
-     * 
+     *
      * @param family
      *            the family to check for
      * @return true if the OS matches
@@ -138,7 +138,7 @@ public final class OS {
 
     /**
      * Determines if the OS on which Ant is executing matches the given OS name.
-     * 
+     *
      * @param name
      *            the OS name to check for
      * @return true if the OS matches
@@ -150,7 +150,7 @@ public final class OS {
     /**
      * Determines if the OS on which Ant is executing matches the given OS
      * architecture.
-     * 
+     *
      * @param arch
      *            the OS architecture to check for
      * @return true if the OS matches
@@ -162,7 +162,7 @@ public final class OS {
     /**
      * Determines if the OS on which Ant is executing matches the given OS
      * version.
-     * 
+     *
      * @param version
      *            the OS version to check for
      * @return true if the OS matches
@@ -174,7 +174,7 @@ public final class OS {
     /**
      * Determines if the OS on which Ant is executing matches the given OS
      * family, name, architecture and version
-     * 
+     *
      * @param family
      *            The OS family
      * @param name

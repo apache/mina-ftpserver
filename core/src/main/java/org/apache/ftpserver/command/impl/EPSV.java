@@ -33,7 +33,7 @@ import org.apache.ftpserver.impl.ServerDataConnectionFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * The EPSV command requests that a server listen on a data port and wait for a
  * connection. The EPSV command takes an optional argument. The response to this
  * command includes only the TCP port number of the listening connection. The
@@ -50,6 +50,8 @@ public class EPSV extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

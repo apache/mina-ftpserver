@@ -29,7 +29,7 @@ import org.apache.ftpserver.ftplet.User;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Generic user class. The user attributes are:
  * <ul>
  * <li>userid</li>
@@ -46,7 +46,6 @@ import org.apache.ftpserver.ftplet.User;
  */
 
 public class BaseUser implements User {
-
     private String name = null;
 
     private String password = null;
@@ -67,6 +66,8 @@ public class BaseUser implements User {
 
     /**
      * Copy constructor.
+     *
+     * @param user The user to copy
      */
     public BaseUser(User user) {
         name = user.getName();
@@ -79,6 +80,8 @@ public class BaseUser implements User {
 
     /**
      * Get the user name.
+     *
+     * @return The user's name
      */
     public String getName() {
         return name;
@@ -86,6 +89,8 @@ public class BaseUser implements User {
 
     /**
      * Set user name.
+     *
+     * @param name The user's name
      */
     public void setName(String name) {
         this.name = name;
@@ -93,6 +98,8 @@ public class BaseUser implements User {
 
     /**
      * Get the user password.
+     *
+     * @return The user's password
      */
     public String getPassword() {
         return password;
@@ -100,11 +107,18 @@ public class BaseUser implements User {
 
     /**
      * Set user password.
+     *
+     * @param pass The user's password
      */
     public void setPassword(String pass) {
         password = pass;
     }
 
+    /**
+     * Get the user's authorities
+     *
+     * @return the user's authorities
+     */
     public List<Authority> getAuthorities() {
         if (authorities != null) {
             return Collections.unmodifiableList(authorities);
@@ -113,6 +127,11 @@ public class BaseUser implements User {
         }
     }
 
+    /**
+     * Set the list of authorities
+     *
+     * @param authorities The list of authorities to set
+     */
     public void setAuthorities(List<Authority> authorities) {
         if (authorities != null) {
             this.authorities = Collections.unmodifiableList(authorities);
@@ -123,6 +142,8 @@ public class BaseUser implements User {
 
     /**
      * Get the maximum idle time in second.
+     *
+     * @return the maximum idle time for this user
      */
     public int getMaxIdleTime() {
         return maxIdleTimeSec;
@@ -130,6 +151,8 @@ public class BaseUser implements User {
 
     /**
      * Set the maximum idle time in second.
+     *
+     * @param idleSec The maximum idle time in seconds
      */
     public void setMaxIdleTime(int idleSec) {
         maxIdleTimeSec = idleSec;
@@ -140,6 +163,8 @@ public class BaseUser implements User {
 
     /**
      * Get the user enable status.
+     *
+     * @return Tell if the user is enabled
      */
     public boolean getEnabled() {
         return isEnabled;
@@ -147,6 +172,8 @@ public class BaseUser implements User {
 
     /**
      * Set the user enable status.
+     *
+     * @param enb Enable or disable the user
      */
     public void setEnabled(boolean enb) {
         isEnabled = enb;
@@ -154,6 +181,8 @@ public class BaseUser implements User {
 
     /**
      * Get the user home directory.
+     *
+     * @return The user's home directory
      */
     public String getHomeDirectory() {
         return homeDir;
@@ -161,6 +190,8 @@ public class BaseUser implements User {
 
     /**
      * Set the user home directory.
+     *
+     * @param home The user's home
      */
     public void setHomeDirectory(String home) {
         homeDir = home;
@@ -168,6 +199,8 @@ public class BaseUser implements User {
 
     /**
      * String representation.
+     *
+     * @return The user as a String
      */
     @Override
     public String toString() {
@@ -179,12 +212,12 @@ public class BaseUser implements User {
      */
     public AuthorizationRequest authorize(AuthorizationRequest request) {
         // check for no authorities at all
-        if(authorities == null) {
+        if (authorities == null) {
             return null;
         }
-       
+
         boolean someoneCouldAuthorize = false;
- 
+
         for (Authority authority : authorities) {
             if (authority.canAuthorize(request)) {
                 someoneCouldAuthorize = true;

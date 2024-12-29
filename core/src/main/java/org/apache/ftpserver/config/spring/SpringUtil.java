@@ -43,7 +43,7 @@ public class SpringUtil {
 
     /**
      * Get all child elements for the element
-     * 
+     *
      * @param elm
      *            The element for which to locate children
      * @return All children
@@ -64,7 +64,7 @@ public class SpringUtil {
 
     /**
      * Get the first child element matching the local name and namespace
-     * 
+     *
      * @param parent
      *            The element for which to locate the child
      * @param ns
@@ -91,7 +91,7 @@ public class SpringUtil {
     /**
      * Get the text context of first child element matching the local name and
      * namespace
-     * 
+     *
      * @param parent
      *            The element for which to locate the child
      * @param ns
@@ -118,7 +118,7 @@ public class SpringUtil {
 
     /**
      * Parse specific Spring elements, bean and ref
-     * 
+     *
      * @param parent
      *            The element in which we will look for Spring elements
      * @param parserContext
@@ -148,7 +148,7 @@ public class SpringUtil {
     /**
      * Parses a attribute value into a boolean. If the attribute is missing or
      * has no content, a default value is returned
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -167,7 +167,7 @@ public class SpringUtil {
 
     /**
      * Parses a attribute value into an integer.
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -183,7 +183,7 @@ public class SpringUtil {
     /**
      * Parses a attribute value into an integer. If the attribute is missing or
      * has no content, a default value is returned
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -203,7 +203,7 @@ public class SpringUtil {
     /**
      * Return the string value of an attribute, or null if the attribute is
      * missing
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -220,7 +220,7 @@ public class SpringUtil {
 
     /**
      * Return an attribute value as a {@link File}
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -236,7 +236,7 @@ public class SpringUtil {
 
     /**
      * Return an attribute value as an {@link InetAddress}
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName
@@ -256,7 +256,7 @@ public class SpringUtil {
     }
     /**
      * Return an attribute value after checking it is a valid {@link InetAddress}
-     * 
+     *
      * @param parent
      *            The element
      * @param attrName

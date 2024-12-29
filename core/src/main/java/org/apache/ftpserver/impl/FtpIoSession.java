@@ -105,44 +105,42 @@ public class FtpIoSession implements IoSession {
 
     /* Begin wrapped IoSession methods */
     /**
-     * @see IoSession#close()
+     * {@inheritDoc}
      */
     public CloseFuture close() {
         return wrappedSession.close();
     }
 
     /**
-     * @see IoSession#close(boolean)
+     * {@inheritDoc}
      */
     public CloseFuture close(boolean immediately) {
         return wrappedSession.close(immediately);
     }
 
     /**
-     * @see IoSession#closeNow()
+     * {@inheritDoc}
      */
-    public CloseFuture closeNow()
-    {
+    public CloseFuture closeNow() {
         return wrappedSession.closeNow();
     }
 
     /**
-     * @see IoSession#closeOnFlush()
+     * {@inheritDoc}
      */
-    public CloseFuture closeOnFlush()
-    {
+    public CloseFuture closeOnFlush() {
         return wrappedSession.closeOnFlush();
     }
 
     /**
-     * @see IoSession#containsAttribute(Object)
+     * {@inheritDoc}
      */
     public boolean containsAttribute(Object key) {
         return wrappedSession.containsAttribute(key);
     }
 
     /**
-     * @see IoSession#getAttachment()
+     * {@inheritDoc}
      */
     @SuppressWarnings("deprecation")
     public Object getAttachment() {
@@ -150,175 +148,175 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#getAttribute(Object)
+     * {@inheritDoc}
      */
     public Object getAttribute(Object key) {
         return wrappedSession.getAttribute(key);
     }
 
     /**
-     * @see IoSession#getAttribute(Object, Object)
+     * {@inheritDoc}
      */
     public Object getAttribute(Object key, Object defaultValue) {
         return wrappedSession.getAttribute(key, defaultValue);
     }
 
     /**
-     * @see IoSession#getAttributeKeys()
+     * {@inheritDoc}
      */
     public Set<Object> getAttributeKeys() {
         return wrappedSession.getAttributeKeys();
     }
 
     /**
-     * @see IoSession#getBothIdleCount()
+     * {@inheritDoc}
      */
     public int getBothIdleCount() {
         return wrappedSession.getBothIdleCount();
     }
 
     /**
-     * @see IoSession#getCloseFuture()
+     * {@inheritDoc}
      */
     public CloseFuture getCloseFuture() {
         return wrappedSession.getCloseFuture();
     }
 
     /**
-     * @see IoSession#getConfig()
+     * {@inheritDoc}
      */
     public IoSessionConfig getConfig() {
         return wrappedSession.getConfig();
     }
 
     /**
-     * @see IoSession#getCreationTime()
+     * {@inheritDoc}
      */
     public long getCreationTime() {
         return wrappedSession.getCreationTime();
     }
 
     /**
-     * @see IoSession#getFilterChain()
+     * {@inheritDoc}
      */
     public IoFilterChain getFilterChain() {
         return wrappedSession.getFilterChain();
     }
 
     /**
-     * @see IoSession#getHandler()
+     * {@inheritDoc}
      */
     public IoHandler getHandler() {
         return wrappedSession.getHandler();
     }
 
     /**
-     * @see IoSession#getId()
+     * {@inheritDoc}
      */
     public long getId() {
         return wrappedSession.getId();
     }
 
     /**
-     * @see IoSession#getIdleCount(IdleStatus)
+     * {@inheritDoc}
      */
     public int getIdleCount(IdleStatus status) {
         return wrappedSession.getIdleCount(status);
     }
 
     /**
-     * @see IoSession#getLastBothIdleTime()
+     * {@inheritDoc}
      */
     public long getLastBothIdleTime() {
         return wrappedSession.getLastBothIdleTime();
     }
 
     /**
-     * @see IoSession#getLastIdleTime(IdleStatus)
+     * {@inheritDoc}
      */
     public long getLastIdleTime(IdleStatus status) {
         return wrappedSession.getLastIdleTime(status);
     }
 
     /**
-     * @see IoSession#getLastIoTime()
+     * {@inheritDoc}
      */
     public long getLastIoTime() {
         return wrappedSession.getLastIoTime();
     }
 
     /**
-     * @see IoSession#getLastReadTime()
+     * {@inheritDoc}
      */
     public long getLastReadTime() {
         return wrappedSession.getLastReadTime();
     }
 
     /**
-     * @see IoSession#getLastReaderIdleTime()
+     * {@inheritDoc}
      */
     public long getLastReaderIdleTime() {
         return wrappedSession.getLastReaderIdleTime();
     }
 
     /**
-     * @see IoSession#getLastWriteTime()
+     * {@inheritDoc}
      */
     public long getLastWriteTime() {
         return wrappedSession.getLastWriteTime();
     }
 
     /**
-     * @see IoSession#getLastWriterIdleTime()
+     * {@inheritDoc}
      */
     public long getLastWriterIdleTime() {
         return wrappedSession.getLastWriterIdleTime();
     }
 
     /**
-     * @see IoSession#getLocalAddress()
+     * {@inheritDoc}
      */
     public SocketAddress getLocalAddress() {
         return wrappedSession.getLocalAddress();
     }
 
     /**
-     * @see IoSession#getReadBytes()
+     * {@inheritDoc}
      */
     public long getReadBytes() {
         return wrappedSession.getReadBytes();
     }
 
     /**
-     * @see IoSession#getReadBytesThroughput()
+     * {@inheritDoc}
      */
     public double getReadBytesThroughput() {
         return wrappedSession.getReadBytesThroughput();
     }
 
     /**
-     * @see IoSession#getReadMessages()
+     * {@inheritDoc}
      */
     public long getReadMessages() {
         return wrappedSession.getReadMessages();
     }
 
     /**
-     * @see IoSession#getReadMessagesThroughput()
+     * {@inheritDoc}
      */
     public double getReadMessagesThroughput() {
         return wrappedSession.getReadMessagesThroughput();
     }
 
     /**
-     * @see IoSession#getReaderIdleCount()
+     * {@inheritDoc}
      */
     public int getReaderIdleCount() {
         return wrappedSession.getReaderIdleCount();
     }
 
     /**
-     * @see IoSession#getRemoteAddress()
+     * {@inheritDoc}
      */
     public SocketAddress getRemoteAddress() {
         // when closing a socket, the remote address might be reset to null
@@ -335,147 +333,147 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#getScheduledWriteBytes()
+     * {@inheritDoc}
      */
     public long getScheduledWriteBytes() {
         return wrappedSession.getScheduledWriteBytes();
     }
 
     /**
-     * @see IoSession#getScheduledWriteMessages()
+     * {@inheritDoc}
      */
     public int getScheduledWriteMessages() {
         return wrappedSession.getScheduledWriteMessages();
     }
 
     /**
-     * @see IoSession#getService()
+     * {@inheritDoc}
      */
     public IoService getService() {
         return wrappedSession.getService();
     }
 
     /**
-     * @see IoSession#getServiceAddress()
+     * {@inheritDoc}
      */
     public SocketAddress getServiceAddress() {
         return wrappedSession.getServiceAddress();
     }
 
     /**
-     * @see IoSession#getTransportMetadata()
+     * {@inheritDoc}
      */
     public TransportMetadata getTransportMetadata() {
         return wrappedSession.getTransportMetadata();
     }
 
     /**
-     * @see IoSession#getWriterIdleCount()
+     * {@inheritDoc}
      */
     public int getWriterIdleCount() {
         return wrappedSession.getWriterIdleCount();
     }
 
     /**
-     * @see IoSession#getWrittenBytes()
+     * {@inheritDoc}
      */
     public long getWrittenBytes() {
         return wrappedSession.getWrittenBytes();
     }
 
     /**
-     * @see IoSession#getWrittenBytesThroughput()
+     * {@inheritDoc}
      */
     public double getWrittenBytesThroughput() {
         return wrappedSession.getWrittenBytesThroughput();
     }
 
     /**
-     * @see IoSession#getWrittenMessages()
+     * {@inheritDoc}
      */
     public long getWrittenMessages() {
         return wrappedSession.getWrittenMessages();
     }
 
     /**
-     * @see IoSession#getWrittenMessagesThroughput()
+     * {@inheritDoc}
      */
     public double getWrittenMessagesThroughput() {
         return wrappedSession.getWrittenMessagesThroughput();
     }
 
     /**
-     * @see IoSession#isClosing()
+     * {@inheritDoc}
      */
     public boolean isClosing() {
         return wrappedSession.isClosing();
     }
 
     /**
-     * @see IoSession#isConnected()
+     * {@inheritDoc}
      */
     public boolean isConnected() {
         return wrappedSession.isConnected();
     }
 
     /**
-     * @see IoSession#isActive()
+     * {@inheritDoc}
      */
     public boolean isActive() {
         return wrappedSession.isActive();
     }
 
     /**
-     * @see IoSession#isIdle(IdleStatus)
+     * {@inheritDoc}
      */
     public boolean isIdle(IdleStatus status) {
         return wrappedSession.isIdle(status);
     }
 
     /**
-     * @see IoSession#read()
+     * {@inheritDoc}
      */
     public ReadFuture read() {
         return wrappedSession.read();
     }
 
     /**
-     * @see IoSession#removeAttribute(Object)
+     * {@inheritDoc}
      */
     public Object removeAttribute(Object key) {
         return wrappedSession.removeAttribute(key);
     }
 
     /**
-     * @see IoSession#removeAttribute(Object, Object)
+     * {@inheritDoc}
      */
     public boolean removeAttribute(Object key, Object value) {
         return wrappedSession.removeAttribute(key, value);
     }
 
     /**
-     * @see IoSession#replaceAttribute(Object, Object, Object)
+     * {@inheritDoc}
      */
     public boolean replaceAttribute(Object key, Object oldValue, Object newValue) {
         return wrappedSession.replaceAttribute(key, oldValue, newValue);
     }
 
     /**
-     * @see IoSession#resumeRead()
+     * {@inheritDoc}
      */
     public void resumeRead() {
         wrappedSession.resumeRead();
     }
 
     /**
-     * @see IoSession#resumeWrite()
+     * {@inheritDoc}
      */
     public void resumeWrite() {
         wrappedSession.resumeWrite();
     }
 
     /**
-     * @see IoSession#setAttachment(Object)
+     * {@inheritDoc}
      */
     @SuppressWarnings("deprecation")
     public Object setAttachment(Object attachment) {
@@ -483,49 +481,49 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#setAttribute(Object)
+     * {@inheritDoc}
      */
     public Object setAttribute(Object key) {
         return wrappedSession.setAttribute(key);
     }
 
     /**
-     * @see IoSession#setAttribute(Object, Object)
+     * {@inheritDoc}
      */
     public Object setAttribute(Object key, Object value) {
         return wrappedSession.setAttribute(key, value);
     }
 
     /**
-     * @see IoSession#setAttributeIfAbsent(Object)
+     * {@inheritDoc}
      */
     public Object setAttributeIfAbsent(Object key) {
         return wrappedSession.setAttributeIfAbsent(key);
     }
 
     /**
-     * @see IoSession#setAttributeIfAbsent(Object, Object)
+     * {@inheritDoc}
      */
     public Object setAttributeIfAbsent(Object key, Object value) {
         return wrappedSession.setAttributeIfAbsent(key, value);
     }
 
     /**
-     * @see IoSession#suspendRead()
+     * {@inheritDoc}
      */
     public void suspendRead() {
         wrappedSession.suspendRead();
     }
 
     /**
-     * @see IoSession#suspendWrite()
+     * {@inheritDoc}
      */
     public void suspendWrite() {
         wrappedSession.suspendWrite();
     }
 
     /**
-     * @see IoSession#write(Object)
+     * {@inheritDoc}
      */
     public WriteFuture write(Object message) {
         WriteFuture future = wrappedSession.write(message);
@@ -534,7 +532,7 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#write(Object, SocketAddress)
+     * {@inheritDoc}
      */
     public WriteFuture write(Object message, SocketAddress destination) {
         WriteFuture future = wrappedSession.write(message, destination);
@@ -571,6 +569,8 @@ public class FtpIoSession implements IoSession {
 
     /**
      * Is logged-in
+     *
+     * @return <code>true</code> if the user is logged in
      */
     public boolean isLoggedIn() {
         return containsAttribute(ATTRIBUTE_USER);
@@ -661,7 +661,8 @@ public class FtpIoSession implements IoSession {
             stats.setLogout(this);
             LoggerFactory.getLogger(this.getClass()).debug("Statistics login decreased due to user logout");
         } else {
-            LoggerFactory.getLogger(this.getClass()).warn("Statistics not available in session, can not decrease login  count");
+            LoggerFactory.getLogger(
+                this.getClass()).warn("Statistics not available in session, can not decrease login  count");
         }
     }
 
@@ -693,7 +694,7 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see FtpSession#getSessionId()
+     * {@inheritDoc}
      */
     public UUID getSessionId() {
         synchronized (wrappedSession) {
@@ -752,35 +753,35 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#getCurrentWriteMessage()
+     * {@inheritDoc}
      */
     public Object getCurrentWriteMessage() {
         return wrappedSession.getCurrentWriteMessage();
     }
 
     /**
-     * @see IoSession#getCurrentWriteRequest()
+     * {@inheritDoc}
      */
     public WriteRequest getCurrentWriteRequest() {
         return wrappedSession.getCurrentWriteRequest();
     }
 
     /**
-     * @see IoSession#isBothIdle()
+     * {@inheritDoc}
      */
     public boolean isBothIdle() {
         return wrappedSession.isBothIdle();
     }
 
     /**
-     * @see IoSession#isReaderIdle()
+     * {@inheritDoc}
      */
     public boolean isReaderIdle() {
         return wrappedSession.isReaderIdle();
     }
 
     /**
-     * @see IoSession#isWriterIdle()
+     * {@inheritDoc}
      */
     public boolean isWriterIdle() {
         return wrappedSession.isWriterIdle();
@@ -828,35 +829,35 @@ public class FtpIoSession implements IoSession {
     }
 
     /**
-     * @see IoSession#getWriteRequestQueue()
+     * {@inheritDoc}
      */
     public WriteRequestQueue getWriteRequestQueue() {
         return wrappedSession.getWriteRequestQueue();
     }
 
     /**
-     * @see IoSession#isReadSuspended()
+     * {@inheritDoc}
      */
     public boolean isReadSuspended() {
         return wrappedSession.isReadSuspended();
     }
 
     /**
-     * @see IoSession#isWriteSuspended()
+     * {@inheritDoc}
      */
     public boolean isWriteSuspended() {
         return wrappedSession.isWriteSuspended();
     }
 
     /**
-     * @see IoSession#setCurrentWriteRequest(WriteRequest)
+     * {@inheritDoc}
      */
     public void setCurrentWriteRequest(WriteRequest currentWriteRequest) {
         wrappedSession.setCurrentWriteRequest(currentWriteRequest);
     }
 
     /**
-     * @see IoSession#updateThroughput(long, boolean)
+     * {@inheritDoc}
      */
     public void updateThroughput(long currentTime, boolean force) {
         wrappedSession.updateThroughput(currentTime, force);

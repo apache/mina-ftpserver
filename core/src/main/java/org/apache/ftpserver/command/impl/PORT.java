@@ -39,9 +39,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>PORT &lt;SP&gt; <host-port> &lt;CRLF&gt;</code><br>
- * 
+ *
  * The argument is a HOST-PORT specification for the data port to be used in
  * data connection. There are defaults for both the user and server data ports,
  * and under normal circumstances this command and its reply are not needed. If
@@ -50,9 +50,9 @@ import org.slf4j.LoggerFactory;
  * broken into 8-bit fields and the value of each field is transmitted as a
  * decimal number (in character string representation). The fields are separated
  * by commas. A port command would be:
- * 
+ *
  * PORT h1,h2,h3,h4,p1,p2
- * 
+ *
  * where h1 is the high order 8 bits of the internet host address.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -63,6 +63,8 @@ public class PORT extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -91,9 +93,9 @@ public class PORT extends AbstractCommand {
         InetSocketAddress address;
         try {
             address = SocketAddressEncoder.decode(request.getArgument());
-            
+
             // port must not be 0
-            if(address.getPort() == 0) {
+            if (address.getPort() == 0) {
                 throw new IllegalPortException("PORT port must not be 0");
             }
         } catch (IllegalInetAddressException e) {
@@ -131,7 +133,8 @@ public class PORT extends AbstractCommand {
                         .getRemoteAddress()).getAddress();
                 if (!address.getAddress().equals(clientAddr)) {
                     session.write(LocalizedFtpReply.translate(session, request,
-                            context, FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "PORT.mismatch", null));
+                            context, FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS,
+                            "PORT.mismatch", null));
                     return;
                 }
             }

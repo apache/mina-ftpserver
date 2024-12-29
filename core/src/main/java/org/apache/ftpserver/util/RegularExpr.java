@@ -21,7 +21,7 @@ package org.apache.ftpserver.util;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This is a simplified regular character mattching class. Supports *?^[]-
  * pattern characters.
  *
@@ -33,9 +33,8 @@ public class RegularExpr {
 
     /**
      * Constructor.
-     * 
-     * @param pattern
-     *            regular expression
+     *
+     * @param pattern regular expression
      */
     public RegularExpr(String pattern) {
         this.pattern = pattern.toCharArray();
@@ -43,6 +42,9 @@ public class RegularExpr {
 
     /**
      * Compare string with a regular expression.
+     *
+     * @param name The string to compare
+     * @return <code>true</code> if the string matches
      */
     public boolean isMatch(String name) {
 
@@ -130,11 +132,9 @@ public class RegularExpr {
                         pc = pattern[patternIndex++];
                         bMatch = (fc >= lastc) && (fc <= pc);
                         lastc = pc;
-                    }
-
-                    // Single character match check. It might also be the
-                    // low range character.
-                    else {
+                    } else {
+                        // Single character match check. It might also be the
+                        // low range character.
                         lastc = pc;
                         bMatch = (pc == fc);
                     }

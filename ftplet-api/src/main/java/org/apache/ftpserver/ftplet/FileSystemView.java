@@ -29,14 +29,14 @@ public interface FileSystemView {
     /**
      * Get the user home directory.
      * @return The {@link FtpFile} for the users home directory
-     * @throws FtpException 
+     * @throws FtpException
      */
     FtpFile getHomeDirectory() throws FtpException;
 
     /**
      * Get user current directory.
      * @return The {@link FtpFile} for the users current directory
-     * @throws FtpException 
+     * @throws FtpException
      */
     FtpFile getWorkingDirectory() throws FtpException;
 
@@ -44,7 +44,7 @@ public interface FileSystemView {
      * Change directory.
      * @param dir The path of the directory to set as the current directory for the user
      * @return true if successful
-     * @throws FtpException 
+     * @throws FtpException
      */
     boolean changeWorkingDirectory(String dir) throws FtpException;
 
@@ -52,14 +52,14 @@ public interface FileSystemView {
      * Get file object.
      * @param file The path to the file to get
      * @return The {@link FtpFile} for the provided path
-     * @throws FtpException 
+     * @throws FtpException
      */
     FtpFile getFile(String file) throws FtpException;
 
     /**
      * Does the file system support random file access?
      * @return true if the file supports random access
-     * @throws FtpException 
+     * @throws FtpException
      */
     boolean isRandomAccessible() throws FtpException;
 

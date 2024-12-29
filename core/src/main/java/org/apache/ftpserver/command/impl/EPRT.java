@@ -36,11 +36,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * The EPRT command allows for the specification of an extended address for the
  * data connection. The extended address MUST consist of the network protocol as
  * well as the network and transport addresses. The format of EPRT is:
- * 
+ *
  * EPRT<space><d><net-prt><d><net-addr><d><tcp-port><d>
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -51,6 +51,8 @@ public class EPRT extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -115,8 +117,8 @@ public class EPRT extends AbstractCommand {
                 InetAddress clientAddr = ((InetSocketAddress) session
                         .getRemoteAddress()).getAddress();
                 if (!dataAddr.equals(clientAddr)) {
-                    session.write(LocalizedFtpReply.translate(session, request,
-                            context, FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT.mismatch", null));
+                    session.write(LocalizedFtpReply.translate(session, request, context,
+                        FtpReply.REPLY_501_SYNTAX_ERROR_IN_PARAMETERS_OR_ARGUMENTS, "EPRT.mismatch", null));
                     return;
                 }
             }

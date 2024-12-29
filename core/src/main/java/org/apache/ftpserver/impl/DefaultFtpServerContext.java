@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * FTP server configuration implementation. It holds all the components used.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -82,19 +82,19 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     private static final List<Authority> ADMIN_AUTHORITIES = new ArrayList<>();
     private static final List<Authority> ANON_AUTHORITIES = new ArrayList<>();
-    
+
     /**
      * The thread pool executor to be used by the server using this context
      */
     private ThreadPoolExecutor threadPoolExecutor = null;
-    
+
     static {
         ADMIN_AUTHORITIES.add(new WritePermission());
-        
+
         ANON_AUTHORITIES.add(new ConcurrentLoginPermission(20, 2));
         ANON_AUTHORITIES.add(new TransferRatePermission(4800, 4800));
     }
-    
+
 
     public DefaultFtpServerContext() {
         // create the default listener
@@ -146,6 +146,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get user manager.
+     * {@inheritDoc}
      */
     public UserManager getUserManager() {
         return userManager;
@@ -153,6 +154,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get file system manager.
+     * {@inheritDoc}
      */
     public FileSystemFactory getFileSystemManager() {
         return fileSystemManager;
@@ -160,6 +162,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get message resource.
+     * {@inheritDoc}
      */
     public MessageResource getMessageResource() {
         return messageResource;
@@ -167,6 +170,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get ftp statistics.
+     * {@inheritDoc}
      */
     public FtpStatistics getFtpStatistics() {
         return statistics;
@@ -178,6 +182,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get ftplet handler.
+     * {@inheritDoc}
      */
     public FtpletContainer getFtpletContainer() {
         return ftpletContainer;
@@ -185,6 +190,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get the command factory.
+     * {@inheritDoc}
      */
     public CommandFactory getCommandFactory() {
         return commandFactory;
@@ -192,6 +198,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Get Ftplet.
+     * {@inheritDoc}
      */
     public Ftplet getFtplet(String name) {
         return ftpletContainer.getFtplet(name);
@@ -199,6 +206,7 @@ public class DefaultFtpServerContext implements FtpServerContext {
 
     /**
      * Close all the components.
+     * {@inheritDoc}
      */
     public void dispose() {
         listeners.clear();
@@ -266,16 +274,15 @@ public class DefaultFtpServerContext implements FtpServerContext {
     public void setConnectionConfig(ConnectionConfig connectionConfig) {
         this.connectionConfig = connectionConfig;
     }
-    
+
     public synchronized ThreadPoolExecutor getThreadPoolExecutor() {
-        if(threadPoolExecutor == null) {
+        if (threadPoolExecutor == null) {
             int maxThreads = connectionConfig.getMaxThreads();
-            if(maxThreads < 1) {
+            if (maxThreads < 1) {
                 int maxLogins = connectionConfig.getMaxLogins();
-                if(maxLogins > 0) {
+                if (maxLogins > 0) {
                     maxThreads = maxLogins;
-                }
-                else {
+                } else {
                     maxThreads = 16;
                 }
             }

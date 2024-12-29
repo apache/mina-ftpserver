@@ -23,7 +23,7 @@ import org.apache.ftpserver.util.DateUtils;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Formats files according to the MLST specification
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -33,7 +33,7 @@ public class MLSTFileFormater implements FileFormater {
     private static final String[] DEFAULT_TYPES = new String[] { "Size",
             "Modify", "Type" };
 
-    private final static char[] NEWLINE = { '\r', '\n' };
+    private static final char[] NEWLINE = { '\r', '\n' };
 
     private String[] selectedTypes = DEFAULT_TYPES;
 
@@ -49,6 +49,8 @@ public class MLSTFileFormater implements FileFormater {
 
     /**
      * @see FileFormater#format(FtpFile)
+     *
+     * {@inheritDoc}
      */
     public String format(FtpFile file) {
         StringBuilder sb = new StringBuilder();

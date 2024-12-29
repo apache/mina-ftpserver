@@ -20,7 +20,7 @@ package org.apache.ftpserver.command.impl.listing;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Contains the parsed argument for a list command (e.g. LIST or NLST)
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -53,7 +53,7 @@ public class ListArgument {
 
     /**
      * The listing options,
-     * 
+     *
      * @return All options
      */
     public char[] getOptions() {
@@ -62,7 +62,7 @@ public class ListArgument {
 
     /**
      * The regular expression pattern that files must match
-     * 
+     *
      * @return The regular expression
      */
     public String getPattern() {
@@ -71,7 +71,7 @@ public class ListArgument {
 
     /**
      * Checks if a certain option is set
-     * 
+     *
      * @param option
      *            The option to check
      * @return true if the option is set
@@ -88,7 +88,7 @@ public class ListArgument {
 
     /**
      * The file path including the directory
-     * 
+     *
      * @return The file path
      */
     public String getFile() {

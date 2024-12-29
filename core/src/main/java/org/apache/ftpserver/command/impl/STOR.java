@@ -44,9 +44,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>STOR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the server-DTP to accept the data transferred via the
  * data connection and to store the data as a file at the server site. If the
  * file specified in the pathname exists at the server site, then its contents
@@ -61,6 +61,8 @@ public class STOR extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -147,9 +149,9 @@ public class STOR extends AbstractCommand {
                 outStream = file.createOutputStream(skipLen);
                 transSz = dataConnection.transferFromClient(session.getFtpletSession(), outStream);
 
-                // attempt to close the output stream so that errors in 
-                // closing it will return an error to the client (FTPSERVER-119) 
-                if(outStream != null) {
+                // attempt to close the output stream so that errors in
+                // closing it will return an error to the client (FTPSERVER-119)
+                if (outStream != null) {
                     outStream.close();
                 }
 
@@ -159,7 +161,7 @@ public class STOR extends AbstractCommand {
                 ServerFtpStatistics ftpStat = (ServerFtpStatistics) context
                         .getFtpStatistics();
                 ftpStat.setUpload(session, file, transSz);
-                
+
             } catch (SocketException ex) {
                 LOG.debug("Socket exception during data transfer", ex);
                 failure = true;

@@ -26,7 +26,7 @@ import org.apache.ftpserver.usermanager.PasswordEncryptor;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Abstract common base type for {@link UserManager} implementations
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -54,7 +54,7 @@ public abstract class AbstractUserManager implements UserManager {
     public static final String ATTR_MAX_LOGIN_PER_IP = "maxloginperip";
 
     private final String adminName;
-    
+
     private final PasswordEncryptor passwordEncryptor;
 
     public AbstractUserManager() {
@@ -63,6 +63,9 @@ public abstract class AbstractUserManager implements UserManager {
 
     /**
      * Internal constructor, do not use directly
+     *
+     * @param adminName The administrator name
+     * @param passwordEncryptor The password encryption method
      */
     public AbstractUserManager(String adminName, PasswordEncryptor passwordEncryptor) {
         this.adminName = adminName;
@@ -71,19 +74,20 @@ public abstract class AbstractUserManager implements UserManager {
 
     /**
      * Get the admin name.
+     *
+     * {@inheritDoc}
      */
     public String getAdminName() {
         return adminName;
     }
 
     /**
-     * @return true if user with this login is administrator
+     * {@inheritDoc}
      */
     public boolean isAdmin(String login) throws FtpException {
         return adminName.equals(login);
     }
-    
-    
+
     /**
      * Retrieve the password encryptor used for this user manager
      * @return The password encryptor. Default to {@link Md5PasswordEncryptor}

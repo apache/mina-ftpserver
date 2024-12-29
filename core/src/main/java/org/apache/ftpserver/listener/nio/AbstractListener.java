@@ -33,7 +33,7 @@ import org.apache.mina.filter.firewall.Subnet;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Common base class for listener implementations
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -47,9 +47,9 @@ public abstract class AbstractListener implements Listener {
     private final SslConfiguration ssl;
 
     private final boolean implicitSsl;
-    
+
     private final int idleTimeout;
-    
+
     private final List<InetAddress> blockedAddresses;
 
     private final List<Subnet> blockedSubnets;
@@ -59,11 +59,20 @@ public abstract class AbstractListener implements Listener {
     private final DataConnectionConfiguration dataConnectionConfig;
 
     /**
-     * @deprecated Use the constructor with IpFilter instead. 
+     * @deprecated Use the constructor with IpFilter instead.
      * Constructor for internal use, do not use directly. Instead use {@link ListenerFactory}
+     *
+     * @param serverAddress The server address
+     * @param port The port
+     * @param implicitSsl Tells if SSL is implicit
+     * @param sslConfiguration The SSL configuration
+     * @param dataConnectionConfig The data connection configuration
+     * @param idleTimeout Idle timeout
+     * @param blockedAddresses The blocked addresses
+     * @param blockedSubnets The blocked subnets
      */
     @Deprecated
-    public AbstractListener(String serverAddress, int port, boolean implicitSsl, 
+    public AbstractListener(String serverAddress, int port, boolean implicitSsl,
             SslConfiguration sslConfiguration, DataConnectionConfiguration dataConnectionConfig,
             int idleTimeout, List<InetAddress> blockedAddresses, List<Subnet> blockedSubnets) {
         this.serverAddress = serverAddress;
@@ -76,9 +85,17 @@ public abstract class AbstractListener implements Listener {
         this.blockedAddresses = blockedAddresses;
         this.blockedSubnets = blockedSubnets;
     }
-    
+
     /**
      * Constructor for internal use, do not use directly. Instead use {@link ListenerFactory}
+     *
+     * @param serverAddress The server address
+     * @param port The port
+     * @param implicitSsl Tells if SSL is implicit
+     * @param sslConfiguration The SSL configuration
+     * @param dataConnectionConfig The data connection configuration
+     * @param idleTimeout Idle timeout
+     * @param sessionFilter The sessions filter
      */
     public AbstractListener(String serverAddress, int port,
             boolean implicitSsl, SslConfiguration sslConfiguration,
@@ -94,11 +111,11 @@ public abstract class AbstractListener implements Listener {
         this.blockedAddresses = null;
         this.blockedSubnets = null;
     }
-    
+
     /**
      * Creates a SessionFilter that blacklists the given IP addresses and/or
      * Subnets.
-     * 
+     *
      * @param blockedAddresses
      *            the addresses to block
      * @param blockedSubnets
@@ -145,7 +162,7 @@ public abstract class AbstractListener implements Listener {
     protected void setPort(int port) {
         this.port = port;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -168,8 +185,8 @@ public abstract class AbstractListener implements Listener {
     }
 
     /**
-     * Get the number of seconds during which no network activity 
-     * is allowed before a session is closed due to inactivity.  
+     * Get the number of seconds during which no network activity
+     * is allowed before a session is closed due to inactivity.
      * @return The idle time out
      */
     public int getIdleTimeout() {
@@ -179,7 +196,7 @@ public abstract class AbstractListener implements Listener {
     /**
      * Retrives the {@link InetAddress} for which this listener blocks
      * connections
-     * 
+     *
      * @return The list of {@link InetAddress}es
      */
     public List<InetAddress> getBlockedAddresses() {
@@ -188,7 +205,7 @@ public abstract class AbstractListener implements Listener {
 
     /**
      * Retrieves the {@link Subnet}s for this listener blocks connections
-     * 
+     *
      * @return The list of {@link Subnet}s
      */
     public List<Subnet> getBlockedSubnets() {

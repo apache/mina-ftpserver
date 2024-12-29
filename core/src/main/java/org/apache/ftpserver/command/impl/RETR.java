@@ -46,9 +46,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>RETR &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the server-DTP to transfer a copy of the file, specified
  * in the pathname, to the server- or user-DTP at the other end of the data
  * connection. The status and contents of the file at the server site shall be
@@ -62,6 +62,8 @@ public class RETR extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -125,9 +127,9 @@ public class RETR extends AbstractCommand {
 
             // 24-10-2007 - added check if PORT or PASV is issued, see
             // https://issues.apache.org/jira/browse/FTPSERVER-110
-            //TODO move this block of code into the super class. Also, it makes 
-            //sense to have this as the first check before checking everything 
-            //else such as the file and its permissions.  
+            //TODO move this block of code into the super class. Also, it makes
+            //sense to have this as the first check before checking everything
+            //else such as the file and its permissions.
             DataConnectionFactory connFactory = session.getDataConnection();
             if (connFactory instanceof IODataConnectionFactory) {
                 InetAddress address = ((IODataConnectionFactory) connFactory)
@@ -167,9 +169,9 @@ public class RETR extends AbstractCommand {
 
                 // transfer data
                 transSz = dataConnection.transferToClient(session.getFtpletSession(), is);
-                // attempt to close the input stream so that errors in 
-                // closing it will return an error to the client (FTPSERVER-119) 
-                if(is != null) {
+                // attempt to close the input stream so that errors in
+                // closing it will return an error to the client (FTPSERVER-119)
+                if (is != null) {
                     is.close();
                 }
 
@@ -181,7 +183,7 @@ public class RETR extends AbstractCommand {
                 if (ftpStat != null) {
                     ftpStat.setDownload(session, file, transSz);
                 }
-                
+
             } catch (SocketException ex) {
                 LOG.debug("Socket exception during data transfer", ex);
                 failure = true;
@@ -219,6 +221,11 @@ public class RETR extends AbstractCommand {
 
     /**
      * Skip length and open input stream.
+     *
+     * @param session The current FTP session
+     * @param file The file to open
+     * @param skipLen The number of bytes  to skip
+     * @return The opened stream
      */
     public InputStream openInputStream(FtpIoSession session, FtpFile file,
             long skipLen) throws IOException {

@@ -27,7 +27,7 @@ import org.apache.ftpserver.command.impl.MD5;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * String encryption utility methods.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -36,32 +36,45 @@ public class EncryptUtils {
 
     /**
      * Encrypt byte array.
+     *
+     * @param source The data to encrypt
+     * @param algorithm The algorithm to use
+     * @throws NoSuchAlgorithmException If th algorithm does not exist
+     * @return The encrypted data
      */
-    public final static byte[] encrypt(byte[] source, String algorithm) throws NoSuchAlgorithmException {
+    public static final byte[] encrypt(byte[] source, String algorithm) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance(algorithm);
         md.reset();
         md.update(source);
-        
+
         return md.digest();
     }
 
     /**
      * Encrypt string
+     *
+     * @param source The data to encrypt
+     * @param algorithm The algorithm to use
+     * @throws NoSuchAlgorithmException If th algorithm does not exist
+     * @return The encrypted data
      */
-    public final static String encrypt(String source, String algorithm) throws NoSuchAlgorithmException {
+    public static final String encrypt(String source, String algorithm) throws NoSuchAlgorithmException {
         if (source == null) {
             source = "";
         }
 
         byte[] resByteArray = encrypt(source.getBytes( StandardCharsets.UTF_8 ), algorithm);
-        
+
         return StringUtils.toHexString(resByteArray);
     }
 
     /**
      * Encrypt string using MD5 algorithm
+     *
+     * @param source The data to encrypt
+     * @return The encrypted data
      */
-    public final static String encryptMD5(String source) {
+    public static final String encryptMD5(String source) {
         try {
             return encrypt(source, MD5.MD5);
         } catch (NoSuchAlgorithmException ex) {
@@ -72,8 +85,11 @@ public class EncryptUtils {
 
     /**
      * Encrypt string using SHA-1 algorithm
+     *
+     * @param source The data to encrypt
+     * @return The encrypted data
      */
-    public final static String encryptSHA(String source) {
+    public static final String encryptSHA(String source) {
         try {
             return encrypt(source, "SHA");
         } catch (NoSuchAlgorithmException ex) {
@@ -85,8 +101,11 @@ public class EncryptUtils {
 
     /**
      * Encrypt string using SHA-256 algorithm
+     *
+     * @param source The data to encrypt
+     * @return The encrypted data
      */
-    public final static String encryptSHA256(String source) {
+    public static final String encryptSHA256(String source) {
         try {
             return encrypt(source, "SHA-256");
         } catch (NoSuchAlgorithmException ex) {
@@ -98,8 +117,11 @@ public class EncryptUtils {
 
     /**
      * Encrypt string using SHA-512 algorithm
+     *
+     * @param source The data to encrypt
+     * @return The encrypted data
      */
-    public final static String encryptSHA512(String source) {
+    public static final String encryptSHA512(String source) {
         try {
             return encrypt(source, "SHA-512");
         } catch (NoSuchAlgorithmException ex) {

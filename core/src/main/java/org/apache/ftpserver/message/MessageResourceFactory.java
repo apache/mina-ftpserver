@@ -43,9 +43,9 @@ public class MessageResourceFactory {
     public MessageResource createMessageResource() {
         return new DefaultMessageResource(languages, customMessageDirectory);
     }
-    
+
     /**
-     * The languages for which messages are available 
+     * The languages for which messages are available
      * @return The list of available languages
      */
     public List<String> getLanguages() {
@@ -53,10 +53,10 @@ public class MessageResourceFactory {
     }
 
     /**
-     * Set the languages for which messages are available 
+     * Set the languages for which messages are available
      * @param languages The list of available languages
      */
-    
+
     public void setLanguages(List<String> languages) {
         this.languages = languages;
     }

@@ -30,9 +30,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>REIN &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command flushes a USER, without affecting transfers in progress. The
  * server state should otherwise be as when the user first connects.
  *
@@ -42,6 +42,8 @@ public class REIN extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

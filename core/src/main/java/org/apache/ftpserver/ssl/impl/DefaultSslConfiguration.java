@@ -35,9 +35,9 @@ import org.apache.ftpserver.util.ClassUtils;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Used to configure the SSL settings for the control channel or the data channel.
- * 
+ *
  * <strong><strong>Internal class, do not use directly.</strong></strong>
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -50,7 +50,7 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     private String[] enabledProtocols = new String[] {"TLSv1.2"};
 
-    private final ClientAuth clientAuth;// = ClientAuth.NONE;
+    private final ClientAuth clientAuth; // = ClientAuth.NONE;
 
     private final String keyAlias;
 
@@ -62,11 +62,18 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * Internal constructor, do not use directly. Instead, use {@link SslConfigurationFactory}
-     * 
-     * @throws GeneralSecurityException
+     *
+     * @param keyManagerFactory The Key Manager factory
+     * @param trustManagerFactory The Trust Manager factory
+     * @param clientAuthReqd The requested level of authentication for the user
+     * @param sslProtocols The supported SSL protocols
+     * @param enabledCipherSuites The enabled cipher suites
+     * @param keyAlias The key alias
+     * @throws GeneralSecurityException If the instance creatio failed
      */
-    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory, 
-	    ClientAuth clientAuthReqd, String[] sslProtocols, String[] enabledCipherSuites, String keyAlias) throws GeneralSecurityException {
+    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory,
+        ClientAuth clientAuthReqd, String[] sslProtocols, String[] enabledCipherSuites, String keyAlias)
+            throws GeneralSecurityException {
         super();
         this.clientAuth = clientAuthReqd;
         this.enabledCipherSuites = enabledCipherSuites;
@@ -80,11 +87,18 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * Internal constructor, do not use directly. Instead, use {@link SslConfigurationFactory}
-     * 
-     * @throws GeneralSecurityException
+     *
+     * @param keyManagerFactory The Key Manager factory
+     * @param trustManagerFactory The Trust Manager factory
+     * @param clientAuthReqd The requested level of authentication for the user
+     * @param sslProtocol The supported SSL protocol
+     * @param enabledCipherSuites The enabled cipher suites
+     * @param keyAlias The key alias
+     * @throws GeneralSecurityException If the instance creatio failed
      */
-    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory, 
-        ClientAuth clientAuthReqd, String sslProtocol, String[] enabledCipherSuites, String keyAlias) throws GeneralSecurityException {
+    public DefaultSslConfiguration(KeyManagerFactory keyManagerFactory, TrustManagerFactory trustManagerFactory,
+        ClientAuth clientAuthReqd, String sslProtocol, String[] enabledCipherSuites, String keyAlias)
+            throws GeneralSecurityException {
         super();
         this.clientAuth = clientAuthReqd;
         this.enabledCipherSuites = enabledCipherSuites;
@@ -102,6 +116,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getSSLContext(String)
+     *
+     * {@inheritDoc}
      */
     public SSLContext getSSLContext(String enabledProtocol) throws GeneralSecurityException {
         return sslContext;
@@ -111,6 +127,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
      * @see SslConfiguration#getEnabledProtocol()
      *
      * @deprecated Use {@link #getEnabledProtocol()}
+     *
+     * {@inheritDoc}
      */
     public String getEnabledProtoco() {
         return getEnabledProtocol();
@@ -118,6 +136,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getEnabledProtocol()
+     *
+     * {@inheritDoc}
      */
     public String getEnabledProtocol() {
         if (enabledProtocols != null && enabledProtocols.length > 0) {
@@ -130,6 +150,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getEnabledProtocols()
+     *
+     * {@inheritDoc}
      */
     public String[] getEnabledProtocols() {
         return enabledProtocols;
@@ -137,6 +159,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getClientAuth()
+     *
+     * {@inheritDoc}
      */
     public ClientAuth getClientAuth() {
         return clientAuth;
@@ -144,6 +168,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getSSLContext()
+     *
+     * {@inheritDoc}
      */
     public SSLContext getSSLContext() throws GeneralSecurityException {
         return getSSLContext(enabledProtocols[0]);
@@ -151,6 +177,8 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     /**
      * @see SslConfiguration#getEnabledCipherSuites()
+     *
+     * {@inheritDoc}
      */
     public String[] getEnabledCipherSuites() {
         if (enabledCipherSuites != null) {
@@ -162,7 +190,7 @@ public class DefaultSslConfiguration implements SslConfiguration {
 
     private SSLContext initContext() throws GeneralSecurityException {
         KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
-    
+
         // wrap key managers to allow us to control their behavior
         // (FTPSERVER-93)
         for (int i = 0; i < keyManagers.length; i++) {
@@ -172,11 +200,11 @@ public class DefaultSslConfiguration implements SslConfiguration {
                 keyManagers[i] = new AliasKeyManager(keyManagers[i], keyAlias);
             }
         }
-    
+
         // create and initialize the SSLContext
         SSLContext ctx = SSLContext.getInstance(enabledProtocols[0]);
         ctx.init(keyManagers, trustManagerFactory.getTrustManagers(), null);
-        
+
         // Create the socket factory
         return ctx;
     }

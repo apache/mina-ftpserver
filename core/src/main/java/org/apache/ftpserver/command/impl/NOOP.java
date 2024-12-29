@@ -31,9 +31,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>NOOP &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command does not affect any parameters or previously entered commands.
  * It specifies no action other than that the server send an OK reply.
  *
@@ -42,7 +42,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 public class NOOP extends AbstractCommand {
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

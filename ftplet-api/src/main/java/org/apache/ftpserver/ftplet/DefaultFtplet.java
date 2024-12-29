@@ -78,7 +78,6 @@ public class DefaultFtplet implements Ftplet {
             throws FtpException, IOException {
 
         // the reply is ignored for these callbacks
-        
         String command = request.getCommand().toUpperCase();
 
         if ("PASS".equals(command)) {

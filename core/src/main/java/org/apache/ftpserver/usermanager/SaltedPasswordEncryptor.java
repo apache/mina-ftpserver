@@ -31,7 +31,7 @@ import org.apache.ftpserver.util.PasswordUtil;
  *
  * The algorithm is based on the principles described in
  * http://www.jasypt.org/howtoencryptuserpasswords.html
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class SaltedPasswordEncryptor implements PasswordEncryptor {
@@ -52,6 +52,8 @@ public class SaltedPasswordEncryptor implements PasswordEncryptor {
     /**
      * Encrypts the password using a salt concatenated with the password and a
      * series of MD5 steps.
+     * @param password The password to encrypt
+     * @return The encrypted password
      */
     public String encrypt(String password) {
         String seed = Integer.toString(rnd.nextInt(MAX_SEED));

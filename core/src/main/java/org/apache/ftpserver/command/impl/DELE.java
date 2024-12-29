@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>DELE &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command causes the file specified in the pathname to be deleted at the
  * server site.
  *
@@ -49,6 +49,8 @@ public class DELE extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -80,7 +82,7 @@ public class DELE extends AbstractCommand {
                     "DELE.invalid", fileName, null));
             return;
         }
-        
+
         // check file
         fileName = file.getAbsolutePath();
 
@@ -90,7 +92,7 @@ public class DELE extends AbstractCommand {
                     "DELE.invalid", fileName, file));
             return;
         }
-        
+
         if (!file.isRemovable()) {
             session.write(LocalizedFileActionFtpReply.translate(session, request, context,
                     FtpReply.REPLY_450_REQUESTED_FILE_ACTION_NOT_TAKEN,

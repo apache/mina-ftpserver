@@ -34,12 +34,12 @@ import org.apache.ftpserver.impl.FtpServerContext;
 public interface Command {
     /**
      * Execute command.
-     * 
+     *
      * @param session The current {@link FtpIoSession}
      * @param context The current {@link FtpServerContext}
      * @param request The current {@link FtpRequest}
-     * @throws IOException 
-     * @throws FtpException 
+     * @throws IOException
+     * @throws FtpException
      */
     void execute(FtpIoSession session, FtpServerContext context, FtpRequest request) throws IOException, FtpException;
 }

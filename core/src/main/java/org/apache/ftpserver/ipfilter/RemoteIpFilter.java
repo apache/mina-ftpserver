@@ -34,9 +34,9 @@ import org.slf4j.LoggerFactory;
 /**
  * An implementation of the <code>SessionFilter</code> interface, to filter
  * sessions based on the remote IP address.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- * 
+ *
  */
 
 public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
@@ -59,7 +59,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
 
     /**
      * Creates a new instance of <code>RemoteIpFilter</code>.
-     * 
+     *
      * @param type
      *            the filter type
      */
@@ -69,7 +69,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
 
     /**
      * Creates a new instance of <code>RemoteIpFilter</code>.
-     * 
+     *
      * @param type
      *            the filter type
      * @param collection
@@ -83,7 +83,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
 
     /**
      * Creates a new instance of <code>RemoteIpFilter</code>.
-     * 
+     *
      * @param type
      *            the filter type
      * @param addresses
@@ -115,7 +115,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
 
     /**
      * Returns the type of this filter.
-     * 
+     *
      * @return the type of this filter.
      */
     public IpFilterType getType() {
@@ -124,7 +124,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
 
     /**
      * Sets the type of this filter.
-     * 
+     *
      * @param type
      *            the type of this filter.
      */
@@ -135,7 +135,7 @@ public class RemoteIpFilter extends CopyOnWriteArraySet<Subnet> implements
     /**
      * Adds the given string representation of InetAddress or CIDR notation to
      * this filter.
-     * 
+     *
      * @param str
      *            the string representation of InetAddress or CIDR notation
      * @return if the given element was added or not. <code>true</code>, if the

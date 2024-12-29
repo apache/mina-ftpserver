@@ -34,9 +34,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>RNTO &lt;SP&gt; &lt;pathname&gt; &lt;CRLF&gt;</code><br>
- * 
+ *
  * This command specifies the new pathname of the file specified in the
  * immediately preceding "rename from" command. Together the two commands cause
  * a file to be renamed.
@@ -49,6 +49,8 @@ public class RNTO extends AbstractCommand {
 
     /**
      * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)
@@ -126,14 +128,14 @@ public class RNTO extends AbstractCommand {
 
             // save away the old path
             String logFrFileAbsolutePath = frFile.getAbsolutePath();
-            
+
             // now rename
             if (frFile.move(toFile)) {
                 session.write(LocalizedRenameFtpReply.translate(session, request, context,
                         FtpReply.REPLY_250_REQUESTED_FILE_ACTION_OKAY, "RNTO",
                         toFileStr, frFile, toFile));
 
-                LOG.info("File rename from \"{}\" to \"{}\"", logFrFileAbsolutePath, 
+                LOG.info("File rename from \"{}\" to \"{}\"", logFrFileAbsolutePath,
                         toFile.getAbsolutePath());
             } else {
                 session

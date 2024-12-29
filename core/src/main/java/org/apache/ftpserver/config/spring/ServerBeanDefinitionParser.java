@@ -62,9 +62,9 @@ public class ServerBeanDefinitionParser extends
     protected void doParse(final Element element,
             final ParserContext parserContext,
             final BeanDefinitionBuilder builder) {
-        
+
         BeanDefinitionBuilder factoryBuilder = BeanDefinitionBuilder.genericBeanDefinition(FtpServerFactory.class);
-        
+
         List<Element> childs = SpringUtil.getChildElements(element);
         for (Element childElm : childs) {
             String childName = childElm.getLocalName();
@@ -142,11 +142,11 @@ public class ServerBeanDefinitionParser extends
 
         factoryBuilder.addPropertyValue("connectionConfig", connectionConfig.createConnectionConfig());
 
-       
+
         BeanDefinition factoryDefinition = factoryBuilder.getBeanDefinition();
 
         String factoryName = parserContext.getReaderContext().generateBeanName(factoryDefinition);
-        
+
         BeanDefinitionHolder factoryHolder = new BeanDefinitionHolder(factoryDefinition, factoryName);
         registerBeanDefinition(factoryHolder, parserContext.getRegistry());
 
@@ -191,7 +191,7 @@ public class ServerBeanDefinitionParser extends
 
         List<Element> childs = SpringUtil.getChildElements(childElm);
 
-        if(childs.size() > 0 && childs.get(0).getLocalName().equals("map")) {
+        if (childs.size() > 0 && childs.get(0).getLocalName().equals("map")) {
             // using a beans:map element
             return parserContext.getDelegate().parseMapElement(
                     childs.get(0),
@@ -199,12 +199,11 @@ public class ServerBeanDefinitionParser extends
         } else {
             ManagedMap ftplets = new ManagedMap();
             for (Element ftpletElm : childs) {
-                ftplets
-                        .put(ftpletElm.getAttribute("name"), SpringUtil
+                ftplets.put(ftpletElm.getAttribute("name"), SpringUtil
                                 .parseSpringChildElement(ftpletElm, parserContext,
                                         builder));
             }
-    
+
             return ftplets;
         }
     }

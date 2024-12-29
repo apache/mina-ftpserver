@@ -33,7 +33,7 @@ import org.apache.ftpserver.usermanager.impl.DbUserManager;
 public class DbUserManagerFactory implements UserManagerFactory {
 
     private String adminName = "admin";
-    
+
     private String insertUserStmt;
 
     private String updateUserStmt;
@@ -51,53 +51,53 @@ public class DbUserManagerFactory implements UserManagerFactory {
     private DataSource dataSource;
 
     private PasswordEncryptor passwordEncryptor = new Md5PasswordEncryptor();
-    
+
     public UserManager createUserManager() {
         if (dataSource == null) {
             throw new FtpServerConfigurationException(
                     "Required data source not provided");
         }
-        
+
         if (insertUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required insert user SQL statement not provided");
         }
-        
+
         if (updateUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required update user SQL statement not provided");
         }
-        
+
         if (deleteUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required delete user SQL statement not provided");
         }
-        
+
         if (selectUserStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required select user SQL statement not provided");
         }
-        
+
         if (selectAllStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required select all users SQL statement not provided");
         }
-        
+
         if (isAdminStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required is admin user SQL statement not provided");
         }
-        
+
         if (authenticateStmt == null) {
             throw new FtpServerConfigurationException(
                     "Required authenticate user SQL statement not provided");
         }
-        
-        return new DbUserManager(dataSource, selectAllStmt, selectUserStmt, 
-                insertUserStmt, updateUserStmt, deleteUserStmt, authenticateStmt, 
+
+        return new DbUserManager(dataSource, selectAllStmt, selectUserStmt,
+                insertUserStmt, updateUserStmt, deleteUserStmt, authenticateStmt,
                 isAdminStmt, passwordEncryptor, adminName);
     }
-    
+
     /**
      * Get the admin name.
      * @return The admin user name
@@ -109,17 +109,17 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the name to use as the administrator of the server. The default value
      * is "admin".
-     * 
+     *
      * @param adminName
      *            The administrator user name
      */
     public void setAdminName(String adminName) {
         this.adminName = adminName;
     }
-    
+
     /**
      * Retrive the data source used by the user manager
-     * 
+     *
      * @return The current data source
      */
     public DataSource getDataSource() {
@@ -128,7 +128,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Set the data source to be used by the user manager
-     * 
+     *
      * @param dataSource
      *            The data source to use
      */
@@ -138,7 +138,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL INSERT statement used to add a new user.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserInsert() {
@@ -148,7 +148,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL INSERT statement used to add a new user. All the dynamic
      * values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -158,7 +158,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL DELETE statement used to delete an existing user.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserDelete() {
@@ -168,7 +168,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL DELETE statement used to delete an existing user. All the
      * dynamic values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -178,7 +178,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL UPDATE statement used to update an existing user.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserUpdate() {
@@ -188,7 +188,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL UPDATE statement used to update an existing user. All the
      * dynamic values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -198,7 +198,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL SELECT statement used to select an existing user.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserSelect() {
@@ -208,7 +208,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL SELECT statement used to select an existing user. All the
      * dynamic values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -218,7 +218,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL SELECT statement used to select all user ids.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserSelectAll() {
@@ -228,7 +228,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL SELECT statement used to select all user ids. All the dynamic
      * values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -238,7 +238,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
 
     /**
      * Get the SQL SELECT statement used to authenticate user.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserAuthenticate() {
@@ -248,7 +248,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL SELECT statement used to authenticate user. All the dynamic
      * values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -259,7 +259,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Get the SQL SELECT statement used to find whether an user is admin or
      * not.
-     * 
+     *
      * @return The SQL statement
      */
     public String getSqlUserAdmin() {
@@ -269,7 +269,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
     /**
      * Set the SQL SELECT statement used to find whether an user is admin or
      * not. All the dynamic values will be replaced during runtime.
-     * 
+     *
      * @param sql
      *            The SQL statement
      */
@@ -281,7 +281,7 @@ public class DbUserManagerFactory implements UserManagerFactory {
      * Retrieve the password encryptor used for this user manager
      * @return The password encryptor. Default to {@link Md5PasswordEncryptor}
      *  if no other has been provided
-     */    
+     */
     public PasswordEncryptor getPasswordEncryptor() {
         return passwordEncryptor;
     }

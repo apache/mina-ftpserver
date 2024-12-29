@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * This class wraps native file object.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
@@ -83,7 +83,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Get full name.
+     * {@inheritDoc}
      */
     public String getAbsolutePath() {
 
@@ -98,7 +98,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Get short name.
+     * {@inheritDoc}
      */
     public String getName() {
 
@@ -123,63 +123,63 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Is a hidden file?
+     * {@inheritDoc}
      */
     public boolean isHidden() {
         return file.isHidden();
     }
 
     /**
-     * Is it a directory?
+     * {@inheritDoc}
      */
     public boolean isDirectory() {
         return file.isDirectory();
     }
 
     /**
-     * Is it a file?
+     * {@inheritDoc}
      */
     public boolean isFile() {
         return file.isFile();
     }
 
     /**
-     * Does this file exists?
+     * {@inheritDoc}
      */
     public boolean doesExist() {
         return file.exists();
     }
 
     /**
-     * Get file size.
+     * {@inheritDoc}
      */
     public long getSize() {
         return file.length();
     }
 
     /**
-     * Get file owner.
+     * {@inheritDoc}
      */
     public String getOwnerName() {
         return "user";
     }
 
     /**
-     * Get group name
+     * {@inheritDoc}
      */
     public String getGroupName() {
         return "group";
     }
 
     /**
-     * Get link count
+     * {@inheritDoc}
      */
     public int getLinkCount() {
         return file.isDirectory() ? 3 : 1;
     }
 
     /**
-     * Get last modified time.
+     * {@inheritDoc}
      */
     public long getLastModified() {
         return file.lastModified();
@@ -193,14 +193,14 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Check read permission.
+     * {@inheritDoc}
      */
     public boolean isReadable() {
         return file.canRead();
     }
 
     /**
-     * Check file write permission.
+     * {@inheritDoc}
      */
     public boolean isWritable() {
         LOG.debug("Checking authorization for " + getAbsolutePath());
@@ -220,7 +220,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Has delete permission.
+     * {@inheritDoc}
      */
     public boolean isRemovable() {
 
@@ -255,7 +255,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Delete file.
+     * {@inheritDoc}
      */
     public boolean delete() {
         boolean retVal = false;
@@ -266,7 +266,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Move file object.
+     * {@inheritDoc}
      */
     public boolean move(final FtpFile dest) {
         boolean retVal = false;
@@ -286,7 +286,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Create directory.
+     * {@inheritDoc}
      */
     public boolean mkdir() {
         boolean retVal = false;
@@ -297,14 +297,14 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Get the physical file object.
+     * {@inheritDoc}
      */
     public File getPhysicalFile() {
         return file;
     }
 
     /**
-     * List files. If not a directory or does not exist, null will be returned.
+     * {@inheritDoc}
      */
     public List<FtpFile> listFiles() {
 
@@ -344,7 +344,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Create output stream for writing.
+     * {@inheritDoc}
      */
     public OutputStream createOutputStream(final long offset)
             throws IOException {
@@ -371,7 +371,7 @@ public class NativeFtpFile implements FtpFile {
     }
 
     /**
-     * Create input stream for reading.
+     * {@inheritDoc}
      */
     public InputStream createInputStream(final long offset) throws IOException {
 
@@ -417,7 +417,7 @@ public class NativeFtpFile implements FtpFile {
         }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         try {

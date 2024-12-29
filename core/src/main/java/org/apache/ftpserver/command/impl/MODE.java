@@ -30,9 +30,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * <code>MODE &lt;SP&gt; <mode-code> &lt;CRLF&gt;</code><br>
- * 
+ *
  * The argument is a single Telnet character code specifying the data transfer
  * modes described in the Section on Transmission Modes.
  *
@@ -41,7 +41,9 @@ import org.apache.ftpserver.impl.LocalizedFtpReply;
 public class MODE extends AbstractCommand {
 
     /**
-     * Execute command
+     * Execute command.
+     *
+     * {@inheritDoc}
      */
     public void execute(final FtpIoSession session,
             final FtpServerContext context, final FtpRequest request)

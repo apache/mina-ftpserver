@@ -42,19 +42,19 @@ public class CommandLine {
     /**
      * This method is the FtpServer starting point when running by using the
      * command line mode.
-     * 
+     *
      * @param args The first element of this array must specify the kind of
      * configuration to be used to start the server.
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         CommandLine cli = new CommandLine();
-        
+
         try {
 
             // get configuration
             FtpServer server = cli.getConfiguration(args);
-            
+
             if (server == null) {
                 return;
             }
@@ -74,7 +74,6 @@ public class CommandLine {
      * Add shutdown hook.
      */
     private void addShutdownHook(final FtpServer engine) {
-
         // create shutdown hook
         Runnable shutdownHook = new Runnable() {
             public void run() {
@@ -108,7 +107,7 @@ public class CommandLine {
         switch (args.length) {
             case 0:
                 System.out.println("Using default configuration");
-                
+
                 return new FtpServerFactory().createServer();
 
             case 1:
@@ -120,20 +119,20 @@ public class CommandLine {
 
                     return new FtpServerFactory().createServer();
                 }
-                
+
                 if (args[0].equals("--default")) {
                     System.out.println("Using default configuration");
 
                     return new FtpServerFactory().createServer();
                 }
-                
+
                 // Help
                 if (args[0].equals("--help")||args[0].equals("-?")) {
                     usage();
-                    
+
                     return null;
                 }
-                
+
                 // We assume we are provided a Spring config
                 System.out.println("Using XML configuration file " + args[0] + "...");
                 FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext(args[0]);
@@ -142,22 +141,24 @@ public class CommandLine {
                     return (FtpServer) ctx.getBean("server");
                 } else {
                     String[] beanNames = ctx.getBeanNamesForType(FtpServer.class);
-                    
+
                     if (beanNames.length == 1) {
                         return (FtpServer) ctx.getBean(beanNames[0]);
                     } else if (beanNames.length > 1) {
-                        System.out.println("Using the first server defined in the configuration, named " + beanNames[0]);
+                        System.out.println(
+                            "Using the first server defined in the configuration, named " + beanNames[0]);
 
                         return (FtpServer) ctx.getBean(beanNames[0]);
                     } else {
                         System.err.println("XML configuration does not contain a server configuration");
-                        
+
                         return null;
                     }
                 }
+
             default:
                 usage();
-                
+
                 return null;
         }
     }

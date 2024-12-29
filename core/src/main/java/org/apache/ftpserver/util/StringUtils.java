@@ -29,11 +29,10 @@ import java.util.Map;
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class StringUtils {
-	
-	/**
-	 * @deprecated Do not instantiate.
-	 */
-	@Deprecated
+    /**
+     * @deprecated Do not instantiate.
+     */
+    @Deprecated
     public StringUtils() {
         // Nothing to do
     }
@@ -169,6 +168,7 @@ public class StringUtils {
      * @param bReplaceTag if true '<' will be replaced by &lt; and
      *                          '>' will be replaced by &gt;
      * @param bReplaceQuote if true '\"' will be replaced by &quot;
+     * @return The HTML formatted string
      */
     public static final String formatHtml(String source, boolean bReplaceNl,
             boolean bReplaceTag, boolean bReplaceQuote) {
@@ -235,6 +235,12 @@ public class StringUtils {
 
     /**
      * Pad string object.
+     *
+     * @param src The String to pad
+     * @param padChar The char to use for padding
+     * @param rightPad <code>true</code> if the padding should be done from the right, otherwise from the left
+     * @param totalLength The String length after padding
+     * @return The padded String
      */
     public static final String pad(String src, char padChar, boolean rightPad,
             int totalLength) {
@@ -259,6 +265,9 @@ public class StringUtils {
 
     /**
      * Get hex string from byte array.
+     *
+     * @param res The byte array to transform
+     * @return The Hex formatted string
      */
     public static final String toHexString(byte[] res) {
         StringBuilder sb = new StringBuilder(res.length << 1);
@@ -274,10 +283,13 @@ public class StringUtils {
 
     /**
      * Get byte array from hex string.
+     *
+     * @param hexString The hex string to convert
+     * @return The resulting byte array
      */
     public static final byte[] toByteArray(String hexString) {
         int arrLength = hexString.length() >> 1;
-        byte buff[] = new byte[arrLength];
+        byte[] buff = new byte[arrLength];
         for (int i = 0; i < arrLength; i++) {
             int index = i << 1;
             String digit = hexString.substring(index, index + 2);

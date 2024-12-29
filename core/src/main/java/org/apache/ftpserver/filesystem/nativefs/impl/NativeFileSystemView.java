@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * File system view based on native file system. Here the root directory will be
  * user virtual root (/).
  *
@@ -66,6 +66,9 @@ public class NativeFileSystemView implements FileSystemView {
 
     /**
      * Constructor - internal do not use directly, use {@link NativeFileSystemFactory} instead
+     *
+     * @param user The current user
+     * @param caseInsensitive If the OS FS is case sensitive or not
      */
     public NativeFileSystemView(User user, boolean caseInsensitive)
             throws FtpException {
@@ -83,9 +86,9 @@ public class NativeFileSystemView implements FileSystemView {
         String rootDir = user.getHomeDirectory();
         rootDir = normalizeSeparateChar(rootDir);
         rootDir = appendSlash(rootDir);
-        
+
         LOG.debug("Native filesystem view created for user \"{}\" with root \"{}\"", user.getName(), rootDir);
-        
+
         this.rootDir = rootDir;
 
         this.user = user;
@@ -96,13 +99,15 @@ public class NativeFileSystemView implements FileSystemView {
     /**
      * Get the user home directory. It would be the file system root for the
      * user.
+     *
+     * {@inheritDoc}
      */
     public FtpFile getHomeDirectory() {
         return new NativeFtpFile("/", new File(rootDir), user);
     }
 
     /**
-     * Get the current directory.
+     * {@inheritDoc}
      */
     public FtpFile getWorkingDirectory() {
         FtpFile fileObj = null;
@@ -117,7 +122,7 @@ public class NativeFileSystemView implements FileSystemView {
     }
 
     /**
-     * Get file object.
+     * {@inheritDoc}
      */
     public FtpFile getFile(String file) {
 
@@ -132,7 +137,7 @@ public class NativeFileSystemView implements FileSystemView {
     }
 
     /**
-     * Change directory.
+     * {@inheritDoc}
      */
     public boolean changeWorkingDirectory(String dir) {
 
@@ -155,22 +160,22 @@ public class NativeFileSystemView implements FileSystemView {
     }
 
     /**
-     * Is the file content random accessible?
+     * {@inheritDoc}
      */
     public boolean isRandomAccessible() {
         return true;
     }
 
     /**
-     * Dispose file system view - does nothing.
+     * {@inheritDoc}
      */
     public void dispose() {
     }
-    
+
     /**
      * Get the physical canonical file name. It works like
      * File.getCanonicalPath().
-     * 
+     *
      * @param rootDir
      *            The root directory.
      * @param currDir
@@ -192,7 +197,7 @@ public class NativeFileSystemView implements FileSystemView {
         // normalize file name
         String normalizedFileName = normalizeSeparateChar(fileName);
         String result;
-        
+
         // if file name is relative, set resArg to root dir + curr dir
         // if file name is absolute, set resArg to root dir
         if (normalizedFileName.charAt(0) != '/') {
@@ -230,12 +235,12 @@ public class NativeFileSystemView implements FileSystemView {
                 continue;
             } else {
                 // token is normal directory name
-                
-                if(caseInsensitive) {
+
+                if (caseInsensitive) {
                     // we're case insensitive, find a directory with the name, ignoring casing
                     File[] matches = new File(result)
                             .listFiles(new NameEqualsFileFilter(tok, true));
-    
+
                     if (matches != null && matches.length > 0) {
                         // found a file matching tok, replace tok for get the right casing
                         tok = matches[0].getName();
@@ -243,7 +248,7 @@ public class NativeFileSystemView implements FileSystemView {
                 }
 
                 result = result + '/' + tok;
-    
+
             }
         }
 
@@ -270,7 +275,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Prepend leading slash ('/') if missing
      */
@@ -281,7 +286,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Trim trailing slash ('/') if existing
      */
@@ -292,7 +297,7 @@ public class NativeFileSystemView implements FileSystemView {
             return path;
         }
     }
-    
+
     /**
      * Normalize separate character. Separate character should be '/' always.
      */
@@ -301,16 +306,16 @@ public class NativeFileSystemView implements FileSystemView {
         normalizedPathName = normalizedPathName.replace('\\', '/');
         return normalizedPathName;
     }
-    
+
     /**
-     * Normalize separator char, append and prepend slashes. Default to 
+     * Normalize separator char, append and prepend slashes. Default to
      * defaultPath if null or empty
      */
     private String normalize(String path, String defaultPath) {
-        if(path == null || path.trim().length() == 0) {
+        if (path == null || path.trim().length() == 0) {
             path = defaultPath;
         }
-        
+
         path = normalizeSeparateChar(path);
         path = prependSlash(appendSlash(path));
         return path;

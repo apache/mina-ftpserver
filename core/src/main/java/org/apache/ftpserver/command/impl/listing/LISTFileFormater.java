@@ -25,19 +25,21 @@ import org.apache.ftpserver.util.DateUtils;
 
 /**
  * <strong>Internal class, do not use directly.</strong>
- * 
+ *
  * Formats files according to the LIST specification
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class LISTFileFormater implements FileFormater {
 
-    private final static char DELIM = ' ';
+    private static final char DELIM = ' ';
 
-    private final static char[] NEWLINE = { '\r', '\n' };
+    private static final char[] NEWLINE = { '\r', '\n' };
 
     /**
      * @see FileFormater#format(FtpFile)
+     *
+     * {@inheritDoc}
      */
     public String format(FtpFile file) {
         StringBuilder sb = new StringBuilder();
@@ -88,22 +90,13 @@ public class LISTFileFormater implements FileFormater {
      * Get permission string.
      */
     private char[] getPermission(FtpFile file) {
-        char permission[] = new char[10];
+        char[] permission = new char[10];
         Arrays.fill(permission, '-');
 
         permission[0] = file.isDirectory() ? 'd' : '-';
         permission[1] = file.isReadable() ? 'r' : '-';
         permission[2] = file.isWritable() ? 'w' : '-';
-        permission[3] = file.isDirectory() ? 'x' : '-'; 
+        permission[3] = file.isDirectory() ? 'x' : '-';
         return permission;
     }
-
-    /*
-     * public String format(FileObject[] files) { StringBuilder sb = new
-     * StringBuilder();
-     * 
-     * for (int i = 0; i < files.length; i++) { sb.append(format(files[i]));
-     * sb.append(NEWLINE); } return sb.toString(); }
-     */
-
 }

@@ -38,7 +38,7 @@ public class FtpException extends Exception {
 
     /**
      * Constructs a <code>FtpException</code> object with a message.
-     * 
+     *
      * @param msg
      *            a description of the exception
      */
@@ -49,7 +49,7 @@ public class FtpException extends Exception {
     /**
      * Constructs a <code>FtpException</code> object with a
      * <code>Throwable</code> cause.
-     * 
+     *
      * @param th
      *            the original cause
      */
@@ -61,7 +61,7 @@ public class FtpException extends Exception {
      * Constructs a <code>BaseException</code> object with a
      * <code>Throwable</code> cause.
      * @param msg A description of the exception
-     * 
+     *
      * @param th
      *            The original cause
      */

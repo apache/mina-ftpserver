@@ -25,13 +25,15 @@ import org.apache.ftpserver.util.PasswordUtil;
 
 /**
  * Password encryptor that hashes the password using SHA-512.
- * 
+ *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
 public class Sha512PasswordEncryptor implements PasswordEncryptor {
 
     /**
      * Hashes the password using SHA-512
+     * @param password The password to encrypt
+     * @return The encrypted password
      */
     public String encrypt(String password) {
         return EncryptUtils.encryptSHA512(password);

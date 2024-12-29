@@ -20,11 +20,7 @@
   <name>Apache FtpServer Core</name>
   <packaging>bundle</packaging>
 
-  <properties>
-    <checkstyle.configdir>..</checkstyle.configdir>
-  </properties>
-
-   <build>
+  <build>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
