@@ -176,6 +176,7 @@
 
     <!-- Maven plugin version -->
     <maven-javadoc-plugin-version>3.11.2</maven-javadoc-plugin-version>
+    <version.site.plugin>4.0.0-M16</version.site.plugin>
   </properties>
 
   <dependencyManagement>
@@ -391,7 +392,12 @@
             </parameter>
           </configuration>
         </plugin>
-
+      
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${version.site.plugin}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 

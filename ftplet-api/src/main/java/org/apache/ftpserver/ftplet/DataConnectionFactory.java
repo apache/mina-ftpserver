@@ -20,6 +20,7 @@
 package org.apache.ftpserver.ftplet;
 
 /**
+ * A DataConnection factory
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
@@ -29,7 +30,7 @@ public interface DataConnectionFactory {
      * Open an active data connection
      *
      * @return The open data connection
-     * @throws Exception
+     * @throws Exception If the connection cannot be opened
      */
     DataConnection openConnection() throws Exception;
 

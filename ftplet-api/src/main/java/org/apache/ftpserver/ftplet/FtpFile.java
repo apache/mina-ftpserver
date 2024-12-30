@@ -112,7 +112,8 @@ public interface FtpFile {
 
     /**
      * Set the last modified time stamp of a file.
-     * @param time The last modified time, in milliseconds since the epoch. See {@link File#setLastModified(long)}.
+     * @param time The last modified time, in milliseconds since the epoch.
+     * See {@link java.io.File#setLastModified(long)}.
      * @return <code>true</code> if and only if the operation succeeded; <code>false</code> otherwise
      */
     boolean setLastModified(long time);

@@ -78,7 +78,6 @@ public interface UserManager {
      * @param authentication The {@link Authentication} that proves the users identity
      * @return the authenticated account.
      * @throws AuthenticationFailedException
-     * @throws FtpException when the UserManager can't fulfill the request.
      */
     User authenticate(Authentication authentication)
             throws AuthenticationFailedException;

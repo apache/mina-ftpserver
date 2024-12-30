@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
+ * The data transfert interface.
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
  */
@@ -36,7 +37,7 @@ public interface DataConnection {
      *            The {@link OutputStream} containing the destination of the
      *            data from the client.
      * @return The length of the transferred data
-     * @throws IOException
+     * @throws IOException If the transfer failed
      */
     long transferFromClient(FtpSession session, OutputStream out)
             throws IOException;
@@ -47,7 +48,7 @@ public interface DataConnection {
      * @param in
      *            Data to be transfered to the client
      * @return The length of the transferred data
-     * @throws IOException
+     * @throws IOException If the transfer failed
      */
     long transferToClient(FtpSession session, InputStream in)
             throws IOException;
@@ -57,7 +58,7 @@ public interface DataConnection {
      * @param session The current {@link FtpSession}
      * @param str
      *            The string to transfer
-     * @throws IOException
+     * @throws IOException If the transfer failed
      */
     void transferToClient(FtpSession session, String str) throws IOException;
 }

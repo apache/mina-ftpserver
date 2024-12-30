@@ -86,7 +86,6 @@ public interface FtpSession {
 
     /**
      * Returns maximum idle time. This time equals to
-     * {@link ConnectionManagerImpl#getDefaultIdleSec()} until user login, and
      * {@link User#getMaxIdleTime()} after user login.
      * @return The number of seconds the client is allowed to be idle before disconnected.
      */
@@ -94,7 +93,6 @@ public interface FtpSession {
 
     /**
      * Set maximum idle time in seconds. This time equals to
-     * {@link ConnectionManagerImpl#getDefaultIdleSec()} until user login, and
      * {@link User#getMaxIdleTime()} after user login.
      * @param maxIdleTimeSec The number of seconds the client is allowed to be idle before disconnected.
      */
