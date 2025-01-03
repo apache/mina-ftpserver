@@ -166,7 +166,7 @@
 
     <!-- Checkstyle configuration -->
     <checkstyle.plugin.version>3.6.0</checkstyle.plugin.version>
-    <checkstyle.version>9.3</checkstyle.version>
+    <checkstyle.version>10.21.1</checkstyle.version>
     <checkstyle.configdir>.</checkstyle.configdir>
 
     <!-- Java version to use -->
