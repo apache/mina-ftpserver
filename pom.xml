@@ -151,7 +151,7 @@
     <!-- doclint>none</doclint-->
 
     <!-- Set versions for depending jars -->
-    <commons.codec.version>1.17.2</commons.codec.version>
+    <commons.codec.version>1.18.0</commons.codec.version>
     <commons.net.version>3.11.1</commons.net.version>
     <ftpserver.version>${project.version}</ftpserver.version>
     <hsqldb.version>1.8.0.10</hsqldb.version>
