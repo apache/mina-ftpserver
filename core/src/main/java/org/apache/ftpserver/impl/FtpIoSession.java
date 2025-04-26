@@ -36,6 +36,7 @@ import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.Structure;
 import org.apache.ftpserver.ftplet.User;
 import org.apache.ftpserver.listener.Listener;
+import org.apache.ftpserver.util.LazyDateHolder;
 import org.apache.mina.core.filterchain.IoFilterChain;
 import org.apache.mina.core.future.CloseFuture;
 import org.apache.mina.core.future.ReadFuture;
@@ -57,60 +58,59 @@ import org.slf4j.LoggerFactory;
  * <strong>Internal class, do not use directly.</strong>
  *
  * @author <a href="http://mina.apache.org">Apache MINA Project</a>
- *
  */
 public class FtpIoSession implements IoSession {
     /// Contains user name between USER and PASS commands
-    /** Prefix for all the attributes*/
+    /** Prefix for all the attributes */
     public static final String ATTRIBUTE_PREFIX = "org.apache.ftpserver.";
 
     /** User argument attribute */
-    private static final String ATTRIBUTE_USER_ARGUMENT =           ATTRIBUTE_PREFIX + "user-argument";
+    private static final String ATTRIBUTE_USER_ARGUMENT = ATTRIBUTE_PREFIX + "user-argument";
 
     /** session ID attribute */
-    private static final String ATTRIBUTE_SESSION_ID =              ATTRIBUTE_PREFIX + "session-id";
+    private static final String ATTRIBUTE_SESSION_ID = ATTRIBUTE_PREFIX + "session-id";
 
     /** User attribute */
-    private static final String ATTRIBUTE_USER =                    ATTRIBUTE_PREFIX + "user";
+    private static final String ATTRIBUTE_USER = ATTRIBUTE_PREFIX + "user";
 
     /** Language attribute */
-    private static final String ATTRIBUTE_LANGUAGE =                ATTRIBUTE_PREFIX + "language";
+    private static final String ATTRIBUTE_LANGUAGE = ATTRIBUTE_PREFIX + "language";
 
     /** Login time attribute */
-    private static final String ATTRIBUTE_LOGIN_TIME =              ATTRIBUTE_PREFIX + "login-time";
+    private static final String ATTRIBUTE_LOGIN_TIME = ATTRIBUTE_PREFIX + "login-time";
 
     /** Data connection attribute */
-    private static final String ATTRIBUTE_DATA_CONNECTION =         ATTRIBUTE_PREFIX + "data-connection";
+    private static final String ATTRIBUTE_DATA_CONNECTION = ATTRIBUTE_PREFIX + "data-connection";
 
     /** File system attribute */
-    private static final String ATTRIBUTE_FILE_SYSTEM =             ATTRIBUTE_PREFIX + "file-system";
+    private static final String ATTRIBUTE_FILE_SYSTEM = ATTRIBUTE_PREFIX + "file-system";
 
     /** Rename from attribute */
-    private static final String ATTRIBUTE_RENAME_FROM =             ATTRIBUTE_PREFIX + "rename-from";
+    private static final String ATTRIBUTE_RENAME_FROM = ATTRIBUTE_PREFIX + "rename-from";
 
     /** File offset attribute */
-    private static final String ATTRIBUTE_FILE_OFFSET =             ATTRIBUTE_PREFIX + "file-offset";
+    private static final String ATTRIBUTE_FILE_OFFSET = ATTRIBUTE_PREFIX + "file-offset";
 
     /** Data type attribute */
-    private static final String ATTRIBUTE_DATA_TYPE =               ATTRIBUTE_PREFIX + "data-type";
+    private static final String ATTRIBUTE_DATA_TYPE = ATTRIBUTE_PREFIX + "data-type";
 
     /** Structure attribute */
-    private static final String ATTRIBUTE_STRUCTURE =               ATTRIBUTE_PREFIX + "structure";
+    private static final String ATTRIBUTE_STRUCTURE = ATTRIBUTE_PREFIX + "structure";
 
     /** Failed login attribute */
-    private static final String ATTRIBUTE_FAILED_LOGINS =           ATTRIBUTE_PREFIX + "failed-logins";
+    private static final String ATTRIBUTE_FAILED_LOGINS = ATTRIBUTE_PREFIX + "failed-logins";
 
     /** Listener attribute */
-    private static final String ATTRIBUTE_LISTENER =                ATTRIBUTE_PREFIX + "listener";
+    private static final String ATTRIBUTE_LISTENER = ATTRIBUTE_PREFIX + "listener";
 
     /** Max idle time attribute */
-    private static final String ATTRIBUTE_MAX_IDLE_TIME =           ATTRIBUTE_PREFIX + "max-idle-time";
+    private static final String ATTRIBUTE_MAX_IDLE_TIME = ATTRIBUTE_PREFIX + "max-idle-time";
 
     /** Last access time attribute */
-    private static final String ATTRIBUTE_LAST_ACCESS_TIME =        ATTRIBUTE_PREFIX + "last-access-time";
+    private static final String ATTRIBUTE_LAST_ACCESS_TIME = ATTRIBUTE_PREFIX + "last-access-time";
 
     /** Cached remote address attribute */
-    private static final String ATTRIBUTE_CACHED_REMOTE_ADDRESS =   ATTRIBUTE_PREFIX + "cached-remote-address";
+    private static final String ATTRIBUTE_CACHED_REMOTE_ADDRESS = ATTRIBUTE_PREFIX + "cached-remote-address";
 
     /** The encapsulated IoSession instance */
     private final IoSession wrappedSession;
@@ -124,15 +124,19 @@ public class FtpIoSession implements IoSession {
     /**
      * Public constructor
      *
-     * @param wrappedSession The wrapped IoSession
-     * @param context The server cobtext
+     * @param wrappedSession
+     *         The wrapped IoSession
+     * @param context
+     *         The server cobtext
      */
     public FtpIoSession(IoSession wrappedSession, FtpServerContext context) {
         this.wrappedSession = wrappedSession;
+        this.wrappedSession.setAttribute(ATTRIBUTE_LAST_ACCESS_TIME, new LazyDateHolder());
         this.context = context;
     }
 
     /* Begin wrapped IoSession methods */
+
     /**
      * {@inheritDoc}
      */
@@ -570,6 +574,7 @@ public class FtpIoSession implements IoSession {
     }
 
     /* End wrapped IoSession methods */
+
     /**
      * Reset the session state. It will remove the 'rename-from' and 'file-offset'
      * attributes from the session
@@ -635,7 +640,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the listener attribute
      *
-     * @param listener The listener to set
+     * @param listener
+     *         The listener to set
      */
     public void setListener(Listener listener) {
         setAttribute(ATTRIBUTE_LISTENER, listener);
@@ -652,7 +658,8 @@ public class FtpIoSession implements IoSession {
 
     /**
      * Get the session's language
-     *-
+     * -
+     *
      * @return The session language
      */
     public String getLanguage() {
@@ -662,7 +669,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the session language
      *
-     * @param language The language to set
+     * @param language
+     *         The language to set
      */
     public void setLanguage(String language) {
         setAttribute(ATTRIBUTE_LANGUAGE, language);
@@ -672,7 +680,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the 'user' attribute
      *
-     * @param user The user for this session
+     * @param user
+     *         The user for this session
      */
     public void setUser(User user) {
         setAttribute(ATTRIBUTE_USER, user);
@@ -691,7 +700,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the user argument
      *
-     * @param userArgument The user argument to set
+     * @param userArgument
+     *         The user argument to set
      */
     public void setUserArgument(String userArgument) {
         setAttribute(ATTRIBUTE_USER_ARGUMENT, userArgument);
@@ -710,7 +720,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the max idle time for a session
      *
-     * @param maxIdleTime Maximum time a session can idle
+     * @param maxIdleTime
+     *         Maximum time a session can idle
      */
     public void setMaxIdleTime(int maxIdleTime) {
         setAttribute(ATTRIBUTE_MAX_IDLE_TIME, maxIdleTime);
@@ -749,7 +760,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the login attributes: 'login-time' and 'file-system'
      *
-     * @param fsview The file system view
+     * @param fsview
+     *         The file system view
      */
     public void setLogin(FileSystemView fsview) {
         setAttribute(ATTRIBUTE_LOGIN_TIME, new Date());
@@ -781,7 +793,7 @@ public class FtpIoSession implements IoSession {
             LoggerFactory.getLogger(this.getClass()).debug("Statistics login decreased due to user logout");
         } else {
             LoggerFactory.getLogger(
-                this.getClass()).warn("Statistics not available in session, can not decrease login  count");
+                    this.getClass()).warn("Statistics not available in session, can not decrease login  count");
         }
     }
 
@@ -797,7 +809,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the 'file-offset' attribute value.
      *
-     * @param fileOffset The 'file-offset' attribute value
+     * @param fileOffset
+     *         The 'file-offset' attribute value
      */
     public void setFileOffset(long fileOffset) {
         setAttribute(ATTRIBUTE_FILE_OFFSET, fileOffset);
@@ -816,7 +829,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the 'rename-from' attribute
      *
-     * @param renFr The 'rename-from' attribute value
+     * @param renFr
+     *         The 'rename-from' attribute value
      */
     public void setRenameFrom(FtpFile renFr) {
         setAttribute(ATTRIBUTE_RENAME_FROM, renFr);
@@ -835,7 +849,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the transfert structure
      *
-     * @param structure The structure (only FILE is currently supported)
+     * @param structure
+     *         The structure (only FILE is currently supported)
      */
     public void setStructure(Structure structure) {
         setAttribute(ATTRIBUTE_STRUCTURE, structure);
@@ -853,7 +868,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Set the data type
      *
-     * @param dataType The data type to use (ASCII or BINARY)
+     * @param dataType
+     *         The data type to use (ASCII or BINARY)
      */
     public void setDataType(DataType dataType) {
         setAttribute(ATTRIBUTE_DATA_TYPE, dataType);
@@ -890,7 +906,7 @@ public class FtpIoSession implements IoSession {
      * @return The last access time
      */
     public Date getLastAccessTime() {
-        return new Date((Long) getAttribute(ATTRIBUTE_LAST_ACCESS_TIME));
+        return ((LazyDateHolder) getAttribute(ATTRIBUTE_LAST_ACCESS_TIME)).getDate();
     }
 
     /**
@@ -924,7 +940,7 @@ public class FtpIoSession implements IoSession {
      * Update the last-access-time session attribute with the current date
      */
     public void updateLastAccessTime() {
-        setAttribute(ATTRIBUTE_LAST_ACCESS_TIME, System.currentTimeMillis());
+        ((LazyDateHolder) getAttribute(ATTRIBUTE_LAST_ACCESS_TIME)).update();
     }
 
     /**
@@ -975,7 +991,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Increase the number of bytes written on the data connection
      *
-     * @param increment The number of bytes written
+     * @param increment
+     *         The number of bytes written
      */
     public void increaseWrittenDataBytes(int increment) {
         if (wrappedSession instanceof AbstractIoSession) {
@@ -988,7 +1005,8 @@ public class FtpIoSession implements IoSession {
     /**
      * Increase the number of bytes read on the data connection
      *
-     * @param increment The number of bytes written
+     * @param increment
+     *         The number of bytes written
      */
     public void increaseReadDataBytes(int increment) {
         if (wrappedSession instanceof AbstractIoSession) {
