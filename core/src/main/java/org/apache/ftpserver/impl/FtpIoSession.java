@@ -890,7 +890,7 @@ public class FtpIoSession implements IoSession {
      * @return The last access time
      */
     public Date getLastAccessTime() {
-        return (Date) getAttribute(ATTRIBUTE_LAST_ACCESS_TIME);
+        return new Date((Long) getAttribute(ATTRIBUTE_LAST_ACCESS_TIME));
     }
 
     /**
@@ -924,7 +924,7 @@ public class FtpIoSession implements IoSession {
      * Update the last-access-time session attribute with the current date
      */
     public void updateLastAccessTime() {
-        setAttribute(ATTRIBUTE_LAST_ACCESS_TIME, new Date());
+        setAttribute(ATTRIBUTE_LAST_ACCESS_TIME, System.currentTimeMillis());
     }
 
     /**
