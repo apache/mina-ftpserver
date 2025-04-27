@@ -58,6 +58,28 @@ public class LazyDateHolderTest extends TestCase {
         assertTrue("Date after auto update should be newer", secondDate.getTime() > firstDate.getTime());
     }
 
+    public void testNullDateWithUpdate() throws InterruptedException {
+        LazyDateHolder holder = new LazyDateHolder();
+        assertTrue("Initially should be null",holder.isDateNull());
+
+        Thread.sleep(5); // ensure time passes
+        holder.update(); // auto update
+        Date secondDate = holder.getDate();
+        assertFalse("Should not be null as date retrieved",holder.isDateNull());
+        Thread.sleep(5); // ensure time passes
+        holder.update(); // auto update
+        assertTrue("Should be not null due to update",holder.isDateNull());
+
+        long now = System.currentTimeMillis();
+        holder.update(now);
+        assertTrue("Should be not null due to update",holder.isDateNull());
+
+        Date customDate = holder.getDate();
+        holder.update(now);  // same value
+        assertFalse("Should be not null as the update was the same",holder.isDateNull());
+        assertEquals("Should be not null as the update was the same",customDate,holder.getDate());
+    }
+
     public void testConcurrentUpdateAndGet() throws InterruptedException {
         final LazyDateHolder holder = new LazyDateHolder();
         final AtomicReference<Exception> failure = new AtomicReference<>(null);

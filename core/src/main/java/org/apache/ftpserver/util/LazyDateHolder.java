@@ -30,7 +30,7 @@ public final class LazyDateHolder {
      */
     public LazyDateHolder(long initialTimeMillis) {
         this.timeMillis = initialTimeMillis;
-        this.cachedDate = new Date(initialTimeMillis);
+        this.cachedDate = null;
     }
 
     /**
@@ -52,7 +52,7 @@ public final class LazyDateHolder {
     public synchronized void update(long newTimeMillis) {
         if (this.timeMillis != newTimeMillis) {
             this.timeMillis = newTimeMillis;
-            this.cachedDate = new Date(newTimeMillis);
+            this.cachedDate = null;
         }
     }
 
@@ -75,7 +75,16 @@ public final class LazyDateHolder {
      * @return the cached {@code Date} corresponding to the last update time
      */
     public synchronized Date getDate() {
+        if(cachedDate == null)
+        {
+            cachedDate = new Date(timeMillis);
+        }
         return cachedDate;
+    }
+
+    synchronized boolean isDateNull()
+    {
+        return cachedDate == null;
     }
 
     /**
