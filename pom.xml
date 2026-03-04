@@ -14,7 +14,7 @@
   <parent>
     <artifactId>apache</artifactId>
     <groupId>org.apache</groupId>
-    <version>33</version>
+    <version>37</version>
   </parent>
   
   <modelVersion>4.0.0</modelVersion>
@@ -151,14 +151,14 @@
     <!-- doclint>none</doclint-->
 
     <!-- Set versions for depending jars -->
-    <commons.codec.version>1.17.2</commons.codec.version>
-    <commons.net.version>3.11.1</commons.net.version>
+    <commons.codec.version>1.21.0</commons.codec.version>
+    <commons.net.version>3.12.0</commons.net.version>
     <ftpserver.version>${project.version}</ftpserver.version>
     <hsqldb.version>1.8.0.10</hsqldb.version>
     <jcl.over.slf4j.version>1.7.36</jcl.over.slf4j.version>
     <junit.version>4.13.2</junit.version>
-    <log4j.version>2.24.3</log4j.version>
-    <mina.core.version>2.2.4</mina.core.version>
+    <log4j.version>2.25.3</log4j.version>
+    <mina.core.version>2.2.5</mina.core.version>
     <osgi.r4.version>1.0</osgi.r4.version>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <slf4j.log4j12.version>1.7.36</slf4j.log4j12.version>
@@ -175,7 +175,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Maven plugin version -->
-    <maven-javadoc-plugin-version>3.11.2</maven-javadoc-plugin-version>
+    <maven-javadoc-plugin-version>3.12.0</maven-javadoc-plugin-version>
+    <maven-bundle-plugin-version>6.0.2</maven-bundle-plugin-version>
     <version.site.plugin>4.0.0-M16</version.site.plugin>
   </properties>
 
@@ -353,7 +354,7 @@
         <plugin>
           <groupId>com.github.siom79.japicmp</groupId>
           <artifactId>japicmp-maven-plugin</artifactId>
-          <version>0.23.1</version>
+          <version>0.25.4</version>
           <configuration>
             <oldVersion>
               <dependency>
