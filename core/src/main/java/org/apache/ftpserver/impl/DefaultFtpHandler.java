@@ -47,7 +47,7 @@ public class DefaultFtpHandler implements FtpHandler {
     private final Logger LOG = LoggerFactory.getLogger(DefaultFtpHandler.class);
 
     private static final String[] NON_AUTHENTICATED_COMMANDS = new String[] {
-            "USER", "PASS", "AUTH", "QUIT", "PROT", "PBSZ" };
+            "USER", "PASS", "AUTH", "QUIT", "PROT", "PBSZ", "FEAT" };
 
     private FtpServerContext context;
 
