@@ -162,7 +162,7 @@
     <osgi.r4.version>1.0</osgi.r4.version>
     <slf4j.api.version>1.7.36</slf4j.api.version>
     <slf4j.log4j12.version>1.7.36</slf4j.log4j12.version>
-    <spring.context.version>2.5.5</spring.context.version>
+    <spring.context.version>6.2.5</spring.context.version>
 
     <!-- Checkstyle configuration -->
     <checkstyle.plugin.version>3.6.0</checkstyle.plugin.version>
