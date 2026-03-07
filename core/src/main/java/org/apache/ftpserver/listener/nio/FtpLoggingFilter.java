@@ -72,7 +72,7 @@ public class FtpLoggingFilter extends LoggingFilter {
     public void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception {
         String request = (String) message;
 
-        if (maskPassword && (request.trim().toUpperCase().startsWith("PASS "))) {
+        if ((request.trim().toUpperCase().startsWith("PASS ")) && maskPassword) {
             logger.info("RECEIVED: PASS *****");
         } else {
             logger.info("RECEIVED: {}", request);
